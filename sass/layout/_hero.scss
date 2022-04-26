@@ -1,0 +1,631 @@
+@mixin hero {
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 90vh;
+        z-index: 120;
+        .images_container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            overflow: hidden;
+        }
+    }
+    // ------------------ Btns -----------------------
+    .images_container .img_btn {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: none;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.61);
+        color: black;
+        font-size: 20px;
+        font-weight: 900;
+        align-items: center;
+        cursor: pointer;
+        &.img_btn-left {
+            right: 4%;
+        }
+        &.img_btn-right {
+            left: 4%;
+        }
+    }
+    .images_container .dots {
+        position: absolute;
+        bottom: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        .img_dots {
+            border: none;
+            /* background-color: #f1ce05; */
+            opacity: 0.5;
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            margin-right: 15px;
+            cursor: pointer;
+            transition: all 0.5s;
+            background: rgb(76, 232, 243);
+        }
+        .img_dots:last-child {
+            margin: 0;
+        }
+        .img_dots-active {
+            background-color: rgb(255, 255, 255);
+            opacity: 1;
+        }
+    }
+
+    //---------------------- Main logo header ------------------------------
+    .images_container .img_container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 1s;    /*!!!!!!!!!!!!!!*/
+        overflow: hidden;
+        .sliderImg {
+            width: 100%;    /* !!!!!!!!! */
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .img_container .text_content {
+        position: absolute;
+        background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(25,31,43,0.8743872549019608) 32%, rgba(237,237,238,0) 64%);
+        width: 100%;
+        height: 100%;
+        .main_logo_container {
+            width: 650px;
+            height: 100%;
+            // background: rgb(229, 255, 0);
+            margin-left: 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            @include desktop {
+                width: 450px;
+            }
+            @include laptop {
+                width: 350px;
+            }
+            @include mobile {
+                margin: 0 auto;
+            }
+        }
+    }
+    .main_logo_container .main_logo {
+        // background: rgb(220, 20, 220);
+        position: relative;
+        width: 100%;
+        height: 150px;
+        @include desktop {
+            height: 110px;
+        }
+        .main_header-one {
+            // background: brown;
+            text-align: center;
+            @include heroHeaders;
+            @include desktop {
+                @include heroHeadersDesktop;
+            }
+            @include laptop {
+                @include heroHeadersLaptop;
+            }
+            @include tablet {
+
+            }
+            .logo {
+                opacity: 0;
+                // @include desktop {
+                //     // font-size: 80px;
+                // }
+                &.start {
+                    opacity: 1;
+                    transform: translateX(-300px);
+                    transition: ease-in-out 0.2s;
+                }
+            }
+            &.big {
+                opacity: 0;
+                // font-size: 120px;
+                // @include desktop {
+                //     font-size: 110px;
+                // }
+            }
+        }
+        .main_header-two {
+            // background: burlywood;
+            position: absolute;
+            top: 85px;
+            padding-left: 50%;
+            font-size: 60px;
+            font-weight: 400;
+            color: $color-text-light;
+            text-transform: uppercase;
+            text-shadow: 0px 0px 8px rgba(0,0,0,0.69);
+            opacity: 0;
+            transform: translateX(-300px);
+            @include desktop {
+                font-size: 50px;
+                top: 68px;
+                // left: -10%;
+            }
+            @include laptop {
+                font-size: 38px;
+                top: 51px;
+                padding-left: 49%;
+            }
+            &.start {
+                opacity: 1;
+                transform: translateX(0px);
+                transition: ease-in-out 0.3s;
+            }
+        }
+    }
+        
+    .main_logo_container .main_header-text{
+        // background: red;
+        padding: 0 20px;
+        font-size: 18px;
+        color: $color-text-light;
+        text-align: center;
+        opacity: 0;
+        transition: all 300ms ease-out;
+        @include desktop {
+            font-size: 17px;
+            // top: 68px;
+            // left: -10%;
+        }
+        &.start {
+            opacity: 1;
+            transition: all 300ms ease-out;
+        }
+    }
+    .main_logo_container a{
+        background: $color-text-light;
+        padding: 15px 35px;
+        color: #1680AC;
+        font-size: 22px;
+        font-weight: 500;
+        @include desktop {
+            margin-bottom: 25px;
+            padding: 10px 23px;
+            font-size: 18px;
+        }
+        &.main_header-btn {
+            opacity: 0;
+            transform: scale(0);
+            transition: all 300ms ease-out;
+            &.start {
+                opacity: 1;
+                transform: scale(1);
+                transition: all 300ms ease-out;
+            }
+        }
+    }
+
+
+    // ------------------------ drumset header ---------------------------------
+    .main_logo_container .main_logo_drums {
+        // background: blueviolet;
+        width: 100%;
+        min-height: 150px;
+        position: relative;
+        .drums_header-top {
+            // background: darkturquoise;
+            padding-left: 50px;
+            @include heroHeaders;
+            opacity: 0;
+            transform: translateX(-300px);
+            @include desktop {
+                @include heroHeadersDesktop;
+            }
+            @include laptop {
+                @include heroHeadersLaptop;
+            }
+            &.anima {
+                opacity: 1;
+                transform: translateX(0px);
+                transition: all 500ms ease-out;
+                transition-delay: 800ms;
+            }
+        }    
+        .drums_header-bottom {
+            // background: deeppink;
+            position: absolute;
+            @include heroHeaders;
+            color: rgb(235, 100, 107);
+            margin-top: -50px;
+            left: 220px;
+            opacity: 0;
+            transform: translateX(300px);
+            @include desktop {
+                @include heroHeadersDesktop;
+                left: 186px;
+                margin-top: -38px;
+            }
+            @include laptop {
+                @include heroHeadersLaptop;
+                left: 152px;
+                margin-top: -29px;
+            }
+            &.anima {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(0px);
+                transition: all 500ms ease-out;
+                transition-delay: 800ms;
+            }
+        }
+        p {
+            position: absolute;
+            // background: #16ac66;
+            // width: 100%;
+            top: 190px;
+            left: 70px;
+            font-size: 25px;
+            color: $color-text-light;
+            text-shadow: 0px 0px 8px rgba(0,0,0,0.69);
+            @include desktop {
+                transform: translateX(-20px);
+                font-size: 20px;
+            }
+            @include laptop {
+                transform: translateX(0px);
+                left: 0;
+                width: 100%;
+                top: 150px;
+            }
+            @include mobile {
+                text-align: center;
+            }
+        }
+    }
+    .main_logo_container .marketing_logo {
+        // background: blue;
+        // margin-top: 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: translateX(-100px);
+        @include desktop {
+            transform: translateX(-20px);
+            margin-top: 20px;
+        }
+        @include tablet {
+            transform: translateX(-20px);
+            margin-top: 0;
+            margin-bottom: 50px;
+        }
+        @include mobile {
+            transform: translateX(0px);
+        }
+        li {
+            // background: #1680AC;
+            width: 150px;
+            height: 90px;
+            @include tablet {
+                width: 150px;
+                height: 72px;
+            }
+            a {
+                background: transparent;
+                // background: wheat;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                @include tablet {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+    .marketing_logo img {
+        width: 150px;
+        filter:drop-shadow(0px 0px 8px rgba(0,0,0,0.69));
+        @include laptop {
+            width: 130px;
+        }
+        @include tablet {
+            width: 120px;
+        }
+    }
+    @for $i from 1 through 4 {
+        .img_drums-#{$i} {
+            opacity: 0;
+            transform: scale(0);
+            &.anima {
+                opacity: 1;
+                transform: scale(1);
+                transition: all 250ms ease-out;
+                transition-delay: $i * 100 + 1000ms;
+            }
+        }
+    }
+
+    // ---------------------------------- Cymbals -----------------------------------------
+                
+    .main_logo_container .main_logo_cymbals {
+        position: relative;
+        // background: #1680AC;
+        width: 100%;
+        min-height: 150px;
+        padding-left: 50px;
+        .cymbals_header {
+            @include heroHeaders;
+            @include desktop {
+                @include heroHeadersDesktop;
+            }
+            @include laptop {
+                @include heroHeadersLaptop;
+            }
+        }
+        .cymbals_header_left {
+            // background: #16ac66;
+            position: absolute;
+            opacity: 0;
+            transform: translateY(-150px);
+            @include mobile {
+                padding-left: 10px;
+            }
+            &.anima {
+                opacity: 1;
+                transform: translateY(0px);
+                transition: all 500ms ease-out;
+                transition-delay: 800ms;
+            }
+        }
+        .cymbals_header_right {
+            // background: #69bbdf;
+            position: absolute;
+            padding-left: 200px;
+            opacity: 0;
+            transform: translateY(150px);
+            @include desktop {
+                padding-left: 161px;
+            }
+            @include laptop {
+                padding-left: 121px;
+            }
+            @include mobile {
+                padding-left: 130px;
+            }
+            &.anima {
+                opacity: 1;
+                transform: translateY(0px);
+                transition: all 500ms ease-out;
+                transition-delay: 800ms;
+            }
+        }
+    }
+    .main_logo_container .marketing_logo_cymbals {
+        // background: blue;
+        padding: 0 15px;
+        display: grid;
+        grid-template-columns: auto auto;
+        row-gap: 20px;
+        column-gap: 20px;
+        transform: translateX(-80px);
+        @include desktop {
+            transform: translateX(-18px);
+            transform: translateY(-30px);
+        }
+        @include laptop {
+            transform: translateX(0px);
+            transform: translateY(-30px);
+        }
+        @include mobile {
+            transform: translateY(-30px);
+            padding: 0 20px;
+            row-gap: 15px;
+            column-gap: 15px;
+        }
+        li {
+            // background: #ac7016;
+            width: 150px;
+            height: 100px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            @include tablet {
+                width: 130px;
+                height: 85px;
+            }
+            a {
+                background: transparent;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+            }
+        }    
+        a img {
+            // background: #69bbdf;
+            width: 150px;
+            @include laptop {
+                width: 130px;
+            }
+            @include tablet {
+                width: 120px;
+            }
+        }
+        
+        @for $i from 1 through 5 {
+            .img_cymbals-#{$i} {
+                opacity: 0;
+                transform: translateX(-100px);
+                @if $i % 2 == 0 {
+                    transform: translateX(100px);
+                }
+                &.anima {
+                    opacity: 1;
+                    transform: translateX(0);
+                    transition: all 350ms ease-out;
+                    transition-delay: #{$i * 150 + 1000}ms;
+                }
+            }
+        }
+        li .cymbals_btn {
+            position: relative;
+            background: #16ac66;
+            width: 100%;
+            height: 50px;
+            opacity: 0;
+            transform: scale(0);
+            &.anima {
+                opacity: 1;
+                transform: scale(1);
+                transition: all 300ms ease-out;
+                transition-delay: 1900ms;
+            }
+            span {
+                position: absolute;
+                // background: #1680AC;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                line-height: 50px;
+                color: $color-text-light;
+                transition: all 350ms ease;
+                &:hover {
+                    background: #69bbdf;
+                    transition: all 350ms ease;
+                }
+            }
+        }
+    }
+    
+       
+    // --------------------------------------- Percussion ---------------------------------
+
+    .main_logo_container .main_logo_percussion {
+        // background: #1680AC;
+        width: 100%;
+        position: relative;
+        min-height: 150px;
+        .percussion_header_top {
+            position: absolute;
+            @include heroHeaders;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale3D(2, 2, 2);
+            @include desktop {
+                @include heroHeadersDesktop;
+            }
+            @include laptop {
+                @include heroHeadersLaptop;
+            }
+            // @include mobile {
+                
+            // }
+            &.anima {
+                opacity: 1;
+                visibility: visible;
+                transform: scale3D(1, 1, 1);
+                transition: all 300ms ease-out;
+                transition-delay: 800ms;
+            }
+        }
+        .percussion_header_bottom {
+            position: absolute;
+            @include heroHeaders;
+            color: rgb(235, 100, 107);
+            margin-top: 70px;
+            left: 120px;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale3D(2, 2, 2);
+            @include desktop {
+                @include heroHeadersDesktop;
+                margin-top: 56px;
+                left: 97px;
+            }
+            @include laptop {
+                @include heroHeadersLaptop;
+                margin-top: 43px;
+                left: 72px;
+            }
+            @include mobile {
+                left: 22px;
+            }
+            &.anima {
+                opacity: 1;
+                visibility: visible;
+                transform: scale3D(1, 1, 1);
+                // transition-delay: 300ms;
+                transition: all 700ms ease-out;
+                transition-delay: 1000ms;
+            }
+        }
+    } 
+    .percussion_list_container {
+        // background: #1680AC;
+        width: 40%;
+        transform: translateX(-80px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include laptop {
+            transform: translateX(-20px);
+            margin-bottom: 50px;
+        }
+        @include mobile {
+            transform: translateX(0px);
+        }
+        .percussion_list {
+            // background: #16ac64;
+            li {
+                text-align: center;
+                &:last-child {
+                    margin-bottom: 30px;
+                }
+            }
+        }
+    }
+    .percussion_list p {
+        // background: #1680AC;
+        font-size: 28px;
+        letter-spacing: 0.75px;
+        color: $color-text-light;
+        text-shadow: 0px 0px 8px rgba(0,0,0,0.69);
+        @include laptop {
+            font-size: 22px;
+        }
+    }
+    @for $i from 1 through 7 {
+        .perc-#{$i} {
+            opacity: 0;
+            transform: scale(0);
+            &.anima {
+                opacity: 1;
+                transform: scale(1);
+                transition: all 250ms ease-out;
+                transition-delay: $i * 100 + 800ms;
+            }
+        }
+    }
+    .perc_btn {
+        opacity: 0;
+        transform: scale(0);
+        &.anima {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 300ms ease-out;
+            transition-delay: 1700ms;
+        }
+    }
+}

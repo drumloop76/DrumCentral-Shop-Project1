@@ -127,3 +127,18 @@
         }
     }
 }
+
+@mixin heroHeaders {
+    font-size: 100px;
+    font-weight: 600;
+    color: $color-text-light;
+    text-shadow: 0px 0px 8px rgba(0,0,0,0.69);
+}
+@mixin heroHeadersDesktop {
+    font-size: 80px;
+    font-weight: 600;
+}
+@mixin heroHeadersLaptop {
+    font-size: 60px;
+    font-weight: 600;
+}
