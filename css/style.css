@@ -2710,4 +2710,233 @@ img {
   width: 200px;
 }
 
+.footer {
+  position: relative;
+  width: 100%;
+  background: #2c3135;
+  padding: 30px;
+  padding: 50px 0 0 0;
+  z-index: 100;
+}
+.footer .footer_content {
+  width: 80%;
+  margin: 0 auto;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+@media screen and (max-width: 1200px) {
+  .footer .footer_content {
+    width: 100%;
+    padding: 0 20px 50px 20px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .footer .footer_content {
+    flex-direction: column;
+  }
+}
+.footer .footer_content .foot {
+  width: 20%;
+  padding: 20px;
+}
+@media screen and (max-width: 768px) {
+  .footer .footer_content .foot {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+}
+.footer .footer_content .foot h2 {
+  color: white;
+  margin-bottom: 20px;
+}
+.footer .footer_content .footer_about,
+.footer .footer_content .footer_media {
+  padding: 0px 20px;
+  width: 30%;
+}
+@media screen and (max-width: 768px) {
+  .footer .footer_content .footer_about,
+.footer .footer_content .footer_media {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+.footer .footer_content .footer_info,
+.footer .footer_content .footer_map {
+  padding: 0px 20px;
+}
+.footer .social {
+  margin-top: 40px;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 30px;
+}
+.footer .social a {
+  display: block;
+  position: relative;
+  width: 45px;
+  height: 45px;
+  background-color: white;
+  text-align: center;
+  line-height: 40px;
+  font-size: 22px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid white;
+  z-index: 1;
+}
+.footer .social a .fab, .footer .social a .fa-brands {
+  position: relative;
+  color: #262626;
+  transition: 500ms;
+  z-index: 3;
+}
+.footer .social a:hover .fab, .footer .social a:hover .fa-brands {
+  color: #fff;
+  transform: rotateX(360deg);
+  transition: 300ms;
+}
+.footer .social a:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: 300ms;
+  z-index: 2;
+  background: rgb(64, 120, 224);
+}
+.footer .social a:hover:before {
+  top: 0;
+}
+@media screen and (max-width: 768px) {
+  .footer .social {
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+}
+.footer .social a {
+  margin-right: 15px;
+}
+@media screen and (max-width: 768px) {
+  .footer .social a {
+    margin: 0 10px;
+  }
+}
+
+.footer_about .nav_logo {
+  color: black;
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 65px;
+  line-height: 30px;
+  color: white;
+  margin-bottom: 20px;
+}
+@media screen and (max-width: 1200px) {
+  .footer_about .nav_logo {
+    line-height: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .footer_about .nav_logo {
+    line-height: 50px;
+    padding-bottom: 20px;
+    color: white;
+  }
+}
+@media screen and (max-width: 500px) {
+  .footer_about .nav_logo {
+    width: 100%;
+    font-size: 25px;
+    font-weight: 900;
+    padding: 0 0 0 20px;
+    margin: 0;
+  }
+}
+.footer_about .nav_logo span {
+  color: rgb(64, 120, 224);
+}
+
+.footer_about p {
+  color: white;
+}
+
+.footer_info div {
+  margin-bottom: 15px;
+}
+.footer_info div :first-child {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 5px;
+}
+.footer_info div :last-child {
+  font-size: 16px;
+  color: white;
+}
+.footer_info div :last-child:hover {
+  color: rgb(97, 97, 241);
+}
+
+.footer_map .pages p {
+  margin-bottom: 10px;
+}
+.footer_map .pages p a {
+  font-size: 16px;
+  color: white;
+}
+.footer_map .pages p a:hover {
+  color: rgb(97, 97, 241);
+}
+
+.footer_media p {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.footer_media .footer_btns button {
+  font-size: 18px;
+  font-weight: 500;
+  width: 100px;
+  height: 40px;
+  background: white;
+  margin-top: 20px;
+  margin-right: 20px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+  .footer_media .footer_btns button {
+    margin-right: 0;
+    margin: 30px 20px 0 20px;
+  }
+}
+.footer_media .footer_btns button:hover {
+  background: gray;
+  color: white;
+  box-shadow: 0px 1px 8px 2px rgba(255, 255, 255, 0.3);
+}
+
+.footer_copy {
+  width: 100%;
+  height: 30px;
+  background: rgb(43, 42, 42);
+  text-align: center;
+}
+.footer_copy p {
+  color: white;
+  line-height: 30px;
+}
+
 /*# sourceMappingURL=style.css.map */
