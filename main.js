@@ -186,3 +186,64 @@ const reveal = function() {
     aboutImgs.forEach(img => revealObserver.observe(img));
 };
 reveal();
+
+/*---------------------------- Lazy Load ----------------------------*/
+
+const lazyLoad = function() {
+    const aboutImgs = document.querySelectorAll('img[data-src]');
+
+    const loadImg = function(entries, observer) {
+        const [entry] = entries;
+        
+        if(!entry.isIntersecting) return;
+
+        entry.target.src = entry.target.dataset.src;
+
+        entry.target.addEventListener('load', function() {
+            entry.target.classList.remove('lazy_img');
+        });
+
+        observer.unobserve(entry.target);
+    };
+
+    const imgObserver = new IntersectionObserver(loadImg, {
+        root: null,
+        threshold: 0,
+        rootMargin: "-120px",
+    });
+
+    aboutImgs.forEach(img => imgObserver.observe(img));
+};
+lazyLoad();
+
+/*---------------------------- About text ----------------------------*/
+
+const aboutText = function() {
+    const noOfChar = 200;
+    const paragraphs = document.querySelectorAll('.paras_about');
+
+    paragraphs.forEach(par => {
+        if(par.textContent.length < noOfChar) {
+            par.nextElementSibling.style.display = "none";
+            console.log(par.nextElementSibling)
+        }else {
+            const text = par.textContent.slice(0, noOfChar);
+            const moreText = par.textContent.slice(noOfChar);
+            par.innerHTML = `
+                    ${text}<span class="dots">...</span>
+                    <span class="more_text show_less">${moreText}</span>
+                    `;
+        }
+    })
+
+    document.querySelectorAll('.more_btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            btn.parentElement.querySelector('.dots').classList.toggle('show_less');
+            btn.parentElement.querySelector('.more_text').classList.toggle('show_less');
+            // console.log(btn.parentElement.querySelector('.show_more'))
+            btn.textContent == "Read More" ? btn.textContent = "Read Less" : btn.textContent = "Read More";
+        })
+    })
+    
+}
+aboutText();

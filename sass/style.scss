@@ -5,6 +5,7 @@
 @import 'layout/side-nav';
 @import 'layout/cards';
 @import 'layout/about';
+@import 'layout/gallery';
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
@@ -15,3 +16,4 @@
 @include side-nav;
 @include cards;
 @include about;
+@include gallery;

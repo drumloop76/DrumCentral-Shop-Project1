@@ -198,31 +198,77 @@ const cardsAnimations = function() {
 }
 cardsAnimations();
 
-/*---------------------------- Lazy Load ----------------------------*/
+/*---------------------------- Gallery ----------------------------*/
 
-const lazyLoad = function() {
-    const aboutImgs = document.querySelectorAll('img[data-src]');
-
-    const loadImg = function(entries, observer) {
-        const [entry] = entries;
-        
-        if(!entry.isIntersecting) return;
-
-        entry.target.src = entry.target.dataset.src;
-
-        entry.target.addEventListener('load', function() {
-            entry.target.classList.remove('lazy_img');
-        });
-
-        observer.unobserve(entry.target);
-    };
-
-    const imgObserver = new IntersectionObserver(loadImg, {
-        root: null,
-        threshold: 0,
-        rootMargin: "-120px",
-    });
-
-    aboutImgs.forEach(img => imgObserver.observe(img));
-};
-lazyLoad();
+const gallery = function() {
+    fetch('/json-files/gallery.json')
+        .then(results => results.json())
+        .then(data => {
+            for(let i=0; i<data.length; i++) {
+                document.querySelector('.gallery_items').innerHTML += `
+                        <div class="gall_pic ${data[i].category}">
+                            <img src="${data[i].image}" alt="">
+                            <span>${data[i].description}</span>
+                        </div>
+                        `
+            }    
+            
+            const gallNav = document.querySelector('.gallery_nav');
+            // const line = document.querySelector('.gallery_nav');
+            const imgBoxs = document.querySelectorAll('.gall_pic');
+            const gallOverlay = document.querySelector('#overlay');
+            
+            gallNav.addEventListener('click', (e) => {
+                if(e.target.classList.contains('gall_btn')) {
+                    gallNav.querySelector('.active').classList.remove('active');
+                    e.target.classList.add('active');
+                    
+                    const dataValue = e.target.getAttribute('data-name');
+                    // console.log(dataValue)
+                    imgBoxs.forEach((box) => {
+                        if(box.classList.contains(dataValue) || dataValue === 'all') {
+                            box.classList.remove('hide')
+                            box.classList.add('show')
+                        } else {
+                            box.classList.add('hide');
+                            box.classList.remove('show');
+                        }
+                    })
+                }
+            })
+            
+            const prevBox = document.querySelector('.prev_box'),
+                imgTitle = prevBox.querySelector('.img_title span'),
+                prevImg = prevBox.querySelector('.prev_img_box img'),
+                closeBoxBtn = prevBox.querySelector('.fa-times'),
+                imgDescription = prevBox.querySelector('.img_description span');
+    
+            imgBoxs.forEach((box, i) => {
+                box.addEventListener('click', () => {
+                    document.querySelector('body').style.overflow = 'hidden'; //!!!!!!!!!!!!!!!!!
+    
+                    let selectedPrevImg = data[i].image;
+                    let selectedImgCategory = data[i].category;
+                    let selectedImgDescription = data[i].description;
+                    
+                    prevImg.src = selectedPrevImg;
+                    imgTitle.textContent = selectedImgCategory
+                    imgDescription.textContent = selectedImgDescription;
+                    
+                    prevBox.classList.add('show');
+                    gallOverlay.classList.add('show'); //!!!!!!!!!!!!!!!!!!!!
+                })
+                closeBoxBtn.addEventListener('click', () => {
+                    prevBox.classList.remove('show');
+                    gallOverlay.classList.remove("show"); //!!!!!!!!!!!!!!!!!!!!
+                    document.querySelector('body').style.overflow = 'auto';  //!!!!!!!!!!!!!!!!!!!!!!!
+                })
+            })
+            gallOverlay.addEventListener('click', () => {
+                prevBox.classList.remove('show');
+                gallOverlay.classList.remove("show");
+                document.querySelector('body').style.overflow = 'auto';
+            })
+        })
+    }
+gallery();
