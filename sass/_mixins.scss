@@ -178,3 +178,162 @@
         filter: blur(20px);
     }
 }
+
+/*------------- Modals -------------*/
+
+@mixin modalWrapper {
+    background: $color-text-light;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 500px;
+    overflow: hidden;   //!!!!!!!!!!!!!
+    opacity: 0;   //!!!!!!!!!!!!!!!
+    visibility: hidden;   //!!!!!!!!!!!!!!!
+    transition: 400ms;
+    z-index: 900;
+}
+
+@mixin closeModalBtn {
+    position: absolute;
+    float: right;
+    top: 8px;
+    right: 13px;
+    padding: 0 2px;
+    font-size: 25px;
+    font-weight: 600;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    // &:hover {
+    //     transform: scale(1.1);
+    //     transform: rotate(180deg);
+    // }
+}
+
+@mixin modalLabel {
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+}
+
+@mixin inputLog {
+    .input_login,
+    .signin_login {
+        // background: #589458;
+        // background: transparent;
+        position: relative;
+        height: 33px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid $color-text-dark;
+        display: flex;
+        align-items: center;
+        .fa-eye-slash,
+        .fa-eye {
+            padding-right: 11px;
+            cursor: pointer;
+        }
+        input {
+            // background: #589458;
+            // position: relative;
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            padding-left: 10px;
+            font-size: 15px;
+        }
+        .verify {
+            // background: greenyellow;
+            display: block;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            bottom: -18px;
+            font-size: 13px;
+            font-style: italic;
+            &.success {
+                color: rgb(56, 177, 56);
+            }
+            &.error {
+                color: rgb(233, 53, 53);
+            }
+        }
+    }
+}
+
+@mixin modalHeader {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    color: $color-text-dark;
+    margin-bottom: 50px;
+    @include tablet {
+        margin: 5% 0 5% 0;
+    }
+} 
+
+@mixin modalSubmitBtn {
+    // background: #ff1a00;
+    background: #b9c4cc;
+    width: 100%;
+    padding: 10px 30px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: $color-text-light;
+    // &:hover {
+    //     // transform: scale(1.1);
+    //     // -webkit-box-shadow: 1px 1px 9px 1px rgba(0,0,0,0.81); 
+    //     // box-shadow: 1px 1px 9px 1px rgba(0,0,0,0.81);
+    // }
+}
+
+@mixin popup_login {
+    position: absolute;
+    background: rgb(197, 235, 197);
+    width: 400px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 30px;
+    z-index: 999;
+    opacity: 0;   //!!!!!!!!!!!!!!!
+    visibility: hidden;   //!!!!!!!!!!!!!!!
+    transition: 200ms;
+    &.open_popup {
+        opacity: 1;
+        visibility: visible;
+        transition: 200ms;
+    }
+    h3 {
+        font-size: 25px;
+        margin-bottom: 30px;
+    }
+    span {
+        font-size: 20px;
+        font-weight: 500;
+        // margin: 30px ;
+    }
+    p {
+        font-size: 20px;
+
+        margin: 30px 0;
+    }
+    button {
+        font-size: 20px;
+        padding: 10px 30px;
+        border: none;
+        outline: none;
+        &:hover {
+            background: rgb(159, 159, 247);
+        }
+    }
+}

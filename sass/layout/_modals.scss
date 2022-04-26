@@ -1,0 +1,901 @@
+@mixin modals {
+    .modal_wrapper {
+        @include modalWrapper;
+        @include tablet {
+            background: $color-text-light;
+            width: 100vw;
+            height: 100%;
+        }
+        @include mobile {
+            width: 100vw;       
+        }
+        &.active_modal {
+            opacity: 1;
+            visibility: visible;
+            transition: 400ms;
+        }
+        .modal_container {
+            position: absolute;
+            width: 1400px;
+            height: 100%;
+            top: 0;
+            left: 0;
+            // background: $color-text-light;
+            display: flex;
+            align-items: center;
+            @include tablet {
+                width: 200%;
+                height: 100%;
+            }
+            &.slide-signin {
+                transform: translateX(-700px);
+                transition: all 500ms ease;
+                @include tablet {
+                    transform: translateX(-100vw);
+                }
+            }
+            &.slide-login {
+                transform: translateX(0px);
+                transition: all 500ms ease;
+                @include tablet {
+                    
+                }
+            }
+
+        }    
+    }
+    .modals { 
+        width: 700px;
+        height: 100%;
+        padding: 40px 30px 20px 30px; //!!!!!
+        position: relative;
+        @include tablet {
+            background: transparent;
+            width: 100%;
+            padding: 30px
+
+        }
+        @include mobile {
+            padding-bottom: 30px;
+        }
+        .close_modal_btn {
+            @include closeModalBtn;
+        }
+        .modal_header {
+            @include modalHeader;
+        }
+    }
+    // .login_modal_container{
+    //     @include tablet {
+    //         // background: rebeccapurple;
+    //     }
+    // }
+    .login_modal_container .form_container,
+    .signin_modal_container .form_container {
+        width: 100%;
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        @include tablet {
+            align-items: center;
+        }
+        .login_form {
+            width: 50%;
+            padding: 20px 0;
+            @include tablet {
+                width: 70%;
+            }
+            @include mobile {
+                width: 100%;   
+            }
+            label {
+                display: block;
+                font-size: 12px;
+                text-transform: uppercase;
+                padding-bottom: 10px;
+            }
+            @include inputLog;
+            .submit_btn {
+                @include modalSubmitBtn;
+                margin-top: 10px;
+
+            }
+        }
+        .divider {
+            width: 56px;
+            margin: 0 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            @include tablet {
+                flex-direction: row;
+                width: 75%;
+            }
+            .divider_text {
+                width: 100%;
+                height: 20%;
+                padding: 20px;
+                text-align: center;
+                line-height: 20%;
+                @include tablet {
+                    width: 10%;
+                    padding: 25px 12px;
+                }
+            }
+            .divider_line_up,
+            .divider_line_down {
+                width: 1px;
+                height: 40%;
+                background: black;
+                @include tablet {
+                    width: 100%;
+                    height: 1px;
+                }
+            }
+        }
+    }
+    .form_container {
+        @include tablet {
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+    .login_media {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        @include tablet {
+            margin-top: 20px;
+            width: 70%;
+            justify-content: space-around;
+        }
+        @include mobile {
+            width: 100%;
+        }
+        .log_media_btn {
+            width: 100%;
+            background: transparent;
+            padding: 10px 23px;
+            border: 1px solid;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            @include tablet {
+                margin-bottom: 5px;
+            }
+            @include mobile {
+
+            }
+            &:hover {
+                background: rgb(236, 233, 233);
+            }
+            .fab {
+                font-size: 18px;
+                // background: salmon;
+                padding: 10px;
+            }
+            span {
+                flex-grow: 1;
+                text-align: center;
+                font-size: 17px;
+            }
+        }
+    }
+
+    .login_modal_container .signin_form_btn,
+    .login_modal_container .forgot_form_btn {
+        position: relative;
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+        font-size: 17px;
+        font-weight: 600;
+        color: $color-text-dark;
+        @include mobile {
+            .signin_form_btn {
+                padding-bottom: 30px;
+            }
+        }
+    }
+    
+    // ---------------- sign in -------------------
+    .signin_modal_container .go_back {
+        position: absolute;
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        top: 18px;
+        left: 15px;
+        background: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        // &:hover {
+        //     transform: scale(1.1);
+        //     transform: rotate(180deg);
+        // }
+        .fa-solid {
+            margin-right: 10px;
+        }
+    }
+    .signin_modal_container .signin_header {
+        margin-bottom: 20px;
+        
+    }
+    .signin_modal_container .signin_form {
+        width: 60%;
+        margin: 0 auto;
+        @include tablet {
+            margin-top: 80px;
+            width: 70%;
+        }
+        @include mobile {
+            width: 90%;
+        }
+        label {
+            display: block;
+            font-size: 12px;
+            text-transform: uppercase;
+            padding-bottom: 5px;
+        }
+        @include inputLog;
+        .submit_btn {
+            @include modalSubmitBtn;
+        }
+    }
+    .popup_login,
+    .popup_signin {
+        @include popup_login;
+    }
+    
+    /*--------------------- Contact Modal ----------------------*/
+
+    .contact_wrapper {
+        @include modalWrapper;
+        height: 550px;
+        @include tablet {
+            width: 90%;
+            height: 100vh;
+        }
+        &.active_modal {
+            display: block;
+        }
+        .modal_container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            @include tablet {
+                height: 100vh;
+                flex-direction: column-reverse;
+                padding: 0 10%;
+            }
+            @include mobile {
+                padding: 0 5%;
+            }
+        }
+    }
+    .modal_container .container_left {
+        width: 50%;
+        height: 100%;
+        background: rgb(208, 174, 241);
+        // background: url(../imgs/pexels-sean-valentine-3260886.jpg);
+        // background-position: center;
+        // background-size: cover;
+        @include tablet {
+            // background: rgb(50, 161, 205);
+            width: 100%;
+            padding: 30px
+        }
+        @include mobile {
+
+        }
+    }
+    .modal_container .container_right {
+        // background: darkblue;
+        position: relative;
+        width: 50%;
+        height: 100%;
+        padding: 20px 20px;
+        @include tablet {
+            width: 100%;
+            padding: 30px;
+        }
+        @include mobile {
+            padding: 20px
+        }
+        .close_modal_btn {
+            @include closeModalBtn;
+        }
+        h1 {
+            @include modalHeader;
+            margin-bottom: 10px;
+        }
+        
+    }
+    .container_right .form_contact {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        label {
+            @include modalLabel;
+            padding: 20px 0 5px 0;
+        }
+        .contact_login {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: baseline;
+            align-items: center;
+            border-bottom: 1px solid ;
+            i {
+                width: 10%;
+                font-size: 22px;
+                text-align: left;
+                line-height: 40px;
+            }
+            input {
+                width: 90%;
+                height: 30px;
+                padding-left: 10px;
+                font-size: 18px;
+                border: none;
+                outline: none;
+                // border-bottom: 1px solid ;
+            }
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            border: 1px solid $color-text-dark;
+            outline: none;
+            padding: 10px;
+            font-size: 16px
+        }
+        .contact_submit_btn {
+            @include modalSubmitBtn;
+            margin-top: 30px;
+            @include tablet {
+                margin-bottom: 40px;
+            }
+        }
+    }
+    #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 800;
+        background: rgba(0, 0, 0, 0.61);
+        display: none;
+        &.active_modal {
+            display: block;
+        }
+    }
+
+    // // // ----------- card modal ----------------
+
+    // // @include cardModal;
+    // // .prod_modal_wrapper {
+    // //     @include modalWrapper;
+    // //     @include tablet {
+    // //         background: $color-text-light;
+    // //         width: 100vw;
+    // //         height: 100%;
+    // //     }
+    // //     @include mobile {
+    // //         width: 100vw;       
+    // //     }
+    // //     &.active_modal {
+    // //         opacity: 1;
+    // //         visibility: visible;
+    // //         transition: 400ms;
+    // //     }
+        
+    // // }
+    // .card_modal {
+    //     // @include modalWrapper;
+    //     position: fixed;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     // background: yellowgreen;
+    //     background: $color-text-light;
+    //     max-width: 900px;
+    //     height: 600px;
+    //     padding: 40px 30px;
+    //     opacity: 0;   //!!!!!!!!!!!!!!!
+    //     visibility: hidden;   //!!!!!!!!!!!!!!!
+    //     transition: 400ms;
+    //     z-index: 900;   //!!!!!!!!!!!!!!!
+    //     @include tablet {
+    //         width: 100vw - 10vw;
+    //         overflow-y: initial;
+    //     }
+    //     &.show_prod_modal {
+    //         opacity: 1;
+    //         visibility: visible;
+    //         transition: 400ms;
+    //     }
+    //     .card_modal_btn {
+    //         // background: #18b5ce;
+    //         position: absolute;
+    //         font-size: 30px;
+    //         font-weight: bolder;
+    //         padding: 5px 10px;
+    //         top: 5px;
+    //         right: 10px;
+    //         cursor: pointer;
+    //         z-index: 10;
+    //         @include tablet {
+    //             top: 50px;
+    //         }
+    //         &:hover {
+    //             transform: scale(1.2);
+    //             color: rgb(80, 80, 80);
+    //         }
+    //     }
+    //     .mod_cont {
+    //         display: flex;
+    //         flex-wrap: wrap;
+    //         @include tablet {
+    //             width: 100%;
+    //             height: 100vh;
+    //             overflow-y: auto;
+    //             -ms-overflow-style: none;
+    //             scrollbar-width: none;
+    //             &::-webkit-scrollbar {
+    //                 display: none;
+    //             }
+    //         }
+    //     }
+    //     .card_modal_content {
+    //         position: relative;
+    //         width: 50%;
+    //         // background: rgb(252, 173, 173);
+    //         border-right: 1px solid;
+    //         @include tablet {
+    //             width: 100%;
+    //             border-right: none;
+    //             display: flex;
+    //             flex-direction: column;
+    //             align-items: center;
+    //         }
+    //         .card_modal_title {
+    //             font-size: 30px;
+    //             margin: 0 0 10px 0;
+    //         }
+    //         .card_modal_description {
+    //             margin-bottom: 20px;
+    //             padding: 20px;
+    //         }
+    //     }
+    // }
+    // .card_modal_content .card_modal_list {
+    //     text-align: left;
+    //     padding-left: 30px;
+    //     .card_modal_item {
+    //         margin-bottom: 10px;
+    //         font-size: 18px;
+    //         .fa-solid{
+    //             color: rgb(20, 219, 20);
+    //             padding-right: 15px;
+    //         }
+    //     }
+    // }
+    // .card_modal_content button {
+    //     margin-top: 20px;
+    //     padding: 10px 30px;
+    //     font-size: 20px;
+    //     cursor: pointer;
+        
+    // }
+  
+    // .card_modal .card_modal_media {
+    //     width: 50%;
+    //     // background: rgb(82, 82, 207);
+    //     @include tablet {
+    //         width: 80%;
+    //         margin: 0 auto;
+    //         padding: 40px 0 40px 0;
+    //         border-right: none;
+    //         display: flex;
+    //         flex-direction: column;
+    //         align-items: center;
+    //     }
+    //     .main_img_container {
+    //         width: 250px;
+    //         height: 200px;
+    //         padding: 10px;
+    //         margin-bottom: 10px;
+    //         object-fit: cover;
+    //         cursor: pointer;
+    //         border: 2px solid black;
+    //         @include tablet {
+    //             // width: 80%;
+    //             // height: 80%;
+    //             margin-bottom: 20px;
+    //         }
+    //     }
+    //     .main_img{
+    //         width: 100%;
+    //         // width: 250px;
+    //         // height: 200px;
+    //         // padding: 10px;
+    //         // margin-bottom: 10px;
+    //         // object-fit: cover;
+    //         // cursor: pointer;
+    //         // border: 2px solid black;
+    //         // @include tablet {
+    //         //     // width: 80%;
+    //         //     // height: 80%;
+    //         //     margin-bottom: 20px;
+    //         // }
+    //     }
+    //     .slider_container {
+    //         width: 100%;
+    //         display: flex;
+    //         align-items: center;
+    //     }
+    //     .cardSlider{
+    //         width: 100%;
+    //         display: flex;
+    //         flex-wrap: nowrap;
+    //         overflow-x: auto;
+    //         //  Problem Mozilla!!!!!!!!!!!
+    //         &::-webkit-scrollbar {
+    //             width: 8px;
+    //         }
+    //         &::-webkit-scrollbar-track {
+    //             -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    //         }
+    //         &::-webkit-scrollbar-thumb {
+    //             background-color: #2e89de; //!!!!!!!!!!!!!!!!!!!
+    //             outline: 1px solid slategrey;
+    //             border-radius: 100px;
+    //             &:hover{
+    //                 background-color: #18b5ce; //!!!!!!!!!!!!!!!!!!!
+    //             }
+    //         }
+    //     }
+    //     .thumbnail{
+    //         object-fit: cover;
+    //         max-width: 100px;
+    //         max-height: 100px;
+    //         cursor: pointer;
+    //         opacity: 0.5;
+    //         margin: 5px;
+    //         border: 2px solid black;
+    //         &:hover{
+    //             opacity:1;
+    //         }
+    //     }
+    //     .activePic{
+    //         width: 100px;
+    //         opacity: 1;
+    //     }
+    //     .fa-solid{
+    //         width: 30px;
+    //         height: 30px;
+    //         font-weight: bold;
+    //         cursor: pointer;
+    //         transition: 300ms;
+    //         &:hover{
+    //             opacity: 0.6;
+    //         }
+    //     }
+    // }
+    // .card_modal_media .column {
+    //     // background: rgb(221, 186, 255);
+    //     margin-top: 30px;
+    //     h1 {
+    //         margin-bottom: 5px;
+    //         @include tablet {
+    //             font-size: 30px;
+    //             margin-bottom: 15px;
+    //         }
+    //     }
+    //     .card_modal_price {
+    //         margin-bottom: 15px;
+    //         @include tablet {
+    //             font-size: 30px;
+    //             margin-bottom: 35px;
+    //         }
+    //     }
+    //     .shop_container{
+    //         // background: #18b5ce;
+    //         display: flex;
+    //         justify-content: center;
+    //         align-items: center;
+    //         height: 45px;
+    //         input {
+    //             width: 100px;
+    //             height: 30px;
+    //             font-size: 18px;
+    //             padding-left: 5px;
+    //             border: 1px solid;
+    //             outline: none;
+    //             margin-right: 20px;
+    //         }
+    //         // /////////////////////////// BTN ///////////////////////////////
+    //         .add_cart_btn {
+    //             // background: #2e89de;
+    //             position: relative;
+    //             width: 170px;
+    //             height: 60px;
+    //             outline: none;
+    //             border: none;
+    //             background: transparent;
+    //             font-size: 15px;
+    //             line-height: 40px;
+    //             vertical-align: middle;
+    //             cursor: pointer;
+    //             &:hover {
+    //                 .circle {
+    //                     width: 100%;
+    //                     .icon {
+    //                         &.arrow {
+    //                         background: $color-text-light;
+    //                         transform: translate(15px, 0);
+    //                         }
+    //                     }
+    //                 }
+    //                 .button-text {
+    //                 color: $color-text-light;
+    //                 }
+    //             }
+    //             .circle {
+    //                 // @include transition(all, 0.45s, cubic-bezier(0.65,0,.076,1));
+    //                 @include transition;
+    //                 position: relative;
+    //                 display: block;
+    //                 // margin: 0;
+    //                 width: 40px;
+    //                 height: 40px;
+    //                 background: $color-text-dark;
+    //                 border-radius: 20px;
+    //                 .icon {
+    //                     // @include transition(all, 0.45s, cubic-bezier(0.65,0,.076,1));
+    //                     @include transition;
+    //                     position: absolute;
+    //                     top: -1px;
+    //                     bottom: 0;
+    //                     margin: auto;
+    //                     background: $color-text-light;
+    //                     &.arrow {
+    //                         // @include transition(all, 0.45s, cubic-bezier(0.65,0,.076,1));
+    //                         @include transition;
+    //                         left: 7px;
+    //                         width: 16px;
+    //                         height: 2px;
+    //                         background: none;
+    //                         &::before {
+    //                             box-sizing: border-box;
+    //                             position: absolute;
+    //                             content: '';
+    //                             top: -4px;
+    //                             right: 0px;
+    //                             width: 10px;
+    //                             height: 10px;
+    //                             border-top: 2px solid $color-text-light;
+    //                             border-right: 2px solid $color-text-light;
+    //                             transform: rotate(45deg);
+    //                         }
+    //                     }
+    //                 }
+    //             }  
+    //             .button-text {
+    //                 // background: red;
+    //                 width: 100%;
+    //                 // @include transition(all, 0.45s, cubic-bezier(0.65,0,.076,1));
+    //                 @include transition;
+    //                 position: absolute;
+    //                 top: 0;
+    //                 left: 0;
+    //                 right: 0;
+    //                 bottom: 0;
+    //                 padding: 10px 0;
+    //                 margin-left: 18px;
+    //                 color: $color-text-dark;
+    //                 font-weight: 700;
+    //                 line-height: 40px;
+    //                 text-align: center;
+    //                 text-transform: uppercase;
+    //             } 
+    //         }
+    //         .open_cart {
+    //             background: #18b5ce;
+    //             margin-left: 10px;
+    //             width: 30px;
+    //             .fa-cart-shopping{
+    //                 font-size: 20px;
+    //             }
+    //         }
+    //     }
+    // }
+    // #overlay_cards {
+    //     position: fixed;
+    //     background: url('../images/overlay-cards.jpg');
+    //     background-position: center;
+    //     background-size: cover;
+    //     // background: rgba(0, 0, 0, 0.527);
+    //     top: 0;
+    //     left: 0;
+    //     width: 100%;
+    //     height: 100vh;
+    //     opacity: 0;
+    //     visibility: hidden;
+    //     transition: 400ms;
+    //     // pointer-events: ;
+    //     z-index: 400;
+    //     // filter: blur(5px);
+    //     &.show_overlay {
+    //         opacity: 0.95;
+    //         visibility: visible;
+    //         transition: 400ms;
+    //     }
+    // }    
+
+
+    // // ---------------- CART-------------------------
+    // // .cart_modal_wrapper {
+    // //     position: fixed;
+    // //     top: 50%;
+    // //     left: 50%;
+    // //     transform: translate(-50%, -50%);
+    // //     // background: $bg-body-light;
+    // //     background: greenyellow;
+    // //     width: 50vw;
+    // //     height: 80vh;
+    // //     padding: 40px 30px;
+    // //     opacity: 0;   //!!!!!!!!!!!!!!!
+    // //     visibility: hidden;   //!!!!!!!!!!!!!!!
+    // //     transition: 400ms;
+    // //     z-index: 990;   //!!!
+    // //     // background: #18b5ce;
+    // //     @include tablet {
+    // //         background: $color-text-light;
+    // //         // background: #18b5ce;
+    // //         width: 100vw;
+    // //         height: 100%;
+    // //     }
+    // //     @include mobile {
+    // //         width: 100vw;       
+    // //     }
+    // //     &.active_modal {
+    // //         opacity: 1;
+    // //         visibility: visible;
+    // //         transition: 400ms;
+    // //     }
+        
+    // // }
+    // .cart {
+    //     // @include modalWrapper;
+    //     position: fixed;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     // background: $bg-body-light;
+    //     background: rgb(149, 194, 83);
+    //     width: 80vw;
+    //     height: 80vh;
+    //     padding: 40px 30px;
+    //     opacity: 0;   //!!!!!!!!!!!!!!!
+    //     visibility: hidden;   //!!!!!!!!!!!!!!!
+    //     transition: 400ms;
+    //     z-index: 990;   //!!!!!!!!!!!!!!!
+    //     @include tablet {
+    //         width: 100vw - 10vw;
+    //         overflow-y: initial;
+    //     }
+    //     &.show_prod_modal {
+    //         opacity: 1;
+    //         visibility: visible;
+    //         transition: 400ms;
+    //     }
+    //     .cart_modal_btn {
+    //         background: #18b5ce;
+    //         position: absolute;
+    //         font-size: 30px;
+    //         font-weight: bolder;
+    //         padding: 5px 10px;
+    //         top: 5px;
+    //         right: 10px;
+    //         cursor: pointer;
+    //         z-index: 10;
+    //         @include tablet {
+    //             top: 50px;
+    //         }
+    //         &:hover {
+    //             transform: scale(1.2);
+    //             color: rgb(80, 80, 80);
+    //         }
+    //     }
+    // }    
+    // .cart_products_container {
+    //     position: relative;
+    //     width: 100%;
+    //     height: 100%;
+    //     margin: 0 auto;
+    //     background: rgb(114, 189, 218);
+    //     display: flex;
+            
+    // }
+
+
+    // // -------------------------------------------------------
+    // .items_container {
+    //     position: absolute;
+    //     background: rgb(238, 123, 123);
+    //     width: 70%;
+    //     height: 100%;
+    //     padding: 50px 0;
+    //     // display: flex;
+    //     // flex-direction: column;
+    // }
+    // .price_checkout_container {
+    //     position: absolute;
+    //     background: rgb(228, 189, 250);
+    //     min-width: 30%;
+    //     height: 100%;
+    //     right: 0;
+    //     padding: 50px 0;
+    //     .price {
+    //         width: 80%;
+    //         margin: 0 auto;
+    //         border: 1px solid $color-text-dark;
+    //         // background: rgb(212, 170, 253);
+    //         display: flex;
+    //         // flex-direction: column;
+    //         h3 {
+    //             text-align: center;
+    //             font-size: 30px;
+    //             font-weight: 600;
+    //             letter-spacing: 1px;
+    //             background: rgb(170, 206, 253);
+    //         }
+    //     }
+    // }
+
+    // .item_container {
+    //     background: darkcyan;
+    //     width: 100%;
+    //     height: 150px;
+    //     padding: 10px 20px;
+    //     margin-bottom: 20px;
+    //     display: flex;
+    //     flex-direction: column;
+    //     // .div {
+    //     //     width: 100%;
+    //     //     height: 100%;
+    //     //     background: darkgoldenrod;
+    //         .cart_item {
+    //             background: chocolate;
+    //             width: 50%;
+    //             display: flex;
+    //             align-items: center;
+    //             img {
+    //                 background: gold;
+    //                 width: 100px;
+    //                 height: 100px;
+    //                 line-height: 150px;
+    //                 margin: 0 30px;
+    //             }
+    //             .cart_info {
+    //                 background: khaki;
+    //                 height: 100%;
+    
+    //             }
+    //         }
+    //     // }
+        
+    // }
+}
+
+

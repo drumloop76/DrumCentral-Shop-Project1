@@ -1,6 +1,7 @@
 @import 'vars';
 @import 'mixins';
 @import 'layout/navigation';
+@import 'layout/modals';
 @import 'layout/hero';
 @import 'layout/side-nav';
 @import 'layout/cards';
@@ -14,6 +15,7 @@
 @include main;
 
 @include navigation;
+@include modals;
 @include hero;
 @include side-nav;
 @include cards;
