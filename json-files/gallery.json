@@ -1,0 +1,102 @@
+[
+    {
+        "image": "images/gallery/gall-dr-5.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "drums"
+    },
+    {
+        "image": "images/gallery/gall-sn-3.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "snares"
+    },
+    {
+        "image": "images/gallery/gall-cy-2.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "cymbals"
+    },
+    {
+        "image": "images/gallery/gall-perc-2.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "percussion"
+    },
+    {
+        "image": "images/gallery/gall-perc-4.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "percussion"
+    },
+    {
+        "image": "images/gallery/gall-cy-3.jpeg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "cymbals"
+    },
+    {
+        "image": "images/gallery/gall-cy-4.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "cymbals"
+    },
+    {
+        "image": "images/gallery/gall-sn-2.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "snares"
+    },
+    {
+        "image": "images/gallery/gall-dr-6.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "drums"
+    },
+    {
+        "image": "images/gallery/gall-perc-1.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "percussion"
+    },
+    {
+        "image": "images/gallery/gall-sn-4.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "snares"
+    },
+    {
+        "image": "images/gallery/gall-1.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "drums"
+    },
+    {
+        "image": "images/gallery/gall-perc-3.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "percussion"
+    },
+    {
+        "image": "images/gallery/gall-cy-1.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "cymbals"
+    },
+    {
+        "image": "images/gallery/gall-dr-1.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "drums"
+    },
+    {
+        "image": "images/gallery/gall-dr-2.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "drums"
+    },
+    {
+        "image": "images/gallery/gall-cy-5.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "cymbals"
+    },
+    {
+        "image": "images/gallery/gall-dr-3.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "drums"
+    },
+    {
+        "image": "images/gallery/gall-dr-4.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "drums"
+    },
+    {
+        "image": "images/gallery/gall-sn-1.jpg",
+        "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+        "category": "snares"
+    }
+]
