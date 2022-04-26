@@ -145,3 +145,44 @@ document.querySelector('.nav_list').addEventListener('click', function(e) {
     };
     e.preventDefault();
 });
+
+/*---------------------------- Scroll Up Btn ----------------------------*/
+
+// Scroll Up
+const sideNav = document.querySelector('.top_btn');
+
+sideNav.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/*---------------------------- Reveal About Section Text ----------------------------*/
+
+const reveal = function() {
+    const sectionTitle = document.querySelectorAll('.title');
+    const paras = document.querySelectorAll('.paras_about') 
+    const headers = document.querySelectorAll('.about_text_header');
+    const moreBtns = document.querySelectorAll('.more_btn');
+    const aboutImgs = document.querySelectorAll('.about_img');
+    
+    const showText = function(entries, observer) {
+        const [entry] = entries;
+
+        if(!entry.isIntersecting) return;
+        else entry.target.classList.add('showAbout');
+
+        observer.unobserve(entry.target);
+    };
+
+    const revealObserver = new IntersectionObserver(showText, {
+        root: null,
+        threshold: 0,
+        rootMargin: "-150px",
+    });
+
+    sectionTitle.forEach(t => revealObserver.observe(t));
+    paras.forEach(p => revealObserver.observe(p));
+    headers.forEach(h => revealObserver.observe(h));
+    moreBtns.forEach(b => revealObserver.observe(b));
+    aboutImgs.forEach(img => revealObserver.observe(img));
+};
+reveal();

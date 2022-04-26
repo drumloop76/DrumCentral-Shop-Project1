@@ -196,10 +196,10 @@
                 justify-content: center;
                 align-items: center;
             }
-            &.active-page {
-                color: cadetblue;
-                text-shadow: 0px 0px 1px #000000;
-            }
+            // &.active-page {
+            //     color: cadetblue;
+            //     text-shadow: 0px 0px 1px #000000;
+            // }
             .fa-chevron-down {
                 display: none;
                 @include tablet {
@@ -226,7 +226,12 @@
             }      
         }
         .active_page {
-            color: rgb(247, 89, 89); //!!!!!!!!!!!!!!!!!!!!
+            color: #0000004d;
+            cursor: default;
+            &:hover {
+                color: #0000004d;
+                text-shadow: none;
+            }
         }
     }
     .main_nav .shop,
@@ -514,7 +519,7 @@
         }
     }
 
-    /*----------------------- Dropdown ----------------------*/
+    /*////////////////////// Dropdown ///////////////////////*/
 
     .list_item .dropdown {
         position: absolute;
@@ -526,7 +531,7 @@
         opacity: 0;
         visibility: hidden;
         transition: transform 200ms ease-out;
-        z-index: 100;
+        z-index: 130;
         @include tablet {
             position: initial;
             width: 100%;

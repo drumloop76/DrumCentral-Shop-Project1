@@ -3,6 +3,8 @@
 @import 'layout/navigation';
 @import 'layout/hero';
 @import 'layout/side-nav';
+@import 'layout/cards';
+@import 'layout/about';
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
@@ -11,3 +13,5 @@
 @include navigation;
 @include hero;
 @include side-nav;
+@include cards;
+@include about;
