@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="main.js"></script>
+    <title>DrumCentral Shop</title>
+</head>
+<body>
+    <div class="wrapper">           
+
+        <!------------------------ Burger --------------------------->
+
+        <div class="toggler">
+            <div class="line-1 line not-active"></div>
+            <div class="line-2 line not-active"></div>
+            <div class="line-3 line not-active"></div>
+        </div>
+
+        <!-------------------------- Top Navbar info --------------------------->
+
+        <div class="nav_info_top"id="home">
+            <div class="info">
+                <a href="mailto:dovlasno1@gmail.com">dovlasno1@gmail.com</a>
+                <a href="tel:381642445657">+381/64 244 5657</a>
+            </div>
+            <div class="media">
+                <a href="https://sr-rs.facebook.com/" target="_blank">
+                    <i class="fab fa-facebook-square"></i>
+                </a>
+                <a href="https://twitter.com/?lang=sr" target="_blank">
+                    <i class="fab fa-twitter-square"></i>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank">
+                    <i class="fab fa-instagram-square"></i>
+                </a>
+                <a href="https://www.youtube.com/" target="_blank">
+                    <i class="fa-brands fa-youtube-square"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-------------------------- Main Navbar --------------------------->
+
+        <div class="nav_container">
+            <a class="nav_logo" href="#"><span>Drum</span>Central</a>
+            <div class="main_nav">
+                <ul class="nav_list">
+                    <li class="list_item">
+                        <a class="list_link scroll" alt="Home page" href="index.html">Home</a>
+                    </li>
+                    <li class="list_item">
+                        <a class="list_link sub-btn active_page" alt="">Products<i
+                                class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown">
+                            <li>
+                                <a href="#">Snares</a>
+                            </li>
+                            <li>
+                                <a href="#">Hardware</a>
+                            </li>
+                            <li>
+                                <a href="#">Bags</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="list_item">
+                        <a class="list_link" alt="" href="cymbals.html">Cymbals</a>
+                    </li>
+                    <li class="list_item">
+                        <a class="list_link" alt="" href="percussion.html">Percussion</a>
+                    </li>
+                    <li class="list_item">
+                        <a class="list_link" alt="" data-contact-target="#contactModal">Contact</a>
+                    </li>
+                    <!-- <li class="list_item list_item_login">
+                        <a class="list_link login_logout_link" alt="" data-modal-target="#loginModal">Log In</a>
+                    </li> -->
+                </ul>
+                <div class="nav_search_box">
+                    <form class="search_form" action="" method="">
+                        <input class="search_input" type="search" name="find" id="find" placeholder="Enter Your Search" onclick="stopProp()">
+                        <button class="search_btn" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+
+                <a class="login_logout_link" alt="" data-modal-target="#loginModal">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+                
+                <a href="#" class="shop open_cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+                
+                <div class="main_nav_media">
+                    <a href="https://sr-rs.facebook.com/" target="_blank">
+                        <i class="fab fa-facebook-f icon"></i>
+                    </a>
+                    <a href="https://twitter.com/?lang=sr" target="_blank">
+                        <i class="fab fa-twitter icon"></i>
+                    </a>
+                    <a href="https://www.instagram.com/" target="_blank">
+                        <i class="fab fa-linkedin-in icon"></i>
+                    </a>
+                    <a href="https://www.youtube.com/" target="_blank">
+                        <i class="fa-brands fa-youtube-square"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="overlay"></div>
+    <div id="overlay_cards"></div>
+</body>
+</html>

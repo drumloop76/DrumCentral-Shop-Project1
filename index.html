@@ -12,6 +12,566 @@
     <title>DrumCentral Shop</title>
 </head>
 <body>
-    
+    <div class="wrapper">           
+
+        <!------------------------ Burger --------------------------->
+
+        <div class="toggler">
+            <div class="line-1 line not-active"></div>
+            <div class="line-2 line not-active"></div>
+            <div class="line-3 line not-active"></div>
+        </div>
+
+        <!-------------------------- Top Navbar info --------------------------->
+
+        <div class="nav_info_top"id="home">
+            <div class="info">
+                <a href="mailto:dovlasno1@gmail.com">dovlasno1@gmail.com</a>
+                <!-- <a href="tel:381642445657">+381/64 244 5657</a> -->
+            </div>
+            <span></span> 
+            <div class="media">
+                <a href="https://sr-rs.facebook.com/" target="_blank">
+                    <i class="fab fa-facebook-square"></i>
+                </a>
+                <a href="https://twitter.com/?lang=sr" target="_blank">
+                    <i class="fab fa-twitter-square"></i>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank">
+                    <i class="fab fa-instagram-square"></i>
+                </a>
+                <a href="https://www.youtube.com/" target="_blank">
+                    <i class="fa-brands fa-youtube-square"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-------------------------- Main Navbar --------------------------->
+
+        <div class="nav_container">
+            <a class="nav_logo" href="#"><span>Drum</span>Central</a>
+            <div class="main_nav">
+                <ul class="nav_list">
+                    <li class="list_item">
+                        <a class="list_link scroll active_page" alt="Home page" href="#page1">Home</a>
+                    </li>
+                    <li class="list_item">
+                        <a class="list_link sub-btn" alt="">Products<i
+                                class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown">
+                            <li>
+                                <a href="drumsets.html">Drumsets</a>
+                            </li>
+                            <li>
+                                <a href="cymbals.html">Cymbals</a>
+                            </li>
+                            <li>
+                                <a href="percussion.html">Percussion</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="list_item">
+                        <a class="list_link scroll" alt="" href="#section_about">About</a>
+                    </li>
+                    <li class="list_item">
+                        <a class="list_link scroll" alt="" href="#section_gallery">Gallery</a>
+                    </li>
+                    <li class="list_item">
+                        <a class="list_link" alt="" data-contact-target="#contactModal">Contact</a>
+                    </li>
+                    <!-- <li class="list_item list_item_login">
+                        <a class="list_link login_logout_link" alt="" data-modal-target="#loginModal">Log In</a>
+                    </li> -->
+                </ul>
+                <div class="nav_search_box">
+                    <form class="search_form" action="" method="">
+                        <input class="search_input" type="search" name="find" id="find" placeholder="Enter Your Search" onclick="stopProp()">
+                        <button class="search_btn" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+
+                <a class="login_logout_link" alt="" data-modal-target="#loginModal">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+                
+                <a href="#" class="shop open_cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+                
+                <div class="main_nav_media">
+                    <a href="https://sr-rs.facebook.com/" target="_blank">
+                        <i class="fab fa-facebook-f icon"></i>
+                    </a>
+                    <a href="https://twitter.com/?lang=sr" target="_blank">
+                        <i class="fab fa-twitter icon"></i>
+                    </a>
+                    <a href="https://www.instagram.com/" target="_blank">
+                        <i class="fab fa-linkedin-in icon"></i>
+                    </a>
+                    <a href="https://www.youtube.com/" target="_blank">
+                        <i class="fa-brands fa-youtube-square"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ----------------------- Side-nav -------------------- -->
+
+        <div class="side_nav">
+            <div class="side_media">
+                <a href="https://sr-rs.facebook.com/" target="_blank">
+                    <i class="fab fa-facebook-square"></i>
+                </a>
+                <a href="https://twitter.com/?lang=sr" target="_blank">
+                    <i class="fab fa-twitter-square"></i>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank">
+                    <i class="fab fa-instagram-square"></i>
+                </a>
+                <a href="#" class="side_shop shop open_cart"><i class="fa-solid fa-cart-shopping"></i></a>
+            </div>
+        </div>
+        <div class="btn_container">
+            <button class="top_btn"><i class="fa-solid fa-angle-up"></i></button>
+        </div>
+
+        <!--------------------------- Hero --------------------------->
+
+        <section class="hero">
+            <div class="images_container">
+
+                <div class="img_container">
+                    <img class="sliderImg" src="images\imgs-hero\header_hero.jpg" alt="">
+                    <div class="text_content active">
+                        <div class="main_logo_container">
+                            <div class="main_logo">
+                                <h1 class="main_header-one">
+                                    <span class="big logo">D</span><span class="logo">r</span><span
+                                        class="logo">u</span><span class="logo">m</span><span
+                                        class="big logo">C</span><span class="logo">e</span><span
+                                        class="logo">n</span><span class="logo">t</span><span class="logo">r</span><span
+                                        class="logo">a</span><span class="logo">l</span>
+                                </h1>
+                                <h1 class="main_header-two">Store</h1>
+                            </div>
+                            <p class="main_header-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                sed do
+                                eiusmod tempor incididunt ut
+                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                ullamco
+                                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                reprehenderit
+                                in
+                                voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                            <a href="#section_about" class="main_header-btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="img_container">
+                    <img class="sliderImg" src="images\imgs-hero\drums-hero.jpg" alt="">
+                    <div class="text_content">
+                        <div class="main_logo_container">
+                            <div class="main_logo_drums">
+                                <h1 class="drums_header-top" data-hero-header='1'>Drum </h1>
+                                <span class="drums_header-bottom" data-hero-header='1'>Sets</span>
+                            </div>
+                            <div class="marketing_logo">
+                                <li>
+                                    <a href="#">
+                                        <img class="img_drums-1" src="images\imgs-hero\logos\dw-white2.png" alt=""
+                                            data-hero-header='1'>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img class="img_drums-2" src="images\imgs-hero\logos\pearl-white2.png" alt=""
+                                            data-hero-header='1'>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img class="img_drums-3" src="images\imgs-hero\logos\yamaha-white2.png" alt=""
+                                            data-hero-header='1'>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img class="img_drums-4" src="images\imgs-hero\logos\gretsch-white2.png" alt=""
+                                            data-hero-header='1'>
+                                    </a>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="img_container">
+                    <img class="sliderImg" src="images\imgs-hero\cymbals-hero.webp" alt="">
+                    <div class="text_content">
+                        <div class="main_logo_container">
+                            <div class="main_logo_cymbals">
+                                <span class="cymbals_header_left cymbals_header" data-hero-header='2'>Cym</span><span
+                                    class="cymbals_header_right cymbals_header" data-hero-header='2'>bals</span>
+                            </div>
+                            <div class="marketing_logo_cymbals">
+                                <li>
+                                    <a href="">
+                                        <img class="img_cymbals-1" src="images\imgs-hero\logos\zildjian-white2.png"
+                                            alt="" data-hero-header='2'>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <img class="img_cymbals-2" src="images\imgs-hero\logos\bosphorus-white2.png"
+                                            alt="" data-hero-header='2'>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <img class="img_cymbals-3" src="images\imgs-hero\logos\istanbul-white2.png"
+                                            alt="" data-hero-header='2'>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <img class="img_cymbals-4" src="images\imgs-hero\logos\sabian-white2.png" alt=""
+                                            data-hero-header='2'>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <img class="img_cymbals-5" src="images\imgs-hero\logos\paiste-white2.png" alt=""
+                                            data-hero-header='2'>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" class="cymbals_btn" data-hero-header='2'><span>Find</span></a>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="img_container">
+                    <img class="sliderImg" src="images\imgs-hero\percussion_hero.jpg" alt="">
+                    <div class="text_content">
+                        <div class="main_logo_container">
+                            <div class="main_logo_percussion">
+                                <h1 class="percussion_header_top" data-hero-header='3'>Percussions</h1>
+                                <span class="percussion_header_bottom" data-hero-header='3'>Accessories</span>
+                            </div>
+                            <div class="percussion_list_container">
+                                <ul class="percussion_list">
+                                    <li class="perc_item-1">
+                                        <p class="perc-1" data-hero-header='3'>Congas</p>
+                                    </li>
+                                    <li class="perc_item-2">
+                                        <p class="perc-2" data-hero-header='3'>Bongos</p>
+                                    </li>
+                                    <li class="perc_item-3">
+                                        <p class="perc-3" data-hero-header='3'>Timbales</p>
+                                    </li>
+                                    <li class="perc_item-4">
+                                        <p class="perc-4" data-hero-header='3'>Cajons</p>
+                                    </li>
+                                    <li class="perc_item-5">
+                                        <p class="perc-5" data-hero-header='3'>Shakere</p>
+                                    </li>
+                                    <li class="perc_item-6">
+                                        <p class="perc-6" data-hero-header='3'>Sticks</p>
+                                    </li>
+                                    <li class="perc_item-7">
+                                        <p class="perc-7" data-hero-header='3'>Cases...</p>
+                                    </li>
+                                </ul>
+                                <a class="perc_btn" href="#" data-hero-header='3'>Find More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="img_btn img_btn-left"><i class="fas fa-angle-right"></i></button>
+                <button class="img_btn img_btn-right"><i class="fas fa-angle-left"></i></button>
+
+                <div class="dots"></div>
+            </div>
+        </section>
+
+        <!------------------------- Cards section ------------------------->
+
+        <section class="cards">
+            <span class="cards_subtitle title">Every month new surprises</span>
+            <h2 class="cards_title title">Check out our special offers</h2>
+
+            <div class="timer">
+                <div class="timer_item timer_box timer_box-1">
+                    <div class="timer_number days"></div>
+                    <div class="timer_info">Days</div>
+                </div>
+                <div class="timer_item timer_box timer_box-2">
+                    <div class="timer_number hours"></div>
+                    <div class="timer_info">Hours</div>
+                </div>
+                <div class="timer_item timer_box timer_box-3">
+                    <div class="timer_number minutes"></div>
+                    <div class="timer_info">Minutes</div>
+                </div>
+                <div class="timer_item timer_box timer_box-4">
+                    <div class="timer_number seconds"></div>
+                    <div class="timer_info">Seconds</div>
+                </div>
+            </div>
+
+            <div class="cards_container">
+                <div class="card_container">
+                    
+                    <div class="card"></div>
+
+                    <!-- <div class="card_modal">
+                        <span class="card_modal_btn">&times;</span>
+                        
+                        <div class="mod_cont"></div>
+                    </div> -->
+                </div>
+
+                <div class="card_container">
+                    
+                    <div class="card"></div>
+
+                    <!-- <div class="card_modal">
+                        <span class="card_modal_btn">&times;</span>
+                        
+                        <div class="mod_cont"></div>
+                    </div> -->
+                </div>
+
+                <div class="card_container">
+                    
+                    <div class="card"></div>
+
+                    <!-- <div class="card_modal">
+                        <span class="card_modal_btn">&times;</span>
+                        
+                        <div class="mod_cont"></div>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ------------------------------ About Section ----------------------------- -->
+
+        <section class="about_section" id="section_about">
+            <div class="about_headers">
+                <h2 class="about_header_one title">About Us</h2>
+                <h3 class="about_header_two title">
+                    Everything you need for your music journey.
+                </h3>
+            </div>
+
+            <div class="about_content">
+                <!-- 1 -->
+                <div class="about_content_container about_cont_one">
+                    <div class="about_text about_text_one">
+                        <h3 class="about_text_header">Drumsets for studios & stages</h3>
+                        <p class="paras_about">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
+                            tenetur consequatur nulla itaque! Quod ab quos veniam atque quia a eveniet magni quidem
+                            nostrum, officiis consequuntur nisi aut optio at excepturi quis porro. Culpa ipsam
+                            perferendis consequatur nobis incidunt soluta harum iusto veniam aspernatur sint sunt,
+                            dolorem autem ab debitis quasi magnam, amet labore sequi dolor a velit! Placeat, beatae.</p>
+                        <button class="more_btn">Read More</button>
+                    </div>
+
+                    <div class="about_img_container">
+                        <img src="images\about_imgs\about-drums-small.png"
+                            data-src="images\about_imgs\about-drums-big.png" 
+                            class="about_img lazy_img" 
+                            alt="Drumset" />
+                    </div>
+                </div>
+                <!-- 2 -->
+                <div class="about_content_container">
+                    <div class="about_img_container">
+                        <img src="images\about_imgs\about-cymbals-small.png"
+                            data-src="images\about_imgs\about-cymbals-big.png" 
+                            class="about_img middle lazy_img "
+                            alt="Cymbals" />
+                    </div>
+
+                    <div class="about_text about_text_middle">
+                        <h3 class="about_text_header">Cymbals for every situation</h3>
+                        <p class="paras_about">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur
+                            fugiat beatae eaque provident sit pariatur, officiis exercitationem, rem, deserunt dolorum
+                            voluptates ullam magnam eum? Velit pariatur, dolor quisquam doloribus numquam cumque
+                            aliquid, ad cum, soluta eveniet totam maiores facilis adipisci consequatur esse nihil
+                            laborum temporibus blanditiis eos modi quam magni. Reprehenderit officiis eius nobis esse
+                            fuga excepturi. Explicabo, id ex!</p>
+                        <button class="more_btn">Read More</button>
+                    </div>
+                </div>
+                <!-- 3 -->
+                <div class="about_content_container about_cont_three">
+                    <div class="about_text about_text_three">
+                        <h3 class="about_text_header">Find your snare</h3>
+                        <p class="paras_about">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi
+                            perspiciatis obcaecati quisquam culpa sit laudantium quibusdam suscipit. Sapiente tempora
+                            vel repellendus nam non quaerat et, doloribus obcaecati saepe accusantium incidunt molestiae
+                            mollitia sit tempore error repellat ut nostrum iusto debitis dicta magni minima suscipit!
+                            Laboriosam natus expedita pariatur quia suscipit beatae, totam consectetur eius veritatis
+                            aliquam ullam ab. Rerum, doloremque.</p>
+                        <button class="more_btn">Read More</button>
+                    </div>
+
+                    <div class="about_img_container">
+                        <img src="images\about_imgs\about-perc-small.png"
+                            data-src="images\about_imgs\about-perc-big.png" 
+                            class="about_img lazy_img" 
+                            alt="Snare" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ------------------------------ Gallery ----------------------------- -->
+
+        <section class="gallery" id="section_gallery">
+            <span class="cards_subtitle title">Check out our best offers</span>
+            <h2 class="cards_title title">Product Gallery</h2>
+            <div class="gallery_nav">
+                <h2>Choose category</h2>
+                <a class="gall_btn active" data-name="all">Show All</a>
+                <a class="gall_btn" data-name="drums">Drums</a>
+                <a class="gall_btn" data-name="snares">Snares</a>
+                <a class="gall_btn" data-name="cymbals">Cymbals</a>
+                <a class="gall_btn" data-name="percussion">Congas</a>
+            </div>
+            <div class="gallery_items">
+                <!-- /////////////// JS!!! /////////////// -->
+            </div>
+
+            <div class="prev_box">
+                <div class="prev_box_content">
+                    <div class="img_details">
+                        <p class="img_title">Image Category: <span></span></p>
+                        <p class="img_description">Image Description: <span></span></p>
+                    </div>
+                    <i class="x-icon fas fa-times"></i>
+                </div>
+                <div class="prev_img_box"><img src="" alt=""></div>
+            </div>
+        </section>
+
+        <!-- ------------------------------ Partners Slider ----------------------------- -->
+
+        <section class="partners">
+            <div class="about_headers">
+                <h2 class="about_header_one title">Our partners</h2>
+                <h3 class="about_header_two title">
+                    Everything you need for your music journey.
+                </h3>
+            </div>
+            <div class="slider_container">
+                <div class="slider">
+                    <ul class="slider_list">
+                        <li class="slider_item">
+                            <a href=""><img src="images\imgs-hero\logos\bosphorus-white2.png"></a>
+                        </li>
+                        <li class="slider_item">
+                            <a href=""><img src="images\imgs-hero\logos\dw-white2.png"></a>
+                        </li>
+                        <li class="slider_item">
+                            <a href=""><img src="images\imgs-hero\logos\gretsch-white2.png"></a>
+                        </li>
+                        <li class="slider_item">
+                            <a href=""><img src="images\imgs-hero\logos\istanbul-white2.png"></a>
+                        </li>
+                        <li class="slider_item">
+                            <a href=""><img src="images\imgs-hero\logos\paiste-white2.png"></a>
+                        </li>
+                        <li class="slider_item">
+                            <a href=""><img src="images\imgs-hero\logos\pearl-white2.png"></a>
+                        </li>
+                        <li class="slider_item">
+                            <a href=""><img src="images\imgs-hero\logos\remo-white2.png"></a>
+                        </li>
+                        <li class="slider_item">
+                            <a href=""><img src="images\imgs-hero\logos\sabian-white2.png"></a>
+                        </li>
+                        <li class="slider_item">
+                            <a href=""><img src="images\imgs-hero\logos\yamaha-white2.png"></a>
+                        </li>
+                        <li class="slider_item">
+                            <a href=""><img src="images\imgs-hero\logos\zildjian-white2.png"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ------------------------------ Footer ----------------------------- -->
+
+        <div class="footer">
+            <div class="footer_content">
+                <div class="footer_about foot">
+                    <h2>About Us</h2>
+                    <a class="nav_logo" href="#"><span>Drum</span>Central</a>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat perspiciatis dolorum ipsum sed
+                        sit neque quis quia quasi error commodi.
+                    </p>
+                    <div class="social">
+                        <a href="https://sr-rs.facebook.com/" target="_blank"><i class="fab fa-facebook-f icon"></i></a>
+                        <a href="https://twitter.com/?lang=sr" target="_blank"><i class="fab fa-twitter icon"></i></a>
+                        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-linkedin-in icon"></i></a>
+                    </div>
+                </div>
+                <div class="footer_info foot">
+                    <h2>Contact Info</h2>
+                    <div>
+                        <p>address:</p>
+                        <p>Jirecekova 5, Novi Sad, Vojvodina, Srbija</p>
+                    </div>
+                    <div>
+                        <p>phone:</p>
+                        <a href="tel:381642445657">+381/64 244 5657</a>
+                    </div>
+                    <div>
+                        <p>emial:</p>
+                        <a href="mailto:dovlasno1@gmail.com">dovlasno1@gmail.com</a>
+                    </div>
+                </div>
+                <div class="footer_map foot">
+                    <h2>Sitemap</h2>
+                    <div class="pages">
+                        <p><a href="pages/drumsets.html">Drums</a></p>
+                        <p><a href="">Cymbals</a></p>
+                        <p><a href="">Hardware</a></p>
+                        <p><a href="">Stycks</a></p>
+                        <p><a href="">Drumheads</a></p>
+                        <p><a href="">Accessoryes</a></p>
+                    </div>
+                </div>
+                <div class="footer_media foot">
+                    <h2>Stay connected</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium cupiditate eius inventore
+                        veniam quasi nisi quod doloribus dolores repellendus minima.</p>
+                    <form action="">
+                        <input type="email" name="" id="">
+                        <button type="submit">Sign up</button>
+                    </form>
+                    <div class="footer_btns">
+                        <!-- <a href="" data-contact-target="#contactModal">Contact Us</a> -->
+                        <button data-modal-target="#loginModal">Login</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer_copy">
+                <p>Copyright@Vladimir.Stojkovic.2022</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="overlay"></div>
+    <div id="overlay_cards"></div>
 </body>
 </html>
