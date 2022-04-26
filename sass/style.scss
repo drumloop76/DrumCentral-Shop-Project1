@@ -6,6 +6,7 @@
 @import 'layout/cards';
 @import 'layout/about';
 @import 'layout/gallery';
+@import 'layout/partners-slider';
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
@@ -17,3 +18,4 @@
 @include cards;
 @include about;
 @include gallery;
+@include partners-slider;

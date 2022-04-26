@@ -272,3 +272,61 @@ const gallery = function() {
         })
     }
 gallery();
+
+/*---------------------------- Partners slider ----------------------------*/
+
+function sliderLogos() {
+    const slider = document.querySelector('.slider');
+    const list = document.querySelector('.slider_list');
+    let list2;
+
+    const speed = 0.1;
+    
+    const listWidth = list.offsetWidth;
+    let firstX = 0;
+    let secondX = listWidth;
+    
+    function cloneList() {
+        list2 = list.cloneNode(true);
+        slider.appendChild(list2);
+        list2.style.left = `${listWidth}px`;
+    }
+    cloneList();
+
+    function firstList() {
+        firstX -= speed;
+
+        if (listWidth >= Math.abs(firstX)) {
+            list.style.left = `${firstX}px`;
+        } else {
+            firstX = listWidth;
+        }
+    }
+
+    function secondList() {
+        secondX -= speed;
+        if (list2.offsetWidth >= Math.abs(secondX)) {
+            list2.style.left = `${secondX}px`;
+        } else {
+            secondX = listWidth;
+        }
+    }
+
+    function hover() {
+        clearInterval(int1);
+        clearInterval(int2);
+    }
+
+    function unhover() {
+        int1 = setInterval(firstList, 5);
+        int2 = setInterval(secondList, 5);
+    }
+    // cloneList();
+
+    let int1 = setInterval(firstList, 5);
+    let int2 = setInterval(secondList, 5);
+
+    slider.addEventListener("mouseenter", hover);
+    slider.addEventListener("mouseleave", unhover);
+}
+sliderLogos();

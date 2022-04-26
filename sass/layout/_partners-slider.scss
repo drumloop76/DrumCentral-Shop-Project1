@@ -1,0 +1,57 @@
+@mixin partners-slider {
+    .partners {
+        // position: relative;
+        width: 100%;
+        margin: 0 auto;
+        // padding-bottom: 50px; //!!!!!!!!!!!!!!!!!!!!!!!!!!
+        .about_headers {
+            text-align: center;
+            margin: 80px 0;
+            @include sectionTitle;
+        }
+    }
+    .partners .slider_container {
+        position: relative;
+        overflow: hidden;
+        background-color: rgb(80, 138, 224);
+        // background: $bg-nav-dropdown-tablet;
+        // z-index: 900;
+        .slider {
+            display: flex;
+            align-items: center;
+            width: 200px * 10;
+            height: 150px;
+            .slider_list {
+                position: absolute;
+                width: fit-content;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+            }
+        }
+    }
+    .slider_list .slider_item {
+        display: flex;
+        align-items: center;
+        width: 200px;
+        height: 150px;
+        margin-right: 20px;
+        cursor: pointer;
+        transform: scale(1);
+        transition: transform 300ms;
+        &:hover {
+            transform: scale(1.1);
+            transition: transform 300ms;
+            font-size: 30px;
+            img {
+                filter: drop-shadow(4px 4px 2px #000);
+            }
+        }
+        a {
+            width: 95%;
+            img {
+                width: 200px;
+            }
+        }
+    }
+}
