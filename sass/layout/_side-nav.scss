@@ -54,7 +54,11 @@
         }
     }
     .side_nav .side_shop {
+        position: relative;
         margin-bottom: 30px;
+        span {
+            @include cartBtnSpan;
+        }
     }
     .btn_container {
         position: fixed;

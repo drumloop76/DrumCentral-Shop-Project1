@@ -59,13 +59,13 @@
             padding: 30px 20px;
             width: 380px;
         }
-        // @include tablet {
-
-        // }
         h1 {
-            font-size: 40px;
+            font-size: 50px;
             color: $color-text-light;
             text-shadow: $text-shadow;
+            @include laptop {
+                font-size: 45px;
+            }
         }
         .page_links {
             display: flex;
@@ -182,7 +182,7 @@
         }
         button {
             background: $bg-body-dark;
-            color: $bg-product-container-hover;
+            color: $bg-body-light;
             width: 100px;
             height: 37px;
             font-size: 18px;
@@ -190,8 +190,8 @@
             outline: none;
             cursor: pointer;
             &:hover {
-                background: $color-product-links;
-                color: $bg-product-container-hover;
+                background: $color-product-links-hover;
+                color: $color-text-light;
             }
         }
     }
@@ -283,7 +283,8 @@
             position: relative;
         }
         &:hover {
-            @include boxShadow;
+            box-shadow: $product-box-shadow;
+            // @include boxShadow;
             background: $bg-product-container-hover;
             transition: 300ms ease-in-out;
         }

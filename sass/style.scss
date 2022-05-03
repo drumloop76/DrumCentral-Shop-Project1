@@ -10,6 +10,7 @@
 @import 'layout/partners-slider';
 @import 'layout/footer';
 @import 'layout-pages/drumsets';
+@import 'layout-pages/cart';
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
@@ -26,3 +27,4 @@
 @include footer;
 
 @include drumsets;
+@include cart;

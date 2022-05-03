@@ -243,6 +243,7 @@
     .main_nav .shop,
     .main_nav .login_logout_link {
         // background: #1d82a1;
+        position: relative;
         display: block;
         color: #000d38; //!!!!!!!!!!!!!!!!!
         font-size: 20px;
@@ -265,7 +266,11 @@
             margin-right: 0;
             transform: translateX(-5px);
         }
+        span {
+            @include cartBtnSpan;
+        }
     }
+    
     @keyframes linksSlide {
         0% {
             opacity: 0;
