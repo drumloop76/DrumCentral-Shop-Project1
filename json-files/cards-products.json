@@ -1,15 +1,17 @@
 [
     {
         "id": 1,
+        "inCart": 0,
         "category": "jazz",
         "brand": "Gretsch",
-        "name": "Gretsch Catalina Club Jazz set",
+        "name": "Gretsch Catalina Jazz Set",
         "material": "Mahogany",
         "woodPly": "7-Ply, 100% mahogany shells",
         "color": "Satin Walnut Glaze (SWG)",
-        "price": "699",
+        "price": 700,
         "sale": true,
         "stock": true,
+        
         "description": [
             "18 x 14 Bass drum",
             "12 x 08 Tom Tom",
@@ -32,15 +34,17 @@
     },
     {
         "id": 2,
+        "inCart": 0,
         "category": "studio",
         "brand": "Yamaha",
-        "name": "Yamaha Live Custom Hybrid Rock",
+        "name": "Yamaha Live Custom Hybrid",
         "material": "Maple",
         "woodPly": "7-Ply, Maple - Wenge hybrid shell",
         "color": "Classic Walnut (WLN)",
-        "price": "1.449",
+        "price": 1500,
         "sale": true,
         "stock": true,
+        
         "description": [
             "20 x 16 Bass drum",
             "10 x 07 Tom tom",
@@ -64,15 +68,17 @@
     },
     {
         "id": 3,
+        "inCart": 0,
         "category": "premium",
         "brand": "Tama",
         "name": "Tama STAR Classic Full Set",
         "material": "Bubinga",
         "woodPly": "Bubinga Wood in 5mm with 5ply",
         "color": "Blue Moonstone",
-        "price": "2590",
+        "price": 2600,
         "sale": true,
-        "stock": true,
+        "stock": false,
+        
         "description": [
             "22 x 16 Bass drum",
             "10 x 07 Tom tom",
@@ -97,14 +103,15 @@
     },
     {
         "id": 4,
-        "category": "jazz",
-        "brand": "Gretsch",
-        "name": "Tama STAR Drum <br> Maple / Bubinga",
+        "category": "premium",
+        "brand": "Pearl",
+        "name": "Pearl Full Stage",
         "material": "Bubinga",
         "color": "Classic Walnut (WLN)",
-        "price": "2590",
+        "price": 2350,
         "sale": false,
         "stock": true,
+        "inCart": 0,
         "description": [
             "22 x 16 Bass drum",
             "10 x 07 Tom tom",
@@ -116,7 +123,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/tama_stage-cards2.png",
+        "image": "images/drum-cards/pearl_stage_1.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -129,14 +136,15 @@
     },
     {
         "id": 5,
-        "category": "jazz",
-        "brand": "Gretsch",
-        "name": "Tama STAR Drum <br> Maple / Bubinga",
-        "material": "Bubinga",
+        "category": "studio",
+        "brand": "Yamaha",
+        "name": "Yamaha Recording Custom",
+        "material": "Birch",
         "color": "Classic Walnut (WLN)",
-        "price": "2590",
+        "price": 850,
         "sale": false,
         "stock": true,
+        "inCart": 0,
         "description": [
             "22 x 16 Bass drum",
             "10 x 07 Tom tom",
@@ -148,7 +156,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/tama_stage-cards2.png",
+        "image": "images/drum-cards/yamaha_studio_1.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -161,14 +169,15 @@
     },
     {
         "id": 6,
-        "category": "drumSet",
+        "category": "jazz",
         "brand": "Gretsch",
-        "name": "Tama STAR Drum <br> Maple / Bubinga",
+        "name": "Gretsch Bubinga Jazz",
         "material": "Bubinga",
         "color": "Classic Walnut (WLN)",
-        "price": "2590",
+        "price": 1000,
         "sale": false,
-        "stock": true,
+        "stock": false,
+        "inCart": 0,
         "description": [
             "22 x 16 Bass drum",
             "10 x 07 Tom tom",
@@ -180,7 +189,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/tama_stage-cards2.png",
+        "image": "images/drum-cards/gretsch_jazz_1.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -193,14 +202,15 @@
     },
     {
         "id": 7,
-        "category": "jazz",
-        "brand": "Gretsch",
-        "name": "Tama STAR Drum <br> Maple / Bubinga",
-        "material": "Bubinga",
+        "category": "stage",
+        "brand": "DW",
+        "name": "DW Stage Set",
+        "material": "Maple",
         "color": "Classic Walnut (WLN)",
-        "price": "2590",
+        "price": 550,
         "sale": false,
         "stock": true,
+        "inCart": 0,
         "description": [
             "22 x 16 Bass drum",
             "10 x 07 Tom tom",
@@ -212,7 +222,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/tama_stage-cards2.png",
+        "image": "images/drum-cards/dw_stage_1.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -225,14 +235,15 @@
     },
     {
         "id": 8,
-        "category": "drumSet",
-        "brand": "Gretsch",
-        "name": "Tama STAR Drum <br> Maple / Bubinga",
-        "material": "Bubinga",
+        "category": "jazz",
+        "brand": "Tama",
+        "name": "Tama Maple Jazz Kit",
+        "material": "Maple",
         "color": "Classic Walnut (WLN)",
-        "price": "2590",
+        "price": 1550,
         "sale": false,
         "stock": true,
+        "inCart": 0,
         "description": [
             "22 x 16 Bass drum",
             "10 x 07 Tom tom",
@@ -244,7 +255,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/tama_stage-cards2.png",
+        "image": "images/drum-cards/tama_jazz_1.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -257,14 +268,15 @@
     },
     {
         "id": 9,
-        "category": "drumSet",
+        "category": "stage",
         "brand": "Gretsch",
-        "name": "Tama STAR Drum <br> Maple / Bubinga",
-        "material": "Bubinga",
+        "name": "Gretsch Stage Drum Set",
+        "material": "Birch",
         "color": "Classic Walnut (WLN)",
-        "price": "2590",
+        "price": 2000,
         "sale": false,
         "stock": true,
+        "inCart": 0,
         "description": [
             "22 x 16 Bass drum",
             "10 x 07 Tom tom",
@@ -276,7 +288,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/tama_stage-cards2.png",
+        "image": "images/drum-cards/gretsch_stage_1.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -289,14 +301,15 @@
     },
     {
         "id": 10,
-        "category": "drumSet",
-        "brand": "Pearl",
-        "name": "Tama STAR Drum <br> Maple / Bubinga",
-        "material": "Bubinga",
+        "category": "premium",
+        "brand": "Ludwig",
+        "name": "Ludwig Full Maple Drum Set",
+        "material": "Maple",
         "color": "Classic Walnut (WLN)",
-        "price": "2590",
+        "price": 1100,
         "sale": false,
         "stock": true,
+        "inCart": 0,
         "description": [
             "22 x 16 Bass drum",
             "10 x 07 Tom tom",
@@ -308,7 +321,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/tama_stage-cards2.png",
+        "image": "images/drum-cards/Ludwig_stage_1.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -321,14 +334,15 @@
     },
     {
         "id": 11,
-        "category": "premium",
+        "category": "studio",
         "brand": "Tama",
-        "name": "Tama STAR Drum <br> Maple / Bubinga",
+        "name": "Tama Studio Set Bubinga",
         "material": "Bubinga",
         "color": "Classic Walnut (WLN)",
-        "price": "2590",
+        "price": 800,
         "sale": false,
         "stock": true,
+        "inCart": 0,
         "description": [
             "22 x 16 Bass drum",
             "10 x 07 Tom tom",
@@ -340,7 +354,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/tama_stage-cards2.png",
+        "image": "images/drum-cards/tama_studio_2.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -353,14 +367,15 @@
     },
     {
         "id": 12,
-        "category": "jazz",
-        "brand": "Tama",
-        "name": "Tama STAR Drum <br> Maple / Bubinga",
-        "material": "Bubinga",
+        "category": "premium",
+        "brand": "DW",
+        "name": "DW Premium Maple Wood",
+        "material": "Maple",
         "color": "Classic Walnut (WLN)",
-        "price": "2590",
+        "price": 600,
         "sale": false,
         "stock": true,
+        "inCart": 0,
         "description": [
             "22 x 16 Bass drum",
             "10 x 07 Tom tom",
@@ -372,7 +387,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/tama_stage-cards2.png",
+        "image": "images/drum-cards/dw_premium_2.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",

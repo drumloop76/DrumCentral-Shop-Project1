@@ -325,4 +325,145 @@ window.addEventListener( "DOMContentLoaded", function () {
         validation();
     }
     modals();
+
+    /*--------------------------------- Product Modal --------------------------------------*/
+
+    function prodModal() {
+        fetch('/json-files/cards-products.json')
+            .then(results => results.json())
+            .then(data => {
+                function cardModal(product_id) {
+                    // console.log(product_id)
+                    const modalDiv = document.createElement('div');
+                    modalDiv.innerHTML = `
+                        <!-- <div class="prod_modal_wrapper modal" id="productModal"> -->
+                            <div class="card_modal">
+                                <span class="card_modal_btn">&times;</span>
+                                <div class="mod_cont">
+                                    <div class="card_modal_content">
+                                        <h3 class="card_modal_title"></h3>
+                                        <p class="card_modal_description">
+                                            Lorem ipsum dolor sit amet consectetur, adipisicing
+                                            elit. Cupiditate officiis optio officia repudiandae harum adipisci neque repellendus
+                                            minus laboriosam eaque.
+                                        </p>
+                                        <ul class="card_modal_list"></ul>
+                                    </div>
+                                    <div class="card_modal_media">
+                                        <div class="main_img_container">
+
+                                        </div>
+                                        <div class="slider_container">
+                                            <i class="fa-solid fa-angle-left" id="btnLeft"></i>
+                                            <div class="cardSlider"></div> 
+                                            <i class="fa-solid fa-chevron-right" id="btnRight"></i>
+                                        </div>
+                                        <div class="column">
+                                            <h1>Shop Now</h1>
+                                            <h3 class="card_modal_price"></h3>
+                                            <div class="shop_container">
+                                                <input value=1 type="number">
+                                                <din class="div_cart_btn"></div>
+                                                
+                                                <!-- <button class="shop open_cart">Go to Cart</button> -->
+                                                <a class="side_shop shop open_cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- </div> -->
+                        `
+                    // console.log(data[product_id].id)
+                    document.body.insertAdjacentElement('beforeend', modalDiv);
+                    
+                    document.querySelector('.card_modal_title').innerHTML =
+                            `${data[product_id].name}`
+                
+                    document.querySelector('.main_img_container').innerHTML =
+                            `<img class="main_img" src="${data[product_id].image}">`
+                            
+                    document.querySelector('.card_modal_price').innerHTML =
+                            `Only € ${data[product_id].price}`
+
+                    document.querySelector('.card_modal_list').innerHTML =
+                            `<li class="card_modal_item">
+                                <i class="fa-solid fa-check"></i>${data[product_id].description}
+                            </li>`
+
+                    // ??????????????????????????????
+                    document.querySelector('.div_cart_btn').innerHTML =
+                            `<button class="add_cart_btn" id="${data[product_id].id}">
+                                <span class="circle" aria-hidden="true">
+                                    <span class="icon arrow"></span>
+                                </span>
+                                <span class="button-text">Add to card</span>
+                            </button>`
+                            
+                    let col = [];
+                    for(let i=0 ; i<data[product_id].colors.length; i++) {
+                        col += `<img class="thumbnail" src="${data[product_id].colors[i]}">`
+                    }
+                        
+                    document.querySelector('.cardSlider').innerHTML = 
+                        `<img class="thumbnail activePic" src="${data[product_id].image}">
+                        ${col}`
+                        
+                    const sliderPics = document.querySelectorAll('.thumbnail');
+                    const activePic = document.querySelectorAll('.activePic');
+                    
+                    document.querySelectorAll('.main_img').forEach((el) => {
+                        for(let i=0; i<sliderPics.length; i++){
+                            sliderPics[i].addEventListener('mouseover', function(){
+                                if (activePic.length > 0){
+                                    activePic[0].classList.remove('activePic');
+                                };
+                                this.classList.add('activePic');
+                                el.src = this.src;
+                            });
+                        };
+                        
+                    });
+                    
+                    // const btnLeft = document.querySelectorAll('#btnLeft');
+                    // const btnRight = document.querySelectorAll('#btnRight');
+                    const slider = document.querySelector('.cardSlider');
+                    // console.log(slider, btnLeft)
+
+                    document.querySelector('#btnLeft').addEventListener('click', function(){
+                        slider.scrollLeft -= 100;
+                    });
+
+                    document.querySelector('#btnRight').addEventListener('click', function(){
+                        slider.scrollLeft += 100;
+                    });
+                    
+                    document.querySelector('.card_modal_btn').addEventListener('click', (e) => {
+                        // document.querySelector('.prod_modal_wrapper').classList.remove('active_modal');
+                        document.querySelector('.card_modal').classList.remove('show_prod_modal');
+                        slider.scrollLeft = 0;
+                        cardOverlay.classList.remove('show_overlay');
+                        document.querySelector('body').style.overflow = 'auto';
+                    }); 
+
+                    
+                    
+                    
+                }    
+
+                const openProdModBtn = document.querySelectorAll('.open_prod_modal');
+                const cardOverlay = document.querySelector('#overlay_cards');
+
+                openProdModBtn.forEach((btn, i) => {
+                    btn.addEventListener('click', () => {
+                        cardModal(i);
+                        document.querySelector('.card_modal').classList.add('show_prod_modal');
+                        cardOverlay.classList.add('show_overlay');
+                        document.querySelector('body').style.overflow = 'hidden';
+                    });
+                });
+                
+            }) 
+    }
+    prodModal()
 })

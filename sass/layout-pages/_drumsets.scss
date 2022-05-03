@@ -1,0 +1,447 @@
+@mixin drumsets {
+    .drumset_hero {
+        position: relative;
+        width: 100%;
+        height: 360px;
+        background-image: url('/images/imgs-hero/percussion_hero.jpg');
+        background-position: center;
+        background-size: cover;
+        z-index: 120;
+        @include laptop {
+            height: 280px;
+        }
+        @include tablet {
+            height: 250px;
+        }
+        .hero_container {
+            width: 90%;
+            height: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            overflow: hidden;
+            @include tablet {
+                flex-direction: row;
+            }
+        }
+    }
+    .hero_container .image_slider_box {
+        width: 40%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include tablet {
+            display: none;
+        }
+        .slide_img {
+            position: absolute;
+            width: 400px;
+            object-fit: cover;
+            filter: drop-shadow(0px 0px 5px rgb(78, 78, 78));
+            opacity: 0;
+            transition: opacity 750ms ease-in-out;
+            @include laptop {
+                width: 280px;
+            }
+        }
+    }
+    .hero_container .hero_content {
+        width: 400px;
+        color: $color-text-light;
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        @include laptop {
+            padding: 30px 20px;
+            width: 380px;
+        }
+        // @include tablet {
+
+        // }
+        h1 {
+            font-size: 40px;
+            color: $color-text-light;
+            text-shadow: $text-shadow;
+        }
+        .page_links {
+            display: flex;
+            justify-content: space-between;
+            @include laptop {
+                margin-bottom: 5px;
+            }
+        }
+    }
+    .page_links .list_item a {
+        font-size: 24px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: $color-text-light;
+        text-shadow: $text-shadow;
+        &:hover {
+            color: $color-product-links-hover;
+        }
+    }
+    .hero_container .shop {
+        display: none;
+        @include tablet {
+            display: block;
+            position: absolute;
+            color: $color-text-light;
+            bottom: 40px;
+            right: 40px;
+        }
+        &:hover {
+            color: $color-product-links-hover;
+        }
+        .fa-cart-shopping {
+            font-size: 25px;
+            text-shadow: $text-shadow;
+        }
+        span {
+            @include cartBtnSpan;
+            text-shadow: $text-shadow;
+            top: -15px;
+        }
+    }
+
+    ////////////////// Filters /////////////////////
+    .selection {
+        width: 100%;
+        margin: 20px 0;
+        .select_container {
+            width: 80%;
+            height: 80px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            @include laptop {
+                width: 100%;
+            }
+        }
+    }
+    .filter_container {
+        position: relative;
+        margin:  5%;
+        @include laptop {
+            margin: 2%;
+        }
+        @include mobile {
+            margin: 1%;
+        }
+        .filter {
+            width: 200px;
+            height: 30px;
+            font-size: 16px;
+            background: $color-product-links-hover;
+            color: $color-text-light;
+            @include tablet {
+                width: 145px;
+            }
+            @include mobile {
+                width: 140px;
+            }
+        }
+    }
+    .search {
+        position: relative;
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        @include laptop {
+            width: 85%;
+        }
+        @include tablet {
+            width: 98%;
+        }
+        form {
+            background: $bg-product-container;
+            margin-bottom: 20px;
+        }
+    }
+    form div {
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        input {
+            width: 50%;
+            height: 35px;
+            border: 1px solid black;
+            outline: none;
+            padding: 0 10px;
+            font-size: 16px;
+            @include tablet {
+                width: 70%;
+            }
+        }
+        button {
+            background: $bg-body-dark;
+            color: $bg-product-container-hover;
+            width: 100px;
+            height: 37px;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            &:hover {
+                background: $color-product-links;
+                color: $bg-product-container-hover;
+            }
+        }
+    }
+    .sorting_container {
+        height: 30px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        @include tablet {
+            margin: 0 20px 20px 20px;
+        }
+        .in_stock_container {
+            position: relative;
+            width: 200px;
+            label {
+                font-size: 18px;
+                color: $color-text-dark;
+                padding-right: 10px;
+            }
+            input {
+                position: absolute;
+                height: 20px;
+                width: 20px;
+                right: -20px;
+                cursor: pointer;
+            }
+            
+        }
+        .sort_products_container {
+            position: absolute;
+            background: $color-product-links;
+            right: 0;
+            @include tablet {
+                right: 20px;
+            }
+            select {
+                width: 150px;
+                height: 30px;
+                font-size: 16px;
+                // padding: 0 16px;
+                background: $color-product-links-hover;
+                color: $color-text-light;
+                border: none;
+                outline: none;
+                cursor: pointer;
+            }
+        }
+    }    
+    
+    //////////////////// Products ////////////////////////
+    .products {
+        width: 100%;
+        height: 100%;
+        div {
+            width: 80%;
+            margin: 0 auto;
+            transition: 200ms ease-in-out;
+            @include laptop {
+                width: 85%;
+            }
+            @include tablet {
+                width: 98%;
+            }
+            &.in_stock {
+                @include hideDivs;
+            }
+            &.show_div {
+                @include hideDivs;
+            }
+        }
+    }
+    div .product_container {
+        width: 100%;
+        height: 250px;
+        padding: 20px 30px;
+        background: $bg-product-container;
+        display: flex;
+        margin-bottom: 20px;
+        transition: 300ms ease-in-out;
+        @include desktop {
+            height: 200px;
+        }
+        @include laptop {
+            height: 180px;
+            padding: 10px 10px;
+        }
+        @include tablet {
+            height: 150px;
+            position: relative;
+        }
+        &:hover {
+            @include boxShadow;
+            background: $bg-product-container-hover;
+            transition: 300ms ease-in-out;
+        }
+    }
+    .product_container .img_container {
+        min-width: 300px;
+        display: flex;
+        align-items: center;
+        @include desktop {
+            min-width: 220px;
+        }
+        @include laptop {
+            min-width: 200px;
+        }
+        @include tablet {
+            min-width: 150px;
+        }
+        img {
+            width: 300px;
+            line-height: 250px;
+            @include desktop {
+                width: 220px;
+            }
+            @include laptop {
+                width: 200px;
+            }
+            @include tablet {
+                width: 150px;
+                line-height: 150px;
+            }
+        }
+    }
+    .product_container .description {
+        position: relative;
+        min-width: 52%;
+        padding-left: 30px;
+        @include desktop {
+            padding-left: 20px;
+        }
+        @include laptop {
+            min-width: 52%;
+        }
+        @include tablet {
+            min-width: 68%;
+            padding-left: 10px;
+        }
+        a {
+            width: 100%;
+            color: $color-product-links;
+            font-size: 27px;
+            font-weight: 500;
+            cursor: pointer;
+            &:hover {
+                color: $color-product-links-hover;
+            }
+            @include desktop {
+                font-size: 23px;
+                font-weight: 500;
+            }
+            @include tablet {
+                font-size: 22px;
+            }
+        }
+        ul {
+            margin-top: 30px;
+            padding-left: 20px;
+            @include desktop {
+                margin-top: 12px;
+            }
+            @include laptop {
+                margin-top: 12px;
+                padding-left: 10px;
+            }
+            @include tablet {
+               display: flex;
+               flex-wrap: wrap;
+            }
+            li {
+                list-style-type: circle;
+                font-size: 18px;
+                margin-bottom: 5px;
+                @include desktop {
+                    font-size: 16px;
+                    margin-bottom: 4px;
+                }
+                @include laptop {
+                    font-size: 15px;
+                    // margin-bottom: 2px;
+                }
+                @include tablet {
+                    margin-right: 50px;
+                 }
+            }
+        }
+        p {
+            position: absolute;
+            bottom: 0;
+            font-size: 18px;
+            &.green {
+                color: $color-inStock;
+            }
+            &.yellow {
+                color: $color-outStock;
+            }
+        }
+    }
+    .price {
+        min-width: 130px;
+        padding-right: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        @include desktop {
+            min-width: 100px;
+        }
+        @include laptop {
+            width: 100px;
+            padding-right: 10px;
+        }
+        @include tablet {
+            position: absolute;
+            max-width: 170px;
+            padding: 0 10px 10px 0;
+            height: 60px;
+            right: 0;
+            bottom: 0;
+            flex-direction: row;
+        }
+        span {
+            font-size: 28px;
+            font-weight: 600;
+            color: $color-text-dark;
+            @include desktop {
+                font-size: 25px;
+            }
+            @include tablet {
+                font-size: 22px;
+            }
+        }
+        
+    }
+    .price a {
+        color: $color-text-dark;
+        display: flex;
+        align-items: flex-end;
+        cursor: pointer;
+        &:hover {
+            color: $color-red;
+        }
+        ion-icon {
+            font-size: 54px;
+            @include desktop {
+                font-size: 48px;
+            }
+            @include laptop {
+                font-size: 42px;
+            }
+        }
+    }
+}

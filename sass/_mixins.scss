@@ -51,7 +51,7 @@
         line-height: 50px;
     }
     @include tablet {
-        line-height: 50px; //!!!!!!!!!!!!!!!!!!!!!!!
+        line-height: 50px; //!!!!!!
         padding-bottom: 20px;
         color: $color-text-light;
     }
@@ -60,7 +60,7 @@
         font-size: 25px;
         font-weight: 900;
         padding: 0 0 0 20px;
-        margin: 0; //!!!!!!!!!!!!!!!!!!!!!!!!!
+        margin: 0; //!!!!!!
     }
     span {
         color: $color-blue;
@@ -336,4 +336,48 @@
             background: rgb(159, 159, 247);
         }
     }
+}
+
+@mixin transition {
+    transition: (all, 500ms, cubic-bezier(0.65,0,.076,1));
+}
+
+/*---------------- Cart section --------------------*/
+
+@mixin boxShadow {
+    box-shadow:
+        0.5px 0.7px 2.8px rgba(0, 0, 0, 0.005),
+        1.3px 1.9px 5.4px rgba(0, 0, 0, 0.011),
+        2.7px 3.7px 7.9px rgba(0, 0, 0, 0.016),
+        4.7px 6.6px 10.5px rgba(0, 0, 0, 0.021),
+        7.8px 10.9px 13.3px rgba(0, 0, 0, 0.024),
+        12.3px 17.3px 17.3px rgba(0, 0, 0, 0.027),
+        18.2px 25.5px 25.5px rgba(0, 0, 0, 0.029),
+        25px 35px 94px rgba(0, 0, 0, 0.03)
+    ;
+}
+
+@mixin cartBtnSpan {
+    position: absolute;
+    left: 10px;
+    top: -8px;
+    background: #f33a3a;
+    color: rgb(248, 248, 248);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    z-index: 55;
+    // display: none;
+}
+
+@mixin hideDivs {
+    opacity: 0;
+    visibility: hidden;
+    margin-bottom: 0;
+    height: 0;
+    padding: 0;
+    transition: 200ms ease-in-out;
 }

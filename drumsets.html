@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="json-files/cards-products.json"></script>
     <script defer src="main.js"></script>
+    <script defer src="drumsets.js" type="module"></script>
     <script defer src="modals.js"></script>
     <title>DrumCentral Shop</title>
 </head>
@@ -29,7 +30,6 @@
         <div class="nav_info_top"id="home">
             <div class="info">
                 <a href="mailto:dovlasno1@gmail.com">dovlasno1@gmail.com</a>
-                <a href="tel:381642445657">+381/64 244 5657</a>
             </div>
             <div class="media">
                 <a href="https://sr-rs.facebook.com/" target="_blank">
@@ -80,9 +80,6 @@
                     <li class="list_item">
                         <a class="list_link" alt="" data-contact-target="#contactModal">Contact</a>
                     </li>
-                    <!-- <li class="list_item list_item_login">
-                        <a class="list_link login_logout_link" alt="" data-modal-target="#loginModal">Log In</a>
-                    </li> -->
                 </ul>
                 <div class="nav_search_box">
                     <form class="search_form" action="" method="">
@@ -95,8 +92,9 @@
                     <i class="fa-solid fa-user"></i>
                 </a>
                 
-                <a href="#" class="shop open_cart">
+                <a href="cart.html" class="shop open_cart">
                     <i class="fa-solid fa-cart-shopping"></i>
+                    <span></span>
                 </a>
                 
                 <div class="main_nav_media">
@@ -116,9 +114,181 @@
             </div>
         </div>
 
+        <!-- ----------------------- Side-nav -------------------- -->
+
+        <div class="side_nav">
+            <div class="side_media">
+                <a href="https://sr-rs.facebook.com/" target="_blank">
+                    <i class="fab fa-facebook-square"></i>
+                </a>
+                <a href="https://twitter.com/?lang=sr" target="_blank">
+                    <i class="fab fa-twitter-square"></i>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank">
+                    <i class="fab fa-instagram-square"></i>
+                </a>
+                <a href="cart.html" class="shop side_shop open_cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span></span>
+                </a>
+            </div>
+        </div>
+        <div class="btn_container">
+            <button class="top_btn"><i class="fa-solid fa-angle-up"></i></button>
+        </div>
+
+        <!-- ---------------------------- Drumset Hero ------------------------- -->
+
+        <section class="drumset_hero">
+            <div class="hero_container">
+                <div class="image_slider_box">
+                    <!-- --------- JS ---------- -->
+                </div>
+                
+                <div class="hero_content">
+                    <h1>Acoustic Drums</h1>
+                    <ul class="page_links">
+                        <li class="list_item">
+                            <a href="#">Snares</a>
+                        </li>
+                        <li class="list_item">
+                            <a href="#">Hardware</a>
+                        </li>
+                        <li class="list_item">
+                            <a href="#">Bags</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="cart.html" class="shop open_cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span></span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ------------------------------ Filters ----------------------------- -->
+            
+        <section class="selection">
+            <div class="select_container" id="filter">
+                <div class="filter_container">
+                    <select data-filter="category" class="filter_category filter">
+                        <option value="">Select Category</option>
+                        <option value="">Show All</option>
+                    </select>
+                </div>
+                <div class="filter_container">
+                    <select data-filter="brand" class="filter_brand filter">
+                        <option value="">Select Brand</option>
+                        <option value="">Show All</option>
+                    </select>
+                </div>
+                <div class="filter_container">
+                    <select data-filter="material" class="filter_material filter">
+                        <option value="">Select Material</option>
+                        <option value="">Show All</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="search">
+                <form id="search_form" action="">
+                    <div>
+                      <input type="search" id="productSearch" name="search" placeholder="Search the products..." aria-label="Search through site content">
+                      <button type="submit" class="submit_search_btn">Search</button>
+                    </div>
+                </form>
+                <div class="sorting_container">
+                    <div class="in_stock_container">
+                        <label class="in_stock_container">In stock
+                                <input type="checkbox" id="check">
+                        </label>
+                    </div>
+                    <div class="sort_products_container">
+                        <select>
+                            <option value="">Sort products</option>
+                            <option value="high_low">Price: high to low</option>
+                            <option value="low_high">Price: low to high</option>
+                            <option value="a_z">Alphabet: A-Z</option>
+                            <option value="z_a">Alphabet: Z-A</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>    
+
+        <!-- ------------------------------ Products Section ----------------------------- -->
+
+        <section class="products">
+            <!-- --------- JS ---------- -->
+        </section>
+
+        <!-- ------------------------------ Footer ----------------------------- -->
+
+        <div class="footer">
+            <div class="footer_content">
+                <div class="footer_about foot">
+                    <h2>About Us</h2>
+                    <a class="nav_logo" href="#"><span>Drum</span>Central</a>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat perspiciatis dolorum ipsum sed
+                        sit neque quis quia quasi error commodi.
+                    </p>
+                    <div class="social">
+                        <a href="https://sr-rs.facebook.com/" target="_blank"><i class="fab fa-facebook-f icon"></i></a>
+                        <a href="https://twitter.com/?lang=sr" target="_blank"><i class="fab fa-twitter icon"></i></a>
+                        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-linkedin-in icon"></i></a>
+                    </div>
+                </div>
+                <div class="footer_info foot">
+                    <h2>Contact Info</h2>
+                    <div>
+                        <p>address:</p>
+                        <p>Jirecekova 5, Novi Sad, Vojvodina, Srbija</p>
+                    </div>
+                    <div>
+                        <p>phone:</p>
+                        <a href="tel:381642445657">+381/64 244 5657</a>
+                    </div>
+                    <div>
+                        <p>emial:</p>
+                        <a href="mailto:dovlasno1@gmail.com">dovlasno1@gmail.com</a>
+                    </div>
+                </div>
+                <div class="footer_map foot">
+                    <h2>Sitemap</h2>
+                    <div class="pages">
+                        <p><a href="drumsets.html">Drums</a></p>
+                        <p><a href="cymbals.html">Cymbals</a></p>
+                        <p><a href="percussion.html">Hardware</a></p>
+                        <p><a href="#section_about">About</a></p>
+                        <p><a href="#section_gallery">Gallery</a></p>
+                    </div>
+                </div>
+                <div class="footer_media foot">
+                    <h2>Stay connected</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium cupiditate eius inventore
+                        veniam quasi nisi quod doloribus dolores repellendus minima.</p>
+                    <form action="">
+                        <input type="email" name="" id="">
+                        <button type="submit">Sign up</button>
+                    </form>
+                    <div class="footer_btns">
+                        <button data-contact-target="#contactModal">Contact</button>
+                        <button data-modal-target="#loginModal">Login</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer_copy">
+                <p>Copyright@Vladimir.Stojkovic.2022</p>
+            </div>
+        </div>
+
     </div>
 
     <div id="overlay"></div>
     <div id="overlay_cards"></div>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
