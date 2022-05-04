@@ -11,6 +11,8 @@
 @import 'layout/footer';
 @import 'layout-pages/drumsets';
 @import 'layout-pages/cart';
+@import 'layout-pages/cymbals';
+@import 'layout-pages/percussion';
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
@@ -28,3 +30,5 @@
 
 @include drumsets;
 @include cart;
+@include cymbals;
+@include percussion;

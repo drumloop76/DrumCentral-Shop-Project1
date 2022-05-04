@@ -3972,7 +3972,7 @@ img {
   position: relative;
   width: 100%;
   height: 360px;
-  background-image: url("/images/imgs-hero/percussion_hero.jpg");
+  background-image: url("/images/imgs-hero/drums_hero-page.jpg");
   background-position: center;
   background-size: cover;
   z-index: 120;
@@ -4885,6 +4885,135 @@ div .product_container:hover {
   40%, 60% {
     transform: translateX(5px);
   }
+}
+.cymbals_side_nav,
+.cymbals_btn_container {
+  display: none;
+}
+
+.cymbals_hero {
+  background-image: url("/images/imgs-hero/cymbals_page-hero.jpg");
+}
+
+.cymbals_page {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  background-image: url(/images/404-bg.jpg);
+  background-position: center;
+  background-size: cover;
+}
+.cymbals_page .content {
+  position: absolute;
+  width: 100%;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.cymbals_page .content h1 {
+  font-size: 60px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: white;
+  text-shadow: 0px 0px 2px #000000;
+  margin-bottom: 40px;
+}
+
+.content ul {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+@media screen and (max-width: 768px) {
+  .content ul {
+    gap: 30px;
+  }
+}
+.content ul li {
+  width: 120px;
+  height: 40px;
+  text-align: center;
+}
+.content ul li a {
+  display: block;
+  line-height: 40px;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: white;
+  background: #346FA2;
+  cursor: pointer;
+}
+.content ul li a:hover {
+  background: rgba(243, 243, 243, 0.356);
+  color: #EEEEEE;
+}
+
+.cymbals_side_nav,
+.cymbals_btn_container {
+  display: none;
+}
+
+.percussion_hero {
+  background-image: url("/images/imgs-hero/percussion_hero.jpg");
+}
+
+.percussion_page {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  background-image: url("/images/404-bg.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.percussion_page .content {
+  position: absolute;
+  width: 100%;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.percussion_page .content h1 {
+  font-size: 60px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: white;
+  text-shadow: 0px 0px 2px #000000;
+  margin-bottom: 40px;
+}
+
+.content ul {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+@media screen and (max-width: 768px) {
+  .content ul {
+    gap: 30px;
+  }
+}
+.content ul li {
+  width: 120px;
+  height: 40px;
+  text-align: center;
+}
+.content ul li a {
+  display: block;
+  line-height: 40px;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: white;
+  background: #346FA2;
+  cursor: pointer;
+}
+.content ul li a:hover {
+  background: rgba(243, 243, 243, 0.356);
+  color: #EEEEEE;
 }
 
 /*# sourceMappingURL=style.css.map */

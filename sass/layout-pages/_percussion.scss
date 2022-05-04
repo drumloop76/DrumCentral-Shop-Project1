@@ -1,0 +1,61 @@
+@mixin percussion {
+    .cymbals_side_nav,
+    .cymbals_btn_container {
+        display: none;
+    }
+    .percussion_hero {
+        background-image: url('/images/imgs-hero/percussion_hero.jpg');
+    }
+    .percussion_page {
+        position: relative;
+        width: 100%;
+        height: 80vh;
+        background-image: url('/images/404-bg.jpg');
+        background-position: center;
+        background-size: cover;
+        .content {
+            position: absolute;
+            width: 100%;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            h1 {
+                font-size: 60px;
+                font-weight: 800;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                color: $color-text-light;
+                text-shadow: $text-shadow;
+                margin-bottom: 40px;
+            }
+        }
+    }    
+    .content ul {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        @include tablet {
+            gap: 30px;
+        }
+        li {
+            width: 120px;
+            height: 40px;
+            text-align: center;
+            a {
+                display: block;
+                line-height: 40px;
+                font-size: 20px;
+                font-weight: 600;
+                text-transform: uppercase;
+                color: $color-text-light;
+                background: $color-product-links;
+                cursor: pointer;
+                &:hover {
+                    background: $bg-product-container-hover;
+                    color: $bg-product-container;
+                }
+            }
+        }
+    }
+}
