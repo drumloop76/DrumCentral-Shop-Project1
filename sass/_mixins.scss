@@ -199,19 +199,18 @@
 @mixin closeModalBtn {
     position: absolute;
     float: right;
-    top: 8px;
-    right: 13px;
-    padding: 0 2px;
-    font-size: 25px;
-    font-weight: 600;
+    top: 10px;
+    right: 15px;
     background: transparent;
     border: none;
     outline: none;
     cursor: pointer;
-    // &:hover {
-    //     transform: scale(1.1);
-    //     transform: rotate(180deg);
-    // }
+    .fa-xmark{
+        font-size: 22px;
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
 }
 
 @mixin modalLabel {

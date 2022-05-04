@@ -1094,15 +1094,18 @@
 .modals .close_modal_btn {
   position: absolute;
   float: right;
-  top: 8px;
-  right: 13px;
-  padding: 0 2px;
-  font-size: 25px;
-  font-weight: 600;
+  top: 10px;
+  right: 15px;
   background: transparent;
   border: none;
   outline: none;
   cursor: pointer;
+}
+.modals .close_modal_btn .fa-xmark {
+  font-size: 22px;
+}
+.modals .close_modal_btn .fa-xmark:hover {
+  transform: scale(1.2);
 }
 .modals .modal_header {
   text-align: center;
@@ -1333,12 +1336,17 @@
   font-size: 17px;
   font-weight: 600;
   color: black;
+  cursor: pointer;
 }
 @media screen and (max-width: 500px) {
   .login_modal_container .signin_form_btn .signin_form_btn,
 .login_modal_container .forgot_form_btn .signin_form_btn {
     padding-bottom: 30px;
   }
+}
+.login_modal_container .signin_form_btn:hover,
+.login_modal_container .forgot_form_btn:hover {
+  color: #C9CCD5;
 }
 
 .signin_modal_container .go_back {
@@ -1536,6 +1544,10 @@
   width: 50%;
   height: 100%;
   background: rgb(208, 174, 241);
+  background: url(../images/contact_pic3.jpg);
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0px 0px 2px #000000;
 }
 @media screen and (max-width: 768px) {
   .modal_container .container_left {
@@ -1563,15 +1575,18 @@
 .modal_container .container_right .close_modal_btn {
   position: absolute;
   float: right;
-  top: 8px;
-  right: 13px;
-  padding: 0 2px;
-  font-size: 25px;
-  font-weight: 600;
+  top: 10px;
+  right: 15px;
   background: transparent;
   border: none;
   outline: none;
   cursor: pointer;
+}
+.modal_container .container_right .close_modal_btn .fa-xmark {
+  font-size: 22px;
+}
+.modal_container .container_right .close_modal_btn .fa-xmark:hover {
+  transform: scale(1.2);
 }
 .modal_container .container_right h1 {
   text-align: center;
@@ -1685,24 +1700,21 @@
   visibility: visible;
   transition: 400ms;
 }
-.card_modal .card_modal_btn {
+.card_modal .close_prod_modal_btn {
   position: absolute;
-  font-size: 30px;
-  font-weight: bolder;
-  padding: 5px 10px;
-  top: 5px;
-  right: 10px;
+  float: right;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  outline: none;
   cursor: pointer;
-  z-index: 10;
 }
-@media screen and (max-width: 768px) {
-  .card_modal .card_modal_btn {
-    top: 50px;
-  }
+.card_modal .close_prod_modal_btn .fa-xmark {
+  font-size: 22px;
 }
-.card_modal .card_modal_btn:hover {
+.card_modal .close_prod_modal_btn .fa-xmark:hover {
   transform: scale(1.2);
-  color: rgb(80, 80, 80);
 }
 .card_modal .mod_cont {
   display: flex;
@@ -1735,16 +1747,24 @@
   }
 }
 .card_modal .card_modal_content .card_modal_title {
+  text-align: center;
   font-size: 30px;
-  margin: 0 0 10px 0;
+  font-weight: 600;
+  color: black;
+  margin-bottom: 50px;
+}
+@media screen and (max-width: 768px) {
+  .card_modal .card_modal_content .card_modal_title {
+    margin: 5% 0 5% 0;
+  }
 }
 .card_modal .card_modal_content .card_modal_description {
-  margin-bottom: 20px;
-  padding: 20px;
+  margin-bottom: 50px;
+  padding: 0 20px;
+  text-align: center;
 }
 
 .card_modal_content .card_modal_list {
-  text-align: left;
   padding-left: 30px;
 }
 .card_modal_content .card_modal_list .card_modal_item {
@@ -1765,6 +1785,7 @@
 
 .card_modal .card_modal_media {
   width: 50%;
+  background: transparent;
 }
 @media screen and (max-width: 768px) {
   .card_modal .card_modal_media {
@@ -1778,11 +1799,14 @@
   }
 }
 .card_modal .card_modal_media .main_img_container {
+  position: relative;
   width: 250px;
   height: 200px;
   padding: 10px;
   margin-bottom: 10px;
   object-fit: cover;
+  left: 50%;
+  transform: translateX(-50%);
   cursor: pointer;
   border: 2px solid black;
 }
@@ -1795,7 +1819,8 @@
   width: 100%;
 }
 .card_modal .card_modal_media .slider_container {
-  width: 100%;
+  width: 95%;
+  margin: 0 auto;
   display: flex;
   align-items: center;
 }
@@ -1823,27 +1848,24 @@
   object-fit: cover;
   max-width: 100px;
   max-height: 100px;
-  cursor: pointer;
   opacity: 0.5;
   margin: 5px;
   border: 2px solid black;
-}
-.card_modal .card_modal_media .thumbnail:hover {
-  opacity: 1;
 }
 .card_modal .card_modal_media .activePic {
   width: 100px;
   opacity: 1;
 }
 .card_modal .card_modal_media .fa-solid {
+  text-align: center;
   width: 30px;
   height: 30px;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
   transition: 300ms;
 }
 .card_modal .card_modal_media .fa-solid:hover {
-  opacity: 0.6;
+  color: #346FA2;
 }
 
 .card_modal_media .column {
@@ -1851,6 +1873,7 @@
 }
 .card_modal_media .column h1 {
   margin-bottom: 5px;
+  text-align: center;
 }
 @media screen and (max-width: 768px) {
   .card_modal_media .column h1 {
@@ -1860,6 +1883,8 @@
 }
 .card_modal_media .column .card_modal_price {
   margin-bottom: 15px;
+  font-size: 25px;
+  text-align: center;
 }
 @media screen and (max-width: 768px) {
   .card_modal_media .column .card_modal_price {

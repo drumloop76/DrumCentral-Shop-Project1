@@ -123,7 +123,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/pearl_stage_1.png",
+        "image": "/images/drum-cards/pearl_stage_1.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -156,7 +156,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/yamaha_studio_1.png",
+        "image": "/images/drum-cards/yamaha_studio_1.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -189,7 +189,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/gretsch_jazz_1.png",
+        "image": "/images/drum-cards/gretsch_jazz_1.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -222,7 +222,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/dw_stage_1.png",
+        "image": "/images/drum-cards/dw_stage_1.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -255,7 +255,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/tama_jazz_1.png",
+        "image": "/images/drum-cards/tama_jazz_1.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -288,7 +288,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/gretsch_stage_1.png",
+        "image": "/images/drum-cards/gretsch_stage_1.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -321,7 +321,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/Ludwig_stage_1.png",
+        "image": "/images/drum-cards/Ludwig_stage_1.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -354,7 +354,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/tama_studio_2.png",
+        "image": "/images/drum-cards/tama_studio_2.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
@@ -387,7 +387,7 @@
             "Bubinga Wood in 5mm with 5ply",
             "Colour: Blue Moonstone"
         ],
-        "image": "images/drum-cards/dw_premium_2.png",
+        "image": "/images/drum-cards/dw_premium_2.png",
         "colors": [
             "images/drum-cards/prod-colors/tom-1.jpg",
             "images/drum-cards/prod-colors/tom-2.jpg",
