@@ -104,7 +104,7 @@ window.addEventListener('DOMContentLoaded', () => {
 /*---------------------------- Cards Timer ----------------------------*/
 
 function timer() {
-    const deadline = '2022-05-01T00:00:00';
+    const deadline = '2022-06-01T00:00:00';
     
     function getTimeRemaining(date) {
         const time = Date.parse(date) - new Date(),
@@ -133,8 +133,8 @@ function timer() {
             seconds.innerHTML = doubleDig(timeRemaining.seconds);
 
             if(timeRemaining <= 0) {
-                clearInterval(timerTick)
-            }
+                clearInterval(timerTick);
+            };
         };
         updateTimer();
     };
@@ -145,7 +145,7 @@ function timer() {
             return '0' + n
         } else {
             return n
-        }
+        };
     };
 };
 timer();
@@ -155,7 +155,6 @@ fetch('/json-files/cards-products.json')
     .then(data => {
         for(let i=0; i<data.length; i++) {
             if(data[i].sale == true) {
-                // console.log(data[i])
                 document.querySelectorAll('.card').forEach((obj, i) => {
                     obj.innerHTML = `
                         <img class="card_img" src="${data[i].image}">
@@ -163,8 +162,8 @@ fetch('/json-files/cards-products.json')
                         <p class="card_price">only <span>€ ${data[i].price}</span></p>
                         <button class="card_btn open_prod_modal" data-product-target="#productModal">Read More</button>`
                 });
-            }       
-        }   
+            };
+        };
     });
 
 /*------------------------ Cards Animation ------------------------*/
@@ -180,18 +179,18 @@ const cardsAnimations = function() {
                 return;
             }else {
                 e.target.classList.add('showBoxs');
-            }
+            };
             observer.unobserve(e.target);
-        })
+        });
     };
 
     const options = {
         root: null,
         threshold: 0,
         rootMargin: "-150px",
-    }
+    };
 
-    const timerObserver = new IntersectionObserver(showTimerBoxs, options)
+    const timerObserver = new IntersectionObserver(showTimerBoxs, options);
 
     timerBoxs.forEach(tb => timerObserver.observe(tb));
     cards.forEach(c => timerObserver.observe(c));
@@ -211,10 +210,9 @@ const gallery = function() {
                             <span>${data[i].description}</span>
                         </div>
                         `
-            }    
+            };
             
             const gallNav = document.querySelector('.gallery_nav');
-            // const line = document.querySelector('.gallery_nav');
             const imgBoxs = document.querySelectorAll('.gall_pic');
             const gallOverlay = document.querySelector('#overlay');
             
@@ -224,18 +222,17 @@ const gallery = function() {
                     e.target.classList.add('active');
                     
                     const dataValue = e.target.getAttribute('data-name');
-                    // console.log(dataValue)
                     imgBoxs.forEach((box) => {
                         if(box.classList.contains(dataValue) || dataValue === 'all') {
-                            box.classList.remove('hide')
-                            box.classList.add('show')
+                            box.classList.remove('hide');
+                            box.classList.add('show');
                         } else {
                             box.classList.add('hide');
                             box.classList.remove('show');
-                        }
-                    })
-                }
-            })
+                        };
+                    });
+                };
+            });
             
             const prevBox = document.querySelector('.prev_box'),
                 imgTitle = prevBox.querySelector('.img_title span'),
@@ -252,25 +249,25 @@ const gallery = function() {
                     let selectedImgDescription = data[i].description;
                     
                     prevImg.src = selectedPrevImg;
-                    imgTitle.textContent = selectedImgCategory
+                    imgTitle.textContent = selectedImgCategory;
                     imgDescription.textContent = selectedImgDescription;
                     
                     prevBox.classList.add('show');
                     gallOverlay.classList.add('show'); //!!!!!!!!!!!!!!!!!!!!
-                })
+                });
                 closeBoxBtn.addEventListener('click', () => {
                     prevBox.classList.remove('show');
                     gallOverlay.classList.remove("show"); //!!!!!!!!!!!!!!!!!!!!
                     document.querySelector('body').style.overflow = 'auto';  //!!!!!!!!!!!!!!!!!!!!!!!
-                })
-            })
+                });
+            });
             gallOverlay.addEventListener('click', () => {
                 prevBox.classList.remove('show');
                 gallOverlay.classList.remove("show");
                 document.querySelector('body').style.overflow = 'auto';
-            })
-        })
-    }
+            });
+        });
+    };
 gallery();
 
 /*---------------------------- Partners slider ----------------------------*/
@@ -290,7 +287,7 @@ function sliderLogos() {
         list2 = list.cloneNode(true);
         slider.appendChild(list2);
         list2.style.left = `${listWidth}px`;
-    }
+    };
     cloneList();
 
     function firstList() {
@@ -300,8 +297,8 @@ function sliderLogos() {
             list.style.left = `${firstX}px`;
         } else {
             firstX = listWidth;
-        }
-    }
+        };
+    };
 
     function secondList() {
         secondX -= speed;
@@ -309,24 +306,23 @@ function sliderLogos() {
             list2.style.left = `${secondX}px`;
         } else {
             secondX = listWidth;
-        }
-    }
+        };
+    };
 
     function hover() {
         clearInterval(int1);
         clearInterval(int2);
-    }
+    };
 
     function unhover() {
         int1 = setInterval(firstList, 5);
         int2 = setInterval(secondList, 5);
-    }
-    // cloneList();
-
+    };
+    
     let int1 = setInterval(firstList, 5);
     let int2 = setInterval(secondList, 5);
 
     slider.addEventListener("mouseenter", hover);
     slider.addEventListener("mouseleave", unhover);
-}
+};
 sliderLogos();

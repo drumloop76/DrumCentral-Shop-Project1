@@ -85,6 +85,7 @@ const drumsets = function() {
                     e.preventDefault();
                     cartNumbers(data[i]);
                     totalCost(data[i]);
+                    alert(`One ${data[i].name} addet to cart`);
                 });
             });
 

@@ -26,10 +26,10 @@ const navToggler = function () {
                     link.style.animation = '';
                 } else {
                     link.style.animation = `linksSlide 0.4s ease both ${i / 10 + 0.1}s`;
-                }
-            })
-        }
-    })
+                };
+            });
+        };
+    });
 
     function clickCloseNav() {
         document.querySelectorAll('.scroll').forEach(el => {
@@ -42,10 +42,10 @@ const navToggler = function () {
                     toggler.classList.remove('open');
                     navContainer.classList.remove('open');
                 };
-            })
-        })
-    }
-    clickCloseNav()
+            });
+        });
+    };
+    clickCloseNav();
 };
 navToggler();
 
@@ -69,7 +69,7 @@ const dropdown = function () {
         } else {
             submenu.style.display = 'block';
             caretDown.classList.add('rotate');
-        }
+        };
     });
 };
 dropdown();
@@ -81,7 +81,7 @@ const search = function () {
     const searchInput = document.querySelector('.search_input');
     const searchBtn = document.querySelector('.search_btn');
     const searchIcon = document.querySelector('.fa-search');
-    const searchBox = document.querySelector('.nav_search_box')
+    const searchBox = document.querySelector('.nav_search_box');
 
     // const mediaSizeLaptop = 1024;
     // const mediaSizeTablet = 768;
@@ -126,10 +126,10 @@ const sticky = function() {
             navContainer.classList.add('sticky');
         } else {
             navContainer.classList.remove('sticky');    
-        }
-    }
+        };
+    };
     window.addEventListener('scroll', fixedNav);
-}
+};
 sticky();
 
 /*---------------------------- Smooth Scrolling ----------------------------*/
@@ -138,10 +138,9 @@ document.querySelector('.nav_list').addEventListener('click', function(e) {
     if(!e.target.classList.contains('scroll')) return
     if(e.target.classList.contains('list_link')) {
         const sectionId = e.target.getAttribute('href');
-        // sectionId.classList.add('active-page')
         document.querySelector(sectionId).scrollIntoView({
             behavior: "smooth"
-        })
+        });
     };
     e.preventDefault();
 });
@@ -155,11 +154,11 @@ sideNav.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-/*---------------------------- Reveal About Section Text ----------------------------*/
+/*---------------------------- Reveal Sections ----------------------------*/
 
 const reveal = function() {
     const sectionTitle = document.querySelectorAll('.title');
-    const paras = document.querySelectorAll('.paras_about') 
+    const paras = document.querySelectorAll('.paras_about');
     const headers = document.querySelectorAll('.about_text_header');
     const moreBtns = document.querySelectorAll('.more_btn');
     const aboutImgs = document.querySelectorAll('.about_img');
@@ -225,25 +224,52 @@ const aboutText = function() {
     paragraphs.forEach(par => {
         if(par.textContent.length < noOfChar) {
             par.nextElementSibling.style.display = "none";
-            console.log(par.nextElementSibling)
         }else {
             const text = par.textContent.slice(0, noOfChar);
             const moreText = par.textContent.slice(noOfChar);
             par.innerHTML = `
                     ${text}<span class="dots">...</span>
                     <span class="more_text show_less">${moreText}</span>
-                    `;
-        }
-    })
+                    `
+        };
+    });
 
     document.querySelectorAll('.more_btn').forEach(btn => {
         btn.addEventListener('click', () => {
             btn.parentElement.querySelector('.dots').classList.toggle('show_less');
             btn.parentElement.querySelector('.more_text').classList.toggle('show_less');
-            // console.log(btn.parentElement.querySelector('.show_more'))
             btn.textContent == "Read More" ? btn.textContent = "Read Less" : btn.textContent = "Read More";
-        })
-    })
-    
-}
+        });
+    });
+};
 aboutText();
+
+/*---------------------------- Loged User ----------------------------*/
+// const loginIcon = document.querySelector('.login_logout_link');
+// console.log(loginIcon)
+// let logedUser = JSON.parse(localStorage.getItem('logedUser'));
+// console.log(logedUser)
+// if(logedUser) {
+//     console.log('rr')
+//     document.querySelector('.nav_info_top span').textContent = `Welcome ${logedUser.firstName}`
+//     // console.log(logedUser.firstName)
+//     loginIcon.classList.add('loged_user');
+//     loginIcon.setAttribute('data-modal-target', '#logedUser');
+//     loginIcon.addEventListener('click', (e) => {
+//         e.preventDefault()
+//         console.log(e.target)
+
+
+//     })
+// }
+
+// const userModal = document.createElement('div');
+    
+// userModal.innerHTML = `
+//     <div class="userPage" id="logedUser">
+//         <div class="userPage_container">
+//             <h1>Welcome</h1>
+//         </div>
+//     </div>
+//     `
+// document.body.insertAdjacentElement('beforeend', userModal);
