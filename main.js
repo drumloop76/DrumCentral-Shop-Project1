@@ -245,31 +245,83 @@ const aboutText = function() {
 aboutText();
 
 /*---------------------------- Loged User ----------------------------*/
-// const loginIcon = document.querySelector('.login_logout_link');
-// console.log(loginIcon)
-// let logedUser = JSON.parse(localStorage.getItem('logedUser'));
-// console.log(logedUser)
-// if(logedUser) {
-//     console.log('rr')
-//     document.querySelector('.nav_info_top span').textContent = `Welcome ${logedUser.firstName}`
-//     // console.log(logedUser.firstName)
-//     loginIcon.classList.add('loged_user');
-//     loginIcon.setAttribute('data-modal-target', '#logedUser');
-//     loginIcon.addEventListener('click', (e) => {
-//         e.preventDefault()
-//         console.log(e.target)
 
-
-//     })
-// }
-
-// const userModal = document.createElement('div');
+// function logedUsers() {
+    // const loginIcon = document.querySelector('.login_logout_link');
+    // const logedUser = JSON.parse(localStorage.getItem('logedUser'));
     
-// userModal.innerHTML = `
-//     <div class="userPage" id="logedUser">
-//         <div class="userPage_container">
-//             <h1>Welcome</h1>
-//         </div>
-//     </div>
-//     `
-// document.body.insertAdjacentElement('beforeend', userModal);
+    // if(logedUser) {
+    //     document.querySelector('.nav_info_top span').textContent = `Welcome ${logedUser.firstName}`;
+    //     // remove dataset
+    //     document.querySelector('.login_logout_link').removeAttribute("data-modal-target"); //!!!!!!!!!!!!!!!!!!!!!
+    //     // remove class / set new class
+    //     let newLogLink = loginIcon;
+    //     newLogLink.setAttribute("class", "loged_user");
+    //     // remove icon / set new icon
+    //     newLogLink.innerHTML = `
+    //         <i class="fa-solid fa-user-check"></i>
+    //         `
+    //     newLogLink.addEventListener('click', (e) => {
+    //         e.preventDefault();
+    //         document.querySelector('.user_page').classList.add('open_user_modal');
+    //     });
+    // };
+
+        // const userModal = document.createElement('div');
+            
+        // userModal.innerHTML = `
+                
+        //             <div class="user_page" id="logedUser">
+        //                 <button class="close_user_modal_btn">
+        //                     <i class="fa-solid fa-xmark"></i>
+        //                 </button>
+        //                 <div class="userPage_container">
+        //                     <h1>Welcome <span>${logedUser.firstName} ${logedUser.lastName}</span></h1>
+        //                     <button class="logout_btn">Log out</button>
+        //                 </div>
+        //                 <p>Go search instruments:</p>
+        //                 <div class="page_btns">
+        //                     <a href="#">Drums</a>
+        //                     <a href="#">Cymbals</a>
+        //                     <a href="#">Percussion</a>
+        //                 </div>
+        //             </div>
+                
+        //         `
+        // document.body.insertAdjacentElement('beforeend', userModal);
+
+        // // ------------------ ugasi modal --------------------
+        // document.querySelector('.close_user_modal_btn').addEventListener('click', (e) => {
+        //     e.preventDefault();
+        //     document.querySelector('.user_page').classList.remove('open_user_modal');
+        // });
+        // // logout()
+        
+    // ------------------ izloguj se --------------------
+//     console.log(document.querySelector('.loged_user'))
+// //     // function logout() {
+//         document.querySelector('.logout_btn').addEventListener('click', (e) => {
+//             e.preventDefault();
+//             localStorage.removeItem('logedUser');
+//             console.log(userModal)
+//             // remove class / set old class
+//             let a = document.querySelector('.loged_user');
+//             console.log(a)
+//             a.setAttribute("class", "login_logout_link");
+//             // remove dataset
+//             a.setAttribute("data-modal-target", "#loginModal"); //!!!!!!!!!!!!!!!!!!!!!
+//             // remove icon / set old icon
+//             a.innerHTML = `
+//                 <i class="fa-solid fa-user"></i>
+//                 `
+//             document.querySelector('.nav_info_top span').textContent = '';
+//             console.log(a)
+//         });
+//     // }
+//     // logout();
+//     // } else {
+//     //     console.log(loginIcon)
+//     // } 
+    
+// };
+// logedUsers();

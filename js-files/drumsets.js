@@ -54,11 +54,21 @@ const drumsets = function() {
                                     <li>${data[i].material}</li>
                                     <li>${data[i].color}</li>
                                 </ul>
-                                <p>${data[i].stock === true ? 'In stock' : 'Available soon'}</p>
+                                <div class="action">
+                                    <p>${data[i].stock === true ? 'In stock' : 'Out of stock'}</p>
+                                    <a class="compare_btn">
+                                        <i class="fa-regular fa-copy"></i>
+                                    </a>
+                                    <a class="wish_list_btn">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </a>
+                                </div>
                             </div>
                             <div class="price">
                                 <span class="product_price">€ ${data[i].price}</span>
-                                <a href="#" class="shop open_cart" data-cart="add_to_cart_btn"><ion-icon name="cart-outline"></ion-icon></a>
+                                <a href="#" class="shop open_cart" data-cart="add_to_cart_btn">
+                                    <i class="fas fa-cart-arrow-down"></i></i>
+                                </a>
                             </div>
                         </div>
                     `
@@ -77,7 +87,7 @@ const drumsets = function() {
             };
 
             ////////////////////////////////////// Add To Cart ///////////////////////////////////////////////
-            
+      
             const addToCartBtn = document.querySelectorAll('[data-cart="add_to_cart_btn"]');
             
             addToCartBtn.forEach((btn, i) => {
@@ -85,7 +95,7 @@ const drumsets = function() {
                     e.preventDefault();
                     cartNumbers(data[i]);
                     totalCost(data[i]);
-                    alert(`One ${data[i].name} addet to cart`);
+                    alert(`One ${data[i].name} added to cart`);
                 });
             });
 
@@ -168,7 +178,7 @@ const drumsets = function() {
                     localStorage.setItem("totalCost", product.price);
                 }                
             }
-
+    
 
             /////////////////////////////////// Filters //////////////////////////////////////////
         
@@ -272,7 +282,6 @@ const drumsets = function() {
                     
                     if(category.indexOf(searchValue) > -1 || brand.indexOf(searchValue) > -1 || material.indexOf(searchValue) > -1) {
                         show(el);
-                        console.log(el);
                     };
                 })
             })
@@ -297,9 +306,9 @@ const drumsets = function() {
                     for(const product of products) {
                         let productStock = product.querySelector('.description p').textContent.trim();
 
-                        if(checkBox.checked && productStock === 'Available soon') {
+                        if(checkBox.checked && productStock === 'Out of stock') {
                             product.classList.add('in_stock');
-                        } else if (!checkBox.checked && productStock === 'Available soon') {
+                        } else if (!checkBox.checked && productStock === 'Out of stock') {
                             product.classList.remove('in_stock');
                         };
                     };
@@ -372,6 +381,285 @@ const drumsets = function() {
             };
             sort();
             onLoadCartNumbers();
+
+            ///////////////////////////////////////////////////////////////////
+            /////////////////////// Compare products //////////////////////////
+
+            const itemDiv = document.createElement('div');
+                itemDiv.innerHTML +=  `
+                        <div class="product_compare_box">
+                            <button class="close_box_btn">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                            <h3>Compare products</h3>
+                            <div class="comparison_content">
+                                <div class="products_container">
+                                
+                                </div>
+                                <div class="box_btns_cont">
+                                    <button class="compare_products btn">Compare</button>
+                                    <button class="remove_products btn">Remove all</button>
+                                </div>
+                            </div>
+                        </div>
+                    `
+
+            document.body.insertAdjacentElement('beforeend', itemDiv);
+
+            //////////////////////////// Add Item //////////////////////////
+
+            const addItemBtn = document.querySelectorAll('.compare_btn');            
+            let arr = [];
+            
+            addItemBtn.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector('.product_compare_box').classList.add('show_up');
+                    
+                    let targetName = e.target.closest('.description').firstElementChild.innerHTML;
+                    
+                    for(let i=0 ; i<data.length ; i++) {
+                        if(data[i].name === targetName && arr.length <= 2) {
+                            arr.push(targetName);
+                            setCompareItems(data[i]);
+                            displayItems();
+                            removeAllItems();
+                        };                        
+                    };
+                });
+            });            
+            
+            // -------------------- setItems -------------------
+            function setCompareItems(item) {
+                let compareItems = JSON.parse(localStorage.getItem('compareItems'));
+
+                if(compareItems != null){
+                    if(compareItems[item.name] == undefined) {
+                        compareItems = {
+                            ...compareItems,
+                            [item.name]: item
+                        };
+                    };
+                    compareItems[item.name].inBox += 1;
+                } else {
+                    item.inBox = 1
+                    compareItems = {
+                        [item.name]: item
+                    };
+                };
+                localStorage.setItem('compareItems', JSON.stringify(compareItems));
+            };
+            
+            // -------------------- Display Item -------------------
+            function displayItems() {
+                let compareItems = JSON.parse(localStorage.getItem('compareItems'));
+
+                const itemBox = document.querySelector('.products_container');
+                if(compareItems) {
+                    itemBox.innerHTML = ``;
+                    Object.values(compareItems).map(item => {
+                        itemBox.innerHTML += `
+                            <div class="selected_item">
+                                <div class="selected_item_img_box">
+                                    <img src="${item.image}">
+                                </div>
+                                <span class="selected_item_name">${item.name}</span>
+                                <div  class="itemDescription">
+                                    <p>${item.category}</p>
+                                    <p>${item.brand}</p>
+                                    <p>${item.material}</p>
+                                    <hr>
+                                    <p>€ ${item.price}</p>
+                                    <hr>
+                                    <p>${item.description[0]}</p>
+                                    <p>${item.description[1]}</p>
+                                    <p>${item.description[2]}</p>
+                                    <p>${item.description[3]}</p>
+                                    <!--<p class="desc">${item.description}</p>-->
+                                    <hr>
+                                    <p>${item.woodPly}</p>
+                                    <p>${item.edges}</p>
+                                </div>
+                                <button class="remove_box_btn">Remove</button>
+                            </div>
+                            ` 
+                        removeBoxItem();
+                    });
+                };
+            };            
+
+            // -------------------- Remove Item from Box -------------------
+            function removeBoxItem() {
+                let compareItems = JSON.parse(localStorage.getItem('compareItems'));
+
+                const removeItemBtn = document.querySelectorAll('.remove_box_btn');
+                let comparedItem;               
+                for(let i=0; i < removeItemBtn.length; i++) {
+                    removeItemBtn[i].addEventListener('click', (e) => {
+                        e.preventDefault();
+                        comparedItem = removeItemBtn[i].previousElementSibling.previousElementSibling.textContent;
+                        
+                        delete compareItems[comparedItem];
+                        localStorage.setItem('compareItems', JSON.stringify(compareItems));
+
+                        arr.filter(function(value, index, arr){
+                            if(comparedItem === value) 
+                                arr.splice(index, 1)
+                            });
+
+                        displayItems();                        
+                    });
+                };
+            };
+            
+            // -------------------- Remove All Items -------------------
+            function removeAllItems() {
+                document.querySelector('.remove_products').addEventListener('click', (e)=> {
+                    e.preventDefault();
+                    
+                    const itemBox = document.querySelector('.products_container').innerHTML = '';
+                    localStorage.removeItem("compareItems");
+                    arr = [];
+                    document.querySelector('.compare_products').textContent = "Compare";
+
+                    displayItems();
+                });                
+            };
+
+            // ------------------------ Toggle Contant ------------------------
+            document.querySelector('.compare_products').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.itemDescription').forEach(d => {
+                    d.classList.toggle('read');
+                    const compareBtn = document.querySelector('.compare_products');
+                    d.classList.contains('read') ? compareBtn.textContent = "Minimize" : compareBtn.textContent = "Compare";
+                });
+            });
+
+            // -------------------- Close Modal -------------------
+            document.querySelector('.close_box_btn').addEventListener('click', () => {
+                document.querySelector('.product_compare_box').classList.remove('show_up');
+            });
+
+            
+            ///////////////////////////////////////////////////////////////////
+            /////////////////////// Wish List //////////////////////////
+                        
+            document.querySelectorAll('.wish_list_btn').forEach((btn, i) => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    let targetName = e.target.closest('.description').firstElementChild.innerHTML;
+                    
+                    for(let i=0 ; i<data.length ; i++) {
+                        if(data[i].name === targetName) {
+                            setWishListItems(data[i]);
+                            displayWishListItem();
+                            removeAllWishListItems();
+                        };                    
+                    };
+                });
+            });
+
+            // // -------------------- setItems -------------------
+            function setWishListItems(item) {
+                let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
+
+                if(wishListItems != null){
+                    if(wishListItems[item.name] == undefined) {
+                        wishListItems = {
+                            ...wishListItems,
+                            [item.name]: item
+                        };
+                    };
+                    wishListItems[item.name].inBox += 1;
+                } else {
+                    item.inBox = 1
+                    wishListItems = {
+                        [item.name]: item
+                    };
+                };
+                localStorage.setItem('wishListItems', JSON.stringify(wishListItems));
+            };
+
+            // -------------------- Display Item -------------------
+            function displayWishListItem() {
+                let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
+
+                const wishListItemsContainer = document.querySelector('.wish_list_content');
+                if(wishListItems) {
+                    wishListItemsContainer.innerHTML = ``;
+                    Object.values(wishListItems).map(item => {
+                    wishListItemsContainer.innerHTML +=  `
+                                <div class="wish_list_box">
+                                    <button class="remove_wl_item_btn">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                    <div class="wish_content_container">
+                                        <div class="img_container">
+                                            <img class="product_img" src="${item.image}">
+                                        </div>
+                                        <div class="info_container">
+                                            <a class="card_btn open_prod_modal product_name" data-product-target="#productModal">${item.name}</a>
+                                            <div class="shop_container">
+                                                <button class="add_cart_btn" data-cart="add_to_cart_modal_btn">
+                                                    Add to cart
+                                                </button>
+                                                <a href="/pages/cart.html" class="open_cart_btn">
+                                                    Go to cart
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `
+                        removeWishListItem();
+                    });
+                };
+            };
+
+            // -------------------- Remove Wish List Item -------------------
+            function removeWishListItem() {
+                let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
+
+                const removeItemBtn = document.querySelectorAll('.remove_wl_item_btn');
+
+                let item;               
+                for(let i=0; i < removeItemBtn.length; i++) {
+                    removeItemBtn[i].addEventListener('click', (e) => {
+                        e.preventDefault();
+                        item = removeItemBtn[i].nextElementSibling.children[1].firstChild.nextSibling.textContent;
+
+                        delete wishListItems[item];
+                        localStorage.setItem('wishListItems', JSON.stringify(wishListItems));
+
+                        displayWishListItem();                     
+                    });
+                };
+            };
+            removeWishListItem();
+
+            // -------------------- Remove All Wish List Items -------------------
+            function removeAllWishListItems() {
+                document.querySelector('.remove_all_wl').addEventListener('click', (e)=> {
+                    e.preventDefault();
+                    
+                    const itemBox = document.querySelector('.products_container').innerHTML = '';
+                    localStorage.removeItem("wishListItems");
+                    
+                    // document.querySelector('.compare_products').textContent = "Compare";
+
+                    displayWishListItem();
+                });                
+            };
+
+            function init() {
+                displayItems();
+                displayWishListItem();
+                
+            };
+            init();
         });
+        
 };
 drumsets();

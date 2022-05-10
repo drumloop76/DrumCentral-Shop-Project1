@@ -11,7 +11,6 @@
             display: none;
         }
         .info {
-            // background: #1d82a1;
             width: 30%;
             a {
                 color: $color-text-light;
@@ -27,13 +26,13 @@
             color: $color-text-light;
         }
         .media {
-            // background: #1d82a1;
             width: 30%;
             text-align: end;
             a {
                 width: 25px;
                 height: 25px;
                 margin-left: 20px;
+                z-index: 150;
                 cursor: pointer;
                 .fab,
                 .fa-brands {
@@ -242,7 +241,8 @@
         }
     }
     .main_nav .shop,
-    .main_nav .login_logout_link {
+    .main_nav .login_logout_link,
+    .main_nav .loged_user_btn {
         // background: #1d82a1;
         position: relative;
         display: block;
@@ -254,6 +254,7 @@
         z-index: 50;
         &:hover {
             color: #1d82a1; //!!!!!!!!!!!!!!!!!
+            color: red;
         }
         @include laptop {
             margin-left: 1%;
@@ -271,20 +272,27 @@
             @include cartBtnSpan;
         }
     }
-    ///////////////// Loged User //////////////////////////////////////////////
-    .loged_user i {
+    //////////////////////////// Loged User ////////////////////////////
+    .main_nav .loged_user_btn {
+        display: none;
+    }
+    
+    .loged_user_btn .fa-user-check {
         color: $color-product-links;
     }
-    .userPage {
-        position: fixed;
-        width: 800px;
-        height: 600px;
-        color: white;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 500;
-    }
+    // .userPage {
+    //     position: fixed;
+    //     width: 800px;
+    //     height: 600px;
+    //     color: white;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     z-index: 500;
+    //     // .fa-user-check {
+            
+    //     // }
+    // }
     
     @keyframes linksSlide {
         0% {
@@ -659,6 +667,9 @@
                     top: 65px;
                 }
             }
+        }
+        .loged_user_btn {
+            margin-left: 0;
         }
         .nav_search_box,
         .shop,

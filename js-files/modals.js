@@ -59,7 +59,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                     <button class="go_back">
                         <i class="fa-solid fa-angle-left"></i>go back</button>
                     <h1 class="signin_header modal_header">Sign In</h1>
-                    <form class="signin_form modal_form" id="signin_form" action="#" novalidate>
+                    <form class="signin_form modal_form" id="signin_form" action="/" novalidate>
                         <label for="signin_first_name">First Name:</label>
                         <div class="signin_login">
                             <input type="text" name="signin_first_name" id="signin_first_name" placeholder="Your First Name">
@@ -103,26 +103,34 @@ window.addEventListener( "DOMContentLoaded", function () {
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                     <h1>Contact Us</h1>
-                    <form class="form_contact" action="#">
+
+                    <form class="form_contact" action="/" novalidate>
                         <label for="contact_first_name">First Name:</label>
                         <div class="contact_login">
                             <i class="fa-solid fa-user"></i>
                             <input type="text" name="contact_first_name" id="contact_first_name">
+                            <span class="verify"></span>
                         </div>
                         <label for="contact_last_name">Last Name:</label>
                         <div class="contact_login">
                             <i class="fa-solid fa-user"></i>
                             <input type="text" name="contact_last_name" id="contact_last_name">
+                            <span class="verify"></span>
                         </div>
                         <label for="contact_email">Email: <span>*</span></label>
                         <div class="contact_login">
                             <i class="fa-solid fa-at"></i>
                             <input type="email" name="contact_email" id="contact_email" required>
+                            <span class="verify"></span>
                         </div>
-                        <label for="message">Message: <span>*</span></label>
-                        <textarea name="message" id="message" cols="30" rows="10" required placeholder="Your message"></textarea>
+                        <div class="message_login">
+                            <label for="message">Message: </label>
+                            <textarea name="message" id="message" cols="30" rows="10" required placeholder="Your message"></textarea>
+                            <span class="verify"></span>
+                        </div>
                         <button class="contact_submit_btn" type="submit">Send</button>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -192,6 +200,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             document.querySelector('body').style.overflow = 'hidden';
         };
 
+
         function closeModal(modal) {
             if(modal === null) return
             modal.classList.remove('active_modal');
@@ -202,6 +211,14 @@ window.addEventListener( "DOMContentLoaded", function () {
             modalContainer.classList.remove('slide-signin');
             wrapper.style.filter = "";
             document.querySelector('body').style.overflow = 'auto';
+            // --------------------------------------------------
+            document.querySelector('#login_form').reset();
+            // document.querySelector('#signin_form').reset();
+            // document.querySelector('#form_contact').reset();
+            document.querySelectorAll('.verify').forEach(s => {
+                // console.log(s)
+                s.innerHTML = '';
+            });
         };
 
         signInBtn.addEventListener('click', function () {
@@ -235,7 +252,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             const popup = document.querySelector('.popup_login');
             const popBtn = document.querySelector('.pop_btn');         
             
-            loginForm.addEventListener('submit', (e) => {
+            loginForm.addEventListener('click', (e) => {
                 e.preventDefault();
                 
                 if(checkInputs() == true) {
@@ -249,6 +266,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                             data.email.toLowerCase() == email.toLowerCase() && 
                             data.password.toLowerCase() == password.toLowerCase()
                         );
+
                     if(!exist){
                         document.querySelector('#login_form').reset();
                         document.querySelectorAll('.input_login .verify').forEach(s => {
@@ -263,18 +281,19 @@ window.addEventListener( "DOMContentLoaded", function () {
                     } else {
                         popup.classList.add('open_popup');
                         document.querySelector('.popup_login span').textContent = `${email}`;
-                        // document.querySelector('.login_logout_link').style.color = 'green';
-                        // document.querySelector('.fa-cart-shopping').style.color = '#4893c6';
-                        // document.querySelector('.login_logout_link').removeAttribute('data-modal-target');
-                        document.querySelector('.login_logout_link').style.display = "none"
 
+                        document.querySelector('.login_logout_link').style.display = "none";
+                        document.querySelector('.loged_user_btn').style.display = "block";
+                        setUserBtn();
                         ///////////////////// Loged User //////////////////////
                         JSON.parse(localStorage.getItem('formData')).find(d => {
                             if(d.email.toLowerCase() === email.toLowerCase() && d.password.toLowerCase() === password.toLowerCase()) {
-                                console.log(d)
+                                document.querySelector('.popup_login span').textContent = `${d.firstName} ${d.lastName}`;
+                                document.querySelector('.nav_info_top span').textContent = `Welcome ${d.firstName}`
                                 let logedUser = JSON.parse(localStorage.getItem('logedUser')) || [];
                                 logedUser.push(logedUser);
                                 localStorage.setItem('logedUser', JSON.stringify(d));
+
                             };
                         });
                     };
@@ -282,10 +301,10 @@ window.addEventListener( "DOMContentLoaded", function () {
                 
                 popBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-    
+                    const modal = document.querySelector('.modal_wrapper');
+                    closeModal(modal);
+
                     document.querySelector('.popup_login').classList.remove('open_popup');
-                    // email.value = '';
-                    // password.value = '';
                     document.querySelector('#login_form').reset();
                     document.querySelectorAll('.input_login .verify').forEach(s => {
                         s.innerHTML = '';
@@ -361,7 +380,86 @@ window.addEventListener( "DOMContentLoaded", function () {
         };
         validation();
 
-        /*-------------------------------- SignIn ------------------------------------*/
+        const logedUser = JSON.parse(localStorage.getItem('logedUser'));
+        
+        
+        function setUserBtn(){
+            if(logedUser) {
+                document.querySelector('.login_logout_link').style.display = "none";
+                document.querySelector('.loged_user_btn').style.display = "block";
+                document.querySelector('.nav_info_top span').textContent = `Welcome ${logedUser.firstName}`;
+
+                // ---------------- otvori modal ---------------
+                document.querySelector('.loged_user_btn').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    createUserDiv();
+                    document.querySelector('.user_page').classList.add('open_user_modal');
+                    document.querySelector('.userPage_container h1 span').textContent = `${logedUser.firstName} ${logedUser.lastName}`;
+                    // document.querySelector('body').style.transform = "translateX(-40vw)"
+                    // document.querySelector('body').style.transition = "300ms ease-out"
+                });
+            };
+        };
+        setUserBtn();
+
+        function createUserDiv() {
+            const userModal = document.createElement('div');
+            userModal.innerHTML = `
+                        <div class="user_page">
+                            <button class="close_user_modal_btn">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+
+                            <div class="userPage_container">
+                                <h1>Welcome <span></span></h1>
+                                <button class="logout_btn">Log out</button>
+                            </div>
+                            <p>Go search instruments</p>
+                            <div class="page_btns">
+                                <a href="/pages/drumsets.html">Drums</a>
+                                <a href="cymbals.html">Cymbals</a>
+                                <a href="percussion.html">Percussion</a>
+                            </div>
+                            <hr>
+                            <p>Wish List</p>
+                            <div class="wish_btns">
+                                <button class="">Hide all</button>
+                                <button class="remove_all_wl">Remove all</button>
+                            </div>
+                            <div class="wish_list_content">
+
+                            </div>
+                        </div>
+                    `
+            document.body.insertAdjacentElement('beforeend', userModal);
+        };
+        
+        // ----------------- ukloni modal -------------------
+        function closeUserDiv() {
+            createUserDiv();
+            document.querySelector('.close_user_modal_btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelector('.user_page').classList.remove('open_user_modal');
+            });
+        };
+        closeUserDiv();
+
+        // ------------------ izloguj se --------------------
+        function logout() {
+            document.querySelector('.logout_btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('logedUser');
+
+                document.querySelector('.login_logout_link').style.display = "block";
+                document.querySelector('.loged_user_btn').style.display = "none";
+                document.querySelector('.nav_info_top span').textContent = '';
+            });
+        }
+        logout();
+
+
+        /*//////////////////////////// Sign In /////////////////////////////////*/
 
         const validateSignIn = function() {
             const signInForm = document.querySelector('#signin_form');
@@ -372,12 +470,11 @@ window.addEventListener( "DOMContentLoaded", function () {
             const popup = document.querySelector('.popup_login');
             const popBtn = document.querySelector('.pop_btn');
             
-            
-
-            signInForm.addEventListener('submit', (e) => {
+            signInForm.addEventListener('click', (e) => {
                 e.preventDefault();
                 
                 if(checkInputs() == true) {
+                    document.querySelector('.submit_btn').disabled = false;
                     let firstName = document.querySelector('#signin_first_name').value;
                     let lastName = document.querySelector('#signin_last_name').value;
                     let email = document.querySelector('#signin_email').value;
@@ -406,12 +503,13 @@ window.addEventListener( "DOMContentLoaded", function () {
                         popup.classList.add('open_popup');
                         document.querySelector('.popup_login h3').textContent = 'Ooopppssss... Duplicate found!!!';
                         document.querySelector('.popup_login span').textContent = `${firstName} ${lastName}`;
-                        document.querySelector('.popup_login p').textContent = 'You have already signed up';
+                        document.querySelector('.popup_login p').textContent = 'You have already signed in.';
                         document.querySelector('.pop_btn').textContent = 'Go to LogIn';
                     };
                 };
 
-                popBtn.addEventListener('click', () => {
+                popBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
                     popup.classList.remove('open_popup');
                     document.querySelector('#signin_form').reset();
                     document.querySelector('.verify').innerHTML = '';
@@ -523,7 +621,9 @@ window.addEventListener( "DOMContentLoaded", function () {
         };
         validateSignIn();
 
-        /*------------------------------ Contact --------------------------*/
+        
+
+        /*------------------------------ Contact ----------------------------*/
 
         function sendEmail() {
             const contForm = document.querySelector('.form_contact');
@@ -534,7 +634,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             const contSubBtn = document.querySelector('.contact_submit_btn');
 
             
-            contForm.addEventListener('submit', (e) => {
+            contForm.addEventListener('click', (e) => {
                 e.preventDefault();
 
                 if(checkInputs() == true) {
@@ -543,9 +643,11 @@ window.addEventListener( "DOMContentLoaded", function () {
                     let email = document.querySelector('#signin_email').value;
                     let message = document.querySelector('#signin_password').value;
 
-                    // console.log(firstName, lastName, email, message)
+                    console.log(firstName, lastName, email, message)
                 };
             });
+
+
 
             function checkInputs() {
                 const firstNameValue = firstName.value.trim();
@@ -555,56 +657,84 @@ window.addEventListener( "DOMContentLoaded", function () {
 
                 console.log(firstNameValue, lastNameValue, emailValue, messageValue)
 
-                if(firstNameValue === '') {
-                    setErrorFor(firstName, 'First name cannot be blank.');
-                    retVal = false;
-                } else if(firstNameValue.charAt(0) != firstNameValue.charAt(0).toUpperCase()) {
-                    setErrorFor(firstName, 'First character must by uppercase.');
-                    retVal = false;
-                } else {
-                    setSuccessFor(firstName, 'Success!');
-                };
+                let retVal = true;
+                const at = emailValue.indexOf('@');
+                const dot = emailValue.indexOf('.');
 
-
-                if(lastNameValue === '') {
-                    setErrorFor(lastName, 'First name cannot be blank.');
-                    retVal = false;
-                } else if(lastNameValue.charAt(0) != lastNameValue.charAt(0).toUpperCase()) {
-                    setErrorFor(lastName, 'First character must by uppercase.');
-                    retVal = false;
-                } else {
-                    setSuccessFor(lastName, 'Success!');
-                };
-
-                if(emailValue === '') {
-                    setErrorFor(email, 'Email cannot be blank.');
-                    retVal = false;
-                } else if(!isEmail(emailValue)) {
-                    setErrorFor(email, 'Email is not valid!');
-                    retVal = false;
-                } else {
-                    setSuccessFor(email, 'Success!');
-                };
-
-                if(messageValue === '') {
-                    setErrorFor(message, 'message cannot be blank.');
-                    retVal = false;
-                } else if(!isPassword(message)) {
-                    setErrorFor(message, 'message is not valid!');
-                    retVal = false;
-                // } else if(passwordValue.length < 8) {
-                //     setErrorFor(password, 'password must have min 8 char!');
-                //     retVal = false;
-                } else {
-                    setSuccessFor(message, 'Success!');
-                };
+                // firstName.addEventListener('blur', (e) => {
+                    // e.preventDefault();
+                    // let retVal = true;
+                    // function fn() {
                 
+                    if(firstNameValue === '') {
+                        setErrorFor(firstName, 'First name cannot be blank.');
+                        retVal = false;
+                    } else if(firstNameValue.charAt(0) != firstNameValue.charAt(0).toUpperCase()) {
+                        setErrorFor(firstName, 'First character must by uppercase.');
+                        retVal = false;
+                    } else {
+                        setSuccessFor(firstName, 'Success!');
+                    };
+                    // return retVal
+                // }
+                // })
+
+                // lastName.addEventListener('blur', (e) => {
+                //     e.preventDefault();
+
+                    if(lastNameValue === '') {
+                        setErrorFor(lastName, 'First name cannot be blank.');
+                        retVal = false;
+                    } else if(lastNameValue.charAt(0) != lastNameValue.charAt(0).toUpperCase()) {
+                        setErrorFor(lastName, 'First character must by uppercase.');
+                        retVal = false;
+                    } else {
+                        setSuccessFor(lastName, 'Success!');
+                    };
+                // })
+
+                // email.addEventListener('blur', (e) => {
+                //     e.preventDefault();
+
+                    if(emailValue === '') {
+                        setErrorFor(email, 'Email cannot be blank.');
+                        retVal = false;
+                    // } else if(!isEmail(emailValue)) {
+                    //     setErrorFor(email, 'Email is not valid!');
+                    //     retVal = false;
+                    } else if(at < 1) {
+                        setErrorFor(email, 'Email must contain "@".');
+                        retVal = false;
+                    } else if(dot <= at + 2) {
+                        setErrorFor(email, '"." must have min 2 characters after "@".');
+                        retVal = false;
+                    } else if(dot === emailValue.length - 1) {
+                        setErrorFor(email, '"." cannot be at the end.');
+                        retVal = false;
+                    } else {
+                        setSuccessFor(email, 'Success!');
+                    };
+                // })
+
+                // message.addEventListener('blur', (e) => {
+                //     e.preventDefault();
+
+                    if(messageValue === '') {
+                        setErrorFor(message, 'message cannot be blank.');
+                        retVal = false;
+                    } else {
+                        setSuccessFor(message, 'Success!');
+                    };
+                // })
+                
+                // console.log(firstNameValue)
                 return retVal;
             }
 
             function setErrorFor(input, message) {
                 const inputCont = input.parentElement;
                 const small = inputCont.querySelector('span');
+                console.log(small)
 
                 small.innerHTML = message;
                 small.classList = 'verify error';
@@ -755,7 +885,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                             e.preventDefault();
                             cartNumbers(data[product_id]);
                             totalCost(data[product_id]);
-                            alert(`One ${data[product_id].name} addet to cart`)
+                            alert(`One ${data[product_id].name} added to cart`)
                         });
                     });
 

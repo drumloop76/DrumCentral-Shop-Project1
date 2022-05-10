@@ -136,6 +136,8 @@
             }
         }
     }
+
+    // ---------------------- Cards --------------------------
     .cards .cards_container {
         width: 80%;
         margin: 0 auto;
@@ -210,6 +212,7 @@
             color: $color-text-light;
             position: relative;
             top: 270px;
+            padding: 0 30px;
             font-size: 28px;
             transition: all 500ms;
             user-select: none;
@@ -222,7 +225,7 @@
             transition: all 500ms;
             user-select: none;
             span {
-                color: red;
+                color: rgb(250, 70, 70);
                 font-size: 28px;
                 font-weight: bold;
                 user-select: none;
@@ -234,7 +237,10 @@
             top: 420px;
             left: 75px;
             font-size: 22px;
+            font-weight: 500;
             padding: 10px 20px;
+            border: none;
+            outline: none;
             cursor: pointer;
             opacity: 0;
             visibility: hidden;
@@ -244,26 +250,26 @@
     .card:hover img {
         width: 350px;
         bottom: 250px;
-        filter:drop-shadow(10px 10px 10px rgb(71, 70, 70));
-        transition: all 500ms;
+        filter:drop-shadow(4px 6px 4px rgb(71, 70, 70));
+        transition: all 400ms;
     }
     .card:hover .card_title {
         font-size: 30px;
         top: 245px;
-        filter:drop-shadow(10px 10px 10px rgb(71, 70, 70));
-        transition: all 500ms;
+        filter:drop-shadow(3px 6px 3px rgb(71, 70, 70));
+        transition: all 400ms;
     }
     .card:hover .card_price {
-        filter:drop-shadow(10px 10px 10px rgb(71, 70, 70));
+        filter:drop-shadow(3px 6px 3px rgb(71, 70, 70));
         top: 262px;
-        transition: all 500ms;
+        transition: all 400ms;
     }
     .card:hover .card_btn {
         left: 85px;
         opacity: 1;
         visibility: visible;
         transform: translateY(-35px);
-        filter:drop-shadow(10px 10px 10px rgb(71, 70, 70));
-        transition: all 500ms;
+        filter:drop-shadow(3px 6px 3px rgb(71, 70, 70));
+        transition: all 400ms;
     }
 }

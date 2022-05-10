@@ -108,7 +108,7 @@ function displayCart() {
                             <p class="item_name">${item.name}</p>
                             <p class="item_stock">${item.stock === true ? 'In stock' : 'Available soon'}</p>
                             <button>
-                                <i class="fa-solid fa-trash-can"></i>
+                                <i class='far fa-trash-alt'></i>
                             </button>
                         </div>
                         <div class="cart_info_right">
@@ -153,11 +153,12 @@ function manageQuantity() {
             currentQuantity = decreaseButtons[i].parentElement.querySelector('span').textContent;
             currentProduct = decreaseButtons[i].parentElement.parentElement.previousElementSibling.querySelector('.item_name').textContent;
             
-            if( cartItems[currentProduct].inCart > 1 ) {
+            if(cartItems[currentProduct].inCart > 1) {
                 cartItems[currentProduct].inCart -= 1;
                 cartNumbers(cartItems[currentProduct], "decrease");
                 totalCost(cartItems[currentProduct], "decrease");
                 localStorage.setItem('productsInCart', JSON.stringify(cartItems));
+                
                 displayCart();
             };
         });
@@ -182,7 +183,7 @@ function deleteButtons() {
     cartItems = JSON.parse(cartItems);
     let productNumbers = localStorage.getItem('cartNumbers');
     let cartCost = localStorage.getItem("totalCost");
-    let deleteButtons = document.querySelectorAll('.fa-trash-can'); 
+    let deleteButtons = document.querySelectorAll('.fa-trash-alt'); 
     let productName;
     
     for(let i=0; i < deleteButtons.length; i++) {

@@ -2,7 +2,8 @@
 
 /*---------------------------- Slider Hero ----------------------------*/
 
-window.addEventListener('DOMContentLoaded', () => {
+// window.addEventListener('DOMContentLoaded', () => {
+    function heroSlider() {
     const letters = document.querySelectorAll('.logo');
     const mainHeader = document.querySelector('.main_header-two');
     const mainTxt = document.querySelector('.main_header-text');
@@ -98,7 +99,8 @@ window.addEventListener('DOMContentLoaded', () => {
             activateDot(slider);
         };
     });
-});
+}
+// });
 
 
 /*---------------------------- Cards Timer ----------------------------*/
@@ -326,3 +328,8 @@ function sliderLogos() {
     slider.addEventListener("mouseleave", unhover);
 };
 sliderLogos();
+
+function init() {
+    heroSlider()
+}
+init()
