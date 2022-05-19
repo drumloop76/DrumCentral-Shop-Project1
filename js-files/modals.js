@@ -1,5 +1,7 @@
 'use strict'
 
+import { setingItem, totalCost, span } from "./lib.js";
+
 window.addEventListener( "DOMContentLoaded", function () {
     const modalDiv = document.createElement('div');
     
@@ -292,8 +294,8 @@ window.addEventListener( "DOMContentLoaded", function () {
                                 document.querySelector('.nav_info_top span').textContent = `Welcome ${d.firstName}`
                                 let logedUser = JSON.parse(localStorage.getItem('logedUser')) || [];
                                 logedUser.push(logedUser);
-                                localStorage.setItem('logedUser', JSON.stringify(d));
-
+                                localStorage.setItem('logedUser', JSON.stringify(d));                                
+                                location.reload();
                             };
                         });
                     };
@@ -380,8 +382,10 @@ window.addEventListener( "DOMContentLoaded", function () {
         };
         validation();
 
-        const logedUser = JSON.parse(localStorage.getItem('logedUser'));
-        
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////// User Modal //////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        const logedUser = JSON.parse(localStorage.getItem('logedUser'));        
         
         function setUserBtn(){
             if(logedUser) {
@@ -389,15 +393,14 @@ window.addEventListener( "DOMContentLoaded", function () {
                 document.querySelector('.loged_user_btn').style.display = "block";
                 document.querySelector('.nav_info_top span').textContent = `Welcome ${logedUser.firstName}`;
 
-                // ---------------- otvori modal ---------------
+                // ---------------- Open User Modal ---------------
                 document.querySelector('.loged_user_btn').addEventListener('click', (e) => {
                     e.preventDefault();
                     
                     createUserDiv();
                     document.querySelector('.user_page').classList.add('open_user_modal');
                     document.querySelector('.userPage_container h1 span').textContent = `${logedUser.firstName} ${logedUser.lastName}`;
-                    // document.querySelector('body').style.transform = "translateX(-40vw)"
-                    // document.querySelector('body').style.transition = "300ms ease-out"
+                    document.querySelector('.wrapper').style.filter = "blur(3.5px)";
                 });
             };
         };
@@ -406,46 +409,259 @@ window.addEventListener( "DOMContentLoaded", function () {
         function createUserDiv() {
             const userModal = document.createElement('div');
             userModal.innerHTML = `
-                        <div class="user_page">
-                            <button class="close_user_modal_btn">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
+                    <div class="user_page">
+                        <button class="close_user_modal_btn">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
 
-                            <div class="userPage_container">
-                                <h1>Welcome <span></span></h1>
-                                <button class="logout_btn">Log out</button>
+                        <div class="userPage_container">
+                            <h1>Welcome <span></span></h1>
+                            <button class="logout_btn">Log out</button>
+                            <button class="login_btn">Log in</button>
+                        </div>
+                        <p>Go search instruments</p>
+                        <div class="page_btns">
+                            <a href="/pages/drumsets.html">Drums</a>
+                            <a href="cymbals.html">Cymbals</a>
+                            <a href="percussion.html">Percussion</a>
+                        </div>
+                        <hr>
+                        <div class="user_tabs">
+                            <button class="tab_btn active_tab" data-tab="cart">Cart<span class="cart_span"></span></button>
+                            <button class="tab_btn" data-tab="wish_list">Wish list</button>
+                            <button class="tab_btn" data-tab="something">Something</button>
+                        </div>
+
+                        <div id="cart" class="tab_container active">
+                            <div class="cart_btns">
+                                <button class="">Hide all</button>
+                                <button class="remove_all_cart">Remove all</button>
                             </div>
-                            <p>Go search instruments</p>
-                            <div class="page_btns">
-                                <a href="/pages/drumsets.html">Drums</a>
-                                <a href="cymbals.html">Cymbals</a>
-                                <a href="percussion.html">Percussion</a>
+                            <div class="cart_list_content">
+                                <!-- <h1 class="empty_cart">Your shopping basket is empty at the moment.</h1> -->
                             </div>
-                            <hr>
-                            <p>Wish List</p>
+                        </div>
+
+                        <div id="wish_list" class="tab_container">
                             <div class="wish_btns">
                                 <button class="">Hide all</button>
                                 <button class="remove_all_wl">Remove all</button>
                             </div>
                             <div class="wish_list_content">
-
+                                
                             </div>
                         </div>
+
+                        <div id="something" class="tab_container">
+                            
+                        </div>
+                    </div>
                     `
             document.body.insertAdjacentElement('beforeend', userModal);
+
+            openTabs();
+            displayWishListItem();
+            displayCartItem();
         };
-        
-        // ----------------- ukloni modal -------------------
+
+        // -------------------- Display WL Items -------------------
+        function displayWishListItem() {
+            let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
+            const wishListItemsContainer = document.querySelector('.wish_list_content');
+            if(wishListItems) {
+                wishListItemsContainer.innerHTML = ``;
+                Object.values(wishListItems).map(item => {
+                wishListItemsContainer.innerHTML +=  `
+                        <div class="wish_list_box">
+                            <button class="remove_wl_item_btn">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                            <div class="wish_content_container">
+                                <div class="img_container">
+                                    <img class="product_img" src="${item.image}">
+                                </div>
+                                <div class="info_container">
+                                    <a class="card_btn open_prod_modal product_name" data-product-target="#productModal">${item.name}</a>
+                                    <div class="shop_container">
+                                        <span>€ ${item.price}</span>
+                                        <a class="shop open_cart" data-cart="add_to_cart_btn">
+                                            <i class="fas fa-cart-arrow-down"></i>
+                                        </a>
+                                        <a href="/pages/cart.html" class="open_cart_btn">
+                                            Go to cart
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `
+                    removeWishListItem();
+                    removeAllWishListItems();
+                    btn(wishListItems);                    
+                });
+            };
+        };
+
+        // ////////////////////////////////////// Add To Cart Items //////////////////////////////////////////////
+        function btn(items) {
+            const addToCartBtn = document.querySelectorAll('[data-cart="add_to_cart_btn"]');
+            
+            addToCartBtn.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    let itemName = e.target.parentElement.parentElement.parentElement.children[0].innerHTML;
+                    setCartNumbers(items[itemName])
+                    totalCost(items[itemName])
+                });
+            });
+        };
+
+        //////////////////////////////////// cart Numbers //////////////////////////////////
+        function setCartNumbers(product) {
+            let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
+            
+            if(productNumbers) {
+                localStorage.setItem('userCartNumbers', productNumbers + 1);
+                setSpan(productNumbers + 1) ;
+            } else {
+                localStorage.setItem('userCartNumbers', 1);
+                setSpan(1); 
+            };
+            
+            setItems(product);
+        };
+
+        ////////////////////////////////////// set Items //////////////////////////////////////
+
+        function setItems(product) {
+            let cartItems = JSON.parse(localStorage.getItem('userProductsInCart'));
+            const key = 'userProductsInCart';
+            setingItem(product, cartItems, key);
+        };
+
+        ////////////////////////////////////// SPAN ////////////////////////////////////////////
+        function setSpan(number) {
+            let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
+            console.log(number, productNumbers)
+            span(number, productNumbers);
+            location.reload();
+        };
+
+        ///////////////////////////////// totalCost //////////////////////////////////////
+        function totalCost(product) {
+            let cartCost = localStorage.getItem('userTotalCost');
+
+            if(cartCost != null) {
+                cartCost = parseInt(cartCost);
+                localStorage.setItem("userTotalCost", cartCost + product.price);
+            } else {
+                cartCost = parseInt(cartCost);
+                localStorage.setItem("userTotalCost", product.price);
+            }                
+        }
+
+
+        // -------------------- Remove Wish List Item -------------------
+        function removeWishListItem() {
+            let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
+            const removeItemBtn = document.querySelectorAll('.remove_wl_item_btn');
+            let item;
+
+            for(let i=0; i < removeItemBtn.length; i++) {
+                removeItemBtn[i].addEventListener('click', (e) => {
+                    item = removeItemBtn[i].nextElementSibling.children[1].firstChild.nextSibling.textContent;
+
+                    delete wishListItems[item];
+                    localStorage.setItem('wishListItems', JSON.stringify(wishListItems));
+                    
+                    displayWishListItem();                     
+                });
+            };
+        };
+
+        // -------------------- Remove All Wish List Items -------------------
+            function removeAllWishListItems() {
+                document.querySelector('.remove_all_wl').addEventListener('click', ()=> {
+                    document.querySelector('.wish_list_content').innerHTML = '';
+                    localStorage.setItem('wishListItems', JSON.stringify({}));
+                    
+                    displayWishListItem();
+                });                
+            };
+        // --------------------- Open/Close tabs-------------------------
+        function openTabs() {
+            const tabBtns = document.querySelectorAll('[data-tab]');
+            const bindAll = function() {
+                for(let i=0 ; i<tabBtns.length ; i++) {
+                    tabBtns[i].addEventListener('click', change, false);
+                };
+            };
+            
+            function clear() {
+                for(let i=0 ; i<tabBtns.length ; i++) {
+                    tabBtns[i].classList.remove('active_tab');
+                    const id = tabBtns[i].getAttribute('data-tab');
+                    document.getElementById(id).classList.remove('active');
+                };
+            };
+            
+            function change(e) {
+                clear();
+                e.target.classList.add('active_tab');
+                const id = e.currentTarget.getAttribute('data-tab');
+                document.getElementById(id).classList.add('active');
+            };
+
+            bindAll();
+        };
+
+        /////////////////////////////////////////////////////////////////
+        // -------------------- Display Cart Items -------------------
+        function displayCartItem() {
+            let cartItems = JSON.parse(localStorage.getItem('userProductsInCart'));
+            const cartItemsContainer = document.querySelector('.cart_list_content');
+            if(cartItems) {
+                cartItemsContainer.innerHTML = ``;
+                Object.values(cartItems).map(item => {
+                    cartItemsContainer.innerHTML +=  `
+                            <div class="wish_list_box">
+                                <button class="remove_wl_item_btn">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                                <div class="wish_content_container">
+                                    <div class="img_container">
+                                        <img class="product_img" src="${item.image}">
+                                    </div>
+                                    <div class="info_container">
+                                        <a class="card_btn open_prod_modal product_name" data-product-target="#productModal">${item.name}</a>
+                                        <div class="shop_container">
+                                            <span>€ ${item.price}</span>
+                                            <a class="shop open_cart" data-cart="add_to_cart_btn">
+                                                <i class="fas fa-cart-arrow-down"></i>
+                                            </a>
+                                            <a href="/pages/cart.html" class="open_cart_btn">
+                                                Go to cart
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `
+                });
+            };
+        };
+
+        // ----------------- Close User Modal -------------------
         function closeUserDiv() {
             createUserDiv();
             document.querySelector('.close_user_modal_btn').addEventListener('click', (e) => {
                 e.preventDefault();
                 document.querySelector('.user_page').classList.remove('open_user_modal');
+                document.querySelector('.wrapper').style.filter = "";
             });
         };
         closeUserDiv();
-
-        // ------------------ izloguj se --------------------
+        
+        // ------------------ Logout --------------------
         function logout() {
             document.querySelector('.logout_btn').addEventListener('click', (e) => {
                 e.preventDefault();
@@ -454,6 +670,12 @@ window.addEventListener( "DOMContentLoaded", function () {
                 document.querySelector('.login_logout_link').style.display = "block";
                 document.querySelector('.loged_user_btn').style.display = "none";
                 document.querySelector('.nav_info_top span').textContent = '';
+                document.querySelector('.userPage_container h1').textContent = 'You are logged out';
+                document.querySelector('.logout_btn').classList.add('close');
+                document.querySelector('.login_btn').classList.add('open');
+                document.querySelector('.cart_list_content').innerHTML = '';
+                document.querySelector('.wish_list_content').innerHTML = '';
+                // location.reload();
             });
         }
         logout();

@@ -502,6 +502,15 @@
             .products_container{
                 width: 80%;
                 display: flex;
+                .chose_text {
+                    // background: rgb(247, 181, 181);
+                    width: 100%;
+                    font-size: 18px;
+                    font-weight: 500;
+                    text-align: center;
+                    height: auto;
+                    padding-top: 30px;
+                }
             }
             .box_btns_cont {
                 width: 20%;
@@ -522,6 +531,7 @@
         }
     }
     .selected_item {
+        // background: darkcyan;
         position: relative;
         width: 32%;
         min-height: 220px;
@@ -563,6 +573,7 @@
             margin: 5px 0;
         }
         .itemDescription {
+            
             opacity: 0;
             visibility: hidden;
             height: 0;
@@ -592,50 +603,5 @@
 
     ///////////////////////// Favourite Items ////////////////////////////
     
-    .wish_list_box {
-        position: relative;
-        width: 100%;
-        height: 130px;
-        margin: 10px 0;
-        padding: 10px;
-        border-bottom: 1px solid black;
-        .remove_wl_item_btn {
-            @include closeModalBtn;
-        }
-    }
-    .wish_content_container {
-        background: $bg-product-container;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        transition: 300ms;
-        &:hover {
-            box-shadow: $product-box-shadow;
-            // @include boxShadow;
-            background: $bg-product-container-hover;
-            transition: 300ms ease-in-out;
-        }
-        .img_container {
-            background: $bg-product-container;
-            width: 150px;
-            height: 110px;
-            .product_img {
-                width: 150px;
-            }
-        }
-        .info_container {
-            width: 65%;
-            padding: 5px 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            h3 {
-                font-size: 22px;
-            }
-        }
-    }
-    .info_container .shop_container {
-        background: darkgrey;
-    }
-
+    
 }
