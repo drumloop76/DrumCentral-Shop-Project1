@@ -1,6 +1,6 @@
 'use strict'
 
-import { setingItem, totalCost, span } from "./lib.js";
+import { setingItem, totalCost, span, prodPopMod } from "./lib.js";
 
 window.addEventListener( "DOMContentLoaded", function () {
     const modalDiv = document.createElement('div');
@@ -160,14 +160,15 @@ window.addEventListener( "DOMContentLoaded", function () {
         openModalBtn.forEach(btn => {
             btn.addEventListener('click', function () {
                 const modal = document.querySelector(btn.dataset.modalTarget);
-                openModal(modal);
+                openModals(modal);
             });
         });
 
         openContactModalBtn.forEach(btn => {
             btn.addEventListener('click', function () {
                 const modal = document.querySelector(btn.dataset.contactTarget);
-                openContactModal(modal);
+                // openContactModal(modal);
+                openModals(modal);
             });
         });
 
@@ -183,21 +184,21 @@ window.addEventListener( "DOMContentLoaded", function () {
             closeModal(modal);
         });
 
-        function openModal(mod) {
-            if (mod === null) return
+        // function openModal(mod) {
+        //     openModals(mod)
+        //     modalContainer.style.left = "0px";
+        // };
+
+        // function openContactModal(mod) {
+        //     openModals(mod)
+        // };
+
+        function openModals(mod) {
+            if(mod === null) return
             mod.classList.add('active_modal');
             modalWrapper.classList.add('active_modal');
             overlay.classList.add('active_modal');
             modalContainer.style.left = "0px";
-            wrapper.style.filter = "blur(3.5px)";
-            document.querySelector('body').style.overflow = 'hidden';
-        };
-
-        function openContactModal(mod) {
-            if (mod === null) return
-            mod.classList.add('active_modal');
-            contactWrapper.classList.add('active_modal');
-            overlay.classList.add('active_modal');
             wrapper.style.filter = "blur(3.5px)";
             document.querySelector('body').style.overflow = 'hidden';
         };
@@ -218,7 +219,6 @@ window.addEventListener( "DOMContentLoaded", function () {
             // document.querySelector('#signin_form').reset();
             // document.querySelector('#form_contact').reset();
             document.querySelectorAll('.verify').forEach(s => {
-                // console.log(s)
                 s.innerHTML = '';
             });
         };
@@ -235,7 +235,6 @@ window.addEventListener( "DOMContentLoaded", function () {
 
         togglePassword.forEach(icon => {
             icon.addEventListener('click', function(e) {
-                // console.log(e.target);
                 password.forEach(pass => {
                     const type = pass.getAttribute('type') === 'password' ? 'text' : 'password';
                     pass.setAttribute('type', type);
@@ -283,7 +282,6 @@ window.addEventListener( "DOMContentLoaded", function () {
                     } else {
                         popup.classList.add('open_popup');
                         document.querySelector('.popup_login span').textContent = `${email}`;
-
                         document.querySelector('.login_logout_link').style.display = "none";
                         document.querySelector('.loged_user_btn').style.display = "block";
                         setUserBtn();
@@ -295,7 +293,8 @@ window.addEventListener( "DOMContentLoaded", function () {
                                 let logedUser = JSON.parse(localStorage.getItem('logedUser')) || [];
                                 logedUser.push(logedUser);
                                 localStorage.setItem('logedUser', JSON.stringify(d));                                
-                                location.reload();
+                                location.reload(); //!!!!!!!!!!!!!!!! 
+                                // reset( !!!!!!!!!!!! )
                             };
                         });
                     };
@@ -417,7 +416,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                         <div class="userPage_container">
                             <h1>Welcome <span></span></h1>
                             <button class="logout_btn">Log out</button>
-                            <button class="login_btn">Log in</button>
+                            <button class="login_btn" data-modal-target="#loginModal">Log in</button>
                         </div>
                         <p>Go search instruments</p>
                         <div class="page_btns">
@@ -427,18 +426,21 @@ window.addEventListener( "DOMContentLoaded", function () {
                         </div>
                         <hr>
                         <div class="user_tabs">
-                            <button class="tab_btn active_tab" data-tab="cart">Cart<span class="cart_span"></span></button>
-                            <button class="tab_btn" data-tab="wish_list">Wish list</button>
+                            <button class="tab_btn active_tab" data-tab="cart">Cart <span class="tc_span"></span></button>
+                            <button class="tab_btn" data-tab="wish_list">Wish list <span class="wl_span"></span></button>
                             <button class="tab_btn" data-tab="something">Something</button>
                         </div>
 
                         <div id="cart" class="tab_container active">
                             <div class="cart_btns">
-                                <button class="">Hide all</button>
-                                <button class="remove_all_cart">Remove all</button>
+                                <button class="">Checkout</button>
+                                <button class="remove_all_user_cart">Remove all</button>
+                            </div>
+                            <div class="total_price_box">
+                                <h3>Total Price: <span class="tc_total_price_value">€ 0</span></h3>
                             </div>
                             <div class="cart_list_content">
-                                <!-- <h1 class="empty_cart">Your shopping basket is empty at the moment.</h1> -->
+                                
                             </div>
                         </div>
 
@@ -462,9 +464,11 @@ window.addEventListener( "DOMContentLoaded", function () {
             openTabs();
             displayWishListItem();
             displayCartItem();
+            tabCartSpan()
+            wlTabSpan()
         };
-
-        // -------------------- Display WL Items -------------------
+        
+        ////////////////////////////////////// Display WL Items //////////////////////////////////////
         function displayWishListItem() {
             let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
             const wishListItemsContainer = document.querySelector('.wish_list_content');
@@ -472,11 +476,11 @@ window.addEventListener( "DOMContentLoaded", function () {
                 wishListItemsContainer.innerHTML = ``;
                 Object.values(wishListItems).map(item => {
                 wishListItemsContainer.innerHTML +=  `
-                        <div class="wish_list_box">
-                            <button class="remove_wl_item_btn">
+                        <div class="wish_list_box list_box">
+                            <button class="remove_wl_item_btn remove_btn">
                                 <i class="fa-solid fa-xmark"></i>
                             </button>
-                            <div class="wish_content_container">
+                            <div class="box_content_container">
                                 <div class="img_container">
                                     <img class="product_img" src="${item.image}">
                                 </div>
@@ -502,7 +506,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             };
         };
 
-        // ////////////////////////////////////// Add To Cart Items //////////////////////////////////////////////
+        ////////////////////////////////////// Add To Cart Items //////////////////////////////////////////////
         function btn(items) {
             const addToCartBtn = document.querySelectorAll('[data-cart="add_to_cart_btn"]');
             
@@ -511,6 +515,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                     let itemName = e.target.parentElement.parentElement.parentElement.children[0].innerHTML;
                     setCartNumbers(items[itemName])
                     totalCost(items[itemName])
+                    displayCartItem()
                 });
             });
         };
@@ -522,9 +527,11 @@ window.addEventListener( "DOMContentLoaded", function () {
             if(productNumbers) {
                 localStorage.setItem('userCartNumbers', productNumbers + 1);
                 setSpan(productNumbers + 1) ;
+                tabCartSpan(productNumbers + 1)
             } else {
                 localStorage.setItem('userCartNumbers', 1);
                 setSpan(1); 
+                tabCartSpan(1)
             };
             
             setItems(product);
@@ -541,10 +548,8 @@ window.addEventListener( "DOMContentLoaded", function () {
         ////////////////////////////////////// SPAN ////////////////////////////////////////////
         function setSpan(number) {
             let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
-            console.log(number, productNumbers)
             span(number, productNumbers);
-            location.reload();
-        };
+        };        
 
         ///////////////////////////////// totalCost //////////////////////////////////////
         function totalCost(product) {
@@ -552,13 +557,41 @@ window.addEventListener( "DOMContentLoaded", function () {
 
             if(cartCost != null) {
                 cartCost = parseInt(cartCost);
-                localStorage.setItem("userTotalCost", cartCost + product.price);
+                localStorage.setItem("userTotalCost", cartCost + product.price);                
             } else {
                 cartCost = parseInt(cartCost);
                 localStorage.setItem("userTotalCost", product.price);
             }                
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////// WL Numbers ///////////////////////////////////
+        function setWLNumbers(change) { 
+            let wlNumbers = parseInt(localStorage.getItem('wishListNumbers'));
+
+            if(change) {
+                localStorage.setItem('wishListNumbers', wlNumbers - 1);
+                wlTabSpan(wlNumbers - 1);
+            } else if(wlNumbers) {
+                localStorage.setItem('wishListNumbers', wlNumbers + 1);
+                wlTabSpan(wlNumbers + 1);
+            } else {
+                localStorage.setItem('wishListNumbers', 1);
+                wlTabSpan(1);
+            };            
+        };
+
+        // -------------------- Wish List Tab Span -------------------
+        function wlTabSpan() {
+            let wlNumbers = localStorage.getItem('wishListNumbers');
+            const wlSpan = document.querySelector('.wl_span');
+            if(wlNumbers < 1 || wlNumbers == null) {
+                wlSpan.style.display = "none";
+            } else {
+                wlSpan.style.display = "block";
+                wlSpan.textContent = `${wlNumbers}`;
+            };
+        };
 
         // -------------------- Remove Wish List Item -------------------
         function removeWishListItem() {
@@ -567,27 +600,31 @@ window.addEventListener( "DOMContentLoaded", function () {
             let item;
 
             for(let i=0; i < removeItemBtn.length; i++) {
-                removeItemBtn[i].addEventListener('click', (e) => {
+                removeItemBtn[i].addEventListener('click', () => {
                     item = removeItemBtn[i].nextElementSibling.children[1].firstChild.nextSibling.textContent;
-
+                    setWLNumbers("decrease");
                     delete wishListItems[item];
                     localStorage.setItem('wishListItems', JSON.stringify(wishListItems));
                     
-                    displayWishListItem();                     
+                    displayWishListItem();
+                    wlTabSpan();
                 });
             };
         };
 
         // -------------------- Remove All Wish List Items -------------------
-            function removeAllWishListItems() {
-                document.querySelector('.remove_all_wl').addEventListener('click', ()=> {
-                    document.querySelector('.wish_list_content').innerHTML = '';
-                    localStorage.setItem('wishListItems', JSON.stringify({}));
-                    
-                    displayWishListItem();
-                });                
-            };
-        // --------------------- Open/Close tabs-------------------------
+        function removeAllWishListItems() {
+            document.querySelector('.remove_all_wl').addEventListener('click', ()=> {
+                document.querySelector('.wish_list_content').innerHTML = '';
+                localStorage.setItem('wishListItems', JSON.stringify({}));
+                localStorage.setItem('wishListNumbers', JSON.stringify(0));
+                document.querySelector('.wl_span').textContent = 0;
+                displayWishListItem();
+            });                
+        };        
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////// Open/Close tabs ////////////////////////////////////
         function openTabs() {
             const tabBtns = document.querySelectorAll('[data-tab]');
             const bindAll = function() {
@@ -614,54 +651,208 @@ window.addEventListener( "DOMContentLoaded", function () {
             bindAll();
         };
 
-        /////////////////////////////////////////////////////////////////
-        // -------------------- Display Cart Items -------------------
+        //////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////// Tab Cart Products //////////////////////////////////
+        function onLoadTabCartNumbers() {
+            let productNumbers = localStorage.getItem('userCartNumbers');
+            
+            if(productNumbers == null || productNumbers == 0) {
+                document.querySelector('.tc_span').style.display = "none";
+            } else {
+                document.querySelector('.tc_span').style.display = "block";
+                // span(productNumbers)
+            };
+        };
+
+        //////////////////////////////// TC Numbers ///////////////////////////////////
+        function setTabCartNumbers(change) { 
+            let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
+            // console.log(span())
+            if(change) {
+                localStorage.setItem('userCartNumbers', productNumbers - 1);
+                tabCartSpan(productNumbers - 1);
+                span(productNumbers - 1)
+            } else if(productNumbers) {
+                localStorage.setItem('userCartNumbers', productNumbers + 1);
+                tabCartSpan(productNumbers + 1);
+                span(productNumbers + 1)
+            } else {
+                localStorage.setItem('userCartNumbers', 1);
+                tabCartSpan(1);
+                span(1)
+            };            
+        };
+
+        /////////////////////////////////////// TC Span /////////////////////////////////////
+        function tabCartSpan() {
+            let productNumbers = localStorage.getItem('userCartNumbers');
+            const numSpan = document.querySelector('[data-tab="cart"] span')
+            
+            if(productNumbers < 1 || productNumbers == null) {
+                numSpan.style.display = "none";
+            } else {
+                numSpan.style.display = "block";
+                numSpan.textContent = `${productNumbers}`;
+                span(productNumbers)
+            };
+        }
+        function span(number) {
+            const numSpan = document.querySelectorAll('.shop span');
+            numSpan.forEach(s => {
+                s.textContent = `${number}`;
+            });
+        };
+
+        ////////////////////////////////////// totalCost ////////////////////////////////////
+        function userCartTotalCost(product, action) {
+            let totalPrice = localStorage.getItem("userTotalCost");
+            
+            if(action) {
+                totalPrice = parseInt(totalPrice);
+                localStorage.setItem("userTotalCost", totalPrice - product.price);
+            } else if(totalPrice != null) {        
+                totalPrice = parseInt(totalPrice);
+                localStorage.setItem("userTotalCost", totalPrice + product.price);    
+            } else {
+                localStorage.setItem("userTotalCost", product.price);
+            };
+            displayCartItem();
+        };
+
+        ///////////////////////////////// Display Tab Cart Items /////////////////////////////////
         function displayCartItem() {
             let cartItems = JSON.parse(localStorage.getItem('userProductsInCart'));
+            let totalPrice = parseInt(localStorage.getItem("userTotalCost"));
             const cartItemsContainer = document.querySelector('.cart_list_content');
+            const tp = document.querySelector('.tc_total_price_value');
+            
             if(cartItems) {
                 cartItemsContainer.innerHTML = ``;
+                tp.textContent = `€ ${totalPrice}`;
                 Object.values(cartItems).map(item => {
-                    cartItemsContainer.innerHTML +=  `
-                            <div class="wish_list_box">
-                                <button class="remove_wl_item_btn">
-                                    <i class="fa-solid fa-xmark"></i>
-                                </button>
-                                <div class="wish_content_container">
-                                    <div class="img_container">
-                                        <img class="product_img" src="${item.image}">
-                                    </div>
-                                    <div class="info_container">
-                                        <a class="card_btn open_prod_modal product_name" data-product-target="#productModal">${item.name}</a>
-                                        <div class="shop_container">
-                                            <span>€ ${item.price}</span>
-                                            <a class="shop open_cart" data-cart="add_to_cart_btn">
-                                                <i class="fas fa-cart-arrow-down"></i>
-                                            </a>
-                                            <a href="/pages/cart.html" class="open_cart_btn">
-                                                Go to cart
-                                            </a>
+                cartItemsContainer.innerHTML +=  `
+                        <div class="cart_list_box list_box">
+                            <button class="remove_tc_item_btn remove_btn">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                            <div class="box_content_container">
+                                <div class="img_container">
+                                    <img class="product_img" src="${item.image}">
+                                </div>
+                                <div class="info_container">
+                                    <a class="card_btn open_prod_modal item_name" data-product-target="#productModal">${item.name}</a>
+                                    
+                                    <div class="shop_container cart_shop_container">
+                                        <span>€ ${item.price}</span>
+                                        <div class="cart_quantity">
+                                            <i class="fa-solid fa-angle-left left"></i>
+                                            <span class="cart_q">${item.inCart}</span>
+                                            <i class="fa-solid fa-angle-right right"></i>
                                         </div>
+                                        <span>€ ${item.inCart * item.price}</span>
                                     </div>
                                 </div>
                             </div>
-                            `
+                        </div>
+                        `
+                    removeTabCartItem()
+                    removeAllUserCartItems();
+                    manageTCQuantity();
+                });
+            };
+        };
+        
+        ///////////////////////////////// Tab Cart Product Quantity ///////////////////////////////////
+        function manageTCQuantity() {
+            let cartItems = JSON.parse(localStorage.getItem("userProductsInCart"));
+            let decreaseButtons = document.querySelectorAll('.left');
+            let increaseButtons = document.querySelectorAll('.right');
+            let currentQuantity = 0;
+            let currentProduct = '';
+            
+            for(let i=0; i < increaseButtons.length; i++) {
+                decreaseButtons[i].addEventListener('click', () => {
+                    currentQuantity = decreaseButtons[i].parentElement.querySelector('span').textContent;
+                    currentProduct = decreaseButtons[i].parentElement.parentElement.previousElementSibling.textContent;
+                    
+                    if(cartItems[currentProduct].inCart > 1) {
+                        // document.querySelectorAll('.cart_quantity span').textContent -= 1
+                        cartItems[currentProduct].inCart -= 1;
+                        setTabCartNumbers("decrease");
+                        userCartTotalCost(cartItems[currentProduct], "decrease");
+                        localStorage.setItem("userProductsInCart", JSON.stringify(cartItems));
+                        
+                        displayCartItem();
+                    };
+                });
+        
+                increaseButtons[i].addEventListener('click', () => {
+                    currentQuantity = increaseButtons[i].parentElement.querySelector('span').textContent;
+                    currentProduct = increaseButtons[i].parentElement.parentElement.previousElementSibling.textContent;
+                                        
+                    cartItems[currentProduct].inCart += 1;
+                    setTabCartNumbers();
+                    userCartTotalCost(cartItems[currentProduct]);
+                    localStorage.setItem("userProductsInCart", JSON.stringify(cartItems));
+        
+                    displayCartItem();
+                });
+            };
+        }
+
+        ///////////////////////////////// Remove Tab Cart Item /////////////////////////////////
+        function removeTabCartItem() {
+            let userProductsInCart = JSON.parse(localStorage.getItem('userProductsInCart'));
+            let cartCost = localStorage.getItem("userTotalCost");
+            let productNumbers = localStorage.getItem('userCartNumbers');
+            const removeItemBtn = document.querySelectorAll('.remove_tc_item_btn');
+            let item;
+
+            for(let i=0; i < removeItemBtn.length; i++) {
+                removeItemBtn[i].addEventListener('click', () => {
+                    item = removeItemBtn[i].nextElementSibling.children[1].firstChild.nextSibling.textContent;
+                    localStorage.setItem("userTotalCost", cartCost - (userProductsInCart[item].price * userProductsInCart[item].inCart));
+                    localStorage.setItem("userCartNumbers", productNumbers - userProductsInCart[item].inCart);
+                    
+                    delete userProductsInCart[item];
+                    localStorage.setItem('userProductsInCart', JSON.stringify(userProductsInCart));
+                    
+                    displayCartItem();
+                    onLoadTabCartNumbers();
+                    tabCartSpan()
                 });
             };
         };
 
-        // ----------------- Close User Modal -------------------
+        ///////////////////////////////// Remove All User Cart Items /////////////////////////////////
+        function removeAllUserCartItems() {
+            document.querySelector('.remove_all_user_cart').addEventListener('click', ()=> {
+                document.querySelector('.cart_list_content').innerHTML = '';
+                localStorage.setItem('userProductsInCart', JSON.stringify({}));
+                localStorage.setItem('userCartNumbers', JSON.stringify(0));
+                localStorage.setItem('userTotalCost', JSON.stringify(0));
+                document.querySelector('[data-tab="cart"] span').textContent = 0;
+                
+                displayCartItem();
+                onLoadTabCartNumbers();
+                // location.reload();
+                // return false;
+            });                
+        };
+
+        ///////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////// Close User Modal //////////////////////////////
         function closeUserDiv() {
             createUserDiv();
-            document.querySelector('.close_user_modal_btn').addEventListener('click', (e) => {
-                e.preventDefault();
+            document.querySelector('.close_user_modal_btn').addEventListener('click', () => {
                 document.querySelector('.user_page').classList.remove('open_user_modal');
                 document.querySelector('.wrapper').style.filter = "";
+                location.reload();
             });
         };
         closeUserDiv();
         
-        // ------------------ Logout --------------------
+        /////////////////////////////// Logout / Login BTNS ///////////////////////////////
         function logout() {
             document.querySelector('.logout_btn').addEventListener('click', (e) => {
                 e.preventDefault();
@@ -680,8 +871,29 @@ window.addEventListener( "DOMContentLoaded", function () {
         }
         logout();
 
+        function logInUser() {
+            document.querySelector('.login_btn').addEventListener('click', () => {
+                const modal = document.querySelector('#loginModal')
+                document.querySelector('.user_page').classList.remove('open_user_modal');
+                openModals(modal)
+                let productNumbers = parseInt(localStorage.getItem('localCartNumbers'));
+                // setSpan(productNumbers)
+                const numSpan = document.querySelectorAll('.shop span');
+                numSpan.forEach(s => {
+                    s.textContent = `${productNumbers}`;
+                });
+            });
+        }
+        logInUser();
 
-        /*//////////////////////////// Sign In /////////////////////////////////*/
+        function init() {
+            displayCartItem()
+            onLoadTabCartNumbers();
+        };
+        init();
+
+        /////////////////////////////////////////////////////////////////////////////////
+        /*///////////////////////////////// Sign In ///////////////////////////////////*/
 
         const validateSignIn = function() {
             const signInForm = document.querySelector('#signin_form');
@@ -721,6 +933,8 @@ window.addEventListener( "DOMContentLoaded", function () {
                         document.querySelector('.popup_login span').textContent = `${firstName} ${lastName}`;
                         document.querySelector('.popup_login p').textContent = `You are successfuly signed into DrumCentral`;
                         document.querySelector('.pop_btn').textContent = `Go to LogIn`;
+                        // document.querySelector('#login_email').innerHTML = `${email}`;
+                        // location.reload();
                     } else {
                         popup.classList.add('open_popup');
                         document.querySelector('.popup_login h3').textContent = 'Ooopppssss... Duplicate found!!!';
@@ -741,7 +955,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                     setErrorFor(password, '');
                     modalContainer.classList.add('slide-login');
                     // document.querySelector('#login_email').textContent = `${email}`
-                    document.querySelector('#login_email').textContent = `bbb`;
+                    // document.querySelector('#login_email').textContent = `bbb`;
                 })
                 
             });
@@ -949,7 +1163,6 @@ window.addEventListener( "DOMContentLoaded", function () {
                     };
                 // })
                 
-                // console.log(firstNameValue)
                 return retVal;
             }
 
@@ -978,13 +1191,22 @@ window.addEventListener( "DOMContentLoaded", function () {
     };
     modals();
 
+    //////////////////////////////////////////////////////////////////////////////////////////
     /*--------------------------------- Product Modal --------------------------------------*/
 
     function prodModal() {
         fetch('/json-files/cards-products.json')
             .then(results => results.json())
             .then(data => {
-                function cardModal(product_id) {
+                function productId(number) {
+                    for(let i=0; i<data.length; i++) {                 
+                        if(data[i].id === number+1) {
+                            cardModal(data[i])
+                            // console.log(data[i])
+                        }
+                    }
+                }
+                function cardModal(product) {
                     const modalDiv = document.createElement('div');
                     modalDiv.innerHTML = `
                             <div class="card_modal">
@@ -1014,7 +1236,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                                             <h1>Shop Now</h1>
                                             <h3 class="card_modal_price"></h3>
                                             <div class="shop_container">
-                                                <button class="add_cart_btn" data-cart="add_to_cart_modal_btn" id="${data[product_id].id}">
+                                                <button class="add_cart_btn" data-cart="add_to_cart_modal_btn">
                                                     <span class="circle" aria-hidden="true">
                                                         <span class="icon arrow"></span>
                                                     </span>
@@ -1034,33 +1256,33 @@ window.addEventListener( "DOMContentLoaded", function () {
                             `
                     document.body.insertAdjacentElement('beforeend', modalDiv);
                     document.querySelector('.card_modal_title').innerHTML =
-                            `${data[product_id].name}`
+                            `${product.name}`
                 
                     document.querySelector('.main_img_container').innerHTML =
-                            `<img class="main_img" src="${data[product_id].image}">`
+                            `<img class="main_img" src="${product.image}">`
                             
                     document.querySelector('.card_modal_price').innerHTML =
-                            `Only € ${data[product_id].price}`
+                            `Only € ${product.price}`
 
                     document.querySelectorAll('.card_modal_list').forEach((mod, i) => {
                         let info = [];
-                        for(let j=0 ; j<data[i].description.length; j++) {
+                        for(let j=0 ; j<product.description.length; j++) {
                             info += `
                                 <li class="card_modal_item">
-                                    <i class="fa-solid fa-check"></i>${data[i].description[j]}
+                                    <i class="fa-solid fa-check"></i>${product.description[j]}
                                 </li>`
                         };
                         mod.innerHTML = info;
                     });
 
-                    ////////////////// Modal Slider //////////////////   
+                    /////////////////////////////// Modal Slider /////////////////////////////   
                     let col = [];
-                    for(let i=0 ; i<data[product_id].colors.length; i++) {
-                        col += `<img class="thumbnail" src="/${data[product_id].colors[i]}">`
+                    for(let i=0 ; i<product.colors.length; i++) {
+                        col += `<img class="thumbnail" src="/${product.colors[i]}">`
                     };
                         
                     document.querySelector('.cardSlider').innerHTML = 
-                        `<img class="thumbnail activePic" src="${data[product_id].image}">
+                        `<img class="thumbnail activePic" src="${product.image}">
                         ${col}`
                         
                     const sliderPics = document.querySelectorAll('.thumbnail');
@@ -1075,10 +1297,9 @@ window.addEventListener( "DOMContentLoaded", function () {
                                 this.classList.add('activePic');
                                 el.src = this.src;
                             });
-                        };
-                        
+                        };                        
                     });
-
+                
                     const slider = document.querySelector('.cardSlider');
                     
                     document.querySelector('#btnLeft').addEventListener('click', function(){
@@ -1089,88 +1310,93 @@ window.addEventListener( "DOMContentLoaded", function () {
                         slider.scrollLeft += 100;
                     });
                     
-                    document.querySelector('.close_prod_modal_btn').addEventListener('click', (e) => {
-                        console.log(e)
+                    document.querySelector('.close_prod_modal_btn').addEventListener('click', () => {
                         document.querySelector('.card_modal').classList.remove('show_prod_modal');
                         slider.scrollLeft = 0;
                         cardOverlay.classList.remove('show_overlay');
                         document.querySelector('body').style.overflow = 'auto';
+                        location.reload()
                     }); 
 
-                    ////////////////////////////////////////////////////////////
-                    // ///////////////////// ADD TO CART ?????????????????????
-                    
+                    //////////////////////////////////////////////////////////////////////////////////
+                    /////////////////////////////////// ADD TO CART //////////////////////////////////
                     const addToCartBtn = document.querySelectorAll('[data-cart="add_to_cart_modal_btn"]');
                     
                     addToCartBtn.forEach((btn, i) => {
-                        btn.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            cartNumbers(data[product_id]);
-                            totalCost(data[product_id]);
-                            alert(`One ${data[product_id].name} added to cart`)
+                        btn.addEventListener('click', () => {
+                            if(localStorage.getItem('logedUser') == null) {
+                                setCartNumbers(product);
+                                setTotalCost(product);
+                                prodPopMod(product);
+                            } else {
+                                setCartNumbers(product);
+                                setTotalCost(product);
+                                prodPopMod(product);
+                            };
                         });
                     });
 
-                    // -------------------- cartNumbers -------------------
-                    function cartNumbers(product) {
-                        let productNumbers = localStorage.getItem('cartNumbers');
-                        productNumbers = parseInt(productNumbers);
-                        
-                        if(productNumbers) {
-                            localStorage.setItem('cartNumbers', productNumbers + 1);
-                            span(productNumbers + 1);
+                    //////////////////////////////////// cart Numbers //////////////////////////////////
+                    function setCartNumbers(product) {
+                        if(localStorage.getItem('logedUser') == null) {
+                            let productNumbers = parseInt(localStorage.getItem('localCartNumbers'));
+                            let key = 'localCartNumbers'
+                            cartNumbers(product, productNumbers, key)
                         } else {
-                            localStorage.setItem('cartNumbers', 1);
-                            span(1);
+                            let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
+                            let key = 'userCartNumbers'
+                            cartNumbers(product, productNumbers, key)
+                        }
+
+                        function cartNumbers(product, productNumbers, key) {
+                            if(productNumbers) {
+                                localStorage.setItem(key, productNumbers + 1);
+                                setSpan(productNumbers + 1) ;
+                            } else {
+                                localStorage.setItem(key, 1);
+                                setSpan(1); 
+                            };                
+                            setItems(product);
                         };
-                        
-                        setItems(product);
+
                     };
 
-                    // -------------------- setItems -------------------
+                    ////////////////////////////////////// set Items //////////////////////////////////////
                     function setItems(product) {
-                        let cartItems = localStorage.getItem('productsInCart');
-                        cartItems = JSON.parse(cartItems);
-                        
-                        if(cartItems != null){
-                            if(cartItems[product.name] == undefined) {
-                                cartItems = {
-                                    ...cartItems,
-                                    [product.name]: product
-                                };
-                            };
-                            cartItems[product.name].inCart += 1;
+                        if(localStorage.getItem('logedUser') == null) { 
+                            let cartItems = JSON.parse(localStorage.getItem('localProductsInCart'));
+                            const key = 'localProductsInCart'
+                            setingItem(product, cartItems, key)
                         } else {
-                            product.inCart = 1
-                            cartItems = {
-                                [product.name]: product
-                            };
-                        };
-                        localStorage.setItem('productsInCart', JSON.stringify(cartItems));
-                    };
-                
-                    // -------------------- SPAN -------------------
-                    function span(number) {
-                        const numSpan = document.querySelectorAll('.shop span');
-
-                        numSpan.forEach(s => {
-                            s.textContent = `${number}`;
-                        });
+                            let cartItems = JSON.parse(localStorage.getItem('userProductsInCart'));
+                            const key = 'userProductsInCart'
+                            setingItem(product, cartItems, key)
+                        }
                     };
 
-
-                    // -------------------- totalCost -------------------
-                    function totalCost(product) {
-                        let cartCost = localStorage.getItem("totalCost");
-                        
-                        if(cartCost != null) {
-                            cartCost = parseInt(cartCost);
-                            localStorage.setItem("totalCost", cartCost + product.price);
+                    ////////////////////////////////////// SPAN ////////////////////////////////////////////            
+                    function setSpan(number) {
+                        if(localStorage.getItem('logedUser') == null) { 
+                            let productNumbers = parseInt(localStorage.getItem('localCartNumbers'));
+                            span(number, productNumbers)
                         } else {
-                            cartCost = parseInt(cartCost);
-                            localStorage.setItem("totalCost", product.price);
-                        };
-                    };
+                            let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
+                            span(number, productNumbers)
+                        }
+                    }
+
+                    /////////////////////////////// totalCost //////////////////////////////////////
+                    function setTotalCost(product) {
+                        if(localStorage.getItem('logedUser') == null) { 
+                            let cartCost = localStorage.getItem('localTotalCost');
+                            const tcKey = "localTotalCost"
+                            totalCost(product, cartCost, tcKey)
+                        } else {
+                            let cartCost = localStorage.getItem('userTotalCost');
+                            const tcKey = "userTotalCost"
+                            totalCost(product, cartCost, tcKey)
+                        }
+                    }
                 };
 
                 const openProdModBtn = document.querySelectorAll('.open_prod_modal');
@@ -1178,19 +1404,21 @@ window.addEventListener( "DOMContentLoaded", function () {
                 
                 openProdModBtn.forEach((btn, i) => {
                     btn.addEventListener('click', () => {
-                        cardModal(i);
+                        productId(i);
                         document.querySelector('.card_modal').classList.add('show_prod_modal');
                         cardOverlay.classList.add('show_overlay');
                         document.querySelector('body').style.overflow = 'hidden';
                     });
                 });
-                
+
+
                 cardOverlay.addEventListener('click', function () {
                     document.querySelector('.card_modal').classList.remove('show_prod_modal');
                     cardOverlay.classList.remove('show_overlay');
                     document.querySelector('body').style.overflow = 'auto';
+                    location.reload()
                 });
-            });
+            });           
     };
     prodModal();
 });

@@ -196,7 +196,7 @@
         }
     }
     
-    // ---------------- sign in -------------------
+    //////////////////////////// sign in ////////////////////////////
     .signin_modal_container .go_back {
         position: absolute;
         font-size: 14px;
@@ -242,7 +242,7 @@
         @include popup_login;
     }
     
-    /*---------------------------- Contact Modal ----------------------------*/
+    //////////////////////////// Contact Modal ////////////////////////////
 
     .contact_wrapper {
         @include modalWrapper;
@@ -325,7 +325,6 @@
             align-items: center;
             border-bottom: 1px solid ;
             i {
-                // background: #18b5ce;
                 width: 10%;
                 font-size: 20px;
                 text-align: left;
@@ -341,7 +340,6 @@
                 outline: none;
             }
             .verify {
-                // background: rgb(47, 120, 255);
                 display: block;
                 position: absolute;
                 width: 100%;
@@ -361,14 +359,12 @@
             // background: #18b5ce;
             position: relative;
             label {
-                // background: rgb(219, 107, 107);
                 width: 100%;
                 height: 16px;
                 padding: 0;
             }
             textarea {
                 position: absolute;
-                // background: #2e89de;
                 top: 50px;
                 width: 100%;
                 height: 100px;
@@ -417,8 +413,8 @@
             display: block;
         }
     }
-
-    // ------------------------ card modal --------------------------
+    ////////////////////////////////////////////////////////////////////
+    //////////////////////////// card modal ////////////////////////////
 
     .card_modal {
         position: fixed;
@@ -628,7 +624,7 @@
             @include tablet {
                 width: 100%;
             }
-            // /////////////////////////// BTN ///////////////////////////////
+            ////////////////////////////// BTN ///////////////////////////////
             .open_cart_btn {
                 display: flex;
                 align-items: center;
@@ -730,9 +726,7 @@
         opacity: 0;
         visibility: hidden;
         transition: 400ms;
-        // pointer-events: ;
         z-index: 400;
-        // filter: blur(5px);
         &.show_overlay {
             opacity: 0.95;
             visibility: visible;
@@ -741,7 +735,7 @@
     }   
     
     
-    // ------------------- User Loged Modal -----------------
+    ///////////////////////// User Loged Modal /////////////////////////
     .user_page {
         position: fixed;
         top: 0;
@@ -749,12 +743,11 @@
         width: 40vw;
         height: 100%;
         background: $color-text-light;
-        // background: rgb(167, 234, 255);
         padding: 30px;
         transform: translateX(40vw);
         transition: all 300ms ease;
         overflow-y: auto;
-        z-index: 999;
+        z-index: 900;
         &.open_user_modal {
             transform: translateX(0);
             transition: all 300ms ease-out;
@@ -767,7 +760,6 @@
         .userPage_container {
             background: rgb(210, 227, 250);
             width: 100%;
-            // height: 100%;
             display: flex;
             justify-content: space-between;
             margin: 20px 0;
@@ -812,7 +804,6 @@
             margin: 10px 0;
         }
         .page_btns {
-            // background: #18b5ce;
             padding: 0 30px;
             margin-bottom: 20px;
             display: flex;
@@ -829,7 +820,6 @@
         }
         .wish_btns,
         .cart_btns {
-            // background: darkcyan;
             text-align: center;
             margin-bottom: 20px;
             button {
@@ -841,12 +831,11 @@
             }
         }
     }
-    // ------------------- User Tabs -------------------
+    ///////////////////////// User Tabs /////////////////////////
     .user_page .user_tabs {
         margin-top: 20px;
         width: 100%;
         height: 40px;
-        // background: #18b5ce;
         display: flex;
         justify-content: center;
         .tab_btn {
@@ -869,7 +858,6 @@
         }
     }
     .tab_container {
-        // background: rgb(237, 172, 172);
         width: 100%;
         height: 100%;
         display: none;
@@ -880,8 +868,8 @@
             color: red;
         }
     }
-    .wish_btns {
-        // background: darkcyan;
+    .wish_btns,
+    .cart_btns {
         text-align: center;
         margin-top: 20px;
         button {
@@ -892,20 +880,20 @@
             margin: 0 10px;
         }
     }
-    ///////////////////////// Wish List ////////////////////////////
-    
-    .wish_list_box {
+
+    ///////////////////////// Wish List ////////////////////////////    
+    .list_box {
         position: relative;
         width: 100%;
         height: 130px;
         margin: 10px 0;
         padding: 10px;
         border-bottom: 1px solid black;
-        .remove_wl_item_btn {
+        .remove_btn {
             @include closeModalBtn;
         }
     }
-    .wish_content_container {
+    .box_content_container {
         background: $bg-product-container;
         width: 100%;
         height: 100%;
@@ -930,7 +918,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            .product_name {
+            .item_name {
                 font-size: 20px;
                 font-weight: 500;
                 color: $color-product-links;
@@ -938,6 +926,34 @@
             }
         }
     }
+    .cart_shop_container{
+        display: flex;
+        
+        .cart_quantity {
+            .fa-solid {
+                font-size: 22px;
+                color: rgb(87, 87, 87);
+                padding: 0 10px;
+                cursor: pointer;
+                @include laptop {
+                    font-size: 20px;
+                    padding: 0 5px;
+                }
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+            .cart_q {
+                font-size: 20px;
+                font-weight: 500;
+                margin: 0 5px;
+                @include laptop {
+                    margin: 0 5px;
+                }
+            }
+        }
+    }
+    
     .info_container .shop_container {
         // background: darkgrey;
         span {
@@ -957,5 +973,43 @@
             color: $color-product-links;
         }
     }
+    ////////////////////////////////////////////////////////////
+    //////////////////////////// popup /////////////////////////
+    .prod_pop_modal {
+        position: fixed;
+        width: 400px;
+        height: 150px;
+        top: -500px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: $color-text-light;
+        box-shadow: $product-box-shadow;
+        transition: 300ms;
+        z-index: 998;
+        &.open_prod_popup {
+            top: 0;
+            transition: 300ms;
+        }
+        .product_popup {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            padding: 20px;
+            span {
+                font-size: 20px;
+                font-weight: 500;
+                margin-bottom: 30px;
+            }
+            p {
+                font-size: 20px;
+                margin-top: 10px;
+                span {
+                    font-size: 22px;
+                    font-weight: 700;
+                }
+            }
+        }
+    } 
 }
 

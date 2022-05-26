@@ -404,7 +404,6 @@
 .main_nav .login_logout_link:hover,
 .main_nav .loged_user_btn:hover {
   color: #1d82a1;
-  color: red;
 }
 @media screen and (max-width: 1024px) {
   .main_nav .shop,
@@ -435,16 +434,17 @@
 .main_nav .loged_user_btn span {
   position: absolute;
   left: 10px;
-  top: -8px;
+  top: -12px;
   background: #f33a3a;
   color: rgb(248, 248, 248);
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   z-index: 55;
+  line-height: 22px;
 }
 
 .main_nav .loged_user_btn {
@@ -465,7 +465,6 @@
     transform: translateX(0px);
   }
 }
-/*------------------- Search Box ------------------*/
 .main_nav .nav_search_box {
   height: 36px;
 }
@@ -893,7 +892,6 @@
   }
 }
 
-/*-------------- Sticky ---------------*/
 .nav_container.sticky {
   position: fixed;
   width: 100%;
@@ -942,7 +940,6 @@
   display: none;
 }
 
-/*------------------- Toggler ----------------*/
 .toggler {
   position: fixed;
   width: 50px;
@@ -1516,7 +1513,6 @@
   background: rgb(159, 159, 247);
 }
 
-/*---------------------------- Contact Modal ----------------------------*/
 .contact_wrapper {
   background: white;
   position: fixed;
@@ -2113,7 +2109,7 @@
   transform: translateX(40vw);
   transition: all 300ms ease;
   overflow-y: auto;
-  z-index: 999;
+  z-index: 900;
 }
 .user_page.open_user_modal {
   transform: translateX(0);
@@ -2235,16 +2231,17 @@
 .user_page .user_tabs span {
   position: absolute;
   left: 10px;
-  top: -8px;
+  top: -12px;
   background: #f33a3a;
   color: rgb(248, 248, 248);
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   z-index: 55;
+  line-height: 22px;
   left: 85px;
   background: #f44336;
 }
@@ -2261,11 +2258,13 @@
   color: red;
 }
 
-.wish_btns {
+.wish_btns,
+.cart_btns {
   text-align: center;
   margin-top: 20px;
 }
-.wish_btns button {
+.wish_btns button,
+.cart_btns button {
   padding: 5px 0;
   width: 100px;
   font-size: 16px;
@@ -2273,7 +2272,7 @@
   margin: 0 10px;
 }
 
-.wish_list_box {
+.list_box {
   position: relative;
   width: 100%;
   height: 130px;
@@ -2281,7 +2280,7 @@
   padding: 10px;
   border-bottom: 1px solid black;
 }
-.wish_list_box .remove_wl_item_btn {
+.list_box .remove_btn {
   position: absolute;
   float: right;
   top: 10px;
@@ -2291,45 +2290,74 @@
   outline: none;
   cursor: pointer;
 }
-.wish_list_box .remove_wl_item_btn .fa-xmark {
+.list_box .remove_btn .fa-xmark {
   font-size: 22px;
 }
-.wish_list_box .remove_wl_item_btn .fa-xmark:hover {
+.list_box .remove_btn .fa-xmark:hover {
   transform: scale(1.2);
 }
 
-.wish_content_container {
+.box_content_container {
   background: #EEEEEE;
   width: 100%;
   height: 100%;
   display: flex;
   transition: 300ms ease-in-out;
 }
-.wish_content_container:hover {
+.box_content_container:hover {
   box-shadow: 5px 5px 12px 3px rgba(0, 0, 0, 0.1921568627);
   background: rgba(243, 243, 243, 0.356);
   transition: 300ms ease-in-out;
 }
-.wish_content_container .img_container {
+.box_content_container .img_container {
   background: #EEEEEE;
   width: 150px;
   height: 110px;
 }
-.wish_content_container .img_container .product_img {
+.box_content_container .img_container .product_img {
   width: 150px;
 }
-.wish_content_container .info_container {
+.box_content_container .info_container {
   width: 65%;
   padding: 5px 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.wish_content_container .info_container .product_name {
+.box_content_container .info_container .item_name {
   font-size: 20px;
   font-weight: 500;
   color: #346FA2;
   cursor: pointer;
+}
+
+.cart_shop_container {
+  display: flex;
+}
+.cart_shop_container .cart_quantity .fa-solid {
+  font-size: 22px;
+  color: rgb(87, 87, 87);
+  padding: 0 10px;
+  cursor: pointer;
+}
+@media screen and (max-width: 1024px) {
+  .cart_shop_container .cart_quantity .fa-solid {
+    font-size: 20px;
+    padding: 0 5px;
+  }
+}
+.cart_shop_container .cart_quantity .fa-solid:hover {
+  transform: scale(1.1);
+}
+.cart_shop_container .cart_quantity .cart_q {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 5px;
+}
+@media screen and (max-width: 1024px) {
+  .cart_shop_container .cart_quantity .cart_q {
+    margin: 0 5px;
+  }
 }
 
 .info_container .shop_container span {
@@ -2347,6 +2375,43 @@
   font-size: 18px;
   font-weight: 500;
   color: #346FA2;
+}
+
+.prod_pop_modal {
+  position: fixed;
+  width: 400px;
+  height: 150px;
+  top: -500px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  box-shadow: 5px 5px 12px 3px rgba(0, 0, 0, 0.1921568627);
+  transition: 300ms;
+  z-index: 998;
+}
+.prod_pop_modal.open_prod_popup {
+  top: 0;
+  transition: 300ms;
+}
+.prod_pop_modal .product_popup {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 20px;
+}
+.prod_pop_modal .product_popup span {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+.prod_pop_modal .product_popup p {
+  font-size: 20px;
+  margin-top: 10px;
+}
+.prod_pop_modal .product_popup p span {
+  font-size: 22px;
+  font-weight: 700;
 }
 
 .hero {
@@ -3244,16 +3309,17 @@
 .side_nav .side_shop span {
   position: absolute;
   left: 10px;
-  top: -8px;
+  top: -12px;
   background: #f33a3a;
   color: rgb(248, 248, 248);
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   z-index: 55;
+  line-height: 22px;
 }
 
 .btn_container {
@@ -4427,16 +4493,17 @@ img {
 .hero_container .shop span {
   position: absolute;
   left: 10px;
-  top: -8px;
+  top: -12px;
   background: #f33a3a;
   color: rgb(248, 248, 248);
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   z-index: 55;
+  line-height: 22px;
   text-shadow: 0px 0px 2px #000000;
   top: -15px;
 }

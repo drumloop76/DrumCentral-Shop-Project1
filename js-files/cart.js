@@ -1,6 +1,6 @@
 function onLoadCartNumbers() {
     let productNumbers = localStorage.getItem('logedUser') == null ? localStorage.getItem('localCartNumbers') : localStorage.getItem('userCartNumbers');
-    if( productNumbers >= 1 ) {
+    if(productNumbers >= 1) {
         span(productNumbers);
         document.querySelector('.empty_cart').style.display = "none";
         document.querySelector('.cart_items_container').style.display = "block";
@@ -86,14 +86,14 @@ function span(number) {
 function setTotalCost(product, action) {
     if(localStorage.getItem('logedUser') == null) { 
         let totalPrice = localStorage.getItem("localTotalCost");
-        const tcKey = "localTotalCost"
-        totalCost(product, action, totalPrice, tcKey)
+        const tcKey = "localTotalCost";
+        totalCost(product, action, totalPrice, tcKey);
     } else {
         let totalPrice = localStorage.getItem("userTotalCost");
-        const tcKey = "userTotalCost"
-        totalCost(product, action, totalPrice, tcKey)
-    }
-}
+        const tcKey = "userTotalCost";
+        totalCost(product, action, totalPrice, tcKey);
+    };
+};
 
 function totalCost(product, action, totalPrice, tcKey) {
     if(action) {
@@ -112,11 +112,11 @@ function displayCart() {
     if(localStorage.getItem('logedUser') == null) {
         let cartItems = JSON.parse(localStorage.getItem('localProductsInCart'));
         let totalPrice = parseInt(localStorage.getItem("localTotalCost"));
-        display(cartItems, totalPrice)
+        display(cartItems, totalPrice);
     } else {
         let cartItems = JSON.parse(localStorage.getItem('userProductsInCart'));
         let totalPrice = parseInt(localStorage.getItem("userTotalCost"));
-        display(cartItems, totalPrice)
+        display(cartItems, totalPrice);
     };
     
     function display(cartItems, totalPrice) {
@@ -169,6 +169,8 @@ function displayCart() {
     };
     display();
 };
+
+
 
 //////////////////////////////////////// Quantaty /////////////////////////////////////////
 function setManageQuantity() {
@@ -246,7 +248,7 @@ function deleteButtons(cartItems, productNumbers, cartCost, picKey, cnKey, tcKey
     let productName;
     
     for(let i=0; i < deleteButtons.length; i++) {
-        deleteButtons[i].addEventListener('click', (e) => {
+        deleteButtons[i].addEventListener('click', () => {
             productName = deleteButtons[i].parentElement.previousElementSibling.previousElementSibling.textContent;
             
             localStorage.setItem(cnKey, productNumbers - cartItems[productName].inCart);

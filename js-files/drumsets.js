@@ -1,6 +1,6 @@
 'use strict'
 
-import { setingItem, span, totalCost, setListItems } from "./lib.js";
+import { setingItem, cartNumbers, span, totalCost, setListItems, prodPopMod } from "./lib.js";
 
 const heroImages = function() {
     fetch('/json-files/cards-products.json')
@@ -68,7 +68,7 @@ const drumsets = function() {
                         </div>
                         <div class="price">
                             <span class="product_price">€ ${data[i].price}</span>
-                            <a href="#" class="shop open_cart" data-cart="add_to_cart_btn">
+                            <a class="shop open_cart" data-cart="add_to_cart_btn">
                                 <i class="fas fa-cart-arrow-down"></i></i>
                             </a>
                         </div>
@@ -92,13 +92,16 @@ const drumsets = function() {
             const addToCartBtn = document.querySelectorAll('[data-cart="add_to_cart_btn"]');
             
             addToCartBtn.forEach((btn, i) => {
-                btn.addEventListener('click', (e) => {
+                btn.addEventListener('click', () => {
                     if(localStorage.getItem('logedUser') == null) {
                         setCartNumbers(data[i]);
                         setTotalCost(data[i]);
+                        // prodPopMod(data[i])
                     } else {
                         setCartNumbers(data[i]);
                         setTotalCost(data[i]);
+                        console.log(data[i])
+                        prodPopMod(data[i])
                     };
                 });
             });
@@ -125,7 +128,6 @@ const drumsets = function() {
             };
             
             //////////////////////////////////// cart Numbers //////////////////////////////////
-
             function setCartNumbers(product) {
                 if(localStorage.getItem('logedUser') == null) {
                     let productNumbers = parseInt(localStorage.getItem('localCartNumbers'));
@@ -136,6 +138,7 @@ const drumsets = function() {
                     let key = 'userCartNumbers'
                     cartNumbers(product, productNumbers, key)
                 }
+                // setItems(product);
             }
 
             function cartNumbers(product, productNumbers, key) {
@@ -441,27 +444,6 @@ const drumsets = function() {
                 setListItems(item, storageItems, key);
             };
 
-
-            // function setCompareItems(item) {
-            //     let compareItems = JSON.parse(localStorage.getItem('compareItems'));
-
-            //     if(compareItems != null){
-            //         if(compareItems[item.name] == undefined) {
-            //             compareItems = {
-            //                 ...compareItems,
-            //                 [item.name]: item
-            //             };
-            //         };
-            //         compareItems[item.name].inBox += 1;                    
-            //     } else {
-            //         item.inBox = 1
-            //         compareItems = {
-            //             [item.name]: item
-            //         };
-            //     };
-            //     localStorage.setItem('compareItems', JSON.stringify(compareItems));
-            // };
-            
             // -------------------- Display Item -------------------
             function displayItems() {
                 let compareItems = JSON.parse(localStorage.getItem('compareItems'));
@@ -506,38 +488,21 @@ const drumsets = function() {
             function toggleItems() {
                 let compareItems = JSON.parse(localStorage.getItem('compareItems'));
                 document.querySelector('.compare_products').addEventListener('click', () => {                    
-                    if(Object.values(compareItems).length != 0 || Object.values(compareItems).length != null) {
+                    // if(Object.values(compareItems).length != 0 || Object.values(compareItems).length != null) {
                         document.querySelectorAll('.itemDescription').forEach(d => {
                             if(d.classList.contains('read')) {
                                 d.classList.remove('read');
                                 document.querySelector('.compare_products').textContent = "Compare";
                             } else {
+                                console.log('no')
                                 d.classList.add('read');
                                 document.querySelector('.compare_products').textContent = "Minimize";
                             };
                         });
-                    };
+                    // };
                 });
             };
             toggleItems();
-
-            // function toggleItems() {
-            //     let compareItems = JSON.parse(localStorage.getItem('compareItems'));
-            //     document.querySelector('.compare_products').addEventListener('click', () => {                    
-            //         if(Object.values(compareItems).length != 0) {
-            //             document.querySelectorAll('.itemDescription').forEach(d => {
-            //                 if(d.classList.contains('read')) {
-            //                     d.classList.remove('read');
-            //                     document.querySelector('.compare_products').textContent = "Compare";
-            //                 } else {
-            //                     d.classList.add('read');
-            //                     document.querySelector('.compare_products').textContent = "Minimize";
-            //                 };
-            //             });
-            //         };
-            //     });
-            // };
-            // toggleItems();
 
             // -------------------- Remove Item from Box -------------------
             function removeBoxItem() {
@@ -557,23 +522,6 @@ const drumsets = function() {
                 };
             };
 
-            // function removeBoxItem() {
-            //     let compareItems = JSON.parse(localStorage.getItem('compareItems'));
-            //     const removeItemBtn = document.querySelectorAll('.remove_box_btn');
-            //     let comparedItem;
-                
-            //     for(let i=0; i < removeItemBtn.length; i++) {
-            //         removeItemBtn[i].addEventListener('click', (e) => {
-            //             document.querySelector('.compare_products').textContent = "Compare";
-            //             comparedItem = removeItemBtn[i].previousElementSibling.previousElementSibling.textContent;
-            //             delete compareItems[comparedItem];
-            //             localStorage.setItem('compareItems', JSON.stringify(compareItems));
-            //             displayItems();
-            //             displayMessage();                        
-            //         });
-            //     };
-            // };
-            
             // -------------------- Remove All Items -------------------
             function removeAllItems() {
                 document.querySelector('.remove_products').addEventListener('click', ()=> {
@@ -582,14 +530,6 @@ const drumsets = function() {
                     displayMessage();
                 });                
             };
-
-            // function removeAllItems() {
-            //     document.querySelector('.remove_products').addEventListener('click', ()=> {
-            //         localStorage.setItem('compareItems', JSON.stringify({}));
-            //         displayItems();
-            //         displayMessage();
-            //     });                
-            // };            
 
             // -------------------- Display empty box message -------------------
             function displayMessage() {
@@ -604,18 +544,6 @@ const drumsets = function() {
                 };
             };
 
-            // function displayMessage() {
-            //     let compareItems = JSON.parse(localStorage.getItem('compareItems'));
-            //     if(compareItems){
-            //         if(Object.values(compareItems).length == 0) {
-            //             document.querySelector('.products_container').innerHTML = `
-            //                         <span class="chose_text">Chose products to compare</span>
-            //                     `
-            //             document.querySelector('.compare_products').textContent = "Compare";
-            //         };
-            //     };
-            // };
-
             // -------------------- Close Modal -------------------
             function closeCompareModal() {
                 document.querySelector('.close_box_btn').addEventListener('click', () => {
@@ -625,14 +553,6 @@ const drumsets = function() {
                 });
             };
 
-            // function closeCompareModal() {
-            //     document.querySelector('.close_box_btn').addEventListener('click', () => {
-            //         document.querySelector('.product_compare_box').classList.remove('show_up');
-            //         document.querySelector('.compare_products').textContent = "Compare";
-            //         displayItems();
-            //     });
-            // };
-            
             ///////////////////////////////////////////////////////////////////
             /////////////////////// Wish List //////////////////////////
             function wishList() {            
@@ -641,127 +561,48 @@ const drumsets = function() {
                         let targetName = e.target.closest('.description').firstElementChild.innerHTML;
                         
                         for(let i=0 ; i<data.length ; i++) {
-                            if(data[i].name === targetName) {
+                            if(data[i].name === targetName && localStorage.getItem('logedUser') != null) {
                                 setWishListItems(data[i]);
-                            };                    
+                                setWishListNumbers()
+                            // } else if(localStorage.getItem('logedUser') != null) {
+                            //     alert('You have to be loged in')
+                            }                    
                         };
                     });
                 });
 
-                // -------------------- setItems -------------------
+                // -------------------- set Items -------------------
                 function setWishListItems(item) {
                     let storageItems = JSON.parse(localStorage.getItem('wishListItems'));
                     const key = 'wishListItems';
                     setListItems(item, storageItems, key);
                 };
-            };
-                        
-            // document.querySelectorAll('.wish_list_btn').forEach(btn => {
-            //     btn.addEventListener('click', (e) => {
-            //         let targetName = e.target.closest('.description').firstElementChild.innerHTML;
-                    
-            //         for(let i=0 ; i<data.length ; i++) {
-            //             if(data[i].name === targetName) {
-            //                 setWishListItems(data[i]);
-            //                 displayWishListItem();
-            //                 removeAllWishListItems();
-            //             };                    
-            //         };
-            //     });
-            // });
-
-            // // // -------------------- setItems -------------------
-            // function setWishListItems(item) {
-            //     let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
-
-            //     if(wishListItems != null){
-            //         if(wishListItems[item.name] == undefined) {
-            //             wishListItems = {
-            //                 ...wishListItems,
-            //                 [item.name]: item
-            //             };
-            //         };
-            //         wishListItems[item.name].inBox += 1;
-            //     } else {
-            //         item.inBox = 1
-            //         wishListItems = {
-            //             [item.name]: item
-            //         };
-            //     };
-            //     localStorage.setItem('wishListItems', JSON.stringify(wishListItems));
-            // };
-
-            // // -------------------- Display Item -------------------
-            // function displayWishListItem() {
-            //     let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
-
-            //     const wishListItemsContainer = document.querySelector('.wish_list_content');
-            //     if(wishListItems) {
-            //         wishListItemsContainer.innerHTML = ``;
-            //         Object.values(wishListItems).map(item => {
-            //         wishListItemsContainer.innerHTML +=  `
-            //                 <div class="wish_list_box">
-            //                     <button class="remove_wl_item_btn">
-            //                         <i class="fa-solid fa-xmark"></i>
-            //                     </button>
-            //                     <div class="wish_content_container">
-            //                         <div class="img_container">
-            //                             <img class="product_img" src="${item.image}">
-            //                         </div>
-            //                         <div class="info_container">
-            //                             <a class="card_btn open_prod_modal product_name" data-product-target="#productModal">${item.name}</a>
-            //                             <div class="shop_container">
-            //                                 <a class="shop open_cart" data-cart="add_to_cart_btn">
-            //                                     <i class="fas fa-cart-arrow-down"></i></i>
-            //                                 </a>
-            //                                 <a href="/pages/cart.html" class="open_cart_btn">
-            //                                     Go to cart
-            //                                 </a>
-            //                             </div>
-            //                         </div>
-            //                     </div>
-            //                 </div>
-            //                 `
-            //             removeWishListItem();
-            //             removeAllWishListItems()
-            //             // cartBtns()
-            //         });
-            //     };
-            // };
-            // // displayWishListItem()
-            // // -------------------- Remove Wish List Item -------------------
-            // function removeWishListItem() {
-            //     let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
-
-            //     const removeItemBtn = document.querySelectorAll('.remove_wl_item_btn');
-
-            //     let item;               
-            //     for(let i=0; i < removeItemBtn.length; i++) {
-            //         removeItemBtn[i].addEventListener('click', (e) => {
-            //             item = removeItemBtn[i].nextElementSibling.children[1].firstChild.nextSibling.textContent;
-
-            //             delete wishListItems[item];
-            //             localStorage.setItem('wishListItems', JSON.stringify(wishListItems));
-                        
-            //             displayWishListItem();                     
-            //         });
-            //     };
-            // };
-            // // removeWishListItem();
-
-            // // -------------------- Remove All Wish List Items -------------------
-            // function removeAllWishListItems() {
-            //     document.querySelector('.remove_all_wl').addEventListener('click', (e)=> {
-            //         document.querySelector('.wish_list_content').innerHTML = '';
-            //         localStorage.setItem('wishListItems', JSON.stringify({}));
-                    
-            //         displayWishListItem();
-            //     });                
-            // };
-
+                // -------------------- set WL Spam -------------------
+                function setWishListNumbers() {
+                    let wishListNumbers = parseInt(localStorage.getItem('wishListNumbers'));
+                    if(wishListNumbers) {
+                        localStorage.setItem('wishListNumbers', wishListNumbers + 1);
+                        // setWLSpan(wishListNumbers + 1) ;
+                    } else {
+                        localStorage.setItem('wishListNumbers', 1);
+                        // setWLSpan(1); 
+                    };                
+                }
+                // -------------------- SPAN -------------------   
+                // function setWLSpan(number) {
+                //     console.log(document.querySelector('.wl_span'))
+                //     if(localStorage.getItem('logedUser') == null) { 
+                //         let productNumbers = parseInt(localStorage.getItem('localCartNumbers'));
+                //         span(number, productNumbers)
+                //     } else {
+                //         let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
+                //         span(number, productNumbers)
+                //     }
+                // }
+            };                   
+            
             function init() {
                 displayItems();
-                // displayWishListItem();
                 setOnLoadCartNumbers();
                 wishList()
             };

@@ -86,3 +86,29 @@ export function setListItems(item, storageItems, key) {
     };
     localStorage.setItem(key, JSON.stringify(storageItems));
 };
+
+//////////////////////////////////// Add Product Popup ///////////////////////////////////
+export function prodPopMod(product) {
+    const modal = document.createElement('div');
+    modal.classList.add('prod_pop_modal')
+    modal.innerHTML = `
+            <div class="product_popup">
+                <span></span>
+                <p>You have added one<br><span>${product.name}</span><br>to the cart.</p>
+            </div>
+            `
+    document.body.appendChild(modal);
+
+    const prodPopup = document.querySelector('.prod_pop_modal');
+    prodPopup.classList.add('open_prod_popup')
+    setTimeout(() => {
+        prodPopup.classList.remove('open_prod_popup');
+    }, 2000);
+
+    if(localStorage.getItem('logedUser') != null) {
+        JSON.parse(localStorage.getItem('formData')).find(d => {
+            document.querySelector('.product_popup span').textContent = `${d.firstName} ${d.lastName}`;
+        });
+    };
+}
+
