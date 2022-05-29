@@ -71,7 +71,7 @@ export function totalCost(product, cartCost, tcKey) {
 ////////////////////////////// WL & Compare Set Items ///////////////////////////////
 export function setListItems(item, storageItems, key) {
     if(storageItems != null){
-        if(storageItems[item.name] == undefined) {
+        if(storageItems[item.name] == undefined) {            
             storageItems = {
                 ...storageItems,
                 [item.name]: item
@@ -88,23 +88,26 @@ export function setListItems(item, storageItems, key) {
 };
 
 //////////////////////////////////// Add Product Popup ///////////////////////////////////
-export function prodPopMod(product) {
-    const modal = document.createElement('div');
-    modal.classList.add('prod_pop_modal')
-    modal.innerHTML = `
+export function prodPopMod(productName) {
+    console.log(productName)
+    const popup = document.createElement('div');
+    popup.classList.add('prod_pop_modal');
+    popup.innerHTML = `
             <div class="product_popup">
                 <span></span>
-                <p>You have added one<br><span>${product.name}</span><br>to the cart.</p>
+                <p>You have added one<br><span>${productName}</span><br>to the cart.</p>
             </div>
             `
-    document.body.appendChild(modal);
-
-    const prodPopup = document.querySelector('.prod_pop_modal');
-    prodPopup.classList.add('open_prod_popup')
+    document.body.appendChild(popup);
+    popup.classList.add('open_prod_popup');
+    
     setTimeout(() => {
-        prodPopup.classList.remove('open_prod_popup');
-    }, 2000);
-
+        popup.classList.remove('open_prod_popup');
+        setTimeout(() => {
+            popup.remove()
+        }, 200);
+    }, 1500);
+    
     if(localStorage.getItem('logedUser') != null) {
         JSON.parse(localStorage.getItem('formData')).find(d => {
             document.querySelector('.product_popup span').textContent = `${d.firstName} ${d.lastName}`;

@@ -22,16 +22,14 @@ const heroImages = function() {
 
             function nextImage() {
                 slideImgs[imgCounter].style.opacity = 0;
-
                 imgCounter = (imgCounter+1) % slideImgs.length;
-
                 slideImgs[imgCounter].style.opacity = 1;
             };
         });
 };
 heroImages();
 
-///////////////////////////////// PRODUCTS ////////////////////////////////////
+///////////////////////////////////// PRODUCTS /////////////////////////////////////
 
 const drumsets = function() {
     fetch('/json-files/cards-products.json')
@@ -62,7 +60,9 @@ const drumsets = function() {
                                     <i class="fa-regular fa-copy"></i>
                                 </a>
                                 <a class="wish_list_btn">
+                                    <span>You have to be loged in</span>
                                     <i class="fa-regular fa-heart"></i>
+                                    <i class="fa-solid fa-heart"></i>
                                 </a>
                             </div>
                         </div>
@@ -77,8 +77,7 @@ const drumsets = function() {
                 itemContainer.insertAdjacentElement('beforeend', itemDiv);
             }            
 
-            const stock = document.querySelectorAll('.description p');
-                
+            const stock = document.querySelectorAll('.description p');                
             for(let p of stock) {
                 if(p.textContent === 'In stock') {
                     p.classList.add('green');
@@ -87,26 +86,54 @@ const drumsets = function() {
                 };
             };
 
-            ////////////////////////////////////// Add To Cart ///////////////////////////////////////////////
+            const hearts = document.querySelectorAll('.fa-heart');
+            for(let h of hearts) {
+                if(localStorage.getItem('logedUser') == null) {
+                    h.style.color = 'rgba(59, 59, 59, 0.5)';
+                    h.addEventListener('mouseover', (e) => {
+                        e.target.previousElementSibling.classList.add('show-span');
+                    })
+                    h.addEventListener('mouseout', (e) => {
+                        e.target.previousElementSibling.classList.remove('show-span');
+                    })
+                } else {
+                    h.style.color = '$product-box-shadow';
+                };
+            };
+
+            let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
+            if(wishListItems && localStorage.getItem('logedUser') != null) {
+                Object.values(wishListItems).map(el => {
+                    let children = document.querySelectorAll('.description');
+                    for(let ch of children) {
+                        if(el.name === ch.firstElementChild.textContent) {
+                            ch.children[2].children[2].children[1].style.display = 'none';
+                            ch.children[2].children[2].children[2].classList.add('showHeart');
+                        };
+                    };
+                });
+            }
+
+            ///////////////////////////////////// Add To Cart /////////////////////////////////////
       
             const addToCartBtn = document.querySelectorAll('[data-cart="add_to_cart_btn"]');
             
             addToCartBtn.forEach((btn, i) => {
-                btn.addEventListener('click', () => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault()
                     if(localStorage.getItem('logedUser') == null) {
                         setCartNumbers(data[i]);
                         setTotalCost(data[i]);
-                        // prodPopMod(data[i])
+                        prodPopMod(data[i].name)
                     } else {
                         setCartNumbers(data[i]);
                         setTotalCost(data[i]);
-                        console.log(data[i])
-                        prodPopMod(data[i])
+                        prodPopMod(data[i].name)
                     };
                 });
             });
 
-            ///////////////////////////////////// On Load Cart Numbers ///////////////////////////////////////
+            ///////////////////////////////////// On Load Cart Numbers /////////////////////////////////////
             function setOnLoadCartNumbers() {
                 if(localStorage.getItem('logedUser') == null) {
                     let productNumbers = localStorage.getItem('localCartNumbers');
@@ -127,19 +154,18 @@ const drumsets = function() {
                 };
             };
             
-            //////////////////////////////////// cart Numbers //////////////////////////////////
+            ///////////////////////////////////// cart Numbers /////////////////////////////////////
             function setCartNumbers(product) {
                 if(localStorage.getItem('logedUser') == null) {
                     let productNumbers = parseInt(localStorage.getItem('localCartNumbers'));
-                    let key = 'localCartNumbers'
-                    cartNumbers(product, productNumbers, key)
+                    let key = 'localCartNumbers';
+                    cartNumbers(product, productNumbers, key);
                 } else {
                     let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
-                    let key = 'userCartNumbers'
-                    cartNumbers(product, productNumbers, key)
-                }
-                // setItems(product);
-            }
+                    let key = 'userCartNumbers';
+                    cartNumbers(product, productNumbers, key);
+                };
+            };
 
             function cartNumbers(product, productNumbers, key) {
                 if(productNumbers) {
@@ -152,47 +178,45 @@ const drumsets = function() {
                 setItems(product);
             };
 
-            ////////////////////////////////////// set Items //////////////////////////////////////
+            ///////////////////////////////////// set Items /////////////////////////////////////
             function setItems(product) {
                 if(localStorage.getItem('logedUser') == null) { 
                     let cartItems = JSON.parse(localStorage.getItem('localProductsInCart'));
-                    const key = 'localProductsInCart'
-                    setingItem(product, cartItems, key)
+                    const key = 'localProductsInCart';
+                    setingItem(product, cartItems, key);
                 } else {
                     let cartItems = JSON.parse(localStorage.getItem('userProductsInCart'));
-                    const key = 'userProductsInCart'
-                    setingItem(product, cartItems, key)
-                }
-            }
+                    const key = 'userProductsInCart';
+                    setingItem(product, cartItems, key);
+                };
+            };
           
-            ////////////////////////////////////// SPAN ////////////////////////////////////////////            
+            ///////////////////////////////////// SPAN /////////////////////////////////////            
             function setSpan(number) {
                 if(localStorage.getItem('logedUser') == null) { 
                     let productNumbers = parseInt(localStorage.getItem('localCartNumbers'));
-                    span(number, productNumbers)
+                    span(number, productNumbers);
                 } else {
                     let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
-                    span(number, productNumbers)
-                }
-            }
+                    span(number, productNumbers);
+                };
+            };
 
-
-            ///////////////////////////////// totalCost //////////////////////////////////////
+            ///////////////////////////////////// totalCost /////////////////////////////////////
             function setTotalCost(product) {
                 if(localStorage.getItem('logedUser') == null) { 
                     let cartCost = localStorage.getItem('localTotalCost');
-                    const tcKey = "localTotalCost"
-                    totalCost(product, cartCost, tcKey)
+                    const tcKey = "localTotalCost";
+                    totalCost(product, cartCost, tcKey);
                 } else {
                     let cartCost = localStorage.getItem('userTotalCost');
-                    const tcKey = "userTotalCost"
-                    totalCost(product, cartCost, tcKey)
-                }
-            }
-    
+                    const tcKey = "userTotalCost";
+                    totalCost(product, cartCost, tcKey);
+                };
+            };
 
-            /////////////////////////////////// Filters /////////////////////////////////////
-        
+            ///////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////// Filters /////////////////////////////////////        
             let arrCategory = [];
             let arrBrand = [];
             let arrMaterial = [];
@@ -269,7 +293,7 @@ const drumsets = function() {
                 });
             });
 
-            ////////////////////////////////// Search products ///////////////////////////////////
+            ///////////////////////////////////// Search products /////////////////////////////////////
 
             document.querySelector('.submit_search_btn').addEventListener('click', (e) => {
                 e.preventDefault();
@@ -305,7 +329,7 @@ const drumsets = function() {
                 elem.parentElement.classList.add('show_div');
             };
 
-            //////////////////////////////// In stock ////////////////////////////////
+            ///////////////////////////////////// In stock /////////////////////////////////////
 
             function inStock() {
                 const checkBox = document.querySelector('#check');
@@ -327,7 +351,7 @@ const drumsets = function() {
             };
             inStock();
 
-            //////////////////////////////// Sorting Items /////////////////////////////
+            ///////////////////////////////////// Sorting Items /////////////////////////////////////
             
             const sortSelect = document.querySelector('.sort_products_container select');
             
@@ -393,8 +417,8 @@ const drumsets = function() {
             sort();
             onLoadCartNumbers();
 
-            ///////////////////////////////////////////////////////////////////
-            /////////////////////// Compare products //////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////// Compare products /////////////////////////////////////
 
             const itemDiv = document.createElement('div');
                 itemDiv.innerHTML +=  `
@@ -416,7 +440,7 @@ const drumsets = function() {
                     `
             document.body.insertAdjacentElement('beforeend', itemDiv);
 
-            //////////////////////////// Add Item //////////////////////////
+            ///////////////////////////////////// Add Item /////////////////////////////////////
 
             document.querySelectorAll('.compare_btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
@@ -437,14 +461,14 @@ const drumsets = function() {
                 });
             });            
             
-            // -------------------- setItems -------------------
+            ///////////////////////////////////// setItems /////////////////////////////////////
             function setCompareItems(item) {
                 let storageItems = JSON.parse(localStorage.getItem('compareItems'));
                 const key = 'compareItems';
                 setListItems(item, storageItems, key);
             };
 
-            // -------------------- Display Item -------------------
+            ///////////////////////////////////// Display Item /////////////////////////////////////
             function displayItems() {
                 let compareItems = JSON.parse(localStorage.getItem('compareItems'));
                 const itemBox = document.querySelector('.products_container');
@@ -484,7 +508,7 @@ const drumsets = function() {
                 };
             };
 
-            // ------------------------ Toggle Contant ------------------------
+            ///////////////////////////////////// Toggle Contant /////////////////////////////////////
             function toggleItems() {
                 let compareItems = JSON.parse(localStorage.getItem('compareItems'));
                 document.querySelector('.compare_products').addEventListener('click', () => {                    
@@ -504,7 +528,7 @@ const drumsets = function() {
             };
             toggleItems();
 
-            // -------------------- Remove Item from Box -------------------
+            ///////////////////////////////////// Remove Item from Box /////////////////////////////////////
             function removeBoxItem() {
                 let compareItems = JSON.parse(localStorage.getItem('compareItems'));
                 const removeItemBtn = document.querySelectorAll('.remove_box_btn');
@@ -522,7 +546,7 @@ const drumsets = function() {
                 };
             };
 
-            // -------------------- Remove All Items -------------------
+            ///////////////////////////////////// Remove All Items /////////////////////////////////////
             function removeAllItems() {
                 document.querySelector('.remove_products').addEventListener('click', ()=> {
                     localStorage.setItem('compareItems', JSON.stringify({}));
@@ -531,7 +555,7 @@ const drumsets = function() {
                 });                
             };
 
-            // -------------------- Display empty box message -------------------
+            ///////////////////////////////////// Display empty box message /////////////////////////////////////
             function displayMessage() {
                 let compareItems = JSON.parse(localStorage.getItem('compareItems'));
                 if(compareItems){
@@ -544,7 +568,7 @@ const drumsets = function() {
                 };
             };
 
-            // -------------------- Close Modal -------------------
+            ///////////////////////////////////// Close Modal /////////////////////////////////////
             function closeCompareModal() {
                 document.querySelector('.close_box_btn').addEventListener('click', () => {
                     document.querySelector('.product_compare_box').classList.remove('show_up');
@@ -553,52 +577,84 @@ const drumsets = function() {
                 });
             };
 
-            ///////////////////////////////////////////////////////////////////
-            /////////////////////// Wish List //////////////////////////
-            function wishList() {            
-                document.querySelectorAll('.wish_list_btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        let targetName = e.target.closest('.description').firstElementChild.innerHTML;
+            /////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////// Wish List /////////////////////////////////////
+            function wishList() {        
+                const parentDiv = document.querySelectorAll('.description');
+                
+                let wishListNumbers = JSON.parse(localStorage.getItem('wishListNumbers'));
+                
+                parentDiv.forEach(p => {
+                    p.querySelector('.wish_list_btn').addEventListener('click', (e) => {
+                        let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
+                        let targetName = p.firstElementChild.textContent;
+                        let arr = [];
+
+                        if(localStorage.getItem('logedUser') != null && wishListNumbers == null && wishListNumbers == 0) {
+                            arr.push(targetName);
+                            setTarget(targetName);
+                            p.querySelector('.fa-regular.fa-heart').style.display = 'none';
+                            p.querySelector('.fa-solid.fa-heart').classList.add('showHeart');                            
+                        };
                         
-                        for(let i=0 ; i<data.length ; i++) {
-                            if(data[i].name === targetName && localStorage.getItem('logedUser') != null) {
-                                setWishListItems(data[i]);
-                                setWishListNumbers()
-                            // } else if(localStorage.getItem('logedUser') != null) {
-                            //     alert('You have to be loged in')
-                            }                    
+                        if(localStorage.getItem('logedUser') != null && wishListItems != null) {
+                            Object.values(wishListItems).map(item => {
+                                arr.push(item.name);
+                            });
+                            
+                            if(!arr.includes(targetName)) {
+                                setTarget(targetName);
+                                p.querySelector('.fa-regular.fa-heart').style.display = 'none';
+                                p.querySelector('.fa-solid.fa-heart').classList.add('showHeart');
+                            };
+                        };
+
+                        if(arr.includes(targetName)) {
+                            removeWishListItem(targetName);
+                            p.querySelector('.fa-regular.fa-heart').style.display = 'block';
+                            p.querySelector('.fa-solid.fa-heart').classList.remove('showHeart');
                         };
                     });
                 });
 
-                // -------------------- set Items -------------------
+                function setTarget(targetName) {
+                    for(let i=0 ; i<data.length ; i++) {
+                        if(data[i].name === targetName && localStorage.getItem('logedUser') != null) {
+                            setWishListItems(data[i]);
+                            setWishListNumbers();
+                        };
+                    };
+                };
+
+                ///////////////////////////////////// set Items /////////////////////////////////////
                 function setWishListItems(item) {
                     let storageItems = JSON.parse(localStorage.getItem('wishListItems'));
                     const key = 'wishListItems';
                     setListItems(item, storageItems, key);
                 };
-                // -------------------- set WL Spam -------------------
-                function setWishListNumbers() {
-                    let wishListNumbers = parseInt(localStorage.getItem('wishListNumbers'));
-                    if(wishListNumbers) {
-                        localStorage.setItem('wishListNumbers', wishListNumbers + 1);
-                        // setWLSpan(wishListNumbers + 1) ;
+                ///////////////////////////////////// set WL Spam /////////////////////////////////////
+                function setWishListNumbers(change) {
+                    let wlNumbers = parseInt(localStorage.getItem('wishListNumbers'));
+                    if(change) {
+                        localStorage.setItem('wishListNumbers', wlNumbers - 1);
+                    } else if(wlNumbers) {
+                        localStorage.setItem('wishListNumbers', wlNumbers + 1);
                     } else {
                         localStorage.setItem('wishListNumbers', 1);
-                        // setWLSpan(1); 
-                    };                
-                }
-                // -------------------- SPAN -------------------   
-                // function setWLSpan(number) {
-                //     console.log(document.querySelector('.wl_span'))
-                //     if(localStorage.getItem('logedUser') == null) { 
-                //         let productNumbers = parseInt(localStorage.getItem('localCartNumbers'));
-                //         span(number, productNumbers)
-                //     } else {
-                //         let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
-                //         span(number, productNumbers)
-                //     }
-                // }
+                    };
+                };
+                
+                ///////////////////////////////////// Remove WL Item /////////////////////////////////////////
+                function removeWishListItem(name) {
+                    let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
+                    console.log(wishListItems[name])
+                    if(wishListItems[name] != undefined) {
+                        console.log('ok')
+                    }
+                    setWishListNumbers("decrease");
+                    delete wishListItems[name];
+                    localStorage.setItem('wishListItems', JSON.stringify(wishListItems));
+                };
             };                   
             
             function init() {

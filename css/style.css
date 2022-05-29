@@ -4883,9 +4883,37 @@ div .product_container:hover {
   height: 30px;
   margin-left: 10%;
 }
-.product_container .description .action .compare_btn .fa-files,
-.product_container .description .action .wish_list_btn .fa-files {
-  font-size: 22px;
+.product_container .description .action .compare_btn:hover .fa-regular,
+.product_container .description .action .wish_list_btn:hover .fa-regular {
+  transform: scale(1.1);
+}
+.product_container .description .action .fa-solid.fa-heart {
+  display: none;
+}
+.product_container .description .action .fa-solid.fa-heart.showHeart {
+  display: block;
+  cursor: none;
+  pointer-events: none;
+}
+.product_container .description .action span {
+  position: absolute;
+  top: -10px;
+  font-size: 14px;
+  background: rgba(59, 59, 59, 0.137);
+  color: rgb(59, 59, 59);
+  display: flex;
+  justify-content: center;
+  width: 160px;
+  opacity: 0;
+  visibility: hidden;
+  cursor: none;
+  transition: all 300ms ease-out;
+}
+.product_container .description .action span.show-span {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-15px);
+  transition: all 300ms ease-out;
 }
 
 .price {

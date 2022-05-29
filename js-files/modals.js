@@ -139,7 +139,7 @@ window.addEventListener( "DOMContentLoaded", function () {
         `
     document.body.insertAdjacentElement('beforeend', modalDiv);
 
-    /*--------------------- Modals -------------------------*/
+    ///////////////////////////////////// Modals /////////////////////////////////////
 
     const modals = function () {
         const openModalBtn = document.querySelectorAll('[data-modal-target]');
@@ -184,15 +184,6 @@ window.addEventListener( "DOMContentLoaded", function () {
             closeModal(modal);
         });
 
-        // function openModal(mod) {
-        //     openModals(mod)
-        //     modalContainer.style.left = "0px";
-        // };
-
-        // function openContactModal(mod) {
-        //     openModals(mod)
-        // };
-
         function openModals(mod) {
             if(mod === null) return
             mod.classList.add('active_modal');
@@ -202,7 +193,6 @@ window.addEventListener( "DOMContentLoaded", function () {
             wrapper.style.filter = "blur(3.5px)";
             document.querySelector('body').style.overflow = 'hidden';
         };
-
 
         function closeModal(modal) {
             if(modal === null) return
@@ -244,7 +234,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             });
         });
 
-        /*----------------------- Login ---------------------------*/
+        ///////////////////////////////////// Login /////////////////////////////////////
 
         const validation = function() {
             const loginForm = document.querySelector('#login_form');
@@ -392,7 +382,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                 document.querySelector('.loged_user_btn').style.display = "block";
                 document.querySelector('.nav_info_top span').textContent = `Welcome ${logedUser.firstName}`;
 
-                // ---------------- Open User Modal ---------------
+                ///////////////////////////////////// Open User Modal /////////////////////////////////////
                 document.querySelector('.loged_user_btn').addEventListener('click', (e) => {
                     e.preventDefault();
                     
@@ -468,7 +458,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             wlTabSpan()
         };
         
-        ////////////////////////////////////// Display WL Items //////////////////////////////////////
+        ///////////////////////////////////// Display WL Items /////////////////////////////////////
         function displayWishListItem() {
             let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
             const wishListItemsContainer = document.querySelector('.wish_list_content');
@@ -506,7 +496,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             };
         };
 
-        ////////////////////////////////////// Add To Cart Items //////////////////////////////////////////////
+        ///////////////////////////////////// Add To Cart Items /////////////////////////////////////
         function btn(items) {
             const addToCartBtn = document.querySelectorAll('[data-cart="add_to_cart_btn"]');
             
@@ -520,7 +510,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             });
         };
 
-        //////////////////////////////////// cart Numbers //////////////////////////////////
+        ///////////////////////////////////// cart Numbers /////////////////////////////////////
         function setCartNumbers(product) {
             let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
             
@@ -537,7 +527,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             setItems(product);
         };
 
-        ////////////////////////////////////// set Items //////////////////////////////////////
+        ///////////////////////////////////// set Items /////////////////////////////////////
 
         function setItems(product) {
             let cartItems = JSON.parse(localStorage.getItem('userProductsInCart'));
@@ -545,13 +535,13 @@ window.addEventListener( "DOMContentLoaded", function () {
             setingItem(product, cartItems, key);
         };
 
-        ////////////////////////////////////// SPAN ////////////////////////////////////////////
+        ///////////////////////////////////// SPAN /////////////////////////////////////
         function setSpan(number) {
             let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
             span(number, productNumbers);
         };        
 
-        ///////////////////////////////// totalCost //////////////////////////////////////
+        ///////////////////////////////////// totalCost /////////////////////////////////////
         function totalCost(product) {
             let cartCost = localStorage.getItem('userTotalCost');
 
@@ -564,8 +554,8 @@ window.addEventListener( "DOMContentLoaded", function () {
             }                
         }
 
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////// WL Numbers ///////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////// Wish List Numbers /////////////////////////////////////
         function setWLNumbers(change) { 
             let wlNumbers = parseInt(localStorage.getItem('wishListNumbers'));
 
@@ -581,7 +571,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             };            
         };
 
-        // -------------------- Wish List Tab Span -------------------
+        ///////////////////////////////////// Wish List Tab Span /////////////////////////////////////
         function wlTabSpan() {
             let wlNumbers = localStorage.getItem('wishListNumbers');
             const wlSpan = document.querySelector('.wl_span');
@@ -593,7 +583,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             };
         };
 
-        // -------------------- Remove Wish List Item -------------------
+        ///////////////////////////////////// Remove Wish List Item /////////////////////////////////////
         function removeWishListItem() {
             let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
             const removeItemBtn = document.querySelectorAll('.remove_wl_item_btn');
@@ -612,7 +602,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             };
         };
 
-        // -------------------- Remove All Wish List Items -------------------
+        ///////////////////////////////////// Remove All Wish List Items /////////////////////////////////////
         function removeAllWishListItems() {
             document.querySelector('.remove_all_wl').addEventListener('click', ()=> {
                 document.querySelector('.wish_list_content').innerHTML = '';
@@ -623,8 +613,8 @@ window.addEventListener( "DOMContentLoaded", function () {
             });                
         };        
 
-        ///////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////// Open/Close tabs ////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////// Open/Close tabs /////////////////////////////////////
         function openTabs() {
             const tabBtns = document.querySelectorAll('[data-tab]');
             const bindAll = function() {
@@ -651,8 +641,8 @@ window.addEventListener( "DOMContentLoaded", function () {
             bindAll();
         };
 
-        //////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////// Tab Cart Products //////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////// Tab Cart Products /////////////////////////////////////
         function onLoadTabCartNumbers() {
             let productNumbers = localStorage.getItem('userCartNumbers');
             
@@ -664,7 +654,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             };
         };
 
-        //////////////////////////////// TC Numbers ///////////////////////////////////
+        ///////////////////////////////////// TC Numbers /////////////////////////////////////
         function setTabCartNumbers(change) { 
             let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
             // console.log(span())
@@ -683,7 +673,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             };            
         };
 
-        /////////////////////////////////////// TC Span /////////////////////////////////////
+        ///////////////////////////////////// TC Span /////////////////////////////////////
         function tabCartSpan() {
             let productNumbers = localStorage.getItem('userCartNumbers');
             const numSpan = document.querySelector('[data-tab="cart"] span')
@@ -703,7 +693,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             });
         };
 
-        ////////////////////////////////////// totalCost ////////////////////////////////////
+        ///////////////////////////////////// totalCost /////////////////////////////////////
         function userCartTotalCost(product, action) {
             let totalPrice = localStorage.getItem("userTotalCost");
             
@@ -719,7 +709,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             displayCartItem();
         };
 
-        ///////////////////////////////// Display Tab Cart Items /////////////////////////////////
+        ///////////////////////////////////// Display Tab Cart Items /////////////////////////////////////
         function displayCartItem() {
             let cartItems = JSON.parse(localStorage.getItem('userProductsInCart'));
             let totalPrice = parseInt(localStorage.getItem("userTotalCost"));
@@ -762,7 +752,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             };
         };
         
-        ///////////////////////////////// Tab Cart Product Quantity ///////////////////////////////////
+        ///////////////////////////////////// Tab Cart Product Quantity /////////////////////////////////////
         function manageTCQuantity() {
             let cartItems = JSON.parse(localStorage.getItem("userProductsInCart"));
             let decreaseButtons = document.querySelectorAll('.left');
@@ -800,7 +790,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             };
         }
 
-        ///////////////////////////////// Remove Tab Cart Item /////////////////////////////////
+        ///////////////////////////////////// Remove Tab Cart Item /////////////////////////////////////
         function removeTabCartItem() {
             let userProductsInCart = JSON.parse(localStorage.getItem('userProductsInCart'));
             let cartCost = localStorage.getItem("userTotalCost");
@@ -824,7 +814,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             };
         };
 
-        ///////////////////////////////// Remove All User Cart Items /////////////////////////////////
+        ///////////////////////////////////// Remove All User Cart Items /////////////////////////////////////
         function removeAllUserCartItems() {
             document.querySelector('.remove_all_user_cart').addEventListener('click', ()=> {
                 document.querySelector('.cart_list_content').innerHTML = '';
@@ -840,8 +830,8 @@ window.addEventListener( "DOMContentLoaded", function () {
             });                
         };
 
-        ///////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////// Close User Modal //////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////// Close User Modal /////////////////////////////////////
         function closeUserDiv() {
             createUserDiv();
             document.querySelector('.close_user_modal_btn').addEventListener('click', () => {
@@ -852,7 +842,7 @@ window.addEventListener( "DOMContentLoaded", function () {
         };
         closeUserDiv();
         
-        /////////////////////////////// Logout / Login BTNS ///////////////////////////////
+        ///////////////////////////////////// Logout / Login BTNS /////////////////////////////////////
         function logout() {
             document.querySelector('.logout_btn').addEventListener('click', (e) => {
                 e.preventDefault();
@@ -892,8 +882,8 @@ window.addEventListener( "DOMContentLoaded", function () {
         };
         init();
 
-        /////////////////////////////////////////////////////////////////////////////////
-        /*///////////////////////////////// Sign In ///////////////////////////////////*/
+        ///////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////// Sign In /////////////////////////////////////
 
         const validateSignIn = function() {
             const signInForm = document.querySelector('#signin_form');
@@ -1059,7 +1049,7 @@ window.addEventListener( "DOMContentLoaded", function () {
 
         
 
-        /*------------------------------ Contact ----------------------------*/
+        ///////////////////////////////////// Contact /////////////////////////////////////
 
         function sendEmail() {
             const contForm = document.querySelector('.form_contact');
@@ -1191,8 +1181,8 @@ window.addEventListener( "DOMContentLoaded", function () {
     };
     modals();
 
-    //////////////////////////////////////////////////////////////////////////////////////////
-    /*--------------------------------- Product Modal --------------------------------------*/
+    /////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////// Product Modal /////////////////////////////////////
 
     function prodModal() {
         fetch('/json-files/cards-products.json')
@@ -1202,7 +1192,6 @@ window.addEventListener( "DOMContentLoaded", function () {
                     for(let i=0; i<data.length; i++) {                 
                         if(data[i].id === number+1) {
                             cardModal(data[i])
-                            // console.log(data[i])
                         }
                     }
                 }
@@ -1275,7 +1264,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                         mod.innerHTML = info;
                     });
 
-                    /////////////////////////////// Modal Slider /////////////////////////////   
+                    ///////////////////////////////////// Modal Slider /////////////////////////////////////   
                     let col = [];
                     for(let i=0 ; i<product.colors.length; i++) {
                         col += `<img class="thumbnail" src="/${product.colors[i]}">`
@@ -1318,8 +1307,8 @@ window.addEventListener( "DOMContentLoaded", function () {
                         location.reload()
                     }); 
 
-                    //////////////////////////////////////////////////////////////////////////////////
-                    /////////////////////////////////// ADD TO CART //////////////////////////////////
+                    ///////////////////////////////////////////////////////////////////////////////////////
+                    ///////////////////////////////////// ADD TO CART /////////////////////////////////////
                     const addToCartBtn = document.querySelectorAll('[data-cart="add_to_cart_modal_btn"]');
                     
                     addToCartBtn.forEach((btn, i) => {
@@ -1327,16 +1316,16 @@ window.addEventListener( "DOMContentLoaded", function () {
                             if(localStorage.getItem('logedUser') == null) {
                                 setCartNumbers(product);
                                 setTotalCost(product);
-                                prodPopMod(product);
+                                // prodPopMod(product);
                             } else {
                                 setCartNumbers(product);
                                 setTotalCost(product);
-                                prodPopMod(product);
+                                // prodPopMod(product);
                             };
                         });
                     });
 
-                    //////////////////////////////////// cart Numbers //////////////////////////////////
+                    ///////////////////////////////////// cart Numbers /////////////////////////////////////
                     function setCartNumbers(product) {
                         if(localStorage.getItem('logedUser') == null) {
                             let productNumbers = parseInt(localStorage.getItem('localCartNumbers'));
@@ -1361,7 +1350,7 @@ window.addEventListener( "DOMContentLoaded", function () {
 
                     };
 
-                    ////////////////////////////////////// set Items //////////////////////////////////////
+                    ///////////////////////////////////// set Items /////////////////////////////////////
                     function setItems(product) {
                         if(localStorage.getItem('logedUser') == null) { 
                             let cartItems = JSON.parse(localStorage.getItem('localProductsInCart'));
@@ -1374,7 +1363,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                         }
                     };
 
-                    ////////////////////////////////////// SPAN ////////////////////////////////////////////            
+                    ///////////////////////////////////// SPAN /////////////////////////////////////            
                     function setSpan(number) {
                         if(localStorage.getItem('logedUser') == null) { 
                             let productNumbers = parseInt(localStorage.getItem('localCartNumbers'));
@@ -1385,7 +1374,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                         }
                     }
 
-                    /////////////////////////////// totalCost //////////////////////////////////////
+                    ///////////////////////////////////// totalCost /////////////////////////////////////
                     function setTotalCost(product) {
                         if(localStorage.getItem('logedUser') == null) { 
                             let cartCost = localStorage.getItem('localTotalCost');
