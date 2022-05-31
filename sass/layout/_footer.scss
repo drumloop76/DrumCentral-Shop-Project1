@@ -10,7 +10,6 @@
             width: 80%;
             margin: 0 auto;
             padding-bottom: 50px;
-            // background: brown;
             display: flex;
             // flex-wrap: wrap; //!!!!!!!!!!!!!!!!!!!!!!!!
             justify-content: space-between;
@@ -23,7 +22,6 @@
                 flex-direction: column;
             }
             .foot {
-                // background: red;
                 width: 20%;
                 padding: 20px;
                 @include tablet {
@@ -40,7 +38,6 @@
             .footer_media {
                 padding: 0px 20px;
                 width: 30%;
-                // background: rgb(250, 136, 136);
                 @include tablet {
                     width: 100%;
                     text-align: center;
@@ -57,7 +54,6 @@
             justify-content: flex-start;
             margin-top: 30px;
             @include tablet {
-                // background: darkcyan;
                 justify-content: center;
                 margin-bottom: 20px;
             }
@@ -76,7 +72,6 @@
         margin-bottom: 20px;
     }
     .footer_about p {
-        // margin: 20px 0 80px 0;
         color: $color-text-light;
     }
     .footer_info div{

@@ -1,8 +1,6 @@
 'use strict'
 
-// import { setingItem, totalCost, span } from "./lib.js";
-
-/*---------------------------- Burger ----------------------------*/
+///////////////////////////////////////// Burger /////////////////////////////////////////
 
 const navToggler = function () {
     const toggler = document.querySelector('.toggler');
@@ -52,7 +50,7 @@ const navToggler = function () {
 navToggler();
 
 
-/*---------------------------- Dropdown menu ----------------------------*/
+///////////////////////////////////////// Dropdown menu /////////////////////////////////////////
 
 const dropdown = function () {
     const submenuBtn = document.querySelector('.sub-btn');
@@ -76,7 +74,7 @@ const dropdown = function () {
 };
 dropdown();
 
-/*---------------------- Search Btn ------------------------*/
+///////////////////////////////////////// Search Btn /////////////////////////////////////////
 
 const search = function () {
     const searchForm = document.querySelector('.search_form');
@@ -84,25 +82,30 @@ const search = function () {
     const searchBtn = document.querySelector('.search_btn');
     const searchIcon = document.querySelector('.fa-search');
     const searchBox = document.querySelector('.nav_search_box');
-
+    
+    
     // const mediaSizeLaptop = 1024;
     // const mediaSizeTablet = 768;
     const mediaSizeMobile = 500;
 
     searchBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        if (searchInput.classList.contains('open') && window.innerWidth > mediaSizeMobile) {
+        if (searchInput.classList.contains('open') && searchInput.value.length == 0 && window.innerWidth > mediaSizeMobile) {
             searchForm.classList.remove('open');
             searchInput.classList.remove('open');
             searchBtn.classList.remove('open');
             searchIcon.classList.remove('open');
             searchBox.classList.remove('open-tablet-box');
-        } else {
+            console.log('close')
+            searchIcon.style.color = 'black';
+        } else {            
             searchForm.classList.add('open');
             searchInput.classList.add('open');
             searchBtn.classList.add('open');
             searchIcon.classList.add('open');
             searchBox.classList.add('open-tablet-box');
+            document.querySelector('.search_results_div').classList.add('open_search_modal');
+            searchIcon.style.color = 'red';
         };
 
         if (window.innerWidth <= mediaSizeMobile) {
@@ -114,9 +117,109 @@ const search = function () {
         };
     });
 };
+
+function autoSearch() {
+    fetch('/json-files/cards-products.json')
+        .then(results => results.json())
+        .then(data => {
+            let products = [];
+            for(let i=0 ; i<data.length ; i++) {
+                products.push(data[i].name);
+            };            
+
+            function autocomplete(input, products) {
+                let currentFocus;
+                input.addEventListener('input', function(e) {
+                    let inputVal = this.value;                    
+
+                    closeAllLists();
+
+                    if(!inputVal) return false;
+                    currentFocus = -1;
+
+                    function findMatches(keyword, product) {
+                        return product.filter(p => {
+                            const regex = new RegExp(keyword, 'gi');             
+                            return p.match(regex);
+                        });
+                    };
+
+                    function displayMatches() {
+                        const matchArray = findMatches(inputVal, products);
+                        const html = matchArray.map(p => {                        
+                            const regex = new RegExp(inputVal, 'gi');
+                            const prod = p.replace(regex, `<span class="highlight">${inputVal}</span>`);
+                            
+                            return `
+                                <li class="auto">
+                                    <span class="prodName">${prod}</span>                                    
+                                </li>
+                            `
+                        }).join('');                        
+                        document.querySelector('.search_list').innerHTML = html;                        
+                    };
+                    displayMatches();
+                    
+                    document.querySelectorAll('.auto').forEach(li => {
+                        li.addEventListener('click', function(e){
+                            document.querySelector('.fa-search').style.color = 'green';
+                            input.value = this.getElementsByClassName("prodName")[0].outerText;
+                            closeAllLists();
+                        });
+                    });
+
+                    input.addEventListener("keydown", function(e) {
+                        let x = document.querySelector(".search_list");
+                        if(x) x = x.getElementsByTagName("li");
+                        if(e.keyCode == 40) {
+                            currentFocus++;
+                            addActive(x);
+                        } else if (e.keyCode == 38) {
+                            currentFocus--;
+                            addActive(x);
+                        } else if (e.keyCode == 13) {
+                            e.preventDefault();
+                            if (currentFocus > -1) {
+                                if(x) x[currentFocus].click();
+                            };
+                        };
+                    });
+                    function addActive(x) {
+                        if(!x) return false;
+                        removeActive(x);
+                        if(currentFocus >= x.length) currentFocus = 0;
+                        if(currentFocus < 0) currentFocus = (x.length - 1);
+                        x[currentFocus].classList.add("autocomplete-active");
+                    }
+                    function removeActive(x) {
+                        for (var i = 0; i < x.length; i++) {
+                            x[i].classList.remove("autocomplete-active");
+                        };
+                    };
+                });
+
+                function closeAllLists(el) {
+                    const x = document.getElementsByClassName("prodName");
+                    for(let i=0; i<x.length; i++) {
+                        if(el != x[i] && el != input) {
+                            x[i].parentNode.remove();                            
+                            closeAllLists();
+                        };
+                    };
+                };
+
+                document.addEventListener("click", function(e) {
+                    closeAllLists(e.target);
+                });
+            };
+            
+            autocomplete(document.querySelector('.search_input'), products);
+        });
+};
+autoSearch();
 search();
 
-/*---------------------------- Stycky nav ----------------------------*/
+///////////////////////////////////////// Stycky nav /////////////////////////////////////////
 
 const sticky = function() {
     const mediaSizeTablet = 768;
@@ -134,7 +237,7 @@ const sticky = function() {
 };
 sticky();
 
-/*---------------------------- Smooth Scrolling ----------------------------*/
+///////////////////////////////////////// Smooth Scrolling /////////////////////////////////////////
 
 document.querySelector('.nav_list').addEventListener('click', function(e) {
     if(!e.target.classList.contains('scroll')) return
@@ -147,7 +250,7 @@ document.querySelector('.nav_list').addEventListener('click', function(e) {
     e.preventDefault();
 });
 
-/*---------------------------- Scroll Up Btn ----------------------------*/
+///////////////////////////////////////// Scroll Up Btn /////////////////////////////////////////
 
 // Scroll Up
 const sideNav = document.querySelector('.top_btn');
@@ -156,7 +259,7 @@ sideNav.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-/*---------------------------- Reveal Sections ----------------------------*/
+///////////////////////////////////////// Reveal Sections /////////////////////////////////////////
 
 const reveal = function() {
     const sectionTitle = document.querySelectorAll('.title');
@@ -188,7 +291,7 @@ const reveal = function() {
 };
 reveal();
 
-/*---------------------------- Lazy Load ----------------------------*/
+///////////////////////////////////////// Lazy Load /////////////////////////////////////////
 
 const lazyLoad = function() {
     const aboutImgs = document.querySelectorAll('img[data-src]');
@@ -217,7 +320,7 @@ const lazyLoad = function() {
 };
 lazyLoad();
 
-/*---------------------------- About text ----------------------------*/
+///////////////////////////////////////// About text /////////////////////////////////////////
 
 const aboutText = function() {
     const noOfChar = 200;
@@ -259,7 +362,7 @@ function onLoadCartNumbers() {
     };
 };
 onLoadCartNumbers()
-///////////////////////////////////////// SPAN ////////////////////////////////////////////            
+///////////////////////////////////////// SPAN /////////////////////////////////////////            
 function span(number) {
     const numSpan = document.querySelectorAll('.shop span');
 

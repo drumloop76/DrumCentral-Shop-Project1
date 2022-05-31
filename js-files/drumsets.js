@@ -510,7 +510,7 @@ const drumsets = function() {
 
             ///////////////////////////////////// Toggle Contant /////////////////////////////////////
             function toggleItems() {
-                let compareItems = JSON.parse(localStorage.getItem('compareItems'));
+                // let compareItems = JSON.parse(localStorage.getItem('compareItems'));
                 document.querySelector('.compare_products').addEventListener('click', () => {                    
                     // if(Object.values(compareItems).length != 0 || Object.values(compareItems).length != null) {
                         document.querySelectorAll('.itemDescription').forEach(d => {
@@ -518,7 +518,6 @@ const drumsets = function() {
                                 d.classList.remove('read');
                                 document.querySelector('.compare_products').textContent = "Compare";
                             } else {
-                                console.log('no')
                                 d.classList.add('read');
                                 document.querySelector('.compare_products').textContent = "Minimize";
                             };

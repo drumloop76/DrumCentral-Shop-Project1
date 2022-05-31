@@ -1,4 +1,4 @@
-////////////////////////////////////// set Items //////////////////////////////////////
+///////////////////////////////////// set Items /////////////////////////////////////
 export function setingItem(product, cartItems, key) {   
     if(cartItems != null){
         let currentProduct = product.name;
@@ -19,7 +19,7 @@ export function setingItem(product, cartItems, key) {
     localStorage.setItem(key, JSON.stringify(cartItems))
 }
 
-///////////////////////////////////// On Load Cart Numbers ///////////////////////////////////////
+///////////////////////////////////// On Load Cart Numbers /////////////////////////////////////
 export function onLoadCartNumbers(productNumbers) {
     if(productNumbers >= 1) {
         setSpan(productNumbers);
@@ -30,7 +30,7 @@ export function onLoadCartNumbers(productNumbers) {
     };
 };
 
-///////////////////////////////////////// SPAN ////////////////////////////////////////////            
+///////////////////////////////////// SPAN /////////////////////////////////////            
 export function span(number, productNumbers) {
     const numSpan = document.querySelectorAll('.shop span');
     
@@ -44,7 +44,7 @@ export function span(number, productNumbers) {
     });
 };
 
-/////////////////////////////////////// cart Numbers //////////////////////////////////
+///////////////////////////////////// cart Numbers /////////////////////////////////////
 export function cartNumbers(product, productNumbers, key) {
     if(productNumbers) {
         localStorage.setItem(key, productNumbers + 1);
@@ -57,7 +57,7 @@ export function cartNumbers(product, productNumbers, key) {
     setItems(product);
 };
 
-///////////////////////////////// totalCost //////////////////////////////////////
+///////////////////////////////////// totalCost /////////////////////////////////////
 export function totalCost(product, cartCost, tcKey) {
     if(cartCost != null) {
         cartCost = parseInt(cartCost);
@@ -68,7 +68,7 @@ export function totalCost(product, cartCost, tcKey) {
     }                
 }
 
-////////////////////////////// WL & Compare Set Items ///////////////////////////////
+///////////////////////////////////// WL & Compare Set Items /////////////////////////////////////
 export function setListItems(item, storageItems, key) {
     if(storageItems != null){
         if(storageItems[item.name] == undefined) {            
@@ -87,7 +87,7 @@ export function setListItems(item, storageItems, key) {
     localStorage.setItem(key, JSON.stringify(storageItems));
 };
 
-//////////////////////////////////// Add Product Popup ///////////////////////////////////
+///////////////////////////////////// Add Product Popup /////////////////////////////////////
 export function prodPopMod(productName) {
     console.log(productName)
     const popup = document.createElement('div');

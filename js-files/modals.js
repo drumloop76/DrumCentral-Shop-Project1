@@ -1299,12 +1299,14 @@ window.addEventListener( "DOMContentLoaded", function () {
                         slider.scrollLeft += 100;
                     });
                     
+                    /*----------------------- Close Modal Btn------------------------*/
                     document.querySelector('.close_prod_modal_btn').addEventListener('click', () => {
                         document.querySelector('.card_modal').classList.remove('show_prod_modal');
                         slider.scrollLeft = 0;
                         cardOverlay.classList.remove('show_overlay');
                         document.querySelector('body').style.overflow = 'auto';
-                        location.reload()
+                        // location.reload();
+                        clearInputField();
                     }); 
 
                     ///////////////////////////////////////////////////////////////////////////////////////
@@ -1329,13 +1331,13 @@ window.addEventListener( "DOMContentLoaded", function () {
                     function setCartNumbers(product) {
                         if(localStorage.getItem('logedUser') == null) {
                             let productNumbers = parseInt(localStorage.getItem('localCartNumbers'));
-                            let key = 'localCartNumbers'
-                            cartNumbers(product, productNumbers, key)
+                            let key = 'localCartNumbers';
+                            cartNumbers(product, productNumbers, key);
                         } else {
                             let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
-                            let key = 'userCartNumbers'
-                            cartNumbers(product, productNumbers, key)
-                        }
+                            let key = 'userCartNumbers';
+                            cartNumbers(product, productNumbers, key);
+                        };
 
                         function cartNumbers(product, productNumbers, key) {
                             if(productNumbers) {
@@ -1347,50 +1349,49 @@ window.addEventListener( "DOMContentLoaded", function () {
                             };                
                             setItems(product);
                         };
-
                     };
 
                     ///////////////////////////////////// set Items /////////////////////////////////////
                     function setItems(product) {
                         if(localStorage.getItem('logedUser') == null) { 
                             let cartItems = JSON.parse(localStorage.getItem('localProductsInCart'));
-                            const key = 'localProductsInCart'
-                            setingItem(product, cartItems, key)
+                            const key = 'localProductsInCart';
+                            setingItem(product, cartItems, key);
                         } else {
                             let cartItems = JSON.parse(localStorage.getItem('userProductsInCart'));
-                            const key = 'userProductsInCart'
-                            setingItem(product, cartItems, key)
-                        }
+                            const key = 'userProductsInCart';
+                            setingItem(product, cartItems, key);
+                        };
                     };
 
                     ///////////////////////////////////// SPAN /////////////////////////////////////            
                     function setSpan(number) {
                         if(localStorage.getItem('logedUser') == null) { 
                             let productNumbers = parseInt(localStorage.getItem('localCartNumbers'));
-                            span(number, productNumbers)
+                            span(number, productNumbers);
                         } else {
                             let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
-                            span(number, productNumbers)
-                        }
-                    }
+                            span(number, productNumbers);
+                        };
+                    };
 
                     ///////////////////////////////////// totalCost /////////////////////////////////////
                     function setTotalCost(product) {
                         if(localStorage.getItem('logedUser') == null) { 
                             let cartCost = localStorage.getItem('localTotalCost');
-                            const tcKey = "localTotalCost"
-                            totalCost(product, cartCost, tcKey)
+                            const tcKey = "localTotalCost";
+                            totalCost(product, cartCost, tcKey);
                         } else {
                             let cartCost = localStorage.getItem('userTotalCost');
-                            const tcKey = "userTotalCost"
-                            totalCost(product, cartCost, tcKey)
-                        }
-                    }
+                            const tcKey = "userTotalCost";
+                            totalCost(product, cartCost, tcKey);
+                        };
+                    };
                 };
 
                 const openProdModBtn = document.querySelectorAll('.open_prod_modal');
                 const cardOverlay = document.querySelector('#overlay_cards');
-                
+                //////////////////////////////// Open product modal /////////////////////////////
                 openProdModBtn.forEach((btn, i) => {
                     btn.addEventListener('click', () => {
                         productId(i);
@@ -1399,14 +1400,37 @@ window.addEventListener( "DOMContentLoaded", function () {
                         document.querySelector('body').style.overflow = 'hidden';
                     });
                 });
-
-
+                ////////////////////////// Open modal with search form btn /////////////////////// 
+                document.querySelector('.search_btn').addEventListener('click', () => {
+                    const inputValue = document.querySelector('.search_input').value;
+                    if(inputValue != 0) {
+                        for(let i=0; i<data.length; i++) {                 
+                            if(data[i].name === inputValue) {
+                                let number = data[i].id;
+                                productId(number - 1);
+                            };
+                        };
+                        document.querySelector('.card_modal').classList.add('show_prod_modal');
+                        cardOverlay.classList.add('show_overlay');
+                        document.querySelector('body').style.overflow = 'hidden';
+                    };
+                });
+                ///////////////////////////// Close product modal with overlay //////////////////////////
                 cardOverlay.addEventListener('click', function () {
                     document.querySelector('.card_modal').classList.remove('show_prod_modal');
                     cardOverlay.classList.remove('show_overlay');
                     document.querySelector('body').style.overflow = 'auto';
-                    location.reload()
+                    // location.reload()
+                    clearInputField();
                 });
+
+                function clearInputField() {
+                    const inputValue = document.querySelector('.search_input').value;
+                    if(inputValue != 0) {
+                        document.querySelector('.search_input').value = '';
+                        document.querySelector('.fa-search').style.color = 'red';
+                    };
+                };
             });           
     };
     prodModal();

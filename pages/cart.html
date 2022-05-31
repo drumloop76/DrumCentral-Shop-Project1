@@ -84,10 +84,17 @@
                     </li>
                 </ul>
                 <div class="nav_search_box">
-                    <form class="search_form" action="" method="">
-                        <input class="search_input" type="search" name="find" id="find" placeholder="Enter Your Search" onclick="stopProp()">
-                        <button class="search_btn" type="submit"><i class="fas fa-search"></i></button>
+                    <form class="search_form" action="" method="" autocomplete="off">
+                        <input class="search_input" type="search" name="find" id="find" placeholder="Search products">
+                        <button class="search_btn" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </form>
+                    <div class="search_results_div">
+                        <ul class="search_list">
+                            
+                        </ul>
+                    </div>
                 </div>
 
                 <a class="login_logout_link" alt="" data-modal-target="#loginModal">
@@ -146,7 +153,6 @@
 
         <section class="drumset_hero cart_hero">
             <div class="hero_container">
-                <!-- <img class="hero_imgs" src="/images/imgs-hero/drums-hero.jpg" alt=""> -->
                 <div class="hero_content">
                     <h1>Shopping Cart</h1>
                 </div>
@@ -222,10 +228,10 @@
                     <h2>Stay connected</h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium cupiditate eius inventore
                         veniam quasi nisi quod doloribus dolores repellendus minima.</p>
-                    <form action="">
+                    <!-- <form action="">
                         <input type="email" name="" id="">
                         <button type="submit">Sign up</button>
-                    </form>
+                    </form> -->
                     <div class="footer_btns">
                         <button data-contact-target="#contactModal">Contact</button>
                         <button data-modal-target="#loginModal">Login</button>
@@ -236,7 +242,6 @@
                 <p>Copyright@Vladimir.Stojkovic.2022</p>
             </div>
         </div>
-
     </div>
 
     <div id="overlay"></div>
