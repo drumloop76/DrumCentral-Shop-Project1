@@ -17,6 +17,12 @@
     }
 }
 
+@mixin vide {
+    @media screen and (max-width:1400px) {
+        @content;
+    }
+}
+
 @mixin desktop {
     @media screen and (max-width:1200px) {
         @content;

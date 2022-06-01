@@ -1,0 +1,304 @@
+@mixin checkout {
+    .checkout_side_nav,
+    .checkout_btn_container {
+        display: none;
+    }
+    .checkout_hero {
+        // background-image: url('/images/imgs-hero/cymbals_page-hero.jpg');
+    }
+    .checkout_page {
+        position: static;
+        width: 100%;
+        .content {
+            width: 80%;
+            max-width: 1500px;
+            margin: 0 auto;
+            display: flex;
+            @include vide {
+                width: 95%;
+            }
+            @include tablet {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+    .content .basket {
+        width: 50%;
+        padding: 0 1%;
+        @include tablet {
+            width: 100%;
+            padding: 20px 5%;
+        }
+        h1 {
+            padding-left: 10%;
+            font-size: 40px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: $color-product-links-hover;
+            text-transform: uppercase;
+            text-shadow: $text-shadow;
+            margin: 40px 0;
+        }
+        .edit_cont {
+            width: 100%;
+            padding: 0 15px;
+            margin-bottom: 20px;
+            text-align: right;
+            .edit_products {
+                font-size: 17px;
+                font-weight: 500;
+                padding: 5px 15px;
+                margin-bottom: 20px;
+                text-align: right;
+                color: $color-text-dark;
+                &:hover {
+                    background: $color-text-dark;
+                    color: $color-text-light;
+                }
+            }
+        }
+        
+    }
+    .basket .basket_content {
+        width: 100%;
+        @include tablet {
+            padding: 0 10px;
+        }
+        .basket_products,
+        .total_content {
+            width: 100%;
+            .basket_product_cont{
+                width: 100%;
+                height: 70px;
+                padding: 10px 0 10px 20px;
+                margin-bottom: 15px;
+                display: flex;
+                border-bottom: 1px solid rgb(173, 173, 173);
+                @include desktop {
+                    padding-left: 10px;
+                }
+                &:last-child {
+                    border-bottom: 2px solid rgb(29, 29, 29);
+                }
+                // &:hover {
+                //     // background: rgb(238, 238, 238);
+                // }                
+            }
+            .basket_product_info,
+            .total_product_info {
+                position: relative;
+                width: 70%;
+                @include desktop {
+                    width: 65%;
+                }
+                @include laptop {
+                    width: 72%;
+                }
+                .product_name {
+                    font-size: 19px;
+                    font-weight: 500;
+                    @include laptop {
+                        font-size: 18px;
+                    }
+                }
+                .total_header {
+                    font-size: 25px;
+                    font-weight: 600;
+                }
+                span {
+                    position: absolute;
+                    bottom: 0;
+                    &.green {
+                        color: $color-inStock;
+                    }
+                    &.yellow {
+                        color: $color-outStock;
+                    }
+                }
+            }
+            .basket_product_quantity,
+            .basket_product_quantity {
+                width: 10%;
+                text-align: center;
+                @include laptop {
+                    width: 10%;
+                }
+                @include tablet {
+                    width: 10%;
+                }
+            }
+            .total_quantity,
+            .total_price {
+                line-height: 30px;
+            }
+            .basket_price_div,
+            .total_price_div {
+                width: 35%;
+                padding: 0 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                @include desktop {                    
+                    width: 35%;
+                    padding-right: 10px;
+                }
+                @include laptop {
+                    justify-content: flex-end;
+                    width: 22%;
+                    padding: 0 5px;
+                }
+                @include tablet {
+                    width: 25%;
+                    padding-right: 10px;
+                }
+                .price_single {
+                    @include laptop {
+                        display: none;
+                    }
+                    @include tablet {
+                        // display: block;
+                    }
+                }
+                .price_full {
+                    margin-left: 20px;
+                    @include desktop {
+                        text-align: right;
+                    }
+                    @include laptop {
+                        margin-left: 0;
+                    }
+                    // @include tablet {
+                    //     // margin-left: 10px;
+                    // }
+                }
+                .total_price {
+                    font-weight: 500;
+                }
+            }
+        }
+        .total_content {
+            display: flex;
+            height: 50px;
+            padding: 10px 0 10px 20px;
+        }        
+    }
+    /*-------------------------  form  -------------------------*/
+    .content .buy_form_container {
+        width: 50%;
+        padding: 40px 40px 0 40px;
+        @include desktop {
+            padding: 60px 20px 0 20px;
+        }
+        @include laptop {
+            padding: 60px 10px 0 10px;
+        }
+        @include tablet {
+            width: 100%;
+            padding: 60px 40px 0 40px;
+        }
+        .user_login {
+            height: 80px;
+            padding: 0 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 30px;
+            
+            h3 {
+                margin-bottom: 15px;
+            }
+            button {
+                position: relative;
+                @include modalSubmitBtn;
+                width: 150px;
+            }
+        }
+        .buy_form_header{
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .buy_form_wrapper {
+            padding: 30px;
+            border-radius: 20px;
+            @include desktop {
+                padding: 20px;
+            }
+            @include laptop {
+                padding: 2%;
+            }
+        }
+    }
+    .buy_form .form_control,
+    .zip_town_container div {
+        position: relative;
+        margin-bottom: 5px;
+        @include desktop {
+            padding: 0;
+        }
+        // @include laptop {
+            // flex-direction: column;
+        // }
+        label,
+        .zip_town_container label {
+            position: absolute;
+            width: fit-content;
+            padding-left: 10px;
+            width: 80%;
+            transition: all 300ms;            
+            @include laptop {
+                width: 90%;
+            }
+            &.move_label {
+                font-size: 10px;
+                padding-left: 0;
+                transform: translateY(-25px);
+                transition: all 300ms;
+            }
+        }
+        input {
+            background: transparent;
+            width: 80%;
+            transition: all 300ms ease;
+            z-index: 10;
+            @include laptop {
+                width: 90%;
+            }            
+        }        
+    }
+    .buy_form .zip_town_container {
+        @include desktop {
+            // padding: 0 5px;
+        }
+        div{
+            margin: 0 3px;
+            @include desktop {
+                // padding: 3px;
+            }
+            label {
+                display: block;
+                width: 100%;
+            }
+            .form_control {
+                width: 100%;
+                input {
+                    width: 100%;
+                }
+            }
+        }      
+    }
+    .submit_btn {
+        position: relative;
+        @include modalSubmitBtn;
+        width: 200px;
+        margin-top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+
+
+   
+}

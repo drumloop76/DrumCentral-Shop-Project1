@@ -8,12 +8,10 @@
         integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/css/style.css">
-    <script src="/json-files/cards-products.json"></script>
-    <!-- <script defer src="/js-files/drumsets.js"></script> -->
-    <script defer src="/main.js"></script>
+    <script defer src="/main.js" type="module"></script>
     <script defer src="/js-files/modals.js" type="module"></script>
-    <script defer src="/js-files/cart.js" type="module"></script>
-    <title>DrumCentral Shop - Cart</title>
+    <script defer src="/js-files/checkout.js"></script>
+    <title>DrumCentral Checkout</title>
 </head>
 <body>
     <div class="wrapper">           
@@ -104,7 +102,7 @@
                     <i class="fa-solid fa-user-check"></i>
                 </a>
                 
-                <a href="#" class="shop open_cart">
+                <a href="cart.html" class="shop open_cart">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span></span>
                 </a>
@@ -128,7 +126,7 @@
 
         <!-- ----------------------- Side-nav -------------------- -->
 
-        <div class="side_nav side_nav_cart">
+        <div class="side_nav checkout_side_nav">
             <div class="side_media">
                 <a href="https://sr-rs.facebook.com/" target="_blank">
                     <i class="fab fa-facebook-square"></i>
@@ -139,47 +137,126 @@
                 <a href="https://www.instagram.com/" target="_blank">
                     <i class="fab fa-instagram-square"></i>
                 </a>
-                <a href="#" class="side_shop shop open_cart">
+                <a href="cart.html" class="shop side_shop open_cart">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span></span>
                 </a>
             </div>
         </div>
-        <div class="btn_container btn_container_cart">
+        <div class="btn_container checkout_btn_container">
             <button class="top_btn"><i class="fa-solid fa-angle-up"></i></button>
         </div>
 
         <!-- ---------------------------- Drumset Hero ------------------------- -->
 
-        <section class="drumset_hero cart_hero">
+        <section class="drumset_hero checkout_hero">
             <div class="hero_container">
-                <div class="hero_content">
-                    <h1>Shopping Cart</h1>
+                <div class="image_slider_box">
+                    <!-- --------- JS ---------- -->
                 </div>
+                
+                <div class="hero_content">
+                    <h1>Checkout</h1>
+                </div>                
             </div>
         </section>
 
-        <!-- ---------------------------- Cart Items --------------------------- -->
+        <!-- ------------------------------ Content ----------------------------- -->
 
-        <section class="cart_section">
-            
-            <div class="cart">
-                <div class="empty_cart">
-                    <h1>Your shopping basket is empty at the moment.</h1>
-                    <div class="empty_cart_img_box">
-                        <img src="\images\empy_cart.png" alt="">
+        <section class="checkout_page">
+            <div class="content">
+                <div class="basket">
+                    <h1>Shopping Basket</h1>
+                    <div class="edit_cont">
+                        <a href="/pages/cart.html" class="edit_products">Edit</a>
+                    </div>
+                    <div class="basket_content">
+                        <div class="basket_products">                            
+                            <!-- JS -->
+                        </div>
+
+                        <div class="total_content">                            
+                                <div class="total_product_info">
+                                    <p class="product_name total_header">Total</p>
+                                </div>
+                                <div class="basket_product_quantity total_quantity">
+                                    <span></span>
+                                </div>
+                                <div class="total_price_div">
+                                    <span class="price_single"></span>
+                                    <span class="price_full total_price"></span>
+                                </div>                            
+                        </div>
                     </div>
                 </div>
-                <div class="cart_items_container">
-                    <!-- --------- JS ---------- -->
-                </div>
-                <div class="price_container">
-                    <div class="total_price_container">
-                        <p class="total_price_title">Total price</p>
-                        <span class="total_price_value">€ 0</span>
-                        <a href="checkout.html" class="checkout_btn">Checkout</a>
+                <div class="buy_form_container">
+                    <div class="user_login">
+                        <h3 class="user_header">Do you have login account?</h3>
+                        <button  class="login_logout_link" data-modal-target="#loginModal">Log In</button>
                     </div>
-                </div>        
+                    <h3 class="buy_form_header">If you dont have account, please fill the form:</h3>
+                    <div class="buy_form_wrapper">
+                        <form class="buy_form" id="buy_form" action="/" novalidate autocomplete="off">
+
+                            <div class="form_control">
+                                <label for="signin_first_name">First Name:</label>
+                                <input type="text" name="buy_first_name" id="buy_first_name">
+                                
+                                <span class="verify"></span>
+                            </div>
+
+                            <div class="form_control">
+                                <label for="buy_last_name">Last Name:</label>
+                                <input type="text" name="buy_last_name" id="buy_last_name">
+                                <span class="verify"></span>
+                            </div>
+
+                            <div class="form_control">
+                                <label for="buy_email">Email: <span>*</span></label>
+                                <input type="email" name="buy_email" id="buy_email" required>
+                                <span class="verify"></span>
+                            </div>
+
+                            <div class="form_control">
+                                <label for="buy_phone">Phone Number: <span>*</span></label>
+                                <input type="tel" name="buy_phone" id="buy_phone" required>
+                                
+                                <span class="verify"></span>
+                            </div>
+                            
+                            <div class="form_control">
+                                <label for="buy_street">Street and Number: <span>*</span></label>
+                                <input type="text" name="buy_street" id="buy_street">
+                                <span class="verify"></span>
+                            </div>
+
+                            <div class="zip_town_container">
+                                <div>                                    
+                                    <div class="form_control">
+                                        <label for="buy_zip">Zip/Postcode: <span>*</span></label>
+                                        <input type="text" name="buy_zip" id="buy_zip" required>
+                                        <span class="verify"></span>
+                                    </div>
+                                </div>
+                                <div>                                    
+                                    <div class="form_control">
+                                        <label for="buy_town">Town: <span>*</span></label>
+                                        <input type="text" name="buy_town" id="buy_town" required>
+                                        <span class="verify"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form_control">
+                                <label for="buy_country">Country: <span>*</span></label>
+                                <input type="email" name="buy_country" id="buy_country" required>
+                                <span class="verify"></span>
+                            </div>
+
+                            <button class="submit_btn" type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </section>
 
