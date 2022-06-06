@@ -579,34 +579,28 @@ const drumsets = function() {
             /////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////// Wish List /////////////////////////////////////
             function wishList() {        
-                const parentDiv = document.querySelectorAll('.description');
-                
+                const parentDiv = document.querySelectorAll('.description');                
                 let wishListNumbers = JSON.parse(localStorage.getItem('wishListNumbers'));
                 
                 parentDiv.forEach(p => {
                     p.querySelector('.wish_list_btn').addEventListener('click', (e) => {
-                        console.log(e.target)
                         let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
                         let targetName = p.firstElementChild.textContent;
                         let arr = [];
-                        console.log(targetName, localStorage.getItem('logedUser') != null, wishListNumbers == null, wishListNumbers == 0)
 
-                        if(localStorage.getItem('logedUser') != null && wishListNumbers == null) {
-                            console.log(targetName, localStorage.getItem('logedUser') != null)
+                        if(localStorage.getItem('logedUser') != null && wishListNumbers == null) {                            
                             arr.push(targetName);
                             setTarget(targetName);
                             p.querySelector('.fa-regular.fa-heart').style.display = 'none';
                             p.querySelector('.fa-solid.fa-heart').classList.add('showHeart');                            
                         };
                         
-                        if(localStorage.getItem('logedUser') != null && wishListItems != null) {
-                            console.log('bbbbbbb')
+                        if(localStorage.getItem('logedUser') != null && wishListItems != null) {                            
                             Object.values(wishListItems).map(item => {
                                 arr.push(item.name);
                             });
                             
                             if(!arr.includes(targetName)) {
-                                console.log('ccccccc')
                                 setTarget(targetName);
                                 p.querySelector('.fa-regular.fa-heart').style.display = 'none';
                                 p.querySelector('.fa-solid.fa-heart').classList.add('showHeart');
@@ -614,7 +608,6 @@ const drumsets = function() {
                         };
 
                         if(arr.includes(targetName)) {
-                            console.log('ddddddd')
                             removeWishListItem(targetName);
                             p.querySelector('.fa-regular.fa-heart').style.display = 'block';
                             p.querySelector('.fa-solid.fa-heart').classList.remove('showHeart');

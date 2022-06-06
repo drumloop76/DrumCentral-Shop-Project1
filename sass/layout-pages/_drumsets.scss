@@ -108,7 +108,7 @@
         }
     }
 
-    ////////////////// Filters /////////////////////
+    ///////////////////////////// Filters //////////////////////////
     .selection {
         width: 100%;
         margin: 20px 0;
@@ -217,8 +217,7 @@
                 width: 20px;
                 right: -20px;
                 cursor: pointer;
-            }
-            
+            }            
         }
         .sort_products_container {
             position: absolute;
@@ -284,7 +283,6 @@
         }
         &:hover {
             box-shadow: $product-box-shadow;
-            // @include boxShadow;
             background: $bg-product-container-hover;
             transition: 300ms ease-in-out;
         }
@@ -377,7 +375,7 @@
                 }
                 @include tablet {
                     margin-right: 50px;
-                 }
+                }
             }
         }
         .action {
@@ -430,9 +428,6 @@
                 visibility: hidden;
                 cursor: none;
                 transition: all 300ms ease-out;
-                // &.loged-color {
-                //     // color: $color-hover-media-nav;
-                // }
                 &.show-span {
                     opacity: 1;
                     visibility: visible;
@@ -475,8 +470,7 @@
             @include tablet {
                 font-size: 22px;
             }
-        }
-        
+        }        
     }
     .price a {
         color: $color-product-links;
@@ -487,7 +481,6 @@
             color: $color-red;
         }
         .fa-cart-arrow-down {
-            // color: $bg-product-container;
             font-size: 45px;
             @include desktop {
                 font-size: 40px;
@@ -498,7 +491,7 @@
         }
     }
     
-    // /////////////////////// Compare products modal ///////////////////////
+    /////////////////////////// Compare products modal ///////////////////////
 
     .product_compare_box {
         position: fixed;
@@ -535,7 +528,6 @@
                 width: 80%;
                 display: flex;
                 .chose_text {
-                    // background: rgb(247, 181, 181);
                     width: 100%;
                     font-size: 18px;
                     font-weight: 500;
@@ -563,7 +555,6 @@
         }
     }
     .selected_item {
-        // background: darkcyan;
         position: relative;
         width: 32%;
         min-height: 220px;
@@ -604,8 +595,7 @@
             text-align: center;
             margin: 5px 0;
         }
-        .itemDescription {
-            
+        .itemDescription {            
             opacity: 0;
             visibility: hidden;
             height: 0;
@@ -623,17 +613,13 @@
             bottom: 0px;
             left: 50%;
             transform: translateX(-50%);
-            // text-align: center;
             font-size: 16px;
             font-weight: 500;
             padding: 5px 10px;
             display: block;
             bottom: 0;
-            // margin: 0 auto;
         }
     }
 
     ///////////////////////// Favourite Items ////////////////////////////
-    
-    
 }

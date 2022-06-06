@@ -11,6 +11,7 @@
     <script defer src="/main.js" type="module"></script>
     <script defer src="/js-files/modals.js" type="module"></script>
     <script defer src="/js-files/checkout.js"></script>
+    <script defer src="/js-files/product-modal.js" type="module"></script>
     <title>DrumCentral Checkout</title>
 </head>
 <body>
@@ -174,89 +175,371 @@
                         <div class="basket_products">                            
                             <!-- JS -->
                         </div>
-
-                        <div class="total_content">                            
-                                <div class="total_product_info">
-                                    <p class="product_name total_header">Total</p>
+                        <div class="total_content">
+                            <div class="basket_product_cont total_cont">
+                                <div class="basket_product_info">
+                                    <p class="total_header total_ship_header">shipping costs</p>
                                 </div>
-                                <div class="basket_product_quantity total_quantity">
-                                    <span></span>
+                                <div class="basket_product_quantity">
+                                    <span class="total_quantity"></span>
                                 </div>
-                                <div class="total_price_div">
-                                    <span class="price_single"></span>
-                                    <span class="price_full total_price"></span>
-                                </div>                            
+                                <div class="basket_price_div">
+                                    <span class="price_full shipping_costs_full"></span>
+                                </div>
+                            </div>
+                            <div class="basket_product_cont total_cont ">
+                                <div class="basket_product_info total_main_info">
+                                    <p class="total_header total_main_header">Total</p>
+                                </div>
+                                <!-- <div class="basket_product_quantity"> -->
+                                    <!-- <span class=""></span> -->
+                                <!-- </div> -->
+                                <div class="basket_price_div total_main_div">
+                                    <span class="total_price"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- !!!!!!!!!!!!!!!!!!! -->
+                    <h3 class="options_content_header">Method of Payment</h3>
+                    <div class="options_content">
+                        <div class="option_container">
+                            <button class="accordion_btn radio_bank_btn" aria-haspopup="true" aria-expanded="false">
+                                <label class="radio_container">Bank Transfer
+                                    <input type="radio" name="" id="">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </button>
+                            <div class="panel panel_bank">
+                                <div>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, cupiditate. Sed
+                                        soluta hic ratione quo possimus sapiente magnam maiores id fugiat quam veritatis
+                                        quaerat qui deleniti, veniam cupiditate! Laboriosam et dolores minima
+                                        perferendis quae nostrum dolorem dolor!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="option_container">
+                            <img class="logo" src="/images/checkout/accordian-pp.png" alt="">
+                            <button class="accordion_btn radio_bank_btn" aria-haspopup="true" aria-expanded="false">
+                                <label class="radio_container">PayPal
+                                    <input type="radio" name="" id="">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </button>
+                            <div class="panel panel_bank">
+                                <div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, doloremque
+                                        nostrum!
+                                        Neque vero, commodi, non iure vel dolore rerum ab enim, quo deleniti ipsam
+                                        placeat
+                                        quasi.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="option_container">
+                            <img class="logo_cards" src="/images/checkout/accordian-cards.png">
+                            <button class="accordion_btn radio_bank_btn" aria-haspopup="true" aria-expanded="false">
+                                <label class="radio_container">Credit/Debit Card
+                                    <input type="radio" name="" id="">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </button>
+                            <div class="panel panel_bank credit_card_panel">
+                                <!-- <div> -->
+                                    <!-- <form action="" class="credit_cards" novalidate>
+                                        <div class="form_control">
+                                            <label for="frmCCNum">Card Number</label>
+                                            <input type="text" id="user_card_number_input" placeholder="0000 0000 0000 0000" data-slots="0" data-accept="\d" require>
+                                            <span class="verify"></span>
+                                        </div>
+                                        <div class="date_container">
+                                            <div>
+                                                <div class="form_control">
+                                                    <label for="month">Month</label>
+                                                    <input type="number" id="month" name="month" min="1" max="31">
+                                                    <span class="verify"></span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="form_control">
+                                                    <label for="year">Year</label>
+                                                    <input type="text" name="year" id="year" min="2022" max="2050">
+                                                    <span class="verify"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form_control">
+                                            <label for="card_security_code">Security Code</label>
+                                            <input type="number" name="card_security_code" id="card_security_code">
+                                            <span class="verify"></span>
+                                        </div>
+                                        <div class="form_control">
+                                            <label for="card_holder">Card Holder</label>
+                                            <input type="text" name="card_holder" id="card_holder">
+                                            <span class="verify"></span>
+                                        </div>
+                                    </form> -->
+                                <!-- </div> -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /////////////////////// -->
+                    <h3 class="options_content_header">Information on your purchase</h3>
+                    <div class="options_content">
+                        <div class="option_container">
+                            <button class="accordion_btn info_btn" aria-haspopup="true" aria-expanded="false">
+                                <span id="header_span">Shipping Costs</span>
+                                <div class="plus_animation closed">
+                                    <div class="horizontal"></div>
+                                    <div class="vertical"></div>
+                                </div>
+                            </button>
+                            <div class="panel panel_cost">
+                                <div>
+                                    <img src="/images/checkout/accordian-cost.png" alt="">
+                                    <div class="table_div">
+                                        <table>
+                                            <tr>
+                                              <th class="head_text">Number of products</th>
+                                              <th>< 5</th>
+                                              <th>5 - 10</th>
+                                              <th>> 10</th>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                              <td>€ 15</td>
+                                              <td>€ 35</td>
+                                              <td>€ 55</td>
+                                            </tr>
+                                            
+                                            </tr>
+                                          </table>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option_container">
+                            <button class="accordion_btn info_btn" aria-haspopup="true" aria-expanded="false">
+                                <span id="header_span">Highest Payment Security</span>
+                                <div class="plus_animation closed">
+                                    <div class="horizontal"></div>
+                                    <div class="vertical"></div>
+                                </div>
+                            </button>
+                            <div class="panel panel_security">
+                                <div>
+                                    <img src="/images/checkout/accordian-security.png" alt="">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, doloremque
+                                        nostrum!
+                                        Neque vero, commodi, non iure vel dolore rerum ab enim, quo deleniti ipsam
+                                        placeat
+                                        quasi.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option_container">
+                            <button class="accordion_btn info_btn" aria-haspopup="true" aria-expanded="false">
+                                <span id="header_span">30-Day Money-Back Guarantee</span>
+                                <div class="plus_animation closed">
+                                    <div class="horizontal"></div>
+                                    <div class="vertical"></div>
+                                </div>
+                            </button>
+                            <div class="panel panel_guarantee">
+                                <div>
+                                    <img src="/images/checkout/accordian-guarantee.png" alt="">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, doloremque
+                                        nostrum!
+                                        Neque vero, commodi, non iure vel dolore rerum ab enim, quo deleniti ipsam
+                                        placeat
+                                        quasi.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option_container">
+                            <button class="accordion_btn info_btn" aria-haspopup="true" aria-expanded="false">
+                                <span id="header_span">3-Year Warranty</span>
+                                <div class="plus_animation closed">
+                                    <div class="horizontal"></div>
+                                    <div class="vertical"></div>
+                                </div>
+                            </button>
+                            <div class="panel panel_warranty">
+                                <div>
+                                    <img src="/images/checkout/accordian-warranty.png" alt="">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, doloremque
+                                        nostrum!
+                                        Neque vero, commodi, non iure vel dolore rerum ab enim, quo deleniti ipsam
+                                        placeat
+                                        quasi? Dolores autem excepturi quasi nobis culpa dignissimos facilis, eaque
+                                        molestias.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- !!!!!!!!!!!!!!!!!!! -->
                 </div>
-                <div class="buy_form_container">
+
+                <div class="main_form_container">
                     <div class="user_login">
                         <h3 class="user_header">Do you have login account?</h3>
                         <button  class="login_logout_link" data-modal-target="#loginModal">Log In</button>
                     </div>
-                    <h3 class="buy_form_header">If you dont have account, please fill the form:</h3>
-                    <div class="buy_form_wrapper">
-                        <form class="buy_form" id="buy_form" action="/" novalidate autocomplete="off">
+                    
+                    <span class="legend">Billing form:</span>
+                    <div class="billing_form_wrapper">
+                        <form class="billing_form" id="billing_form" novalidate autocomplete="off">
 
                             <div class="form_control">
-                                <label for="signin_first_name">First Name:</label>
-                                <input type="text" name="buy_first_name" id="buy_first_name">
-                                
-                                <span class="verify"></span>
+                                <label for="billing_first_name">First Name:</label>
+                                <div class="input_container">
+                                    <input class="bill" type="text" name="billing_first_name" id="billing_first_name">
+                                    <span class="verify"></span>
+                                </div>
                             </div>
 
                             <div class="form_control">
-                                <label for="buy_last_name">Last Name:</label>
-                                <input type="text" name="buy_last_name" id="buy_last_name">
-                                <span class="verify"></span>
+                                <label for="billing_last_name">Last Name:</label>
+                                <div class="input_container">
+                                    <input class="bill" type="text" name="billing_last_name" id="billing_last_name">
+                                    <span class="verify"></span>
+                                </div>
                             </div>
 
                             <div class="form_control">
-                                <label for="buy_email">Email: <span>*</span></label>
-                                <input type="email" name="buy_email" id="buy_email" required>
-                                <span class="verify"></span>
+                                <label for="billing_email">Email:</label>
+                                <div class="input_container">
+                                    <input class="bill" type="email" name="billing_email" id="billing_email">
+                                    <span class="verify"></span>
+                                </div>
                             </div>
 
                             <div class="form_control">
-                                <label for="buy_phone">Phone Number: <span>*</span></label>
-                                <input type="tel" name="buy_phone" id="buy_phone" required>
-                                
-                                <span class="verify"></span>
+                                <label for="billing_phone">Phone Number (optional)</label>
+                                <div class="input_container">
+                                    <input class="bill" type="tel" name="billing_phone" id="billing_phone">
+                                    <span class="verify"></span>
+                                </div>
                             </div>
                             
                             <div class="form_control">
-                                <label for="buy_street">Street and Number: <span>*</span></label>
-                                <input type="text" name="buy_street" id="buy_street">
-                                <span class="verify"></span>
+                                <label for="billing_street">Street and Number:</label>
+                                <div class="input_container">
+                                    <input class="bill" type="text" name="billing_street" id="billing_street">
+                                    <span class="verify"></span>
+                                </div>
                             </div>
 
                             <div class="zip_town_container">
                                 <div>                                    
                                     <div class="form_control">
-                                        <label for="buy_zip">Zip/Postcode: <span>*</span></label>
-                                        <input type="text" name="buy_zip" id="buy_zip" required>
-                                        <span class="verify"></span>
+                                        <label for="billing_zip">Zip/Postcode:</label>
+                                        <div class="input_container">
+                                            <input class="bill" type="text" name="billing_zip" id="billing_zip">
+                                            <span class="verify ver_zip"></span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div>                                    
                                     <div class="form_control">
-                                        <label for="buy_town">Town: <span>*</span></label>
-                                        <input type="text" name="buy_town" id="buy_town" required>
-                                        <span class="verify"></span>
+                                        <label for="billing_town">Town:</label>
+                                        <div class="input_container">
+                                            <input class="bill" type="text" name="billing_town" id="billing_town">
+                                            <span class="verify ver_zip"></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form_control">
-                                <label for="buy_country">Country: <span>*</span></label>
-                                <input type="email" name="buy_country" id="buy_country" required>
-                                <span class="verify"></span>
+                                <div class="input_container">
+                                    <select class="bill" name="billing_country" id="billing_country">
+                                        <option value="">Select Country:</option>
+                                    </select>
+                                    <span class="verify"></span>
+                                </div>
                             </div>
 
-                            <button class="submit_btn" type="submit">Submit</button>
+                            <!-- <button class="billing_submit_btn" type="button">Submit</button> -->
+                        </form>
+                    </div>
+
+                    <div class="checkbox_group">
+                        <input type="checkbox" class="checkbox">
+                        <span class="mark">Enter different delivery address</span>
+                    </div>
+
+                    <span class="legend delivery_legend">Delivery Address</span>
+                    <div class="delivery_form_wrapper">
+                        <form class="delivery_form" id="delivery_form" novalidate autocomplete="off">
+
+                            <div class="form_control">
+                                <label for="delivery_first_name">First Name:</label>
+                                <div class="input_container">
+                                    <input class="del" type="text" name="delivery_first_name" id="delivery_first_name">
+                                    <span class="verify"></span>
+                                </div>
+                            </div>
+
+                            <div class="form_control">
+                                <label for="delivery_last_name">Last Name:</label>
+                                <div class="input_container">
+                                    <input class="del" type="text" name="delivery_last_name" id="delivery_last_name">
+                                    <span class="verify"></span>
+                                </div>
+                            </div>
+
+                            <div class="form_control">
+                                <label for="delivery_street">Street and Number:</label>
+                                <div class="input_container">
+                                    <input class="del" type="text" name="delivery_street" id="delivery_street">
+                                    <span class="verify"></span>
+                                </div>
+                            </div>
+
+                            <div class="zip_town_container">
+                                <div>                                    
+                                    <div class="form_control">
+                                        <label for="delivery_zip">Zip/Postcode:</label>
+                                        <div class="input_container">
+                                            <input class="del" type="text" name="delivery_zip" id="delivery_zip">
+                                            <span class="verify"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>                                    
+                                    <div class="form_control">
+                                        <label for="delivery_town">Town:</label>
+                                        <div class="input_container">
+                                            <input class="del" type="text" name="delivery_town" id="delivery_town">
+                                            <span class="verify"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form_control">
+                                <div class="input_container">
+                                    <select class="del" name="delivery_country" id="delivery_country" autocomplete="on">
+                                        <option value="">Select Country:</option>
+                                    </select>
+                                    <span class="verify"></span>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                 </div>
+
+            </div>
+            <div class="buy_now_btn_container">
+                <button type="button" class="buy_now_btn">Buy now</button>
             </div>
         </section>
 
