@@ -98,15 +98,15 @@ window.addEventListener( "DOMContentLoaded", function () {
                 let shipCostNumber = 0;
             
                 if(itemsInCart < 5) {
-                    console.log('1', itemsInCart)
+                    // console.log('1', itemsInCart)
                     shipCostsSpan.innerHTML = `€ 15`;
                     shipCostNumber = 15;
                 } else if(itemsInCart == 5 || itemsInCart <= 10) {
-                    console.log('2', itemsInCart)
+                    // console.log('2', itemsInCart)
                     shipCostsSpan.innerHTML = `€ 35`;
                     shipCostNumber = 35;
                 } else if(itemsInCart > 10) {
-                    console.log('3', itemsInCart)
+                    // console.log('3', itemsInCart)
                     shipCostsSpan.innerHTML = `€ 55`;
                     shipCostNumber = 55;
                 };
@@ -123,19 +123,17 @@ function label() {
     const inputEl = document.querySelectorAll('.form_control input');
 
     inputEl.forEach(el => {
-        // console.log(el)
+        
         if(el.value) {
-            el.parentElement.previousElementSibling.classList.add('move_label');
-            // el
-            console.log(el.parentElement.previousElementSibling.nextElementSibling.lastChild)
+            el.previousElementSibling.classList.add('move_label');
         };
 
         el.addEventListener('focus', function(e) {            
-            this.parentElement.previousElementSibling.classList.add('move_label');
+            this.previousElementSibling.classList.add('move_label');
         });
         el.addEventListener('blur', function(e) {
             if(el.value != 0) return;
-            this.parentElement.previousElementSibling.classList.remove('move_label');
+            this.previousElementSibling.classList.remove('move_label');
         });
     });
 };

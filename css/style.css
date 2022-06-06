@@ -4655,13 +4655,13 @@ img {
   margin-bottom: 20px;
 }
 
-form div {
+#search_form div {
   height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-form div input {
+#search_form div input {
   width: 50%;
   height: 35px;
   border: 1px solid black;
@@ -4670,11 +4670,11 @@ form div input {
   font-size: 16px;
 }
 @media screen and (max-width: 768px) {
-  form div input {
+  #search_form div input {
     width: 70%;
   }
 }
-form div button {
+#search_form div button {
   background: rgb(80, 79, 79);
   color: #F9F9F9;
   width: 100px;
@@ -4684,7 +4684,7 @@ form div button {
   outline: none;
   cursor: pointer;
 }
-form div button:hover {
+#search_form div button:hover {
   background: #1A86C9;
   color: white;
 }
@@ -6186,145 +6186,161 @@ div .product_container:hover {
   font-size: 30px;
   font-weight: 600;
 }
-.main_form_container .billing_form_wrapper,
-.main_form_container .delivery_form_wrapper {
+
+.billing_form_wrapper,
+.delivery_form_wrapper {
   padding: 20px 30px 10px 30px;
   border: 1px solid rgba(0, 0, 0, 0.151);
   border-radius: 10px;
 }
 @media screen and (max-width: 1200px) {
-  .main_form_container .billing_form_wrapper,
-.main_form_container .delivery_form_wrapper {
+  .billing_form_wrapper,
+.delivery_form_wrapper {
     padding: 20px;
   }
 }
 @media screen and (max-width: 1024px) {
-  .main_form_container .billing_form_wrapper,
-.main_form_container .delivery_form_wrapper {
+  .billing_form_wrapper,
+.delivery_form_wrapper {
     padding: 2%;
   }
 }
 
-.billing_form .form_control,
-.delivery_form .form_control,
-.zip_town_container div {
-  position: relative;
+.billing_form .form_control:first-of-type {
+  grid-area: a;
+}
+
+.billing_form .form_control:nth-of-type(2) {
+  grid-area: b;
+}
+
+.billing_form .form_control:nth-of-type(3) {
+  grid-area: c;
+}
+
+.billing_form .form_control:nth-of-type(4) {
+  grid-area: d;
+}
+
+.billing_form .form_control:nth-of-type(5) {
+  grid-area: e;
+}
+
+.billing_form .form_control:nth-of-type(6) {
+  grid-area: f;
+}
+
+.billing_form .form_control:nth-of-type(7) {
+  grid-area: g;
+}
+
+.billing_form .form_control:nth-of-type(8) {
+  grid-area: h;
+}
+
+.billing_form {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: repeat(7, 75px);
+  grid-column-gap: 10px;
+  grid-template-areas: "a a" "b b" "c c" "d d" "e e" "f g" "h h";
+  width: 100%;
   margin-bottom: 5px;
+  position: relative;
 }
-@media screen and (max-width: 1200px) {
-  .billing_form .form_control,
-.delivery_form .form_control,
-.zip_town_container div {
-    padding: 0;
-  }
+
+.form_control {
+  margin-bottom: 35px;
+  padding: 20px 0;
 }
-.billing_form .form_control label,
-.billing_form .form_control .zip_town_container label,
-.delivery_form .form_control label,
-.delivery_form .form_control .zip_town_container label,
-.zip_town_container div label,
-.zip_town_container div .zip_town_container label {
+.form_control label {
+  color: #707070;
   position: absolute;
-  width: fit-content;
-  top: 20px;
-  padding-left: 10px;
-  width: 90%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 17px;
+  padding-left: 20px;
+  width: 100%;
   transition: all 300ms;
 }
-@media screen and (max-width: 1024px) {
-  .billing_form .form_control label,
-.billing_form .form_control .zip_town_container label,
-.delivery_form .form_control label,
-.delivery_form .form_control .zip_town_container label,
-.zip_town_container div label,
-.zip_town_container div .zip_town_container label {
-    width: 90%;
-  }
-}
-.billing_form .form_control label.move_label,
-.billing_form .form_control .zip_town_container label.move_label,
-.delivery_form .form_control label.move_label,
-.delivery_form .form_control .zip_town_container label.move_label,
-.zip_town_container div label.move_label,
-.zip_town_container div .zip_town_container label.move_label {
+.form_control label.move_label {
   font-size: 10px;
-  padding-left: 0;
+  padding-left: 5px;
+  height: 20px;
+  line-height: 20px;
   transform: translateY(-20px);
   transition: all 300ms;
 }
-.billing_form .form_control .input_container,
-.delivery_form .form_control .input_container,
-.zip_town_container div .input_container {
+.form_control input,
+.form_control select {
   position: relative;
   background: transparent;
-  width: 90%;
-  height: 35px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-}
-.billing_form .form_control .input_container input,
-.delivery_form .form_control .input_container input,
-.zip_town_container div .input_container input {
-  position: relative;
-  background: transparent;
+  padding-left: 20px;
+  font-size: 17px;
+  height: 42px;
   width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  outline: none;
   transition: all 300ms ease;
   z-index: 10;
 }
 @media screen and (max-width: 1024px) {
-  .billing_form .form_control .input_container input,
-.delivery_form .form_control .input_container input,
-.zip_town_container div .input_container input {
+  .form_control input,
+.form_control select {
     width: 100%;
   }
 }
-.billing_form .form_control .input_container .verify,
-.delivery_form .form_control .input_container .verify,
-.zip_town_container div .input_container .verify {
+.form_control .verify {
   display: block;
-  position: absolute;
   width: 100%;
   left: 0;
-  bottom: -18px;
   font-size: 13px;
   font-style: italic;
 }
-.billing_form .form_control .input_container .verify.success,
-.delivery_form .form_control .input_container .verify.success,
-.zip_town_container div .input_container .verify.success {
+.form_control .verify.success {
   color: rgb(56, 177, 56);
 }
-.billing_form .form_control .input_container .verify.error,
-.delivery_form .form_control .input_container .verify.error,
-.zip_town_container div .input_container .verify.error {
+.form_control .verify.error {
   color: rgb(233, 53, 53);
 }
-@media screen and (max-width: 500px) {
-  .billing_form .form_control .input_container .ver_zip,
-.delivery_form .form_control .input_container .ver_zip,
-.zip_town_container div .input_container .ver_zip {
-    bottom: 0px;
-  }
-}
-
-.zip_town_container {
-  background: darkkhaki;
-  padding: 0 1%;
-}
-.zip_town_container > div {
+.form_control #billing_phone {
   background-color: aqua;
-  width: 90%;
-}
-.zip_town_container > div .form_control {
-  background-color: aliceblue;
-  width: 100%;
 }
 
-#billing_country,
-#delivery_country {
+.delivery_form .form_control:first-of-type {
+  grid-area: a;
+}
+
+.delivery_form .form_control:nth-of-type(2) {
+  grid-area: b;
+}
+
+.delivery_form .form_control:nth-of-type(3) {
+  grid-area: c;
+}
+
+.delivery_form .form_control:nth-of-type(4) {
+  grid-area: d;
+}
+
+.delivery_form .form_control:nth-of-type(5) {
+  grid-area: e;
+}
+
+.delivery_form .form_control:nth-of-type(6) {
+  grid-area: f;
+}
+
+.delivery_form {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: repeat(5, 80px);
+  grid-column-gap: 10px;
+  grid-template-areas: "a a" "b b" "c c" "d e" "f f";
   width: 100%;
-  height: 35px;
+  margin-bottom: 5px;
+  position: relative;
 }
 
 .checkbox_group {

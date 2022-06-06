@@ -395,78 +395,49 @@
                     <span class="legend">Billing form:</span>
                     <div class="billing_form_wrapper">
                         <form class="billing_form" id="billing_form" novalidate autocomplete="off">
-
                             <div class="form_control">
-                                <label for="billing_first_name">First Name:</label>
-                                <div class="input_container">
-                                    <input class="bill" type="text" name="billing_first_name" id="billing_first_name">
-                                    <span class="verify"></span>
-                                </div>
+                                <label class="one" for="billing_first_name">First Name:</label>
+                                <input class="bill" type="text" name="billing_first_name" id="billing_first_name">
+                                <span class="verify"></span>
                             </div>
-
                             <div class="form_control">
                                 <label for="billing_last_name">Last Name:</label>
-                                <div class="input_container">
-                                    <input class="bill" type="text" name="billing_last_name" id="billing_last_name">
-                                    <span class="verify"></span>
-                                </div>
+                                <input class="bill" type="text" name="billing_last_name" id="billing_last_name">
+                                <span class="verify"></span>
+                            </div>
+                            <div class="form_control">
+                                <label for="billing_email">Email:</label>                                
+                                <input class="bill" type="email" name="billing_email" id="billing_email">
+                                <span class="verify"></span>                                
                             </div>
 
                             <div class="form_control">
-                                <label for="billing_email">Email:</label>
-                                <div class="input_container">
-                                    <input class="bill" type="email" name="billing_email" id="billing_email">
-                                    <span class="verify"></span>
-                                </div>
-                            </div>
+                                <label for="billing_phone">Phone Number (optional)</label>                                
+                                <input class="bill" type="tel" name="billing_phone" id="billing_phone" placeholder="+123">
+                                <span class="verify"></span>                                
+                            </div>                     
 
                             <div class="form_control">
-                                <label for="billing_phone">Phone Number (optional)</label>
-                                <div class="input_container">
-                                    <input class="bill" type="tel" name="billing_phone" id="billing_phone">
-                                    <span class="verify"></span>
-                                </div>
+                                <label for="billing_street">Street and Number:</label>                                
+                                <input class="bill" type="text" name="billing_street" id="billing_street">
+                                <span class="verify"></span>
                             </div>
-                            
                             <div class="form_control">
-                                <label for="billing_street">Street and Number:</label>
-                                <div class="input_container">
-                                    <input class="bill" type="text" name="billing_street" id="billing_street">
-                                    <span class="verify"></span>
-                                </div>
-                            </div>
-
-                            <div class="zip_town_container">
-                                <div>                                    
-                                    <div class="form_control">
-                                        <label for="billing_zip">Zip/Postcode:</label>
-                                        <div class="input_container">
-                                            <input class="bill" type="text" name="billing_zip" id="billing_zip">
-                                            <span class="verify ver_zip"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>                                    
-                                    <div class="form_control">
-                                        <label for="billing_town">Town:</label>
-                                        <div class="input_container">
-                                            <input class="bill" type="text" name="billing_town" id="billing_town">
-                                            <span class="verify ver_zip"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                                <label for="billing_zip">Zip/Postcode:</label>                                        
+                                <input class="bill" type="text" name="billing_zip" id="billing_zip">
+                                <span class="verify ver_zip"></span>                                        
+                            </div>                        
                             <div class="form_control">
-                                <div class="input_container">
-                                    <select class="bill" name="billing_country" id="billing_country">
-                                        <option value="">Select Country:</option>
-                                    </select>
-                                    <span class="verify"></span>
-                                </div>
+                                <label for="billing_town">Town:</label>
+                                <input class="bill" type="text" name="billing_town" id="billing_town">
+                                <span class="verify ver_town"></span>
                             </div>
-
-                            <!-- <button class="billing_submit_btn" type="button">Submit</button> -->
+                            <div class="form_control">
+                                <select class="bill" name="billing_country" id="billing_country">
+                                    <option value="">Select Country:</option>
+                                </select>
+                                <span class="verify"></span>
+                            </div>
                         </form>
                     </div>
 
@@ -478,65 +449,40 @@
                     <span class="legend delivery_legend">Delivery Address</span>
                     <div class="delivery_form_wrapper">
                         <form class="delivery_form" id="delivery_form" novalidate autocomplete="off">
-
                             <div class="form_control">
                                 <label for="delivery_first_name">First Name:</label>
-                                <div class="input_container">
-                                    <input class="del" type="text" name="delivery_first_name" id="delivery_first_name">
-                                    <span class="verify"></span>
-                                </div>
+                                <input class="del" type="text" name="delivery_first_name" id="delivery_first_name">
+                                <span class="verify"></span>
                             </div>
-
                             <div class="form_control">
                                 <label for="delivery_last_name">Last Name:</label>
-                                <div class="input_container">
-                                    <input class="del" type="text" name="delivery_last_name" id="delivery_last_name">
-                                    <span class="verify"></span>
-                                </div>
+                                <input class="del" type="text" name="delivery_last_name" id="delivery_last_name">
+                                <span class="verify"></span>
                             </div>
-
                             <div class="form_control">
                                 <label for="delivery_street">Street and Number:</label>
-                                <div class="input_container">
-                                    <input class="del" type="text" name="delivery_street" id="delivery_street">
-                                    <span class="verify"></span>
-                                </div>
-                            </div>
-
-                            <div class="zip_town_container">
-                                <div>                                    
-                                    <div class="form_control">
-                                        <label for="delivery_zip">Zip/Postcode:</label>
-                                        <div class="input_container">
-                                            <input class="del" type="text" name="delivery_zip" id="delivery_zip">
-                                            <span class="verify"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>                                    
-                                    <div class="form_control">
-                                        <label for="delivery_town">Town:</label>
-                                        <div class="input_container">
-                                            <input class="del" type="text" name="delivery_town" id="delivery_town">
-                                            <span class="verify"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                                <input class="del" type="text" name="delivery_street" id="delivery_street">
+                                <span class="verify"></span>
+                            </div>                                
                             <div class="form_control">
-                                <div class="input_container">
-                                    <select class="del" name="delivery_country" id="delivery_country" autocomplete="on">
-                                        <option value="">Select Country:</option>
-                                    </select>
-                                    <span class="verify"></span>
-                                </div>
+                                <label for="delivery_zip">Zip/Postcode:</label>
+                                <input class="del" type="text" name="delivery_zip" id="delivery_zip">
+                                <span class="verify"></span>
+                            </div>                                
+                            <div class="form_control">
+                                <label for="delivery_town">Town:</label>
+                                <input class="del" type="text" name="delivery_town" id="delivery_town">
+                                <span class="verify"></span>
                             </div>
-
+                            <div class="form_control">
+                                <select class="del" name="delivery_country" id="delivery_country" autocomplete="on">
+                                    <option value="">Select Country:</option>
+                                </select>
+                                <span class="verify"></span>
+                            </div>
                         </form>
                     </div>
                 </div>
-
             </div>
             <div class="buy_now_btn_container">
                 <button type="button" class="buy_now_btn">Buy now</button>
