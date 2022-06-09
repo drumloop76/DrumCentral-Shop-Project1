@@ -163,6 +163,7 @@ function autoSearch() {
                     document.querySelectorAll('.auto').forEach(li => {
                         li.addEventListener('click', function(e){
                             document.querySelector('.fa-search').style.color = 'green';
+                            // document.querySelector('.search_btn').style.background = 'red';
                             input.value = this.getElementsByClassName("prodName")[0].outerText;
                             closeAllLists();
                         });
@@ -371,3 +372,19 @@ function span(number) {
     });
 };
 
+////////////////////////////////////////// SideNav Reveal //////////////////////////////////////////////
+const revealSideNav = function() {
+    const sideNav = document.querySelector('.side_nav');
+    const sideBtn = document.querySelector('.top_btn');
+    
+    window.addEventListener("scroll", () => { 
+        if(window.scrollY >= document.documentElement.clientHeight){               
+            sideNav.classList.add("showSideNav");
+            sideBtn.classList.add("showSideBtn");
+        }else{
+            sideNav.classList.remove("showSideNav");
+            sideBtn.classList.remove("showSideBtn");
+        };
+    });
+};
+revealSideNav();

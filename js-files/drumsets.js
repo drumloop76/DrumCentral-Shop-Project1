@@ -124,11 +124,11 @@ const drumsets = function() {
                     if(localStorage.getItem('logedUser') == null) {
                         setCartNumbers(data[i]);
                         setTotalCost(data[i]);
-                        prodPopMod(data[i].name)
+                        prodPopMod(data[i].name);
                     } else {
                         setCartNumbers(data[i]);
                         setTotalCost(data[i]);
-                        prodPopMod(data[i].name)
+                        prodPopMod(data[i].name);
                     };
                 });
             });
@@ -184,7 +184,7 @@ const drumsets = function() {
                     let cartItems = JSON.parse(localStorage.getItem('localProductsInCart'));
                     const key = 'localProductsInCart';
                     setingItem(product, cartItems, key);
-                } else {
+                } else if(localStorage.getItem('logedUser') != null && !document.querySelector('.user_page').classList.contains('open_user_modal')){
                     let cartItems = JSON.parse(localStorage.getItem('userProductsInCart'));
                     const key = 'userProductsInCart';
                     setingItem(product, cartItems, key);
@@ -581,43 +581,35 @@ const drumsets = function() {
             function wishList() {        
                 const parentDiv = document.querySelectorAll('.description');                
                 let wishListNumbers = JSON.parse(localStorage.getItem('wishListNumbers'));
+                let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
                 
                 parentDiv.forEach(p => {
-                    p.querySelector('.wish_list_btn').addEventListener('click', (e) => {
-                        let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
+                    p.querySelector('.wish_list_btn').addEventListener('click', (e) => {                        
                         let targetName = p.firstElementChild.textContent;
-                        let arr = [];
-
-                        if(localStorage.getItem('logedUser') != null && wishListNumbers == null) {                            
-                            arr.push(targetName);
-                            setTarget(targetName);
-                            p.querySelector('.fa-regular.fa-heart').style.display = 'none';
-                            p.querySelector('.fa-solid.fa-heart').classList.add('showHeart');                            
-                        };
                         
-                        if(localStorage.getItem('logedUser') != null && wishListItems != null) {                            
-                            Object.values(wishListItems).map(item => {
-                                arr.push(item.name);
-                            });
-                            
-                            if(!arr.includes(targetName)) {
-                                setTarget(targetName);
-                                p.querySelector('.fa-regular.fa-heart').style.display = 'none';
-                                p.querySelector('.fa-solid.fa-heart').classList.add('showHeart');
-                            };
-                        };
-
-                        if(arr.includes(targetName)) {
+                        if(p.querySelector('.fa-solid.fa-heart').classList.contains('showHeart')) {                            
                             removeWishListItem(targetName);
                             p.querySelector('.fa-regular.fa-heart').style.display = 'block';
                             p.querySelector('.fa-solid.fa-heart').classList.remove('showHeart');
+                        } else {
+                            
+                            if(wishListNumbers == null || Object.values(wishListItems).length == 0) { 
+                                setTarget(targetName);    
+                                p.querySelector('.fa-regular.fa-heart').style.display = 'none';
+                                p.querySelector('.fa-solid.fa-heart').classList.add('showHeart');
+    
+                            } else {
+                                setTarget(targetName);    
+                                p.querySelector('.fa-regular.fa-heart').style.display = 'none';
+                                p.querySelector('.fa-solid.fa-heart').classList.add('showHeart');
+                            };
                         };
                     });
                 });
 
                 function setTarget(targetName) {
                     for(let i=0 ; i<data.length ; i++) {
-                        if(data[i].name === targetName && localStorage.getItem('logedUser') != null) {
+                        if(data[i].name === targetName) {
                             setWishListItems(data[i]);
                             setWishListNumbers();
                         };
@@ -645,9 +637,8 @@ const drumsets = function() {
                 ///////////////////////////////////// Remove WL Item /////////////////////////////////////////
                 function removeWishListItem(name) {
                     let wishListItems = JSON.parse(localStorage.getItem('wishListItems'));
-                    console.log(wishListItems[name])
                     if(wishListItems[name] != undefined) {
-                        console.log('ok')
+                        // console.log('ok')
                     }
                     setWishListNumbers("decrease");
                     delete wishListItems[name];

@@ -106,7 +106,7 @@
 /*---------------------------- Cards Timer ----------------------------*/
 
 function timer() {
-    const deadline = '2022-06-01T00:00:00';
+    const deadline = '2022-07-01T00:00:00';
     
     function getTimeRemaining(date) {
         const time = Date.parse(date) - new Date(),

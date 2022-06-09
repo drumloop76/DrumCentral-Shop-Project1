@@ -63,8 +63,8 @@
             @include modalHeader;
         }
     }
-    .login_modal_container .form_container,
-    .signin_modal_container .form_container {
+    .login_modal_container .login_form_container,
+    .signin_modal_container .login_form_container {
         width: 100%;
         padding-bottom: 20px;
         display: flex;
@@ -128,7 +128,7 @@
             }
         }
     }
-    .form_container {
+    .login_form_container {
         @include tablet {
             flex-direction: column;
             justify-content: center;
@@ -413,9 +413,9 @@
             display: block;
         }
     }
+
     ////////////////////////////////////////////////////////////////////
     //////////////////////////// card modal ////////////////////////////
-
     .card_modal {
         position: fixed;
         top: 50%;
@@ -640,7 +640,7 @@
                 font-size: 15px;
                 line-height: 40px;
                 vertical-align: middle;
-                cursor: pointer;
+                cursor: pointer;                
                 &:hover {
                     .circle {
                         width: 100%;
@@ -655,6 +655,7 @@
                     color: $color-text-light;
                     }
                 }
+                
                 .circle {
                     // @include transition(all, 0.45s, cubic-bezier(0.65,0,.076,1));
                     @include transition;
@@ -664,6 +665,9 @@
                     height: 40px;
                     background: $color-text-dark;
                     border-radius: 20px;
+                    &.active {
+                        width: 100%;
+                    }
                     .icon {
                         // @include transition(all, 0.45s, cubic-bezier(0.65,0,.076,1));
                         @include transition;
@@ -672,6 +676,7 @@
                         bottom: 0;
                         margin: auto;
                         background: $color-text-light;
+                        
                         &.arrow {
                             // @include transition(all, 0.45s, cubic-bezier(0.65,0,.076,1));
                             @include transition;
@@ -693,6 +698,7 @@
                             }
                         }
                     }
+                    
                 }  
                 .button-text {
                     width: 100%;
@@ -711,6 +717,22 @@
                     text-align: center;
                     text-transform: uppercase;
                 } 
+            }
+            .add_cart_btn.active {
+                cursor: not-allowed;
+                .circle {
+                    width: 100%;
+                    background-color: rgb(185, 185, 185);
+                    .icon {
+                        &.arrow {
+                        background: $color-text-light;
+                        transform: translate(15px, 0);
+                        }
+                    }
+                }
+                .button-text {
+                color: $color-text-light;
+                }
             }
         }
     }
@@ -740,22 +762,28 @@
         position: fixed;
         top: 0;
         right: 0;
-        width: 40vw;
+        width: 600px;
         height: 100%;
         background: $color-text-light;
         padding: 30px;
-        transform: translateX(40vw);
+        transform: translateX(650px);
         transition: all 300ms ease;
         overflow-y: auto;
-        z-index: 900;
+        z-index: 200;
         &.open_user_modal {
             transform: translateX(0);
             transition: all 300ms ease-out;
         }
         .close_user_modal_btn {
             @include closeModalBtn;
-            top: 15px;
-            right: 20px;
+            float: right;
+            background: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 22px;
+            top: 10px;
+            z-index: 999;
         }
         .userPage_container {
             background: rgb(210, 227, 250);

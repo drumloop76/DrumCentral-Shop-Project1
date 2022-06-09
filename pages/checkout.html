@@ -11,7 +11,6 @@
     <script defer src="/main.js" type="module"></script>
     <script defer src="/js-files/modals.js" type="module"></script>
     <script defer src="/js-files/checkout.js"></script>
-    <script defer src="/js-files/product-modal.js" type="module"></script>
     <title>DrumCentral Checkout</title>
 </head>
 <body>
@@ -229,13 +228,12 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </button>
-                            <div class="panel panel_bank">
-                                <div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, doloremque
-                                        nostrum!
-                                        Neque vero, commodi, non iure vel dolore rerum ab enim, quo deleniti ipsam
-                                        placeat
-                                        quasi.</p>
+                            <div class="panel panel_bank pb_panel">
+                                <div class="pb_container">
+                                    <span>503</span> 
+                                    <h1>Service Unavailable</h1>
+                                    <h3>Ooooopps, something went wrong.</h3>
+                                    <p>You can use your <strong>Visa</strong>, <strong>MasterCard</strong> or <strong>American Express</strong> Credit Card instead</p>
                                 </div>
                             </div>
                         </div>
@@ -248,42 +246,38 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </button>
-                            <div class="panel panel_bank credit_card_panel">
-                                <!-- <div> -->
-                                    <!-- <form action="" class="credit_cards" novalidate>
-                                        <div class="form_control">
-                                            <label for="frmCCNum">Card Number</label>
-                                            <input type="text" id="user_card_number_input" placeholder="0000 0000 0000 0000" data-slots="0" data-accept="\d" require>
+                            <div class="panel panel_bank cc_panel">
+                                <div class="cc_panel_container">
+                                    <h3>Chose your credit card:</h3>
+                                    <div class="cards">
+                                        <a href="#" class="visa"><img src="/images/checkout/visa-panel.png"></a>
+                                        <a href="#" class="master"><img src="/images/checkout/master-panel.png"></a>
+                                        <a href="#" class="american"><img src="/images/checkout/american-panel.png"></a>
+                                    </div>
+                                    <div class="form_container">
+                                        <div class="field_container">
+                                            <label for="cc_name">Card Holder</label>
+                                            <input class="cc" id="cc_name" maxlength="20" type="text" placeholder="Card Holder / Full Name">
                                             <span class="verify"></span>
                                         </div>
-                                        <div class="date_container">
-                                            <div>
-                                                <div class="form_control">
-                                                    <label for="month">Month</label>
-                                                    <input type="number" id="month" name="month" min="1" max="31">
-                                                    <span class="verify"></span>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div class="form_control">
-                                                    <label for="year">Year</label>
-                                                    <input type="text" name="year" id="year" min="2022" max="2050">
-                                                    <span class="verify"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form_control">
-                                            <label for="card_security_code">Security Code</label>
-                                            <input type="number" name="card_security_code" id="card_security_code">
+                                        <div class="field_container">
+                                            <label for="cc_number">Card Number</label>
+                                            <input class="cc" id="cc_number" name="cc_number" type="text">
+                                            <span class="cc_tumbnail"></span>
                                             <span class="verify"></span>
                                         </div>
-                                        <div class="form_control">
-                                            <label for="card_holder">Card Holder</label>
-                                            <input type="text" name="card_holder" id="card_holder">
+                                        <div class="field_container">
+                                            <label for="cc_exp_date">Expiration (mm/yy)</label>
+                                            <input class="cc" id="cc_exp_date" type="text" name='ccNum' maxlength='5' placeholder="MM/YY">
                                             <span class="verify"></span>
                                         </div>
-                                    </form> -->
-                                <!-- </div> -->
+                                        <div class="field_container">
+                                            <label for="cc_security_code">Security Code</label>
+                                            <input class="cc" id="cc_security_code" type="tel" inputmode="numeric" placeholder="CCV">
+                                            <span class="verify"></span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

@@ -89,7 +89,6 @@ export function setListItems(item, storageItems, key) {
 
 ///////////////////////////////////// Add Product Popup /////////////////////////////////////
 export function prodPopMod(productName) {
-    console.log(productName)
     const popup = document.createElement('div');
     popup.classList.add('prod_pop_modal');
     popup.innerHTML = `
@@ -98,7 +97,8 @@ export function prodPopMod(productName) {
                 <p>You have added one<br><span>${productName}</span><br>to the cart.</p>
             </div>
             `
-    document.body.appendChild(popup);
+    // document.body.appendChild(popup);
+    document.body.insertAdjacentElement('beforeend', popup);
     popup.classList.add('open_prod_popup');
     
     setTimeout(() => {
@@ -115,3 +115,22 @@ export function prodPopMod(productName) {
     };
 }
 
+//////////////////////////////////////////////////////////////////////////////////////
+// export function openCartProdModal(btns, key) {
+//     // let cartItems = JSON.parse(localStorage.getItem('userProductsInCart'));
+
+//     document.querySelectorAll(btns).forEach(btn => {
+//         btn.addEventListener('click', function(e) {
+//             Object.values(key).map(item => {
+//                 if(e.target.textContent === item.name) {
+//                     console.log('open btn 2a')
+//                     cardModal(item);
+//                 };
+//             });
+//             document.querySelector('.card_modal').classList.add('show_prod_modal');
+//             cardOverlay.classList.add('show_overlay');
+//             document.querySelector('body').style.overflow = 'hidden';
+//         });
+//     });
+// }; 
+// openCartProdModal();

@@ -181,7 +181,6 @@
             }            
         }
     }
-
     /*------------- Accordion --------------*/
     .basket .options_content_header {
         margin-top: 60px;
@@ -348,10 +347,42 @@
             opacity: 1;
         }
     }
-    .panel_bank { ///////////////////////////////// !!!!!!!!!!!!!!!!!!!
+    .pb_panel { ///////////////////////////////// !!!!!!!!!!!!!!!!!!!
+        // background-color: blanchedalmond;
         // padding: 5px 20px 12px 20px;
-        div {
-            padding: 5px 20px 12px 20px;
+        box-shadow: $product-box-shadow;
+        // margin-bottom: 30px;
+        text-align: center;
+        .pb_container {
+            position: relative;
+            // padding: 0 30px;
+            margin-bottom: 30px;
+            span {
+                position: absolute;
+                // background-color: rgb(224, 224, 224);
+                font-size: 75px;
+                font-weight: 900;
+                top: -80px;
+                left: 50%;
+                transform: translateX(-50%);
+                color: $color-red;
+                text-shadow: $text-shadow;
+            }
+            h1 {
+                // background: sandybrown;
+                padding: 0;
+                text-align: center;
+                margin-top: 80px;
+                // margin-bottom: 30px;
+            }
+            h3 {
+                font-size: 22px;
+                margin-bottom: 15px;
+            }
+            p {
+                font-size: 20px;
+                padding: 0 20px;
+            }
         }
     }
     .panel_cost,
@@ -413,10 +444,137 @@
             margin: 2px 0 0 39px;
         }
     }
-    .credit_card_panel {
-        background: rgb(253, 183, 175);
+    //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
+    .cc_panel {
+        // background-color: antiquewhite;
+        // max-height: 150px;
+        // width: 100%;
+        // height: 200px;
+        box-shadow: $product-box-shadow;
+        .cc_panel_container {
+            padding: 20px;
+            // background: darkgoldenrod;
+            // width: 100%;
+            h3 {
+                font-size: 20px;
+                margin-bottom: 30px;
+            }
+            .cards {
+                // background: #707070;
+                // height: 120px;
+                padding: 0 0 30px 0;
+            }
+        }
+                    
     }
-    
+    .cc_panel_container .cards {
+        // background-color: rgb(16, 54, 87);
+        // max-height: 200px;
+        // padding: 0;
+        a {
+            margin: 0 10px;
+            &.active {
+                transform: scale(1.1);
+                transition: 300ms;
+            }
+            img {
+                width: 100px;                
+                transition: 300ms;
+                &.active {
+                    transform: scale(1.1);
+                    transition: 300ms;
+                }
+                &:hover {
+                    transform: scale(1.1);
+                    transition: 300ms;
+                }
+            }
+        }
+    }
+    /*------------- cc form -----------*/
+    .form_container .field_container:first-of-type {
+        grid-area: a;
+    }
+    .form_container .field_container:nth-of-type(2) {
+        grid-area: b;
+    }
+    .form_container .field_container:nth-of-type(3) {
+        grid-area: c;
+    }
+    .form_container .field_container:nth-of-type(4) {
+        grid-area: d;
+    }
+    .form_container {        
+        display: grid;
+        grid-column-gap: 20px;
+        grid-template-columns: auto auto;
+        grid-template-rows: repeat(3, 90px);
+        grid-template-areas: "a a" 
+                             "b b" 
+                             "c d"
+                             "e e";        
+        // background-color: aquamarine;
+        width: 100%;
+        padding: 0 20px;
+        color: #707070;
+        opacity: 0;
+        visibility: hidden;
+        height: 0;
+        transition: 300ms;
+        &.show_form {
+            opacity: 1;
+            visibility: visible;
+            height: fit-content;
+            transition: 300ms;
+        }
+        .field_container {
+            position: relative;
+            label {
+                // background-color: rosybrown;
+                font-size: 15px;
+            }
+            input {
+                position: relative;
+                width: 100%;
+                margin-top: 5px;
+                height: 41px;
+                padding-left: 10px;
+                font-size: 17px;
+                letter-spacing: 0.5px;
+                border-radius: 3px;
+                outline: none;
+                border: 1px solid $color-text-dark;
+            }
+            .cc_tumbnail {
+                // background-color: rgb(233, 53, 53);
+                position: absolute;
+                width: 62px;
+                top: 26px;
+                height: 38px;
+                right: 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    width: 100%;
+                }
+            }
+            .verify {
+                display: block;
+                width: 100%;
+                left: 0;
+                font-size: 13px;
+                font-style: italic;
+                &.success {
+                    color: rgb(56, 177, 56);
+                }
+                &.error {
+                    color: rgb(233, 53, 53);
+                }
+            }
+        }
+    }
 
     //////////////////////////////////////////////////////////////
     /*-------------------------  form  -------------------------*/
@@ -522,7 +680,6 @@
             line-height: 40px;
             font-size: 17px;
             padding-left: 20px;
-            width: 100%;
             transition: all 300ms;
             &.move_label {
                 font-size: 10px;
@@ -539,6 +696,7 @@
             background: transparent;
             padding-left: 20px;
             font-size: 17px;
+            letter-spacing: 0.5px;
             height: 42px;
             width: 100%;
             border: 1px solid $color-text-dark;
@@ -622,14 +780,6 @@
                 color: $color-text-light;
             }
         }
-    }
-    .submit_btn {
-        position: relative;
-        @include modalSubmitBtn;
-        width: 200px;
-        margin-top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
     }
     .footer {
         margin-top: 50px;

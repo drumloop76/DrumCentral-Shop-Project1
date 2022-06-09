@@ -13,11 +13,13 @@ window.addEventListener( "DOMContentLoaded", function () {
             document.querySelector('.buy_now_btn').style.background = 'black';
             document.querySelector('.buy_now_btn').disabled = false;
         } else if(localStorage.getItem('localProductsInCart') == null || localStorage.getItem('userProductsInCart') == null) {
-            document.querySelector('.buy_now_btn').style.background = 'red';
-            document.querySelector('.buy_now_btn').style.cursor = 'not-allowed'
-            document.querySelector('.buy_now_btn').setAttribute("disabled", "")
-            // alert(`Your cart is empty. Put product in cart`);
-        }
+            document.querySelector('.buy_now_btn').style.background = 'rgba(0, 0, 0, 0.301)';
+            document.querySelector('.buy_now_btn').style.cursor = 'not-allowed';
+            document.querySelector('.buy_now_btn').setAttribute("disabled", "");
+            localStorage.removeItem('shippingCost');
+            // document.querySelector('.total_price').innerHTML = '€ 0';
+            alert('Your cart is empty')
+        };
 
         if(localStorage.getItem('logedUser') == null) return;    
 
@@ -31,12 +33,8 @@ window.addEventListener( "DOMContentLoaded", function () {
 
         label();
     };
-    onPageLoad()
-
-
-
-    console.log(document.querySelector('.shipping_costs_full'))
-
+    onPageLoad();    
+    
     function checkout() {;
         if(localStorage.getItem('logedUser') == null && 
             localStorage.getItem("localProductsInCart") == undefined || 
@@ -69,7 +67,6 @@ window.addEventListener( "DOMContentLoaded", function () {
                                 <span>x ${items[i].inCart}</span>
                             </div>
                             <div class="basket_price_div">
-                                <!--<span class="price_single">€ ${items[i].price}</span>-->
                                 <span class="price_full">€${items[i].price * items[i].inCart}</span>
                             </div>
                         </div>
@@ -83,13 +80,12 @@ window.addEventListener( "DOMContentLoaded", function () {
                     };
                 };
             };
-            if(JSON.parse(localStorage.getItem("checkShippingCost"))) {
-                console.log(JSON.parse(localStorage.getItem("checkShippingCost")))
-            }
-            
-            let totalPrice = document.querySelector('.total_price');
-            totalPrice.innerHTML = `€ ${totalCost + JSON.parse(localStorage.getItem("checkShippingCost"))}`;
 
+            // function messageModal() {
+            //     // document.querySelector('.basket_products').innerHTML += `
+            // }
+
+            
             let totalQuantity = document.querySelector('.total_quantity');
             totalQuantity.innerHTML = itemsInCart;
 
@@ -98,32 +94,36 @@ window.addEventListener( "DOMContentLoaded", function () {
                 let shipCostNumber = 0;
             
                 if(itemsInCart < 5) {
-                    // console.log('1', itemsInCart)
                     shipCostsSpan.innerHTML = `€ 15`;
                     shipCostNumber = 15;
                 } else if(itemsInCart == 5 || itemsInCart <= 10) {
-                    // console.log('2', itemsInCart)
                     shipCostsSpan.innerHTML = `€ 35`;
                     shipCostNumber = 35;
                 } else if(itemsInCart > 10) {
-                    // console.log('3', itemsInCart)
                     shipCostsSpan.innerHTML = `€ 55`;
                     shipCostNumber = 55;
+                } else if(itemsInCart == 0 || itemsInCart == null) {
+                    console.log('000')
+                    shipCostsSpan.innerHTML = `€ 0`;
+                    shipCostNumber = 0;
+                    localStorage.removeItem('shippingCost');
                 };
-                console.log(shipCostNumber)
-                localStorage.setItem('checkShippingCost', shipCostNumber)
+                localStorage.setItem('shippingCost', shipCostNumber);
             };
-            shippingCosts()
+            shippingCosts();
+
+            let totalPrice = document.querySelector('.total_price');
+            totalPrice.innerHTML = `€ ${totalCost + JSON.parse(localStorage.getItem("shippingCost"))}`;
         };
     };
     checkout();
-})
+});
 ////////////////////////////// label ///////////////////////////////
 function label() {
     const inputEl = document.querySelectorAll('.form_control input');
+    console.log()
 
     inputEl.forEach(el => {
-        
         if(el.value) {
             el.previousElementSibling.classList.add('move_label');
         };
@@ -139,7 +139,8 @@ function label() {
 };
 label();
 
-/////////////////////////////// fetch API ////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+//////////////////////////////// fetch API /////////////////////////////////
 const fetchCountry = async(e) => {
 	const apiEndpoint = 'https://restcountries.com/v2/all';
     const countries = document.querySelector('#billing_country');
@@ -158,19 +159,11 @@ const fetchCountry = async(e) => {
                         phone.value = `+${el.callingCodes[0]} `;
                         phone.parentElement.previousElementSibling.classList.add('move_label');
                     };
-                });
-
-                
+                });                
             });
         });
 
     /////////////////////////////////// Shipping costs //////////////////////////////////////
-            
-    
-
-
-    // const countries = document.querySelector('#billing_country'),
-    //      phone = document.querySelector('#billing_phone'),
     const firstName = document.querySelector('#billing_first_name'),
         lastName = document.querySelector('#billing_last_name'),
         email = document.querySelector('#billing_email'),
@@ -178,7 +171,6 @@ const fetchCountry = async(e) => {
         zip = document.querySelector('#billing_zip'),
         town = document.querySelector('#billing_town');
         
-    // const countriesDel = document.querySelector('#delivery_country'),
     const firstNameDel = document.querySelector('#delivery_first_name'),
         lastNameDel = document.querySelector('#delivery_last_name'),
         streetDel = document.querySelector('#delivery_street'),
@@ -189,7 +181,12 @@ const fetchCountry = async(e) => {
     const checkoutBtn = function() {
         document.querySelector('.buy_now_btn').addEventListener('click', function(e) {
             e.preventDefault();
+            console.log(localStorage.getItem("localProductsInCart") == undefined, localStorage.getItem("userProductsInCart") == undefined)
+            if(localStorage.getItem("localProductsInCart") == undefined || localStorage.getItem("userProductsInCart") == undefined) {
 
+            }
+            
+            console.log(document.q)
             /////////////////////////////// Validate & submit forms data ////////////////////////////////////
             let user = '';
             if(localStorage.getItem('logedUser') == null) { 
@@ -206,22 +203,22 @@ const fetchCountry = async(e) => {
                     if(small.innerHTML !== 'Success!') {
                         if(inp == firstName) {
                             setErrorFor(firstName, 'Please enter a first name');
-                        } 
+                        };
                         if(inp == lastName) {
                             setErrorFor(lastName, 'Please enter a last name');
-                        } 
+                        };
                         if(inp == email) {
                             setErrorFor(email, 'Please enter a valid e-mail address.');
-                        } 
+                        };
                         if(inp == street) {
                             setErrorFor(street, 'Enter your Street and Number.');
-                        } 
+                        };
                         if(inp == zip) {
                             setErrorFor(zip, 'Enter your Postal Code');
-                        } 
+                        };
                         if(inp == town) {
                             setErrorFor(town, 'Please enter a city');
-                        } 
+                        };
                         if(inp == countries) {
                             setErrorFor(countries, 'Select your Country.');
                         };
@@ -237,25 +234,61 @@ const fetchCountry = async(e) => {
                     if(small.innerHTML !== 'Success!') {
                         if(inp == firstNameDel) {
                             setErrorFor(firstNameDel, 'Please enter a first name');
-                        } 
+                        };
                         if(inp == lastNameDel) {
                             setErrorFor(lastNameDel, 'Please enter a last name');
-                        } 
+                        };
                         if(inp == streetDel) {
                             setErrorFor(streetDel, 'Enter your Street and Number.');
-                        } 
+                        };
                         if(inp == zipDel) {
                             setErrorFor(zipDel, 'Enter your PostCode');
-                        } 
+                        };
                         if(inp == townDel) {
                             setErrorFor(townDel, 'Please enter a city');
-                        } 
+                        };
                         if(inp == countriesDel) {
                             setErrorFor(countriesDel, 'Select your Country.');
                         };
                     };
                 });
             };
+
+            
+
+            if(checkCCInputs() != true) {
+                document.querySelectorAll('.form_container input').forEach(inp => {                
+                    const inputCont = inp.parentElement;
+                    const small = inputCont.querySelector('.verify');
+
+                    if(small.innerHTML !== 'Success!') {
+                        if(inp == ccFullName) {
+                            setErrorFor(ccFullName, 'Please enter your full name');
+                        };
+                        if(inp == ccNumber) {
+                            setErrorFor(ccNumber, 'Please enter credit card number');
+                        };
+                        if(inp == ccExpDate) {
+                            setErrorFor(ccExpDate, 'Please enter card expiration date.');
+                        };
+                        if(inp == ccSecCode) {
+                            setErrorFor(ccSecCode, 'Please enter valid security code');
+                        };
+                    };
+                });
+            };
+
+            if(checkBillingInputs() != true || checkDeliveryInputs() != true || checkCCInputs() != true && document.querySelector('.checkbox').checked == false)
+
+
+            console.log(checkBillingInputs() != true, checkDeliveryInputs() != true, checkCCInputs() != true)
+            if((checkBillingInputs() != true && document.querySelector('.checkbox').checked != false) || checkCCInputs() != true) {
+                console.log('no 1')
+            } else if(checkBillingInputs() != true || checkDeliveryInputs() != true || checkCCInputs() != true && document.querySelector('.checkbox').checked == false){
+                console.log('no2')
+            } else {
+                console.log('yes')
+            }
 
             const firstNameVal = document.querySelector('#billing_first_name').value,
                 lastNameVal = document.querySelector('#billing_last_name').value,
@@ -273,45 +306,66 @@ const fetchCountry = async(e) => {
                 townDelVal = document.querySelector('#delivery_town').value,
                 countryDelVal = document.querySelector('#delivery_country').value;
 
-            if(checkBillingInputs() == true && document.querySelector('.checkbox').checked == false) {
-                // console.log('true & false 111')
+            const shippingCosts = localStorage.getItem('shippingCost');
+            console.log(shippingCosts)
+
+            if(checkBillingInputs() == true && document.querySelector('.checkbox').checked == false && checkCCInputs() == true) {
+                console.log('aaa')
                 let billingData = JSON.parse(localStorage.getItem('checkBillingData')) || [];
-                // console.log("1-1 :", firstNameVal, lastNameVal, emailVal, streetVal, townVal, zipVal, countryVal, phoneVal, user)
                 billingData.push({firstNameVal, lastNameVal, emailVal, streetVal, townVal, zipVal, countryVal, phoneVal, user});
                 localStorage.setItem('checkBillingData', JSON.stringify(billingData));
 
                 let deliveryData = JSON.parse(localStorage.getItem('checkDeliveryData')) || [];
-                // console.log("1-2 :", firstNameVal, lastNameVal, streetVal, townVal, zipVal, countryVal)         
                 deliveryData.push({firstNameVal, lastNameVal, streetVal, townVal, zipVal, countryVal});
                 localStorage.setItem('checkDeliveryData', JSON.stringify(deliveryData));
-
-            } else if(checkDeliveryInputs() == true && document.querySelector('.checkbox').checked == true) {
-                // console.log("true & true 222")
+                setCheckCCInputs()
+            } else if(checkBillingInputs() == true && checkDeliveryInputs() == true && document.querySelector('.checkbox').checked == true && checkCCInputs() == true) {
+                console.log('bbb')
                 let billingData = JSON.parse(localStorage.getItem('checkBillingData')) || [];
-                // console.log("2-1 :", firstNameVal, lastNameVal, emailVal, streetVal, townVal, zipVal, countryVal, phoneVal, user)
-                billingData.push({firstNameVal, lastNameVal, emailVal, streetVal, townVal, zipVal, countryVal, phoneVal, user});
+                billingData.push({firstNameVal, lastNameVal, emailVal, streetVal, townVal, zipVal, countryVal, phoneVal, user, });
                 localStorage.setItem('checkBillingData', JSON.stringify(billingData));
 
                 let deliveryData = JSON.parse(localStorage.getItem('checkDeliveryData')) || [];
-                // console.log("2-2 :", firstNameDelVal, lastNameDelVal, streetDelVal, townDelVal, zipDelVal, countryDelVal, user)
                 deliveryData.push({firstNameDelVal, lastNameDelVal, streetDelVal, townDelVal, zipDelVal, countryDelVal, user});
                 localStorage.setItem('checkDeliveryData', JSON.stringify(deliveryData));
+                setCheckCCInputs()
             };
 
+            function setCheckCCInputs() {
+                if(checkCCInputs() == true) {
+                    if(ccType == 'visa') {
+                        ccType = 'Visa Card';
+                    } else if (ccType == 'visa') {
+                        ccType = 'Visa Card';
+                    } else if (ccType == 'visa') {
+                        ccType = 'Visa Card';
+                    };
+    
+                    const ccFullNameValue = ccFullName.value,
+                        ccNumberValue = ccNumber.value,
+                        ccExpDateValue = ccExpDate.value,
+                        ccSecCodeValue = ccSecCode.value;
+                    
+                    let checkCC = JSON.parse(localStorage.getItem('checkCC')) || [];
+                    checkCC.push({ccFullNameValue, ccNumberValue, ccExpDateValue, ccSecCodeValue, ccType});
+                    localStorage.setItem('checkCC', JSON.stringify(checkCC));
+                };
+            }
             
+
+
         });
-        // shippingCosts()
     };
     checkoutBtn();
 
 
-    firstName.addEventListener('blur', setFirstName, true)
+    firstName.addEventListener('blur', setFirstName, true);
     lastName.addEventListener('blur', setLastName, true);
     email.addEventListener('blur', setEmail, true);
     street.addEventListener('blur', setStreet, true);
     zip.addEventListener('blur', setZip, true);
     town.addEventListener('blur', setTown, true);
-    countries.addEventListener('blur', setCountries, true);
+    countries.addEventListener('change', setCountries, true);
 
 
     function checkBillingInputs() {
@@ -333,7 +387,7 @@ const fetchCountry = async(e) => {
     streetDel.addEventListener('blur', setStreetDel, true);
     zipDel.addEventListener('blur', setZipDel, true);
     townDel.addEventListener('blur', setTownDel, true);
-    countriesDel.addEventListener('blur', setCountriesDel, true);
+    countriesDel.addEventListener('change', setCountriesDel, true);
 
     function checkDeliveryInputs() {
         let retVal = true;
@@ -569,28 +623,6 @@ const fetchCountry = async(e) => {
         return retVal;
     };
 
-    ////////////////////////////////// set Error / Success msg ////////////////////////////////
-    function setErrorFor(input, message) {
-        const inputCont = input.parentElement;
-        const small = inputCont.querySelector('.verify');
-
-        small.innerHTML = message;
-        small.classList = 'verify error';
-
-        input.style.border = '1px solid red';
-    };
-
-    function setSuccessFor(input, message) {
-        const inputCont = input.parentElement;
-        const small = inputCont.querySelector('.verify');
-
-        small.innerHTML = message;
-        small.classList = 'verify success';
-
-        input.style.border = '1px solid black';
-    };
-
-
     function checkDeliveryAddress() {
         const checkbox = document.querySelector('.checkbox');
         checkbox.addEventListener('change', function(e) {
@@ -604,16 +636,326 @@ const fetchCountry = async(e) => {
         });
     };
     checkDeliveryAddress();
-}; /////////////////////////// !!! fetch end ////////////////////////////
-
-function init() {
-    // onPageLoad();
-    fetchCountry();
 };
-init();
 
 
-///////////////////////////// Accordion ///////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////// CC ///////////////////////////////////////////
+
+
+//////////////////////////////// set card type & input fields ////////////////////////////////
+const ccFullName = document.querySelector('#cc_name'),
+    ccNumber = document.querySelector('#cc_number'),
+    ccExpDate = document.querySelector('#cc_exp_date'),
+    ccSecCode = document.querySelector('#cc_security_code');
+
+let ccType = '';
+function choseCC() {
+    const ccLink = document.querySelectorAll('.cards a');
+    const spanPic = document.querySelector('#cc_number').nextElementSibling;   
+    const verify = 
+    ccLink.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.form_container').classList.add('show_form');
+
+            if(this.getAttribute('class') === 'visa') {
+                spanPic.innerHTML = `<img class="visa" src="/images/checkout/visa-panel.png">`;
+                ccType = 'visa';
+                setFields(ccNumber, ccSecCode, ccExpDate, '4xxx xxxx xxxx xxxx', 'xxxx');
+            } else if(this.getAttribute('class') === 'master') {
+                spanPic.innerHTML = `<img class="master" src="/images/checkout/master-panel.png">`;
+                ccType = 'master';
+                setFields(ccNumber, ccSecCode, ccExpDate, '5xxx xxxx xxxx xxxx', 'xxxx');
+            } else if(this.getAttribute('class') === 'american') {
+                spanPic.innerHTML = `<img class="american" src="/images/checkout/american-panel.png">`;
+                ccType = 'american';
+                setFields(ccNumber, ccSecCode, ccExpDate, '3xxx xxxxxx xxxxx', 'xxx');
+            };
+        });
+    });
+};
+choseCC();
+
+function setFields(numInput, secInput, expFormat, numFormat, secFormat) {
+    numInput.setAttribute('placeholder', numFormat);
+    numInput.value = '';
+    numInput.parentElement.querySelector('.verify').textContent = '';
+    
+    secInput.setAttribute('placeholder', secFormat);
+    secInput.value = '';
+    secInput.parentElement.querySelector('.verify').textContent = '';
+    
+    expFormat.setAttribute('placeholder', 'MM/YY');
+    expFormat.value = '';
+    expFormat.parentElement.querySelector('.verify').textContent = '';
+}
+
+//////////////////////////////// CC Full Name ////////////////////////////////
+ccFullName.addEventListener('keyup', ccFullNameInput);
+
+function ccFullNameInput(e) {
+    const string = ccFullName.value;
+    let sp = string.split(' ')
+    let word = new Array();
+    let f,l;
+
+    for(let i=0 ; i<sp.length ; i++) {            
+        f = sp[i].substring(0,1).toUpperCase(); 
+        l = sp[i].substring(1).toLowerCase(); 
+        word[i] = f + l;            
+    }
+    e.target.value = word.join(' ');
+}
+
+//////////////////////////////// CC Number Input ////////////////////////////////
+ccNumber.addEventListener('keyup', ccNumInput);
+
+function ccNumInput() {
+    let ccNumStr = ccNumber.value
+    
+    ccNumStr = ccNumStr.replace(/[^0-9]/g, '');
+    
+    let typeCheck = ccNumStr.substring(0, 2);
+    let ccType = '';
+    let group1 = '';
+    let group2 = '';
+    let group3 = '';
+    let group4 = '';
+    let form = '';
+
+    if(typeCheck.length == 2) {
+        typeCheck = parseInt(typeCheck);
+        if(typeCheck >= 40 && typeCheck <= 49) {
+            ccType = 'Visa';
+        } else if(typeCheck >= 51 && typeCheck <= 59) {
+            ccType = 'Master Card';
+        } else if(typeCheck == 34 || typeCheck == 37) {
+            ccType = 'American Express';
+        } else {
+            ccType = 'Invalid';
+        };
+    };
+
+    group1 = ccNumStr.substring(0, 4);
+        if (group1.length == 4) {
+            group1 = group1 + ' ';
+        };
+
+        if (ccType == 'Visa' || ccType == 'Master Card') {
+            group2 = ccNumStr.substring(4, 8);
+            if (group2.length == 4) {
+                group2 = group2 + ' ';
+            };
+            group3 = ccNumStr.substring(8, 12);
+            if (group3.length == 4) {
+                group3 = group3 + ' ';
+            };
+            group4 = ccNumStr.substring(12, 16);
+
+        } else if (ccType == 'American Express') {
+            group2 =  ccNumStr.substring(4, 10);
+            
+            if (group2.length == 6) {
+                group2 = group2 + ' ';
+            };
+
+            group3 =  ccNumStr.substring(10, 15);
+            group4 = '';
+
+        } else if (ccType == 'Invalid') {
+            // American Express 34 or 37
+            group1 = typeCheck;
+            group2='';
+            group3='';
+            group4='';
+
+            setErrorFor(ccNumber, 'First two digits must be 34 or 37.');                
+        };
+
+        form = group1 + group2 + group3 + group4;
+        ccNumber.value = form;
+};
+
+function ccExpInput() {
+    ccExpDate.addEventListener('keyup', function(e) {
+        let ccExpStr = ccExpDate.value;
+        let numOfKeys = [8];
+        
+        if(numOfKeys.indexOf(ccExpStr) !== -1) return;
+        
+        e.target.value = e.target.value.replace(
+            /^([1-9]\/|[2-9])$/g, '0$1/'
+        ).replace(
+            /^(0[1-9]|1[0-2])$/g, '$1/'
+        ).replace(
+            /^([0-1])([3-9])$/g, '0$1/$2'
+        ).replace(
+            /^(0?[1-9]|1[0-2])([0-9]{2})$/g, '$1/$2'
+        ).replace(
+            /^([0]+)\/|[0]+$/g, '0'
+        ).replace(
+            /[^\d\/]|^[\/]*$/g, ''
+        ).replace(
+            /\/\//g, '/'
+        );            
+    });        
+};
+ccExpInput();
+
+function ccSecCodeInput() {
+    ccSecCode.addEventListener('keyup', function(e) {            
+        if (ccType == 'visa' || ccType == 'master') {
+            e.target.setAttribute('maxlength', '4');
+        }else if (ccType == 'american') {
+            e.target.setAttribute('maxlength', '3');
+        };
+    });
+};
+ccSecCodeInput();
+
+//////////////////////////////// CC Validation ////////////////////////////////
+ccFullName.addEventListener('blur', setFullName, true);
+ccNumber.addEventListener('blur', setCCNumber, true);
+ccExpDate.addEventListener('blur', setExpDate, true);
+ccSecCode.addEventListener('blur', setSecCodeDate, true);
+
+function checkCCInputs() {
+    let retVal = true;
+    
+    if(setFullName() != true) return;
+    if(setCCNumber() != true) return;
+    if(setExpDate() != true) return;
+    if(setSecCodeDate() != true) return;
+
+    return retVal;
+};
+
+function setFullName() {
+    let retVal = true;
+    const ccFullNameValue = ccFullName.value.trim();
+
+    if(ccFullNameValue == null || ccFullNameValue == '') {
+        setErrorFor(ccFullName, 'Please enter your full name');
+        retVal = false;
+    } else if(ccFullNameValue.charAt(0) != ccFullNameValue.charAt(0).toUpperCase()) {
+        setErrorFor(ccFullName, 'First character must by uppercase.');
+        retVal = false;
+    } else {
+        setSuccessFor(ccFullName, 'Success!');
+    };
+
+    return retVal;
+};
+
+function setCCNumber() {
+    const visaRegEx = /^4[0-9]{12}(?:[0-9]{3})?$/;
+    const masterRegEx = /^5[1-5][0-9]{14}$|^2(?:2(?:2[1-9]|[3-9][0-9])|[3-6][0-9][0-9]|7(?:[01][0-9]|20))[0-9]{12}$/;
+    const americanRegEx = /^3[47][0-9]{13}$/;
+    
+    const ccNumberValue = Number(ccNumber.value.replace(/\s/g, ''));
+    let retVal = true;
+
+    // 4155279860457
+    // 5114496353984312
+    // 341256789012345
+    if(ccNumberValue == '') {
+        setErrorFor(ccNumber, 'Please enter your credit card number.');
+        retVal = false;
+    } else if(ccType === 'visa' && !visaRegEx.test(ccNumberValue)) {
+        setErrorFor(ccNumber, 'Please enter a valid credit card number.');
+        retVal = false;
+    } else if(ccType === 'master' && !masterRegEx.test(ccNumberValue)) {    
+        setErrorFor(ccNumber, 'Please enter a valid credit card number.');    
+        retVal = false;
+    } else if(ccType === 'american' && !americanRegEx.test(ccNumberValue)) {  
+        setErrorFor(ccNumber, 'Please enter a valid credit card number.');      
+        retVal = false;
+    } else {
+        // console.log('ok', ccType, ccNumberValue)
+        setSuccessFor(ccNumber, 'Success!');
+    };
+
+    return retVal
+};
+
+function setExpDate() {
+    let retVal = true;
+    let expNum = ccExpDate.value;
+    let newStr = expNum.replace('/', '');    
+    
+    const date = new Date()
+    const month = date.getMonth() + 1;
+    const year = date.getYear() - 100;
+    let today = ''
+    let tMM = Number(today.concat(0, month))
+    let MM = Number(expNum.slice(0, 2));
+    let YY = Number(expNum.slice(3, 5));
+
+
+    if(newStr == null || newStr == '') {
+        setErrorFor(ccExpDate, 'Please enter card expiration date');
+        retVal = false;
+    } else if(MM < tMM) {
+        setErrorFor(ccExpDate, 'Your card has expired (MM)!');
+        retVal = false;
+    } else if(YY < year) {
+        setErrorFor(ccExpDate, 'Your card has expired (YY)!');
+        retVal = false;
+    } else if (newStr.length != 4) {
+        setErrorFor(ccExpDate, 'Format shold be mm/yy');
+        retVal = false;
+    } else {
+        setSuccessFor(ccExpDate, 'Success!');
+    };
+
+    return retVal;
+};
+
+function setSecCodeDate() {
+    let retVal = true;
+    const ccSecCodeValue = ccSecCode.value.trim(); 
+
+    if(ccSecCodeValue == null || ccSecCodeValue == '' || ccSecCodeValue == NaN) {
+        setErrorFor(ccSecCode, 'Please enter valid security code');
+        retVal = false;
+    } else if ((ccType == 'visa' || ccType == 'master') && ccSecCodeValue.length != 4) {
+        setErrorFor(ccSecCode, 'Please enter 4 digits');
+        retVal = false;
+    } else if (ccType == 'american' && ccSecCodeValue.length != 3) {
+        setErrorFor(ccSecCode, 'Please enter 3 digits');
+        retVal = false;
+    }else {
+        setSuccessFor(ccSecCode, 'Success!');
+    };
+
+    return retVal;
+};
+
+//////////////////////////////// set Error / Success msg ////////////////////////////////
+function setErrorFor(input, message) {
+    const inputCont = input.parentElement;
+    const small = inputCont.querySelector('.verify');
+
+    small.innerHTML = message;
+    small.classList = 'verify error';
+
+    input.style.border = '1px solid red';
+};
+
+function setSuccessFor(input, message) {
+    const inputCont = input.parentElement;
+    const small = inputCont.querySelector('.verify');
+
+    small.innerHTML = message;
+    small.classList = 'verify success';
+
+    input.style.border = '1px solid black';
+};
+
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////// Accordions ///////////////////////////////////////
 function accordionBtns() {
     const accBtn = document.querySelectorAll(".info_btn");
 
@@ -655,8 +997,7 @@ function accordionBtns() {
                 panel.style.maxHeight = null;
                 panel.classList.remove('open');
                 this.setAttribute('aria-expanded','false');
-                span.classList.remove('active');
-                
+                span.classList.remove('active');                
             } else{
                 let active = document.querySelectorAll('.radio_bank_btn.active');
                 active.forEach(a => {
@@ -678,3 +1019,9 @@ function accordionBtns() {
     });
 };
 accordionBtns();
+
+function init() {
+    // onPageLoad();
+    fetchCountry();
+};
+init();
