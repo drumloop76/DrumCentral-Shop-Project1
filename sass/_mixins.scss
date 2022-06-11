@@ -300,8 +300,9 @@
 }
 
 @mixin popup_login {
-    position: absolute;
-    background: rgb(197, 235, 197);
+    position: fixed;
+    background: $color-blue;
+    color: $color-text-light;
     width: 400px;
     height: 300px;
     top: 50%;
@@ -309,6 +310,7 @@
     transform: translate(-50%, -50%);
     text-align: center;
     padding: 30px;
+    box-shadow: $product-box-shadow;
     z-index: 999;
     opacity: 0;   //!!!!!!!!!!!!!!!
     visibility: hidden;   //!!!!!!!!!!!!!!!
@@ -323,21 +325,57 @@
         margin-bottom: 30px;
     }
     span {
-        font-size: 20px;
+        font-size: 28px;
         font-weight: 500;
+        text-shadow: $text-shadow;
         // margin: 30px ;
     }
     p {
         font-size: 20px;
-        margin: 30px 0;
+        margin: 25px 0;
     }
-    button {
-        font-size: 20px;
-        padding: 10px 30px;
+    
+    .pop_btn,
+    .pop_btn_logout,
+    .pop_btn_logIn,
+    .procede_btn {
+        font-size: 22px;
+        font-weight: 500;
+        width: 150px;
+        height: 50px;
+        margin: 0 auto;
         border: none;
         outline: none;
+        cursor: pointer;
+        transition: all 300ms;
         &:hover {
-            background: rgb(159, 159, 247);
+            background: $color-red;
+            color: $color-text-light;
+            box-shadow: $product-box-shadow;
+            transform: scale(1.1);
+            transition: 300ms;
+        }
+    }
+    .pop_btn.remove{
+        display: none;
+    }
+    .pop_btn_logout {
+        display: none;
+        &.reveal {
+            display: block;
+        }
+    }
+    .pop_btn_logIn {
+        display: none;
+        &.showBtn {
+            display: block;
+        }
+    }
+    .procede_btn {
+        margin-top: 20px;
+        display: none;
+        &.showPrBtn {
+            display: block;
         }
     }
 }

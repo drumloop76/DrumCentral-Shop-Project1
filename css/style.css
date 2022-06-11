@@ -1541,8 +1541,9 @@
 
 .popup_login,
 .popup_signin {
-  position: absolute;
-  background: rgb(197, 235, 197);
+  position: fixed;
+  background: rgb(64, 120, 224);
+  color: white;
   width: 400px;
   height: 300px;
   top: 50%;
@@ -1550,6 +1551,7 @@
   transform: translate(-50%, -50%);
   text-align: center;
   padding: 30px;
+  box-shadow: 5px 5px 12px 3px rgba(0, 0, 0, 0.1921568627);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
@@ -1568,24 +1570,75 @@
 }
 .popup_login span,
 .popup_signin span {
-  font-size: 20px;
+  font-size: 28px;
   font-weight: 500;
+  text-shadow: 0px 0px 2px #000000;
 }
 .popup_login p,
 .popup_signin p {
   font-size: 20px;
-  margin: 30px 0;
+  margin: 25px 0;
 }
-.popup_login button,
-.popup_signin button {
-  font-size: 20px;
-  padding: 10px 30px;
+.popup_login .pop_btn,
+.popup_login .pop_btn_logout,
+.popup_login .pop_btn_logIn,
+.popup_login .procede_btn,
+.popup_signin .pop_btn,
+.popup_signin .pop_btn_logout,
+.popup_signin .pop_btn_logIn,
+.popup_signin .procede_btn {
+  font-size: 22px;
+  font-weight: 500;
+  width: 150px;
+  height: 50px;
+  margin: 0 auto;
   border: none;
   outline: none;
+  cursor: pointer;
+  transition: all 300ms;
 }
-.popup_login button:hover,
-.popup_signin button:hover {
-  background: rgb(159, 159, 247);
+.popup_login .pop_btn:hover,
+.popup_login .pop_btn_logout:hover,
+.popup_login .pop_btn_logIn:hover,
+.popup_login .procede_btn:hover,
+.popup_signin .pop_btn:hover,
+.popup_signin .pop_btn_logout:hover,
+.popup_signin .pop_btn_logIn:hover,
+.popup_signin .procede_btn:hover {
+  background: #f44336;
+  color: white;
+  box-shadow: 5px 5px 12px 3px rgba(0, 0, 0, 0.1921568627);
+  transform: scale(1.1);
+  transition: 300ms;
+}
+.popup_login .pop_btn.remove,
+.popup_signin .pop_btn.remove {
+  display: none;
+}
+.popup_login .pop_btn_logout,
+.popup_signin .pop_btn_logout {
+  display: none;
+}
+.popup_login .pop_btn_logout.reveal,
+.popup_signin .pop_btn_logout.reveal {
+  display: block;
+}
+.popup_login .pop_btn_logIn,
+.popup_signin .pop_btn_logIn {
+  display: none;
+}
+.popup_login .pop_btn_logIn.showBtn,
+.popup_signin .pop_btn_logIn.showBtn {
+  display: block;
+}
+.popup_login .procede_btn,
+.popup_signin .procede_btn {
+  margin-top: 20px;
+  display: none;
+}
+.popup_login .procede_btn.showPrBtn,
+.popup_signin .procede_btn.showPrBtn {
+  display: block;
 }
 
 .contact_wrapper {

@@ -3,9 +3,9 @@
 import { setingItem, totalCost, span, prodPopMod } from "./lib.js";
 
 window.addEventListener( "DOMContentLoaded", function () {
-    const modalDiv = document.createElement('div');
-    
-    modalDiv.innerHTML = `
+    ///////// Login Modal
+    const modalLoginDiv = document.createElement('div');    
+    modalLoginDiv.innerHTML = `
         <div class="modal_wrapper modal" id="loginModal">
             <div class="modal_container">
                 <div class="login_modal_container modals">
@@ -49,8 +49,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                                 <span>Log in with Linkedin</span>
                             </button>
                         </div>
-                    </div>
-                    
+                    </div>                    
                     <a class="signin_form_btn">Sign In.</a>
                 </div>
                 
@@ -87,59 +86,74 @@ window.addEventListener( "DOMContentLoaded", function () {
                     </form>
                 </div>
             </div>
-
-            <div class="popup_login">
-                <h3>Welcome back</h3>
-                <span></span>
-                <p>You are successfuly loged into DrumCentral!</p>
-                <button class="pop_btn">Go Surf</button>
-            </div>
-        </div>
-
-        <div class="contact_wrapper modal_wrapper modal" id="contactModal">
-            <div class="modal_container">
-                <div class="container_left"></div>
-                
-                <div class="container_right">
-                    <button class="close_modal_btn" data-close-modal>
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                    <h1>Contact Us</h1>
-
-                    <form class="form_contact" action="/" novalidate>
-                        <label for="contact_first_name">First Name:</label>
-                        <div class="contact_login">
-                            <i class="fa-solid fa-user"></i>
-                            <input type="text" name="contact_first_name" id="contact_first_name" class="messageInp">
-                            <span class="verify"></span>
-                        </div>
-                        <label for="contact_last_name">Last Name:</label>
-                        <div class="contact_login">
-                            <i class="fa-solid fa-user"></i>
-                            <input type="text" name="contact_last_name" id="contact_last_name" class="messageInp">
-                            <span class="verify"></span>
-                        </div>
-                        <label for="contact_email">Email: <span>*</span></label>
-                        <div class="contact_login">
-                            <i class="fa-solid fa-at"></i>
-                            <input type="email" name="contact_email" id="contact_email" class="messageInp">
-                            <span class="verify"></span>
-                        </div>
-                        <div class="message_login">
-                            <label for="message">Message: </label>
-                            <textarea name="message" id="message" class="messageInp" cols="30" rows="10" placeholder="Your message"></textarea>
-                            <span class="verify"></span>
-                        </div>
-                        <button class="contact_submit_btn" type="button">Send</button>
-                    </form>
-
-                </div>
-            </div>
         </div>
         `
-    document.body.insertAdjacentElement('beforeend', modalDiv);
+    document.body.insertAdjacentElement('beforeend', modalLoginDiv);
 
-    ///////////////////////////////////// Modals /////////////////////////////////////
+    ///////// Contact Modal
+
+    const modalContactDiv = document.createElement('div');    
+    modalContactDiv.innerHTML = `
+            <div class="contact_wrapper modal_wrapper modal" id="contactModal">
+                    <div class="modal_container">
+                        <div class="container_left"></div>
+                        
+                        <div class="container_right">
+                            <button class="close_modal_btn" data-close-modal>
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                            <h1>Contact Us</h1>
+
+                            <form class="form_contact" action="/" novalidate>
+                                <label for="contact_first_name">First Name:</label>
+                                <div class="contact_login">
+                                    <i class="fa-solid fa-user"></i>
+                                    <input type="text" name="contact_first_name" id="contact_first_name" class="messageInp">
+                                    <span class="verify"></span>
+                                </div>
+                                <label for="contact_last_name">Last Name:</label>
+                                <div class="contact_login">
+                                    <i class="fa-solid fa-user"></i>
+                                    <input type="text" name="contact_last_name" id="contact_last_name" class="messageInp">
+                                    <span class="verify"></span>
+                                </div>
+                                <label for="contact_email">Email: <span>*</span></label>
+                                <div class="contact_login">
+                                    <i class="fa-solid fa-at"></i>
+                                    <input type="email" name="contact_email" id="contact_email" class="messageInp">
+                                    <span class="verify"></span>
+                                </div>
+                                <div class="message_login">
+                                    <label for="message">Message: </label>
+                                    <textarea name="message" id="message" class="messageInp" cols="30" rows="10" placeholder="Your message"></textarea>
+                                    <span class="verify"></span>
+                                </div>
+                                <button class="contact_submit_btn" type="button">Send</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                `;
+    document.body.insertAdjacentElement('beforeend', modalContactDiv);
+
+    ///////// Popup
+
+    const popupDiv = document.createElement('div');
+    popupDiv.innerHTML = `
+            <div class="popup_login">
+                <h3></h3>
+                <span></span>
+                <p></p>
+                <button class="pop_btn"></button>
+                <button class="pop_btn_logout"></button>
+                <button class="pop_btn_logIn" data-modal-target="#loginModal">Log in</button>
+                <button class="procede_btn"></button>
+            </div>
+            `;
+    document.body.insertAdjacentElement('beforeend', popupDiv);        
+
+    ///////////////////////////////////// Open / Close Modals /////////////////////////////////////
 
     const modals = function () {
         const openModalBtn = document.querySelectorAll('[data-modal-target]');
@@ -156,18 +170,24 @@ window.addEventListener( "DOMContentLoaded", function () {
         const togglePassword = document.querySelectorAll('#togglePassword');
         const wrapper = document.querySelector('.wrapper');
 
+        let logedUser = JSON.parse(localStorage.getItem('logedUser'));
+        
         openModalBtn.forEach(btn => {
-            btn.addEventListener('click', function () {
-                const modal = document.querySelector(btn.dataset.modalTarget);
-                openModals(modal);
-                // logInUser()
+            btn.addEventListener('click', function () {   
+                if(logedUser == null) {
+                    const modal = document.querySelector(btn.dataset.modalTarget);
+                    openModals(modal);
+                } else {
+                    document.querySelector('.pop_btn').classList.add('remove');
+                    document.querySelector('.pop_btn_logout').classList.add('reveal');
+                    logedUserPop();
+                };
             });
         });
-
+        
         openContactModalBtn.forEach(btn => {
             btn.addEventListener('click', function () {
                 const modal = document.querySelector(btn.dataset.contactTarget);
-                // openContactModal(modal);
                 openModals(modal);
             });
         });
@@ -181,7 +201,7 @@ window.addEventListener( "DOMContentLoaded", function () {
 
         overlay.addEventListener('click', function () {
             const modal = document.querySelector('.active_modal');
-            closeModal(modal);
+            closeModal(modal);            
         });
 
         function openModals(mod) {
@@ -191,7 +211,7 @@ window.addEventListener( "DOMContentLoaded", function () {
             overlay.classList.add('active_modal');
             modalContainer.style.left = "0px";
             wrapper.style.filter = "blur(3.5px)";
-            document.querySelector('body').style.overflow = 'hidden';
+            document.querySelector('body').style.overflow = 'hidden';            
         };
 
         function closeModal(modal) {
@@ -235,20 +255,143 @@ window.addEventListener( "DOMContentLoaded", function () {
             });
         });
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////// Modal Dialog Btns /////////////////////////////////////////////////////
+        const popup = document.querySelector('.popup_login');
+        const popBtn = document.querySelector('.pop_btn');
+        const popBtnLogout = document.querySelector('.pop_btn_logout');
+        const popBtnLogIn = document.querySelector('.pop_btn_logIn');
+        const popBtnProcede = document.querySelector('.procede_btn');
+
+        function login(exist, emailValue, passwordValue) {
+            if(!exist){
+                document.querySelector('.submit_login_btn').disabled = true;
+                popup.classList.add('open_popup');
+                document.querySelector('.popup_login h3').textContent = 'Ooopppssss...!';
+                document.querySelector('.popup_login span').textContent = 'Incorrect login credentials';
+                document.querySelector('.popup_login p').textContent = 'Try again.';
+                popBtn.textContent = 'Go to login';
+
+                popBtn.addEventListener('click', () => {
+                    popupModClose(exist);
+                })
+            } else {
+                JSON.parse(localStorage.getItem('formData')).find(d => {
+                    if(d.email.toLowerCase() === emailValue.toLowerCase() && d.password.toLowerCase() === passwordValue.toLowerCase()) {
+                        document.querySelector('.submit_login_btn').disabled = true;
+                        // nav welcome
+                        document.querySelector('.nav_info_top span').textContent = `Welcome ${d.firstName}`; 
+                        // user modal btns
+                        document.querySelector('.login_logout_link').style.display = "none";
+                        document.querySelector('.loged_user_btn').style.display = "block";  
+                        // popup
+                        popup.classList.add('open_popup');
+                        document.querySelector('.popup_login h3').textContent = 'Welcome';
+                        document.querySelector('.popup_login span').textContent = `${d.firstName} ${d.lastName}`;
+                        document.querySelector('.popup_login p').textContent = 'You are successfuly loged into DrumCentral!.';
+                        popBtn.textContent = 'Go surf';                                
+                        
+                        let logedUser = JSON.parse(localStorage.getItem('logedUser')) || [];
+                        logedUser.push(logedUser);
+                        localStorage.setItem('logedUser', JSON.stringify(d));
+                    };
+                });
+                popupModClose(exist);
+            };
+        };
+    
+
+        function popupModClose(exist) {
+            popBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if(exist == true) {
+                    document.querySelector('.submit_login_btn').disabled = false;
+                    const modal = document.querySelector('.modal_wrapper');
+                    closeModal(modal);
+                    location.reload(); ///////////////////////////
+                } else {
+                    document.querySelector('.submit_login_btn').disabled = false;
+                    popup.classList.remove('open_popup');
+                    document.querySelector('#login_form').reset();
+                    document.querySelectorAll('.input_login .verify').forEach(s => {
+                        s.innerHTML = '';
+                    });
+                };
+            });
+        };
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        function logedUserPop() {
+            if(logedUser == null || logedUser == []) return;
+
+            if(logedUser) {
+                popup.classList.add('open_popup');
+                document.querySelector('.popup_login h3').textContent = 'Ooopppssss...!';
+                document.querySelector('.popup_login p').textContent = 'You are allready loged in.';
+                document.querySelector('.popup_login p').style.marginBottom = '40px';
+                popBtnLogout.textContent = 'Log out';
+                popBtnProcede.textContent = 'Go back';
+                popBtnProcede.classList.add('showPrBtn');
+
+                logOut();
+                procedeBtn();                
+            };
+        };
+        
+        /*--------------------------------------------------*/
+        function logOut() {
+            popBtnLogout.addEventListener('click', () => {
+                popBtnLogout.classList.remove('reveal');                
+                localStorage.removeItem('logedUser');
+                document.querySelector('.popup_login h3').textContent = 'You are loged out';
+                document.querySelector('.popup_login p').textContent = '';
+                popBtnLogIn.classList.add('showBtn');
+                popBtn.textContent = 'Log in';
+
+                logInPopBtn();
+                procedeBtn();
+            });
+        };
+
+        /*-------------------------------------------------*/
+
+        function logInPopBtn() {
+            popBtnLogIn.addEventListener('click', () => {
+                popup.classList.remove('open_popup');
+                popBtn.classList.remove('remove');
+                popBtnLogout.classList.remove('reveal');
+                popBtnLogIn.classList.remove('showBtn');
+                popBtnProcede.classList.remove('showPrBtn');
+
+                document.querySelector('.popup_login h3').textContent = '';
+                document.querySelector('.popup_login p').textContent = '';
+                // location.reload(); ///////////////////////////
+                
+                const modal = document.querySelector('.modal_wrapper');
+                openModals(modal);
+            });
+        };
+        
+        /*--------------------------------------------------*/
+
+        function procedeBtn() {            
+            popBtnProcede.addEventListener('click', () => {
+                popup.classList.remove('open_popup');
+                popBtnLogIn.classList.remove('showBtn');
+            });
+        };
+
         ///////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////// Login  Form /////////////////////////////////////////        
 
         const validateLogIn = function() {
             const email = document.querySelector('#login_email');
             const password = document.querySelector('#login_password');
-            const formBtn = document.querySelector('.submit_login_btn')
-            const popup = document.querySelector('.popup_login');
-            const popBtn = document.querySelector('.pop_btn');
+            const formBtn = document.querySelector('.submit_login_btn');
 
-            
             formBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                
                 if(checkLogInputs() != true) {
                     document.querySelectorAll('.logInp').forEach(inp => {                
                         const inputCont = inp.parentElement;
@@ -274,53 +417,9 @@ window.addEventListener( "DOMContentLoaded", function () {
                             data.email.toLowerCase() == emailValue.toLowerCase() && 
                             data.password.toLowerCase() == passwordValue.toLowerCase()
                     );
-                    
-                    if(!exist){
-                        popup.classList.add('open_popup');
-                        document.querySelector('.popup_login h3').textContent = 'Ooopppssss...!';
-                        document.querySelector('.popup_login span').textContent = 'Incorrect login credentials';
-                        document.querySelector('.popup_login p').textContent = 'Try again.';
-                        document.querySelector('.pop_btn').textContent = 'Log In';
-                        popupModClose(exist)
-                    } else {
-                        popup.classList.add('open_popup');
-                        document.querySelector('.popup_login span').textContent = `${email}`;
-                        document.querySelector('.login_logout_link').style.display = "none";
-                        document.querySelector('.loged_user_btn').style.display = "block";
-                        document.querySelector('.pop_btn').textContent = 'Go surf';
-                        // // setUserBtn();
-                        // ///////////////////// Loged User //////////////////////
-                        JSON.parse(localStorage.getItem('formData')).find(d => {
-                            if(d.email.toLowerCase() === emailValue.toLowerCase() && d.password.toLowerCase() === passwordValue.toLowerCase()) {
-                                document.querySelector('.popup_login span').textContent = `${d.firstName} ${d.lastName}`;
-                                document.querySelector('.nav_info_top span').textContent = `Welcome ${d.firstName}`
-                                let logedUser = JSON.parse(localStorage.getItem('logedUser')) || [];
-                                logedUser.push(logedUser);
-                                localStorage.setItem('logedUser', JSON.stringify(d));
 
-                            };
-                        });
-                        popupModClose(exist)
-                    };
-                };
-
-                function popupModClose(exist) {
-                    popBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        if(exist) {
-                            document.querySelector('.submit_signin_btn').disabled = false;
-                            const modal = document.querySelector('.modal_wrapper');
-                            closeModal(modal);
-                            location.reload();
-                        } else {
-                            // document.querySelector('.submit_signin_btn').disabled = false;
-                            document.querySelector('.popup_login').classList.remove('open_popup');
-                            document.querySelector('#login_form').reset();
-                            document.querySelectorAll('.input_login .verify').forEach(s => {
-                                s.innerHTML = '';
-                            });
-                        };
-                    });
+                    login(exist, emailValue, passwordValue);
+                    logInPopBtn();
                 };
             });
         
@@ -435,7 +534,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                             data.password.toLowerCase() == password.toLowerCase()
                         );
                     
-                    if(!exist){                        
+                    if(!exist){                   
                         formData.push({firstName, lastName, email, password});
                         localStorage.setItem('formData', JSON.stringify(formData));
 
@@ -477,7 +576,8 @@ window.addEventListener( "DOMContentLoaded", function () {
                 };
             });
 
-            //////////////////////////////////////// sign validation ////////////////////////////////////////
+            //////////////////////////////////////// sign validation //////////////////////////////////////// 
+
             firstName.addEventListener('blur', setSignFirstName, true);
             lastName.addEventListener('blur', setSignLastName, true);
             email.addEventListener('blur', setSignEmail, true);
@@ -753,7 +853,6 @@ window.addEventListener( "DOMContentLoaded", function () {
                     };
         
                     function cardModal(product) {
-                        console.log(product)
                         let userProductsInCart = JSON.parse(localStorage.getItem('userProductsInCart'));
                         const modalDiv = document.createElement('div');
                         modalDiv.innerHTML = `
@@ -864,7 +963,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                             slider.scrollLeft = 0;
                             cardOverlay.classList.remove('show_overlay');
                             document.querySelector('body').style.overflow = 'auto';
-                            location.reload(); ////////////////////////////////////////////////
+                            // location.reload(); ////////////////////////////////////////////////
                             clearInputField();
                         }); 
 
@@ -881,7 +980,6 @@ window.addEventListener( "DOMContentLoaded", function () {
                             };
 
                             if(!arr.includes(nameEl)) {
-                                console.log('ne')
                                 prodTxt.parentElement.removeAttribute('disabled');
                                 prodTxt.innerHTML = 'Add to cart';
                                 prodTxt.parentElement.style.cursor = 'auto';
@@ -889,36 +987,36 @@ window.addEventListener( "DOMContentLoaded", function () {
                             };
 
                             if(arr.includes(nameEl)) {
-                                console.log('da')
                                 prodTxt.innerHTML = 'In Cart';
                                 prodTxt.style.color = '$color-text-light';
                                 prodTxt.parentElement.classList.add('active');
                                 prodTxt.parentElement.setAttribute('disabled', '');                            
                             };
                         };
-
-                        
+                      
                         ///////////////////////////////////////////////////////////////////////////////////////
                         ///////////////////////////////////// ADD TO CART /////////////////////////////////////
                         const addToCartBtn = document.querySelectorAll('[data-cart="add_to_cart_modal_btn"]');
                         addToCartBtn.forEach((btn, i) => {
                             btn.addEventListener('click', (e) => {
+                                e.preventDefault()
                                 e.target.textContent = 'In Cart';
                                 e.target.parentElement.classList.add('active');
                                 e.target.parentElement.setAttribute('disabled', '');
-
-                                if(localStorage.getItem('logedUser') == null) {
-                                    console.log('ll', product)
-                                    setCartNumbers(product);
-                                    setTotalCost(product);
-                                } else {
-                                    console.log('uu', product)
-                                    setCartNumbers(product);
-                                    setTotalCost(product);
+                                const targetName = e.target.closest('.card_modal').children[1].firstElementChild.firstElementChild.innerHTML;
+                                if(targetName === product.name) {
+                                    if(localStorage.getItem('logedUser') == null) {
+                                        setCartNumbers(product);
+                                        setTotalCost(product);
+                                    } else {
+                                        setCartNumbers(product);
+                                        setTotalCost(product);
+                                        displayCartItem();
+                                    };
                                 };
                             });
                         });
-        
+     
                         ///////////////////////////////////// cart Numbers /////////////////////////////////////
                         function setCartNumbers(product) {
                             if(localStorage.getItem('logedUser') == null) {
@@ -935,9 +1033,11 @@ window.addEventListener( "DOMContentLoaded", function () {
                                 if(productNumbers) {
                                     localStorage.setItem(key, productNumbers + 1);
                                     setProdSpan(productNumbers + 1) ;
+                                    tabCartSpan(productNumbers + 1)
                                 } else {
                                     localStorage.setItem(key, 1);
-                                    setProdSpan(1); 
+                                    setProdSpan(1);
+                                    tabCartSpan(1)
                                 };                
                                 setItems(product);
                             };                            
@@ -961,12 +1061,14 @@ window.addEventListener( "DOMContentLoaded", function () {
                             if(localStorage.getItem('logedUser') == null) { 
                                 let productNumbers = parseInt(localStorage.getItem('localCartNumbers'));
                                 span(number, productNumbers);
+                                // spanCL(number)
                             } else {
                                 let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
                                 span(number, productNumbers);
+                                // spanCL(number)
                             };
                         };
-        
+                        
                         ///////////////////////////////////// totalCost /////////////////////////////////////
                         function setTotalCost(product) {
                             if(localStorage.getItem('logedUser') == null) { 
@@ -1003,7 +1105,6 @@ window.addEventListener( "DOMContentLoaded", function () {
                                     productId(number - 1);
                                 };
                             };
-                            console.log(document.querySelector('.card_modal'))
                             document.querySelector('.card_modal').classList.add('show_prod_modal');
                             cardOverlay.classList.add('show_overlay');
                             document.querySelector('body').style.overflow = 'hidden';
@@ -1019,7 +1120,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                         } else {
                             document.querySelector('body').style.overflow = 'auto';
                         }
-                        location.reload() /////////////////////////////////////////////
+                        // location.reload() /////////////////////////////////////////////
                         clearInputField();
                     });
         
@@ -1194,11 +1295,9 @@ window.addEventListener( "DOMContentLoaded", function () {
         
                         document.querySelectorAll('[data-wlProduct-target="#productWLModal"]').forEach(btn => {
                             btn.addEventListener('click', function(e) {
-                                console.log(e.target)
                                 if(logedUser && e.target.classList.contains('product_name')) {
                                     Object.values(wlItems).map(item => {
                                         if(e.target.textContent === item.name) {
-                                            console.log(item)
                                             cardModal(item);                                
                                         };                            
                                     });
@@ -1217,24 +1316,27 @@ window.addEventListener( "DOMContentLoaded", function () {
                         addToCartBtn.forEach(btn => {
                             btn.addEventListener('click', (e) => {
                                 let itemName = e.target.parentElement.parentElement.parentElement.children[0].innerHTML;
+
                                 setWLCartNumbers(items[itemName]);
                                 wlTotalCost(items[itemName]);
                                 // displayCartItem();
                             });
                         });
                     };
-        
+   
                     ///////////////////////////////////// cart Numbers /////////////////////////////////////
                     function setWLCartNumbers(product) {
                         let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
-  ///                      
+                   
                         if(productNumbers) {
                             localStorage.setItem('userCartNumbers', productNumbers + 1);
                             setSpan(productNumbers + 1);
+                            span2(productNumbers + 1)
                             tabCartSpan(productNumbers + 1);
                         } else {
                             localStorage.setItem('userCartNumbers', 1);
-                            setSpan(1); 
+                            setSpan(1);
+                            span2(1)
                             tabCartSpan(1);                            
                         };                
                         setWLItems(product);
@@ -1243,7 +1345,6 @@ window.addEventListener( "DOMContentLoaded", function () {
                     ///////////////////////////////////// set Items /////////////////////////////////////
 
                     function setWLItems(product) {
-                        console.log('gugu',product)
                         let cartItems = JSON.parse(localStorage.getItem('userProductsInCart'));
                         const key = 'userProductsInCart';
                         setingItem(product, cartItems, key);
@@ -1251,7 +1352,6 @@ window.addEventListener( "DOMContentLoaded", function () {
 
                     ///////////////////////////////////// SPAN /////////////////////////////////////
                     function setSpan(number) {
-                        // console.log(number)
                         let productNumbers = parseInt(localStorage.getItem('userCartNumbers'));
                         span(number, productNumbers);
                     };        
@@ -1337,7 +1437,6 @@ window.addEventListener( "DOMContentLoaded", function () {
                             document.querySelector('.tc_span').style.display = "none";
                         } else {
                             document.querySelector('.tc_span').style.display = "block";
-                            // span(productNumbers)
                         };
                     };
         
@@ -1371,7 +1470,6 @@ window.addEventListener( "DOMContentLoaded", function () {
                             numSpan.style.display = "block";
                             numSpan.textContent = `${productNumbers}`;
                             span2(productNumbers)
-                            // span(productNumbers)
                         };
                     };
         
@@ -1538,7 +1636,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                             
                             displayCartItem();
                             onLoadTabCartNumbers();
-                            // location.reload();
+                            // location.reload(); /////////////////////////////
                         });                
                     };
         
@@ -1549,7 +1647,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                         document.querySelector('.close_user_modal_btn').addEventListener('click', () => {
                             document.querySelector('.user_page').classList.remove('open_user_modal');
                             document.querySelector('.wrapper').style.filter = "";
-                            location.reload();
+                            location.reload(); ///////////////////////////////////////////////////
                         });
                     };
                     closeUserDiv();
@@ -1568,7 +1666,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                             document.querySelector('.login_btn').classList.add('open');
                             document.querySelector('.cart_list_content').innerHTML = '';
                             document.querySelector('.wish_list_content').innerHTML = '';
-                            // location.reload();
+                            // location.reload(); /////////////////////////////
                         });
                     };
                     logout();
@@ -1589,9 +1687,8 @@ window.addEventListener( "DOMContentLoaded", function () {
                     logInUser();
 
                     function init() {
-                        // displayCartItem();
+                        displayCartItem();
                         onLoadTabCartNumbers();
-                        
                     };
                     init();
                 });
