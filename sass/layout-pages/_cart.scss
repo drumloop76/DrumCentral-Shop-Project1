@@ -191,6 +191,9 @@
                 @include laptop {
                     margin: 0 5px;
                 }
+                @include mobile {
+                    margin: 0 0;
+                }
             }
         }
         .item_price {

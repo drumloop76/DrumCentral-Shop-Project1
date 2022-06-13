@@ -15,10 +15,16 @@ const navToggler = function () {
     toggler.addEventListener('click', function () {
         line.forEach((el) => {
             el.classList.toggle('active');
-            el.classList.toggle('not-active');
-        })
+            el.classList.toggle('not-active');           
+        });
         toggler.classList.toggle('open');
         navContainer.classList.toggle('open');
+
+        if(navContainer.classList.contains('open')) {
+            document.querySelector('body').style.overflow = 'hidden';
+        } else {
+            document.querySelector('body').style.overflow = 'auto';
+        }
         
         if (window.innerWidth > mediaSizeMobile && !submenuBtn.classList.contains('open_sub')) {
             navLinks.forEach((link, i) => {

@@ -272,9 +272,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                 document.querySelector('.popup_login p').textContent = 'Try again.';
                 popBtn.textContent = 'Go to login';
 
-                popBtn.addEventListener('click', () => {
-                    popupModClose(exist);
-                })
+                popupModClose(exist)
             } else {
                 JSON.parse(localStorage.getItem('formData')).find(d => {
                     if(d.email.toLowerCase() === emailValue.toLowerCase() && d.password.toLowerCase() === passwordValue.toLowerCase()) {
@@ -299,7 +297,6 @@ window.addEventListener( "DOMContentLoaded", function () {
                 popupModClose(exist);
             };
         };
-    
 
         function popupModClose(exist) {
             popBtn.addEventListener('click', (e) => {
@@ -1181,7 +1178,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                                     <div class="user_tabs">
                                         <button class="tab_btn active_tab" data-tab="cart">Cart <span class="tc_span"></span></button>
                                         <button class="tab_btn" data-tab="wish_list">Wish list <span class="wl_span"></span></button>
-                                        <button class="tab_btn" data-tab="something">Something</button>
+                                        <button class="tab_btn" data-tab="something">Purchases</button>
                                     </div>
         
                                     <div id="cart" class="tab_container active">
@@ -1199,7 +1196,6 @@ window.addEventListener( "DOMContentLoaded", function () {
         
                                     <div id="wish_list" class="tab_container">
                                         <div class="wish_btns">
-                                            <button class="">Hide all</button>
                                             <button class="remove_all_wl">Remove all</button>
                                         </div>
                                         <div class="wish_list_content">
@@ -1239,14 +1235,12 @@ window.addEventListener( "DOMContentLoaded", function () {
                                             </div>
                                             <div class="info_container">
                                                 <a class="card_btn open_prod_modal product_name wl_prod" data-wlProduct-target="#productWLModal">${item.name}</a>
-                                                <div class="shop_container">
-                                                    <span>€ ${item.price}</span>
+                                                <div class="cart_shop_container wl_shop_container">
+                                                    <span class="cart_price">€ ${item.price}</span>
                                                     <a class="shop open_cart" data-cart="user_add_to_cart_btn">
                                                         <i class="fas fa-cart-arrow-down"></i>
                                                     </a>
-                                                    <a href="/pages/cart.html" class="open_cart_btn">
-                                                        Go to cart
-                                                    </a>
+                                                    <a href="/pages/cart.html" class="open_cart_btn">Go to cart</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -1473,7 +1467,6 @@ window.addEventListener( "DOMContentLoaded", function () {
                         };
                     };
         
-                    // function span(number) {
                     function span2(number) {
                         const numSpan = document.querySelectorAll('.shop span');
                         numSpan.forEach(s => {
@@ -1519,16 +1512,15 @@ window.addEventListener( "DOMContentLoaded", function () {
                                                 <img class="product_img" src="${item.image}">
                                             </div>
                                             <div class="info_container">
-                                                <a class="card_btn open_prod_modal item_name" data-product-target="#productCartModal">${item.name}</a>
-                                                
-                                                <div class="shop_container cart_shop_container">
-                                                    <span>€ ${item.price}</span>
+                                                <a class="card_btn open_prod_modal item_name" data-product-target="#productCartModal">${item.name}</a>                                                
+                                                <div class="cart_shop_container">
+                                                    <span class="cart_price">€ ${item.price}</span>
                                                     <div class="cart_quantity">
                                                         <i class="fa-solid fa-angle-left left"></i>
                                                         <span class="cart_q">${item.inCart}</span>
                                                         <i class="fa-solid fa-angle-right right"></i>
                                                     </div>
-                                                    <span>€ ${item.inCart * item.price}</span>
+                                                    <span class="cart_full_price">€ ${item.inCart * item.price}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1677,7 +1669,6 @@ window.addEventListener( "DOMContentLoaded", function () {
                             document.querySelector('.user_page').classList.remove('open_user_modal');
                             openModals(modal);
                             let productNumbers = parseInt(localStorage.getItem('localCartNumbers'));
-                            // setSpan(productNumbers)
                             const numSpan = document.querySelectorAll('.shop span');
                             numSpan.forEach(s => {
                                 s.textContent = `${productNumbers}`;

@@ -495,7 +495,7 @@ const drumsets = function() {
                                     <p>${item.description[3]}</p>
                                     <!--<p class="desc">${item.description}</p>-->
                                     <hr>
-                                    <p>${item.woodPly}</p>
+                                    <p>${item.color}</p>
                                     <p>${item.edges}</p>
                                 </div>
                                 <button class="remove_box_btn">Remove</button>

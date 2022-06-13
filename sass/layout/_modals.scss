@@ -766,10 +766,14 @@
         height: 100%;
         background: $color-text-light;
         padding: 30px;
-        transform: translateX(650px);
+        transform: translateX(900px);
         transition: all 300ms ease;
         overflow-y: auto;
         z-index: 200;
+        @include tablet {
+            width: 100%;
+            padding: 30px 10px;
+        }
         &.open_user_modal {
             transform: translateX(0);
             transition: all 300ms ease-out;
@@ -792,6 +796,9 @@
             justify-content: space-between;
             margin: 20px 0;
             padding: 20px 20px;
+            @include tablet {
+                // margin: 0;
+            }
             h1 {
                 text-align: center;
                 span {
@@ -909,7 +916,7 @@
         }
     }
 
-    ///////////////////////// Wish List ////////////////////////////    
+    ///////////////////////// Wish List / Cart items ////////////////////////////    
     .list_box {
         position: relative;
         width: 100%;
@@ -918,7 +925,11 @@
         padding: 10px;
         border-bottom: 1px solid black;
         .remove_btn {
+            background: #18b5ce;
             @include closeModalBtn;
+            @include tablet {
+                
+            }
         }
     }
     .box_content_container {
@@ -934,10 +945,15 @@
         }
         .img_container {
             background: $bg-product-container;
-            width: 150px;
-            height: 110px;
+            width: 140px;
+            height: 100%;
+            position: relative;
             .product_img {
-                width: 150px;
+                position: absolute;
+                width: 140px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
         }
         .info_container {
@@ -946,7 +962,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            .item_name {
+            .item_name,
+            .product_name {
                 font-size: 20px;
                 font-weight: 500;
                 color: $color-product-links;
@@ -954,9 +971,10 @@
             }
         }
     }
-    .cart_shop_container{
+    .info_container .cart_shop_container{
         display: flex;
-        
+        justify-content: space-evenly;
+        align-items: center;
         .cart_quantity {
             .fa-solid {
                 font-size: 22px;
@@ -979,27 +997,30 @@
                     margin: 0 5px;
                 }
             }
-        }
-    }
-    
-    .info_container .shop_container {
-        // background: darkgrey;
-        span {
+        }        
+        .cart_price,
+        .cart_full_price {
             font-size: 22px;
             font-weight: 500;
-            margin-right: 30px;
+            min-width: 33%;
+        }
+        .cart_full_price {
+            text-align: right;
         }
         .open_cart {
+            width: 33%;
             font-size: 24px;
             color: $color-product-links;
-            margin-right: 30px;
             cursor: pointer;
+            text-align: center;
         }
         .open_cart_btn {
+            width: 33%;
             font-size: 18px;
             font-weight: 500;
             color: $color-product-links;
-        }
+            text-align: right;
+        } 
     }
     ////////////////////////////////////////////////////////////
     //////////////////////////// popup /////////////////////////

@@ -53,7 +53,7 @@
         width: 100%;
         height: 65px;
         background: $bg-nav-dropdown-main;
-        padding-left: 4%;
+        padding-left: 3%;
         padding-right: 3%;
         display: flex;
         justify-content: space-between;
@@ -65,7 +65,7 @@
         }
         @include tablet {
             position: fixed;
-            width: 350px;
+            width: 360px;
             height: 100vh;
             background: $bg-nav-footer;
             top: 0;
@@ -81,14 +81,11 @@
         }
         @include mobile {
             width: 100%;
-            height: fit-content;
             padding: 0;
             margin: 0;
             left: 0;
             transform: translateY(-880px);
             transition: transform 300ms ease-out;
-            // overflow-y: auto;  //!!!!!!!!!!!!!!
-            // overflow-x: hidden;  //!!!!!!!!!!!!!!
         }
         &.open {
             transform: translateX(0);
@@ -99,7 +96,10 @@
             }
         }
         .nav_logo {
-            @include logo;
+            @include logo;         
+            @include mobile {
+                padding-top: 12px;
+            }   
         }
     }
     // ------------------- Nav-List ---------------------
@@ -111,6 +111,10 @@
         @include tablet {
             flex-direction: column;
             height: fit-content;
+
+        }
+        @include mobile {
+            // margin-top: 20px;
         }
     }
     .main_nav .nav_list {
@@ -126,8 +130,7 @@
         }
         @include mobile {
             justify-content: flex-start;
-            padding: 0;
-            margin-bottom: 20px;
+            padding: 20px 0 30px 0px;
         }
     }
     .nav_list .list_item {
@@ -139,7 +142,7 @@
             margin-right: 2%;
         }
         @include laptop {
-            margin-right: 0%;
+            margin-right: 1%;
         }
         @include tablet {
             height: fit-content;
@@ -229,36 +232,87 @@
             }
         }
     }
-    .main_nav .shop,
-    .main_nav .login_logout_link,
-    .main_nav .loged_user_btn {
-        position: relative;
-        display: block;
-        color: #000d38; //!!!!!!!!!!!!!!!!!
-        font-size: 20px;
-        margin-left: 2%;
-        padding: 3px;
-        cursor: pointer;
-        z-index: 50;
-        &:hover {
-            color: $color-hover-nav-btns;
-        }
-        @include laptop {
-            margin-left: 1%;
-        }
+    .action_div {
+        // background-color: darkgoldenrod;
+        height: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        // margin-left: 10px;
         @include tablet {
-            margin-top: 30px;
-            font-size: 35px;
-            transform: translateX(-3px);
+            width: 100%;
+            // justify-content: flex-end;
         }
-        @include mobile {
-            margin-right: 0;
-            transform: translateX(-5px);
+        .shop,
+        .login_logout_link,
+        .loged_user_btn {
+            position: relative;
+            display: block;
+            color: #000d38; //!!!!!!!!!!!!!!!!!
+            font-size: 22px;
+            margin-left: 30px;
+            padding: 3px;
+            cursor: pointer;
+            z-index: 50;
+            &:hover {
+                color: $color-hover-nav-btns;
+            }
+            @include desktop {
+                font-size: 20px;
+                margin-left: 20px;
+            }
+            @include laptop {
+                margin-left: 15px;
+            }
+            @include tablet {
+                padding: 0;
+                width: 50%;
+                margin: 40px 0 0 0;
+                font-size: 35px;
+                text-align: center;
+                color: $color-text-light;
+                &:hover {
+                    color: $color-product-links-hover;
+                }
+                .fa-cart-shopping {
+                    transform: translateX(-40px);
+                    
+                    
+                }
+                .fa-user,
+                .fa-user-check {
+                    transform: translateX(40px);
+                }
+            }
+            @include mobile {
+                margin-right: 0;
+                transform: translateX(-5px);
+                .fa-cart-shopping {
+                    transform: translateX(-60px);
+                }
+                .fa-user,
+                .fa-user-check {
+                    transform: translateX(60px);
+                }
+            }            
+            
         }
-        span {
-            @include cartBtnSpan;
+        .shop {
+            @include tablet {
+                
+            }
+            span {
+                @include cartBtnSpan;
+                @include tablet {
+                    transform: translateX(30px);
+                }
+                @include mobile {
+                    transform: translateX(50px);
+                }
+            }
         }
     }
+    
     //////////////////////////// Loged User ////////////////////////////
     .main_nav .loged_user_btn {
         display: none;
@@ -266,6 +320,12 @@
     
     .loged_user_btn .fa-user-check {
         color: $color-product-links;
+        @include tablet {
+            color: $color-text-light;
+            &:hover {
+                color: $color-product-links-hover;
+            }
+        }
     }
     
     @keyframes linksSlide {
@@ -510,7 +570,7 @@
         }   
         .fa-search {
             cursor: pointer;
-            font-size: 17px;
+            font-size: 20px;
             transform: rotate(0deg);
             transition: all 400ms cubic-bezier(0.650, -0.600, 0.240, 1.650);
             @include tablet {
@@ -747,9 +807,11 @@
             display: block;
             background: rgb(3, 3, 3);
             z-index: 250;
+            // right: 20px;
             &.open {
                 background: transparent;
                 box-shadow: none;
+                // right: 20px;
                 transform: translateX(0px);
                 transition: all 350ms ease-out;
             }

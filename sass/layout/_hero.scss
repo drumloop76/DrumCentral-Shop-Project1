@@ -42,21 +42,20 @@
         display: flex;
         .img_dots {
             border: none;
-            /* background-color: #f1ce05; */
             opacity: 0.5;
             height: 15px;
             width: 15px;
             border-radius: 50%;
             margin-right: 15px;
             cursor: pointer;
-            transition: all 0.5s;
+            transition: all 400ms;
             background: rgb(76, 232, 243);
         }
         .img_dots:last-child {
             margin: 0;
         }
         .img_dots-active {
-            background-color: rgb(255, 255, 255);
+            background-color: $color-text-light;
             opacity: 1;
         }
     }
@@ -69,7 +68,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: transform 1s;    /*!!!!!!!!!!!!!!*/
+        transition: transform 400ms ease-out;    /*!!!!!!!!!!!!!!*/
         overflow: hidden;
         .sliderImg {
             width: 100%;    /* !!!!!!!!! */
@@ -85,7 +84,6 @@
         .main_logo_container {
             width: 650px;
             height: 100%;
-            // background: rgb(229, 255, 0);
             margin-left: 10%;
             display: flex;
             flex-direction: column;
@@ -103,7 +101,6 @@
         }
     }
     .main_logo_container .main_logo {
-        // background: rgb(220, 20, 220);
         position: relative;
         width: 100%;
         height: 150px;
@@ -111,7 +108,6 @@
             height: 110px;
         }
         .main_header-one {
-            // background: brown;
             text-align: center;
             @include heroHeaders;
             @include desktop {
@@ -131,7 +127,7 @@
                 &.start {
                     opacity: 1;
                     transform: translateX(-300px);
-                    transition: ease-in-out 0.2s;
+                    transition: ease-in-out 200ms;
                 }
             }
             &.big {
@@ -143,7 +139,6 @@
             }
         }
         .main_header-two {
-            // background: burlywood;
             position: absolute;
             top: 85px;
             padding-left: 50%;
@@ -167,19 +162,17 @@
             &.start {
                 opacity: 1;
                 transform: translateX(0px);
-                transition: ease-in-out 0.3s;
+                transition: ease-in-out 200ms;
             }
         }
     }
         
     .main_logo_container .main_header-text{
-        // background: red;
         padding: 0 20px;
         font-size: 18px;
         color: $color-text-light;
         text-align: center;
         opacity: 0;
-        transition: all 300ms ease-out;
         @include desktop {
             font-size: 17px;
             // top: 68px;
@@ -187,7 +180,7 @@
         }
         &.start {
             opacity: 1;
-            transition: all 300ms ease-out;
+            transition: all 200ms ease-out;
         }
     }
     .main_logo_container a{
@@ -204,11 +197,10 @@
         &.main_header-btn {
             opacity: 0;
             transform: scale(0);
-            transition: all 300ms ease-out;
             &.start {
                 opacity: 1;
                 transform: scale(1);
-                transition: all 300ms ease-out;
+                transition: all 200ms ease-out;
             }
         }
     }
@@ -216,12 +208,10 @@
 
     // ------------------------ drumset header ---------------------------------
     .main_logo_container .main_logo_drums {
-        // background: blueviolet;
         width: 100%;
         min-height: 150px;
         position: relative;
         .drums_header-top {
-            // background: darkturquoise;
             padding-left: 50px;
             @include heroHeaders;
             opacity: 0;
@@ -235,12 +225,11 @@
             &.anima {
                 opacity: 1;
                 transform: translateX(0px);
-                transition: all 500ms ease-out;
-                transition-delay: 800ms;
+                transition: all 300ms ease-out;
+                transition-delay: 400ms;
             }
         }    
         .drums_header-bottom {
-            // background: deeppink;
             position: absolute;
             @include heroHeaders;
             color: rgb(235, 100, 107);
@@ -262,14 +251,12 @@
                 opacity: 1;
                 visibility: visible;
                 transform: translateX(0px);
-                transition: all 500ms ease-out;
-                transition-delay: 800ms;
+                transition: all 300ms ease-out;
+                transition-delay: 500ms;
             }
         }
         p {
             position: absolute;
-            // background: #16ac66;
-            // width: 100%;
             top: 190px;
             left: 70px;
             font-size: 25px;
@@ -291,8 +278,6 @@
         }
     }
     .main_logo_container .marketing_logo {
-        // background: blue;
-        // margin-top: 10%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -310,7 +295,6 @@
             transform: translateX(0px);
         }
         li {
-            // background: #1680AC;
             width: 150px;
             height: 90px;
             @include tablet {
@@ -319,7 +303,6 @@
             }
             a {
                 background: transparent;
-                // background: wheat;
                 width: 100%;
                 height: 100%;
                 display: flex;
@@ -349,8 +332,8 @@
             &.anima {
                 opacity: 1;
                 transform: scale(1);
-                transition: all 250ms ease-out;
-                transition-delay: $i * 100 + 1000ms;
+                transition: all 300ms ease-out;
+                transition-delay: $i * 100 + 600ms;
             }
         }
     }
@@ -359,7 +342,6 @@
                 
     .main_logo_container .main_logo_cymbals {
         position: relative;
-        // background: #1680AC;
         width: 100%;
         min-height: 150px;
         padding-left: 50px;
@@ -373,7 +355,6 @@
             }
         }
         .cymbals_header_left {
-            // background: #16ac66;
             position: absolute;
             opacity: 0;
             transform: translateY(-150px);
@@ -383,12 +364,11 @@
             &.anima {
                 opacity: 1;
                 transform: translateY(0px);
-                transition: all 500ms ease-out;
-                transition-delay: 800ms;
+                transition: all 300ms ease-out;
+                transition-delay: 400ms;
             }
         }
         .cymbals_header_right {
-            // background: #69bbdf;
             position: absolute;
             padding-left: 200px;
             opacity: 0;
@@ -405,13 +385,12 @@
             &.anima {
                 opacity: 1;
                 transform: translateY(0px);
-                transition: all 500ms ease-out;
-                transition-delay: 800ms;
+                transition: all 300ms ease-out;
+                transition-delay: 500ms;
             }
         }
     }
     .main_logo_container .marketing_logo_cymbals {
-        // background: blue;
         padding: 0 15px;
         display: grid;
         grid-template-columns: auto auto;
@@ -433,7 +412,6 @@
             column-gap: 15px;
         }
         li {
-            // background: #ac7016;
             width: 150px;
             height: 100px;
             display: flex;
@@ -454,7 +432,6 @@
             }
         }    
         a img {
-            // background: #69bbdf;
             width: 150px;
             @include laptop {
                 width: 130px;
@@ -474,8 +451,8 @@
                 &.anima {
                     opacity: 1;
                     transform: translateX(0);
-                    transition: all 350ms ease-out;
-                    transition-delay: #{$i * 150 + 1000}ms;
+                    transition: all 300ms ease-out;
+                    transition-delay: #{$i * 100 + 600}ms;
                 }
             }
         }
@@ -490,20 +467,18 @@
                 opacity: 1;
                 transform: scale(1);
                 transition: all 300ms ease-out;
-                transition-delay: 1900ms;
+                transition-delay: 1300ms;
             }
             span {
                 position: absolute;
-                // background: #1680AC;
                 width: 100%;
                 height: 100%;
                 text-align: center;
                 line-height: 50px;
                 color: $color-text-light;
-                transition: all 350ms ease;
                 &:hover {
                     background: #69bbdf;
-                    transition: all 350ms ease;
+                    transition: all 300ms ease;
                 }
             }
         }
@@ -513,7 +488,6 @@
     // --------------------------------------- Percussion ---------------------------------
 
     .main_logo_container .main_logo_percussion {
-        // background: #1680AC;
         width: 100%;
         position: relative;
         min-height: 150px;
@@ -529,15 +503,12 @@
             @include laptop {
                 @include heroHeadersLaptop;
             }
-            // @include mobile {
-                
-            // }
             &.anima {
                 opacity: 1;
                 visibility: visible;
                 transform: scale3D(1, 1, 1);
                 transition: all 300ms ease-out;
-                transition-delay: 800ms;
+                transition-delay: 400ms;
             }
         }
         .percussion_header_bottom {
@@ -566,14 +537,12 @@
                 opacity: 1;
                 visibility: visible;
                 transform: scale3D(1, 1, 1);
-                // transition-delay: 300ms;
-                transition: all 700ms ease-out;
-                transition-delay: 1000ms;
+                transition: all 400ms ease-out;
+                transition-delay: 500ms;
             }
         }
     } 
     .percussion_list_container {
-        // background: #1680AC;
         width: 40%;
         transform: translateX(-80px);
         display: flex;
@@ -587,7 +556,6 @@
             transform: translateX(0px);
         }
         .percussion_list {
-            // background: #16ac64;
             li {
                 text-align: center;
                 &:last-child {
@@ -597,7 +565,6 @@
         }
     }
     .percussion_list p {
-        // background: #1680AC;
         font-size: 28px;
         letter-spacing: 0.75px;
         color: $color-text-light;
@@ -614,7 +581,7 @@
                 opacity: 1;
                 transform: scale(1);
                 transition: all 250ms ease-out;
-                transition-delay: $i * 100 + 800ms;
+                transition-delay: $i * 100 + 600ms;
             }
         }
     }
@@ -625,7 +592,7 @@
             opacity: 1;
             transform: scale(1);
             transition: all 300ms ease-out;
-            transition-delay: 1700ms;
+            transition-delay: 1500ms;
         }
     }
 }

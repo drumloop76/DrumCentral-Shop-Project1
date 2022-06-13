@@ -17,8 +17,7 @@
                 width: 100%;
                 padding: 0 20px 50px 20px;
             }
-            @include tablet {
-                
+            @include tablet {                
                 flex-direction: column;
             }
             .foot {
