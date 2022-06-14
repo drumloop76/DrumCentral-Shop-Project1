@@ -82,7 +82,7 @@ window.addEventListener( "DOMContentLoaded", function () {
                             <i class="far fa-eye-slash" id="togglePassword"></i>
                             <span class="verify"></span>
                         </div>
-                        <button class="submit_btn submit_signin_btn" type="submit">Signin</button>
+                        <button class="submit_btn submit_signin_btn" type="submit">Sign In</button>
                     </form>
                 </div>
             </div>

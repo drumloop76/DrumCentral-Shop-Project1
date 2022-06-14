@@ -1,3 +1,15 @@
+///////////////////////////////////////// Smooth Scrolling /////////////////////////////////////////
+// export function scrollBtn() {
+//     const sideNav = document.querySelector('.top_btn');
+
+//     sideNav.addEventListener('click', () => {
+//         window.scrollTo({ top: 0, behavior: 'smooth' });
+//     });
+// };
+// scrollBtn();
+
+
+
 ///////////////////////////////////// set Items /////////////////////////////////////
 export function setingItem(product, cartItems, key) {   
     if(cartItems != null){

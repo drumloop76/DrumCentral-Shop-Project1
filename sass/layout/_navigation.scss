@@ -59,9 +59,10 @@
         justify-content: space-between;
         transition: all 350ms ease-out;    // Sticky!!!
         z-index: 225;
+        // display: none;
         @include desktop {
             height: 50px;
-            padding: 0 2% 0 3%;
+            padding: 0 2% 0 2%;
         }
         @include tablet {
             position: fixed;
@@ -76,8 +77,9 @@
             align-items: center;
             transform: translateX(380px);
             transition: transform 350ms ease-out;
-            overflow-y: auto;  //!!!!!!!!!!!!!!
+            overflow-y: scroll;  //!!!!!!!!!!!!!!
             overflow-x: hidden;  //!!!!!!!!!!!!!!
+            scrollbar-width: none;
         }
         @include mobile {
             width: 100%;
@@ -94,6 +96,7 @@
                 transform: translateY(0);
                 transition: transform 300ms ease-out;
             }
+            
         }
         .nav_logo {
             @include logo;         
@@ -101,6 +104,7 @@
                 padding-top: 12px;
             }   
         }
+        
     }
     // ------------------- Nav-List ---------------------
     .nav_container .main_nav {
@@ -143,6 +147,7 @@
         }
         @include laptop {
             margin-right: 1%;
+            
         }
         @include tablet {
             height: fit-content;
@@ -178,6 +183,7 @@
             line-height: 65px;
             @include desktop {
                 line-height: 50px;
+                padding: 0 5px; /////////////////////////////
             }
             @include tablet {
                 padding-left: 40px;
@@ -275,9 +281,7 @@
                     color: $color-product-links-hover;
                 }
                 .fa-cart-shopping {
-                    transform: translateX(-40px);
-                    
-                    
+                    transform: translateX(-40px);                
                 }
                 .fa-user,
                 .fa-user-check {
@@ -345,7 +349,7 @@
         height: 36px;
         @include laptop {
             position: relative;
-            width: 36px;
+            // width: 36px;
         }
         @include tablet {
             height: 50px;
@@ -414,6 +418,9 @@
                 width: 36px;
                 transform: translateY(43px);
                 transition: all 300ms ease-in-out;
+                .list_link{
+                    background-color: darkblue;
+                }
             }
             @include tablet {
                 transform: none;
@@ -606,8 +613,8 @@
         transform: all 500ms;
         @include laptop {
             top: 43px;
-            left: -250px;
-            width: 250px;
+            // left: -250px;
+            // display: none;
         }
         @include tablet {
             top: 0;
@@ -621,6 +628,8 @@
             margin-left: 10%;
         }
         &.open_search_modal {
+            // display: block;
+            // width: 250px;
             opacity: 1;
             visibility: visible;
             transform: all 500ms;
@@ -785,7 +794,7 @@
         height: 48px;
         top: 10px;
         right: 10px;
-        background: rgba(3, 3, 3, 0.363);
+        background: rgba(3, 3, 3, 0.637);
         display: flex;
         flex-direction: column;
         justify-content: center;  

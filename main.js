@@ -1,5 +1,7 @@
 'use strict'
 
+// import { scrollBtn } from "js-fileslib.js";
+
 ///////////////////////////////////////// Burger /////////////////////////////////////////
 
 const navToggler = function () {
@@ -8,6 +10,7 @@ const navToggler = function () {
     const navContainer = document.querySelector('.nav_container');
     const navLinks = document.querySelectorAll('.list_item');
     const submenuBtn = document.querySelector('.sub-btn');
+    const wrapper = document.querySelector('body')
     const mediaSizeTablet = 768;
     const mediaSizeMobile = 500;
 
@@ -15,7 +18,7 @@ const navToggler = function () {
     toggler.addEventListener('click', function () {
         line.forEach((el) => {
             el.classList.toggle('active');
-            el.classList.toggle('not-active');           
+            el.classList.toggle('not-active');
         });
         toggler.classList.toggle('open');
         navContainer.classList.toggle('open');
@@ -44,7 +47,7 @@ const navToggler = function () {
                     line.forEach((el) => {
                         el.classList.remove('active');
                         el.classList.toggle('not-active');
-                    })
+                    });
                     toggler.classList.remove('open');
                     navContainer.classList.remove('open');
                 };
@@ -87,8 +90,7 @@ const search = function () {
     const searchInput = document.querySelector('.search_input');
     const searchBtn = document.querySelector('.search_btn');
     const searchIcon = document.querySelector('.fa-search');
-    const searchBox = document.querySelector('.nav_search_box');
-    
+    const searchBox = document.querySelector('.nav_search_box');    
     
     // const mediaSizeLaptop = 1024;
     // const mediaSizeTablet = 768;
@@ -102,7 +104,6 @@ const search = function () {
             searchBtn.classList.remove('open');
             searchIcon.classList.remove('open');
             searchBox.classList.remove('open-tablet-box');
-            console.log('close')
             searchIcon.style.color = 'black';
         } else {            
             searchForm.classList.add('open');
@@ -111,6 +112,7 @@ const search = function () {
             searchIcon.classList.add('open');
             searchBox.classList.add('open-tablet-box');
             document.querySelector('.search_results_div').classList.add('open_search_modal');
+            // document.querySelector('.list_link').classList.add('shrink'); /////////////
             searchIcon.style.color = 'red';
         };
 
@@ -160,7 +162,7 @@ function autoSearch() {
                                 <li class="auto">
                                     <span class="prodName">${prod}</span>                                    
                                 </li>
-                            `
+                            `;
                         }).join('');                        
                         document.querySelector('.search_list').innerHTML = html;                        
                     };
@@ -187,7 +189,7 @@ function autoSearch() {
                         } else if (e.keyCode == 13) {
                             e.preventDefault();
                             if (currentFocus > -1) {
-                                if(x) x[currentFocus].click();
+                                if(x) x[currentFocus].click(); //////////////////
                             };
                         };
                     });
@@ -245,26 +247,30 @@ const sticky = function() {
 sticky();
 
 ///////////////////////////////////////// Smooth Scrolling /////////////////////////////////////////
-
-document.querySelector('.nav_list').addEventListener('click', function(e) {
-    if(!e.target.classList.contains('scroll')) return
-    if(e.target.classList.contains('list_link')) {
-        const sectionId = e.target.getAttribute('href');
-        document.querySelector(sectionId).scrollIntoView({
-            behavior: "smooth"
-        });
-    };
-    e.preventDefault();
-});
+function smothScroll() {
+    document.querySelector('.nav_list').addEventListener('click', function(e) {
+        if(!e.target.classList.contains('scroll')) return
+        if(e.target.classList.contains('list_link')) {
+            const sectionId = e.target.getAttribute('href');
+            document.querySelector(sectionId).scrollIntoView({
+                behavior: "smooth"
+            });
+        };
+        e.preventDefault();
+    });
+};
+smothScroll();
 
 ///////////////////////////////////////// Scroll Up Btn /////////////////////////////////////////
 
-// Scroll Up
-const sideNav = document.querySelector('.top_btn');
+function scrollUpBtn() {
+    const topBtn = document.querySelector('.top_btn');
 
-sideNav.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+    topBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+};
+scrollUpBtn();
 
 ///////////////////////////////////////// Reveal Sections /////////////////////////////////////////
 

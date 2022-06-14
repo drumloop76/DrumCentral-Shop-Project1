@@ -1,10 +1,13 @@
 @mixin checkout {
     .checkout_side_nav,
     .checkout_btn_container {
-        display: none;
+        // display: none;
     }
     .checkout_hero {
         // background-image: url('/images/imgs-hero/cymbals_page-hero.jpg');
+        // background: black;
+        // height: 150px;
+        // width: 100%;
     }
     .checkout_page {
         position: static;
@@ -16,6 +19,8 @@
             display: flex;
             @include vide {
                 width: 95%;
+            // }@include laptop {
+            //     width: 100%;
             }
             @include tablet {
                 display: flex;

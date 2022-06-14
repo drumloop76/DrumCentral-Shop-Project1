@@ -5,9 +5,10 @@
             background: $color-text-light;
             width: 100vw;
             height: 100%;
-        }
-        @include mobile {
-            width: 100vw;       
+            min-height: auto;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            overflow-y: visible;
         }
         &.active_modal {
             opacity: 1;
@@ -23,7 +24,7 @@
             display: flex;
             align-items: center;
             @include tablet {
-                width: 200%;
+                width: 202%;
                 height: 100%;
             }
             &.slide-signin {
@@ -45,16 +46,16 @@
     .modals { 
         width: 700px;
         height: 100%;
-        padding: 40px 30px 20px 30px; //!!!!!
+        padding: 40px 30px 20px 30px;
         position: relative;
         @include tablet {
             background: transparent;
             width: 100%;
-            padding: 30px
-
+            padding-top: 10px;
         }
         @include mobile {
             padding-bottom: 30px;
+            width: 80%;
         }
         .close_modal_btn {
             @include closeModalBtn;
@@ -79,7 +80,7 @@
                 width: 70%;
             }
             @include mobile {
-                width: 100%;   
+                width: 80%;   
             }
             label {
                 display: block;
@@ -91,7 +92,9 @@
             .submit_btn {
                 @include modalSubmitBtn;
                 margin-top: 10px;
-
+                &:hover {
+                    background: $color-red;
+                }
             }
         }
         .divider {
@@ -105,6 +108,10 @@
                 flex-direction: row;
                 width: 75%;
             }
+            @include mobile {
+                width: 90%;
+                margin: 0;
+            }
             .divider_text {
                 width: 100%;
                 height: 20%;
@@ -113,7 +120,8 @@
                 line-height: 20%;
                 @include tablet {
                     width: 10%;
-                    padding: 25px 12px;
+                    padding: 25px 3%;
+                    text-align: center;
                 }
             }
             .divider_line_up,
@@ -134,7 +142,7 @@
             justify-content: center;
         }
     }
-    .login_media {
+    .login_form_container .login_media {
         width: 50%;
         display: flex;
         flex-direction: column;
@@ -145,7 +153,7 @@
             justify-content: space-around;
         }
         @include mobile {
-            width: 100%;
+            width: 80%;
         }
         .log_media_btn {
             width: 100%;
@@ -162,7 +170,12 @@
 
             }
             &:hover {
-                background: rgb(236, 233, 233);
+                background: rgb(87, 160, 243);
+                color: $color-text-light;
+                .fab {
+                    color: $color-text-light;
+                    transform: scale(1.1);
+                }
             }
             .fab {
                 font-size: 18px;
@@ -175,9 +188,7 @@
             }
         }
     }
-
-    .login_modal_container .signin_form_btn,
-    .login_modal_container .forgot_form_btn {
+    .login_modal_container .signin_form_btn {
         position: relative;
         display: block;
         margin-top: 10px;
@@ -186,10 +197,11 @@
         font-weight: 600;
         color: $color-text-dark;
         cursor: pointer;
+        @include tablet {
+            padding-bottom: 30px;
+        }
         @include mobile {
-            .signin_form_btn {
-                padding-bottom: 30px;
-            }
+            padding-bottom: 40px;
         }
         &:hover {
             color: $color-hover-media-nav;
@@ -197,30 +209,32 @@
     }
     
     //////////////////////////// sign in ////////////////////////////
-    .signin_modal_container .go_back {
-        position: absolute;
-        font-size: 14px;
-        font-weight: 600;
-        text-transform: uppercase;
-        top: 18px;
-        left: 15px;
-        background: transparent;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        .fa-solid {
-            margin-right: 10px;
+    .signin_modal_container {
+        margin-left: 2%;
+        .go_back {
+            position: absolute;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            top: 18px;
+            left: 15px;
+            background: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            .fa-solid {
+                margin-right: 10px;
+            }
         }
     }
     .signin_modal_container .signin_header {
-        margin-bottom: 20px;
-        
+        margin-bottom: 20px;        
     }
     .signin_modal_container .signin_form {
         width: 60%;
         margin: 0 auto;
         @include tablet {
-            margin-top: 80px;
+            margin-top: 50px;
             width: 70%;
         }
         @include mobile {
@@ -235,6 +249,10 @@
         @include inputLog;
         .submit_btn {
             @include modalSubmitBtn;
+            margin-top: 10px;
+            &:hover {
+                background: $color-red;
+            }
         }
     }
     .popup_login,
@@ -243,13 +261,17 @@
     }
     
     //////////////////////////// Contact Modal ////////////////////////////
-
     .contact_wrapper {
         @include modalWrapper;
         height: 550px;
         @include tablet {
-            width: 90%;
-            height: 100vh;
+            width: 100vw;
+            height: 100%;
+            min-height: auto;
+            overflow-y: visible;
+            background: url(../images/contact_pic3.jpg);
+            background-position: center;
+            background-size: cover;
         }
         &.active_modal {
             display: block;
@@ -263,7 +285,9 @@
             display: flex;
             justify-content: space-between;
             @include tablet {
-                height: 100vh;
+                height: 100%;
+                min-height: auto;
+                overflow-y: visible;
                 flex-direction: column-reverse;
                 padding: 0 10%;
             }
@@ -281,7 +305,8 @@
         box-shadow: $text-shadow;
         @include tablet {
             width: 100%;
-            padding: 30px
+            padding: 30px;
+            display: none;
         }
         @include mobile {
 
@@ -294,27 +319,39 @@
         padding: 20px 20px;
         @include tablet {
             width: 100%;
-            padding: 30px;
+            padding: 30px;            
         }
         @include mobile {
             padding: 20px
         }
         .close_modal_btn {
             @include closeModalBtn;
+            @include tablet {
+                color: $color-text-light;
+            }
         }
         h1 {
             @include modalHeader;
             margin-bottom: 10px;
-        }
-        
+            @include tablet {
+                color: $color-text-light;
+            }
+        }        
     }
-    .container_right .form_contact {
+    .container_right .form_contact {        
         width: 100%;
         display: flex;
         flex-direction: column;
+        @include tablet {
+            padding: 0 5%;
+            background-color: rgba(82, 169, 241, 0.5);
+        }
         label {
             @include modalLabel;
-            padding: 30px 0 0px 0;
+            padding: 30px 0 5px 0;
+            @include tablet {
+                color: $color-text-light;
+            }
         }
         .contact_login {
             position: relative;
@@ -324,11 +361,17 @@
             justify-content: baseline;
             align-items: center;
             border-bottom: 1px solid ;
+            @include tablet {
+                border-bottom: none;
+            }
             i {
                 width: 10%;
                 font-size: 20px;
                 text-align: left;
                 line-height: 32px;
+                @include tablet {
+                    color: $color-text-light;
+                }
             }
             input {
                 
@@ -347,17 +390,24 @@
                 bottom: -18px;
                 font-size: 13px;
                 font-style: italic;
+                color: $color-text-light;
                 &.success {
                     color: rgb(56, 177, 56);
+                    @include tablet {
+                        text-shadow: $text-shadow;
+                    }
                 }
                 &.error {
-                    color: rgb(233, 53, 53);
+                    color: rgb(252, 89, 89);
+                    @include tablet {
+                        text-shadow: $text-shadow;
+                    }                    
                 }
             }
         }
         .message_login {
-            // background: #18b5ce;
             position: relative;
+            margin-top: 30px;
             label {
                 width: 100%;
                 height: 16px;
@@ -365,7 +415,7 @@
             }
             textarea {
                 position: absolute;
-                top: 50px;
+                top: 20px;
                 width: 100%;
                 height: 100px;
                 border: 1px solid $color-text-dark;
@@ -375,7 +425,6 @@
                 z-index: 10;
             }
             .verify {
-                // background: rgb(47, 120, 255);
                 display: block;
                 position: absolute;
                 width: 100%;
@@ -390,13 +439,16 @@
                     color: rgb(233, 53, 53);
                 }
             }
-        }
-        
+        }        
         .contact_submit_btn {
             @include modalSubmitBtn;
-            margin-top: 120px;
+            margin-top: 130px;
             @include tablet {
                 margin-bottom: 40px;
+                background: $color-acc-border;
+                &:hover {
+                    background: $color-red;
+                }
             }
         }
     }
@@ -408,6 +460,7 @@
         height: 100%;
         z-index: 800;
         background: rgba(0, 0, 0, 0.61);
+        filter: blur(3.5px);
         display: none;
         &.active_modal {
             display: block;

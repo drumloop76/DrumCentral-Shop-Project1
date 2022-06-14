@@ -189,6 +189,7 @@
         color: #1680AC;
         font-size: 22px;
         font-weight: 500;
+        border-radius: 5px;
         @include desktop {
             margin-bottom: 25px;
             padding: 10px 23px;
@@ -197,6 +198,10 @@
         &.main_header-btn {
             opacity: 0;
             transform: scale(0);
+            &:hover {
+                background: #1680AC;
+                color: $color-text-light;
+            }
             &.start {
                 opacity: 1;
                 transform: scale(1);
@@ -458,9 +463,9 @@
         }
         li .cymbals_btn {
             position: relative;
-            background: #16ac66;
+            background: $color-text-light;
             width: 100%;
-            height: 50px;
+            height: 45px;
             opacity: 0;
             transform: scale(0);
             &.anima {
@@ -474,10 +479,13 @@
                 width: 100%;
                 height: 100%;
                 text-align: center;
-                line-height: 50px;
-                color: $color-text-light;
+                line-height: 45px;
+                color: #1680AC;
                 &:hover {
-                    background: #69bbdf;
+                    &:hover {
+                        background: #1680AC;
+                        color: $color-text-light;
+                    }
                     transition: all 300ms ease;
                 }
             }
@@ -588,6 +596,11 @@
     .perc_btn {
         opacity: 0;
         transform: scale(0);
+        &:hover {
+            background: #1680AC;
+            color: $color-text-light;
+            transition: 300ms;
+        }
         &.anima {
             opacity: 1;
             transform: scale(1);

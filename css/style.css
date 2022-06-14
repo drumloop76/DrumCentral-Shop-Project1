@@ -155,7 +155,7 @@
 @media screen and (max-width: 1200px) {
   .nav_container {
     height: 50px;
-    padding: 0 2% 0 3%;
+    padding: 0 2% 0 2%;
   }
 }
 @media screen and (max-width: 768px) {
@@ -172,8 +172,9 @@
     align-items: center;
     transform: translateX(380px);
     transition: transform 350ms ease-out;
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
+    scrollbar-width: none;
   }
 }
 @media screen and (max-width: 500px) {
@@ -325,6 +326,7 @@
 @media screen and (max-width: 1200px) {
   .nav_list .list_item .list_link {
     line-height: 50px;
+    padding: 0 5px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -355,8 +357,7 @@
     margin-right: 20px;
     font-size: 14px;
     transition: 300ms ease;
-    pointer-events: none;
-    /* dodato iz JS */
+    pointer-events: none; /* dodato iz JS */
   }
 }
 @media screen and (max-width: 500px) {
@@ -544,7 +545,6 @@
 @media screen and (max-width: 1024px) {
   .main_nav .nav_search_box {
     position: relative;
-    width: 36px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -630,6 +630,9 @@
     width: 36px;
     transform: translateY(43px);
     transition: all 300ms ease-in-out;
+  }
+  .nav_search_box .search_form.open .list_link {
+    background-color: darkblue;
   }
 }
 @media screen and (max-width: 768px) {
@@ -855,8 +858,6 @@
 @media screen and (max-width: 1024px) {
   .search_results_div {
     top: 43px;
-    left: -250px;
-    width: 250px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -1091,7 +1092,7 @@
   height: 48px;
   top: 10px;
   right: 10px;
-  background: rgba(3, 3, 3, 0.363);
+  background: rgba(3, 3, 3, 0.637);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1199,11 +1200,10 @@
     background: white;
     width: 100vw;
     height: 100%;
-  }
-}
-@media screen and (max-width: 500px) {
-  .modal_wrapper {
-    width: 100vw;
+    min-height: auto;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    overflow-y: visible;
   }
 }
 .modal_wrapper.active_modal {
@@ -1222,7 +1222,7 @@
 }
 @media screen and (max-width: 768px) {
   .modal_wrapper .modal_container {
-    width: 200%;
+    width: 202%;
     height: 100%;
   }
 }
@@ -1249,12 +1249,13 @@
   .modals {
     background: transparent;
     width: 100%;
-    padding: 30px;
+    padding-top: 10px;
   }
 }
 @media screen and (max-width: 500px) {
   .modals {
     padding-bottom: 30px;
+    width: 80%;
   }
 }
 .modals .close_modal_btn {
@@ -1313,7 +1314,7 @@
 @media screen and (max-width: 500px) {
   .login_modal_container .login_form_container .login_form,
 .signin_modal_container .login_form_container .login_form {
-    width: 100%;
+    width: 80%;
   }
 }
 .login_modal_container .login_form_container .login_form label,
@@ -1354,7 +1355,7 @@
   border: none;
   outline: none;
   padding-left: 10px;
-  font-size: 15px;
+  font-size: 16px;
 }
 .login_modal_container .login_form_container .login_form .input_login .verify,
 .login_modal_container .login_form_container .login_form .signin_login .verify,
@@ -1385,12 +1386,17 @@
   background: #b9c4cc;
   width: 100%;
   padding: 10px 30px;
-  font-size: 18px;
+  font-size: 19px;
+  font-weight: 500;
   border: none;
   outline: none;
   cursor: pointer;
   color: white;
   margin-top: 10px;
+}
+.login_modal_container .login_form_container .login_form .submit_btn:hover,
+.signin_modal_container .login_form_container .login_form .submit_btn:hover {
+  background: #f44336;
 }
 .login_modal_container .login_form_container .divider,
 .signin_modal_container .login_form_container .divider {
@@ -1408,6 +1414,13 @@
     width: 75%;
   }
 }
+@media screen and (max-width: 500px) {
+  .login_modal_container .login_form_container .divider,
+.signin_modal_container .login_form_container .divider {
+    width: 90%;
+    margin: 0;
+  }
+}
 .login_modal_container .login_form_container .divider .divider_text,
 .signin_modal_container .login_form_container .divider .divider_text {
   width: 100%;
@@ -1420,7 +1433,8 @@
   .login_modal_container .login_form_container .divider .divider_text,
 .signin_modal_container .login_form_container .divider .divider_text {
     width: 10%;
-    padding: 25px 12px;
+    padding: 25px 3%;
+    text-align: center;
   }
 }
 .login_modal_container .login_form_container .divider .divider_line_up,
@@ -1448,25 +1462,25 @@
   }
 }
 
-.login_media {
+.login_form_container .login_media {
   width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
 @media screen and (max-width: 768px) {
-  .login_media {
+  .login_form_container .login_media {
     margin-top: 20px;
     width: 70%;
     justify-content: space-around;
   }
 }
 @media screen and (max-width: 500px) {
-  .login_media {
-    width: 100%;
+  .login_form_container .login_media {
+    width: 80%;
   }
 }
-.login_media .log_media_btn {
+.login_form_container .login_media .log_media_btn {
   width: 100%;
   background: transparent;
   padding: 10px 23px;
@@ -1476,25 +1490,29 @@
   cursor: pointer;
 }
 @media screen and (max-width: 768px) {
-  .login_media .log_media_btn {
+  .login_form_container .login_media .log_media_btn {
     margin-bottom: 5px;
   }
 }
-.login_media .log_media_btn:hover {
-  background: rgb(236, 233, 233);
+.login_form_container .login_media .log_media_btn:hover {
+  background: rgb(87, 160, 243);
+  color: white;
 }
-.login_media .log_media_btn .fab {
+.login_form_container .login_media .log_media_btn:hover .fab {
+  color: white;
+  transform: scale(1.1);
+}
+.login_form_container .login_media .log_media_btn .fab {
   font-size: 18px;
   padding: 10px;
 }
-.login_media .log_media_btn span {
+.login_form_container .login_media .log_media_btn span {
   flex-grow: 1;
   text-align: center;
   font-size: 17px;
 }
 
-.login_modal_container .signin_form_btn,
-.login_modal_container .forgot_form_btn {
+.login_modal_container .signin_form_btn {
   position: relative;
   display: block;
   margin-top: 10px;
@@ -1504,17 +1522,23 @@
   color: black;
   cursor: pointer;
 }
-@media screen and (max-width: 500px) {
-  .login_modal_container .signin_form_btn .signin_form_btn,
-.login_modal_container .forgot_form_btn .signin_form_btn {
+@media screen and (max-width: 768px) {
+  .login_modal_container .signin_form_btn {
     padding-bottom: 30px;
   }
 }
-.login_modal_container .signin_form_btn:hover,
-.login_modal_container .forgot_form_btn:hover {
+@media screen and (max-width: 500px) {
+  .login_modal_container .signin_form_btn {
+    padding-bottom: 40px;
+  }
+}
+.login_modal_container .signin_form_btn:hover {
   color: #C9CCD5;
 }
 
+.signin_modal_container {
+  margin-left: 2%;
+}
 .signin_modal_container .go_back {
   position: absolute;
   font-size: 14px;
@@ -1541,7 +1565,7 @@
 }
 @media screen and (max-width: 768px) {
   .signin_modal_container .signin_form {
-    margin-top: 80px;
+    margin-top: 50px;
     width: 70%;
   }
 }
@@ -1579,7 +1603,7 @@
   border: none;
   outline: none;
   padding-left: 10px;
-  font-size: 15px;
+  font-size: 16px;
 }
 .signin_modal_container .signin_form .input_login .verify,
 .signin_modal_container .signin_form .signin_login .verify {
@@ -1603,11 +1627,16 @@
   background: #b9c4cc;
   width: 100%;
   padding: 10px 30px;
-  font-size: 18px;
+  font-size: 19px;
+  font-weight: 500;
   border: none;
   outline: none;
   cursor: pointer;
   color: white;
+  margin-top: 10px;
+}
+.signin_modal_container .signin_form .submit_btn:hover {
+  background: #f44336;
 }
 
 .popup_login,
@@ -1729,8 +1758,13 @@
 }
 @media screen and (max-width: 768px) {
   .contact_wrapper {
-    width: 90%;
-    height: 100vh;
+    width: 100vw;
+    height: 100%;
+    min-height: auto;
+    overflow-y: visible;
+    background: url(../images/contact_pic3.jpg);
+    background-position: center;
+    background-size: cover;
   }
 }
 .contact_wrapper.active_modal {
@@ -1747,7 +1781,9 @@
 }
 @media screen and (max-width: 768px) {
   .contact_wrapper .modal_container {
-    height: 100vh;
+    height: 100%;
+    min-height: auto;
+    overflow-y: visible;
     flex-direction: column-reverse;
     padding: 0 10%;
   }
@@ -1770,6 +1806,7 @@
   .modal_container .container_left {
     width: 100%;
     padding: 30px;
+    display: none;
   }
 }
 .modal_container .container_right {
@@ -1805,6 +1842,11 @@
 .modal_container .container_right .close_modal_btn .fa-xmark:hover {
   transform: scale(1.2);
 }
+@media screen and (max-width: 768px) {
+  .modal_container .container_right .close_modal_btn {
+    color: white;
+  }
+}
 .modal_container .container_right h1 {
   text-align: center;
   font-size: 30px;
@@ -1818,18 +1860,34 @@
     margin: 5% 0 5% 0;
   }
 }
+@media screen and (max-width: 768px) {
+  .modal_container .container_right h1 {
+    color: white;
+  }
+}
 
 .container_right .form_contact {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
+@media screen and (max-width: 768px) {
+  .container_right .form_contact {
+    padding: 0 5%;
+    background-color: rgba(82, 169, 241, 0.5);
+  }
+}
 .container_right .form_contact label {
   display: block;
   font-size: 12px;
   text-transform: uppercase;
   padding-bottom: 10px;
-  padding: 30px 0 0px 0;
+  padding: 30px 0 5px 0;
+}
+@media screen and (max-width: 768px) {
+  .container_right .form_contact label {
+    color: white;
+  }
 }
 .container_right .form_contact .contact_login {
   position: relative;
@@ -1840,11 +1898,21 @@
   align-items: center;
   border-bottom: 1px solid;
 }
+@media screen and (max-width: 768px) {
+  .container_right .form_contact .contact_login {
+    border-bottom: none;
+  }
+}
 .container_right .form_contact .contact_login i {
   width: 10%;
   font-size: 20px;
   text-align: left;
   line-height: 32px;
+}
+@media screen and (max-width: 768px) {
+  .container_right .form_contact .contact_login i {
+    color: white;
+  }
 }
 .container_right .form_contact .contact_login input {
   width: 90%;
@@ -1862,15 +1930,27 @@
   bottom: -18px;
   font-size: 13px;
   font-style: italic;
+  color: white;
 }
 .container_right .form_contact .contact_login .verify.success {
   color: rgb(56, 177, 56);
 }
+@media screen and (max-width: 768px) {
+  .container_right .form_contact .contact_login .verify.success {
+    text-shadow: 0px 0px 2px #000000;
+  }
+}
 .container_right .form_contact .contact_login .verify.error {
-  color: rgb(233, 53, 53);
+  color: rgb(252, 89, 89);
+}
+@media screen and (max-width: 768px) {
+  .container_right .form_contact .contact_login .verify.error {
+    text-shadow: 0px 0px 2px #000000;
+  }
 }
 .container_right .form_contact .message_login {
   position: relative;
+  margin-top: 30px;
 }
 .container_right .form_contact .message_login label {
   width: 100%;
@@ -1879,7 +1959,7 @@
 }
 .container_right .form_contact .message_login textarea {
   position: absolute;
-  top: 50px;
+  top: 20px;
   width: 100%;
   height: 100px;
   border: 1px solid black;
@@ -1907,16 +1987,21 @@
   background: #b9c4cc;
   width: 100%;
   padding: 10px 30px;
-  font-size: 18px;
+  font-size: 19px;
+  font-weight: 500;
   border: none;
   outline: none;
   cursor: pointer;
   color: white;
-  margin-top: 120px;
+  margin-top: 130px;
 }
 @media screen and (max-width: 768px) {
   .container_right .form_contact .contact_submit_btn {
     margin-bottom: 40px;
+    background: rgba(172, 172, 172, 0.768627451);
+  }
+  .container_right .form_contact .contact_submit_btn:hover {
+    background: #f44336;
   }
 }
 
@@ -1928,6 +2013,7 @@
   height: 100%;
   z-index: 800;
   background: rgba(0, 0, 0, 0.61);
+  filter: blur(3.5px);
   display: none;
 }
 #overlay.active_modal {
@@ -2726,13 +2812,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 400ms ease-out;
-  /*!!!!!!!!!!!!!!*/
+  transition: transform 400ms ease-out; /*!!!!!!!!!!!!!!*/
   overflow: hidden;
 }
 .images_container .img_container .sliderImg {
-  width: 100%;
-  /* !!!!!!!!! */
+  width: 100%; /* !!!!!!!!! */
   height: 100%;
   object-fit: cover;
 }
@@ -2862,6 +2946,7 @@
   color: #1680AC;
   font-size: 22px;
   font-weight: 500;
+  border-radius: 5px;
 }
 @media screen and (max-width: 1200px) {
   .main_logo_container a {
@@ -2873,6 +2958,10 @@
 .main_logo_container a.main_header-btn {
   opacity: 0;
   transform: scale(0);
+}
+.main_logo_container a.main_header-btn:hover {
+  background: #1680AC;
+  color: white;
 }
 .main_logo_container a.main_header-btn.start {
   opacity: 1;
@@ -3267,9 +3356,9 @@
 }
 .main_logo_container .marketing_logo_cymbals li .cymbals_btn {
   position: relative;
-  background: #16ac66;
+  background: white;
   width: 100%;
-  height: 50px;
+  height: 45px;
   opacity: 0;
   transform: scale(0);
 }
@@ -3284,12 +3373,15 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  line-height: 50px;
-  color: white;
+  line-height: 45px;
+  color: #1680AC;
 }
 .main_logo_container .marketing_logo_cymbals li .cymbals_btn span:hover {
-  background: #69bbdf;
   transition: all 300ms ease;
+}
+.main_logo_container .marketing_logo_cymbals li .cymbals_btn span:hover:hover {
+  background: #1680AC;
+  color: white;
 }
 
 .main_logo_container .main_logo_percussion {
@@ -3485,6 +3577,11 @@
 .perc_btn {
   opacity: 0;
   transform: scale(0);
+}
+.perc_btn:hover {
+  background: #1680AC;
+  color: white;
+  transition: 300ms;
 }
 .perc_btn.anima {
   opacity: 1;
@@ -6061,11 +6158,6 @@ div .product_container:hover {
   color: #EEEEEE;
 }
 
-.checkout_side_nav,
-.checkout_btn_container {
-  display: none;
-}
-
 .checkout_page {
   position: static;
   width: 100%;
@@ -6693,7 +6785,8 @@ div .product_container:hover {
   background: #b9c4cc;
   width: 100%;
   padding: 10px 30px;
-  font-size: 18px;
+  font-size: 19px;
+  font-weight: 500;
   border: none;
   outline: none;
   cursor: pointer;
