@@ -1,7 +1,7 @@
 @mixin checkout {
     .checkout_side_nav,
     .checkout_btn_container {
-        // display: none;
+        display: none;
     }
     .checkout_hero {
         // background-image: url('/images/imgs-hero/cymbals_page-hero.jpg');
@@ -24,13 +24,13 @@
             }
             @include tablet {
                 display: flex;
-                flex-direction: column;
+                flex-direction: column-reverse;
             }
         }
     }
     .content .basket {
         width: 50%;
-        padding: 0 1%;
+        padding: 0 2%;
         @include laptop {
             padding: 0 0;
         }
@@ -47,6 +47,11 @@
             text-transform: uppercase;
             text-shadow: $text-shadow;
             margin: 40px 0;
+            @include laptop {
+                padding-left: 0;
+                margin: 10px 0;
+                text-align: center;
+            }
         }
     }
     .basket .edit_cont {
@@ -209,12 +214,24 @@
                 width: 35px;
                 top: 15px;
                 right: 20px;
+                @include laptop {
+                    right: 0px;
+                }
+                @include tablet {
+                    right: 20px;
+                }
             }
             .logo_cards {
                 position: absolute;
                 width: 155px;
                 top: 15px;
                 right: 20px;
+                @include laptop {
+                    right: 0px;
+                }
+                @include tablet {
+                    right: 20px;
+                }
             }            
         }
     }
@@ -280,6 +297,12 @@
         transition: all 300ms;
         cursor: pointer;
         transition: 300ms;
+        @include laptop {
+            padding: 17px 0px;
+        }
+        @include tablet {
+            padding: 17px 5px;
+        }
         &.active {
             opacity: 1;
         }
@@ -293,6 +316,12 @@
             padding: 2px 30px 2px 50px;
             cursor: pointer;
             transition: 300ms;
+            @include laptop {
+                padding: 2px 10px 2px 40px;
+            }
+            @include tablet {
+                padding: 2px 10px 2px 40px;
+            }
             &:hover .checkmark {
                 background-color: $bg-acc-hover;
                 transition: 300ms;
@@ -378,7 +407,7 @@
                 padding: 0;
                 text-align: center;
                 margin-top: 80px;
-                // margin-bottom: 30px;
+                // margin-bottom: 30px;                
             }
             h3 {
                 font-size: 22px;
@@ -452,33 +481,34 @@
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     .cc_panel {
-        // background-color: antiquewhite;
-        // max-height: 150px;
-        // width: 100%;
-        // height: 200px;
         box-shadow: $product-box-shadow;
         .cc_panel_container {
             padding: 20px;
-            // background: darkgoldenrod;
-            // width: 100%;
+            @include laptop {
+                padding: 10px;
+            }
             h3 {
                 font-size: 20px;
                 margin-bottom: 30px;
             }
             .cards {
-                // background: #707070;
-                // height: 120px;
                 padding: 0 0 30px 0;
+                @include tablet {
+                    // padding: 0 0 0px 0;
+                }
             }
         }
                     
     }
     .cc_panel_container .cards {
-        // background-color: rgb(16, 54, 87);
-        // max-height: 200px;
-        // padding: 0;
         a {
             margin: 0 10px;
+            @include laptop {
+                margin: 0 5px;
+            }
+            @include tablet {
+                margin: 0 1%;
+            }
             &.active {
                 transform: scale(1.1);
                 transition: 300ms;
@@ -594,7 +624,7 @@
         }
         @include tablet {
             width: 100%;
-            padding: 60px 40px 0 40px;
+            padding: 40px 40px 0 40px;
         }
         .user_login {
             height: 80px;
@@ -604,14 +634,26 @@
             justify-content: space-between;
             align-items: flex-end;
             margin-bottom: 30px;
-            
+            @include laptop {
+                margin-bottom: 10px;
+            }
             h3 {
                 margin-bottom: 15px;
+                &.loged_h3 {                    
+                    font-size: 20px;
+                    span {
+                        color: $color-product-links-hover;
+                    }
+                }
             }
             button {
                 position: relative;
                 @include modalSubmitBtn;
                 width: 150px;
+                &:hover {
+                    background: $color-text-dark;
+                    color: $color-text-light;
+                }
             }
         }
         .legend {
@@ -675,8 +717,9 @@
         margin-bottom: 5px;
         position: relative;        
     }
-    .form_control {
-        margin-bottom: 35px;
+    .form_control { 
+        // background-color: salmon;
+        // margin-bottom: 35px;
         padding: 20px 0;
         label {
             color: #707070;
@@ -725,9 +768,30 @@
             &.error {
                 color: rgb(233, 53, 53);
             }
+        }        
+    }
+    .phone_form_control {
+        label {
+            font-size: 10px;
+            padding-left: 5px;
+            height: 20px;
+            line-height: 20px;
+            transform: translateY(-20px);
+            transition: all 300ms;
         }
         #billing_phone {
-            background-color: aqua;
+            position: relative;
+            padding-left: 80px;            
+        }
+        #billing_phone_code {
+            position: absolute;
+            background: transparent;
+            width: 70px;
+            height: 41px;
+            left: 0;
+            padding-left: 5px;
+            border: none;
+            border-right: 1px solid;
         }
     }
     .delivery_form .form_control:first-of-type {
@@ -781,12 +845,10 @@
             border: none;
             cursor: pointer;
             &:hover {
-                background: $color-product-links-hover;
-                color: $color-text-light;
+                // background: $color-product-links-hover;
+                background: red;
+                // color: $color-text-light;
             }
         }
     }
-    .footer {
-        margin-top: 50px;
-    }   
 }

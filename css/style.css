@@ -1042,7 +1042,7 @@
   position: fixed;
   width: 100%;
   top: 0;
-  background-color: rgba(255, 255, 255, 0.907);
+  box-shadow: 5px 5px 12px 3px rgba(0, 0, 0, 0.1921568627);
   padding: 0 10%;
   height: 40px;
   transition: all 400ms ease;
@@ -6158,6 +6158,11 @@ div .product_container:hover {
   color: #EEEEEE;
 }
 
+.checkout_side_nav,
+.checkout_btn_container {
+  display: none;
+}
+
 .checkout_page {
   position: static;
   width: 100%;
@@ -6176,13 +6181,13 @@ div .product_container:hover {
 @media screen and (max-width: 768px) {
   .checkout_page .content {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 }
 
 .content .basket {
   width: 50%;
-  padding: 0 1%;
+  padding: 0 2%;
 }
 @media screen and (max-width: 1024px) {
   .content .basket {
@@ -6204,6 +6209,13 @@ div .product_container:hover {
   text-transform: uppercase;
   text-shadow: 0px 0px 2px #000000;
   margin: 40px 0;
+}
+@media screen and (max-width: 1024px) {
+  .content .basket h1 {
+    padding-left: 0;
+    margin: 10px 0;
+    text-align: center;
+  }
 }
 
 .basket .edit_cont {
@@ -6393,11 +6405,31 @@ div .product_container:hover {
   top: 15px;
   right: 20px;
 }
+@media screen and (max-width: 1024px) {
+  .basket .options_content .option_container .logo {
+    right: 0px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .basket .options_content .option_container .logo {
+    right: 20px;
+  }
+}
 .basket .options_content .option_container .logo_cards {
   position: absolute;
   width: 155px;
   top: 15px;
   right: 20px;
+}
+@media screen and (max-width: 1024px) {
+  .basket .options_content .option_container .logo_cards {
+    right: 0px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .basket .options_content .option_container .logo_cards {
+    right: 20px;
+  }
 }
 
 .option_container .accordion_btn {
@@ -6464,6 +6496,16 @@ div .product_container:hover {
   cursor: pointer;
   transition: 300ms;
 }
+@media screen and (max-width: 1024px) {
+  .option_container .radio_bank_btn {
+    padding: 17px 0px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .option_container .radio_bank_btn {
+    padding: 17px 5px;
+  }
+}
 .option_container .radio_bank_btn.active {
   opacity: 1;
 }
@@ -6477,6 +6519,16 @@ div .product_container:hover {
   padding: 2px 30px 2px 50px;
   cursor: pointer;
   transition: 300ms;
+}
+@media screen and (max-width: 1024px) {
+  .option_container .radio_bank_btn .radio_container {
+    padding: 2px 10px 2px 40px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .option_container .radio_bank_btn .radio_container {
+    padding: 2px 10px 2px 40px;
+  }
 }
 .option_container .radio_bank_btn .radio_container:hover .checkmark {
   background-color: #C9CCD5;
@@ -6637,6 +6689,11 @@ div .product_container:hover {
 .cc_panel .cc_panel_container {
   padding: 20px;
 }
+@media screen and (max-width: 1024px) {
+  .cc_panel .cc_panel_container {
+    padding: 10px;
+  }
+}
 .cc_panel .cc_panel_container h3 {
   font-size: 20px;
   margin-bottom: 30px;
@@ -6644,9 +6701,18 @@ div .product_container:hover {
 .cc_panel .cc_panel_container .cards {
   padding: 0 0 30px 0;
 }
-
 .cc_panel_container .cards a {
   margin: 0 10px;
+}
+@media screen and (max-width: 1024px) {
+  .cc_panel_container .cards a {
+    margin: 0 5px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .cc_panel_container .cards a {
+    margin: 0 1%;
+  }
 }
 .cc_panel_container .cards a.active {
   transform: scale(1.1);
@@ -6765,7 +6831,7 @@ div .product_container:hover {
 @media screen and (max-width: 768px) {
   .main_form_container {
     width: 100%;
-    padding: 60px 40px 0 40px;
+    padding: 40px 40px 0 40px;
   }
 }
 .main_form_container .user_login {
@@ -6777,8 +6843,19 @@ div .product_container:hover {
   align-items: flex-end;
   margin-bottom: 30px;
 }
+@media screen and (max-width: 1024px) {
+  .main_form_container .user_login {
+    margin-bottom: 10px;
+  }
+}
 .main_form_container .user_login h3 {
   margin-bottom: 15px;
+}
+.main_form_container .user_login h3.loged_h3 {
+  font-size: 20px;
+}
+.main_form_container .user_login h3.loged_h3 span {
+  color: #1A86C9;
 }
 .main_form_container .user_login button {
   position: relative;
@@ -6792,6 +6869,10 @@ div .product_container:hover {
   cursor: pointer;
   color: white;
   width: 150px;
+}
+.main_form_container .user_login button:hover {
+  background: black;
+  color: white;
 }
 .main_form_container .legend {
   position: relative;
@@ -6865,7 +6946,6 @@ div .product_container:hover {
 }
 
 .form_control {
-  margin-bottom: 35px;
   padding: 20px 0;
 }
 .form_control label {
@@ -6919,8 +6999,28 @@ div .product_container:hover {
 .form_control .verify.error {
   color: rgb(233, 53, 53);
 }
-.form_control #billing_phone {
-  background-color: aqua;
+
+.phone_form_control label {
+  font-size: 10px;
+  padding-left: 5px;
+  height: 20px;
+  line-height: 20px;
+  transform: translateY(-20px);
+  transition: all 300ms;
+}
+.phone_form_control #billing_phone {
+  position: relative;
+  padding-left: 80px;
+}
+.phone_form_control #billing_phone_code {
+  position: absolute;
+  background: transparent;
+  width: 70px;
+  height: 41px;
+  left: 0;
+  padding-left: 5px;
+  border: none;
+  border-right: 1px solid;
 }
 
 .delivery_form .form_control:first-of-type {
@@ -6980,12 +7080,7 @@ div .product_container:hover {
   cursor: pointer;
 }
 .buy_now_btn_container .buy_now_btn:hover {
-  background: #1A86C9;
-  color: white;
-}
-
-.footer {
-  margin-top: 50px;
+  background: red;
 }
 
 /*# sourceMappingURL=style.css.map */

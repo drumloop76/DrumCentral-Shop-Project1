@@ -240,7 +240,7 @@
                             </div>
                         </div>
 
-                        <div class="option_container">
+                        <div class="option_container" id="cc_form">
                             <img class="logo_cards" src="/images/checkout/accordian-cards.png">
                             <button class="accordion_btn radio_bank_btn" aria-haspopup="true" aria-expanded="false">
                                 <label class="radio_container">Credit/Debit Card
@@ -382,10 +382,11 @@
                     <!-- !!!!!!!!!!!!!!!!!!! -->
                 </div>
 
-                <div class="main_form_container">
+                <!-- //////////////// Billing Form /////////////// -->
+                <div class="main_form_container" id="bill_form">
                     <div class="user_login">
                         <h3 class="user_header">Do you have login account?</h3>
-                        <button  class="login_logout_link" data-modal-target="#loginModal">Log In</button>
+                        <button class="login_logout_link" data-modal-target="#loginModal">Log In</button>
                     </div>
                     
                     <span class="legend">Billing form:</span>
@@ -407,9 +408,12 @@
                                 <span class="verify"></span>                                
                             </div>
 
-                            <div class="form_control">
+                            <div class="form_control phone_form_control">
                                 <label for="billing_phone">Phone Number (optional)</label>                                
-                                <input class="bill" type="tel" name="billing_phone" id="billing_phone" placeholder="+123">
+                                <input class="bill" type="tel" name="billing_phone" id="billing_phone" placeholder="e.g. +381 061234567">
+                                <select class="code" name="billing_phone_code" id="billing_phone_code">
+                                    <option value="">SRB</option>
+                                </select>
                                 <span class="verify"></span>                                
                             </div>                     
 
@@ -442,7 +446,7 @@
                         <span class="mark">Enter different delivery address</span>
                     </div>
 
-                    <span class="legend delivery_legend">Delivery Address</span>
+                    <span class="legend delivery_legend" id="del_form">Delivery Address</span>
                     <div class="delivery_form_wrapper">
                         <form class="delivery_form" id="delivery_form" novalidate autocomplete="off">
                             <div class="form_control">

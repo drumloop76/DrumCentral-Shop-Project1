@@ -744,7 +744,7 @@
         position: fixed;
         width: 100%;
         top: 0;
-        background-color: rgba(255, 255, 255, 0.907);
+        box-shadow: $product-box-shadow;
         padding: 0 10%;
         height: 40px;
         transition: all 400ms ease;

@@ -1,18 +1,19 @@
 "use strict"
 window.addEventListener( "DOMContentLoaded", function () {
+    fetchCountry()
     function onPageLoad() {
         let logedUser = JSON.parse(localStorage.getItem("logedUser"));
         const firstName = document.querySelector('#billing_first_name');
         const lastName = document.querySelector('#billing_last_name');
         const email = document.querySelector('#billing_email');
-
+        
         document.querySelector('.delivery_legend').style.display = 'none';
         document.querySelector('.delivery_form_wrapper').style.display = 'none';
 
         if(localStorage.getItem('localProductsInCart') != null || localStorage.getItem('userProductsInCart') != null) {
             document.querySelector('.buy_now_btn').style.background = 'black';
             document.querySelector('.buy_now_btn').disabled = false;
-        } else if(localStorage.getItem('localProductsInCart') == null || localStorage.getItem('userProductsInCart') == null) {
+        } else if((localStorage.getItem('localProductsInCart') == null || localStorage.getItem('localProductsInCart').value == undefined) || (localStorage.getItem('userProductsInCart') == null || localStorage.getItem('userProductsInCart').value == undefined)) {
             document.querySelector('.buy_now_btn').style.background = 'rgba(0, 0, 0, 0.301)';
             document.querySelector('.buy_now_btn').style.cursor = 'not-allowed';
             document.querySelector('.buy_now_btn').setAttribute("disabled", "");
@@ -93,7 +94,9 @@ window.addEventListener( "DOMContentLoaded", function () {
                 let shipCostsSpan = document.querySelector('.shipping_costs_full');    
                 let shipCostNumber = 0;
             
-                if(itemsInCart < 5) {
+                if(itemsInCart == 0) {
+                    shipCostsSpan.innerHTML = `€ 0`;
+                } else if(itemsInCart > 0 && itemsInCart < 5) {
                     shipCostsSpan.innerHTML = `€ 15`;
                     shipCostNumber = 15;
                 } else if(itemsInCart == 5 || itemsInCart <= 10) {
@@ -103,7 +106,6 @@ window.addEventListener( "DOMContentLoaded", function () {
                     shipCostsSpan.innerHTML = `€ 55`;
                     shipCostNumber = 55;
                 } else if(itemsInCart == 0 || itemsInCart == null) {
-                    console.log('000')
                     shipCostsSpan.innerHTML = `€ 0`;
                     shipCostNumber = 0;
                     localStorage.removeItem('shippingCost');
@@ -117,12 +119,20 @@ window.addEventListener( "DOMContentLoaded", function () {
         };
     };
     checkout();
+    const user = JSON.parse(localStorage.getItem("logedUser"));
+    function logedUser() {
+        document.querySelector('.user_header').innerHTML = user == null ? 'Do you have login account?' : `<span>${user.firstName} ${user.lastName}</span>, you are loged.`
+        if(user != null) {
+            document.querySelector('.user_login button').style.display = 'none';
+            document.querySelector('.user_header').classList.add('loged_h3')
+        }
+    }
+    logedUser()
 });
 ////////////////////////////// label ///////////////////////////////
 function label() {
     const inputEl = document.querySelectorAll('.form_control input');
-    console.log()
-
+    
     inputEl.forEach(el => {
         if(el.value) {
             el.previousElementSibling.classList.add('move_label');
@@ -145,6 +155,7 @@ const fetchCountry = async(e) => {
 	const apiEndpoint = 'https://restcountries.com/v2/all';
     const countries = document.querySelector('#billing_country');
     const phone = document.querySelector('#billing_phone');
+    const phoneCode = document.querySelector('#billing_phone_code')
     const countriesDel = document.querySelector('#delivery_country');
     
 	await fetch(apiEndpoint)
@@ -153,13 +164,18 @@ const fetchCountry = async(e) => {
             data.forEach(el => {
                 countries.innerHTML += `<option value="${el.name}">${el.name}</option>`;
                 countriesDel.innerHTML += `<option value="${el.name}">${el.name}</option>`;
+                phoneCode.innerHTML += `<option value="${el.name}">${el.alpha3Code}</option>`;
+                phone.previousElementSibling.classList.add('move_label');
                 
-                countries.addEventListener('change', function(e) {
+                document.querySelector('.code').addEventListener('change', function(e) {
+                    if(e.target.value === '') {
+                        phone.value = `+381 `;
+                    }
                     if(el.name === e.target.value) {
+                        phone.removeAttribute('placeholder')
                         phone.value = `+${el.callingCodes[0]} `;
-                        phone.parentElement.previousElementSibling.classList.add('move_label');
                     };
-                });                
+                });
             });
         });
 
@@ -181,12 +197,12 @@ const fetchCountry = async(e) => {
     const checkoutBtn = function() {
         document.querySelector('.buy_now_btn').addEventListener('click', function(e) {
             e.preventDefault();
-            console.log(localStorage.getItem("localProductsInCart") == undefined, localStorage.getItem("userProductsInCart") == undefined)
-            if(localStorage.getItem("localProductsInCart") == undefined || localStorage.getItem("userProductsInCart") == undefined) {
-
+            // console.log(localStorage.getItem("localProductsInCart") == undefined, localStorage.getItem("userProductsInCart") == undefined)
+            if(localStorage.getItem("localProductsInCart") == undefined && localStorage.getItem("userProductsInCart") == undefined) {
+                console.log('prazno')
             }
             
-            console.log(document.q)
+            
             /////////////////////////////// Validate & submit forms data ////////////////////////////////////
             let user = '';
             if(localStorage.getItem('logedUser') == null) { 
@@ -278,17 +294,37 @@ const fetchCountry = async(e) => {
                 });
             };
 
-            if(checkBillingInputs() != true || checkDeliveryInputs() != true || checkCCInputs() != true && document.querySelector('.checkbox').checked == false)
-
-
-            console.log(checkBillingInputs() != true, checkDeliveryInputs() != true, checkCCInputs() != true)
-            if((checkBillingInputs() != true && document.querySelector('.checkbox').checked != false) || checkCCInputs() != true) {
-                console.log('no 1')
-            } else if(checkBillingInputs() != true || checkDeliveryInputs() != true || checkCCInputs() != true && document.querySelector('.checkbox').checked == false){
-                console.log('no2')
-            } else {
-                console.log('yes')
-            }
+            /////////////////////////////////// scroll on error ////////////////////////////////// 
+            if(checkBillingInputs() != true) {
+                e.target.setAttribute("href", "#bill_form");
+                const sectionId = e.target.getAttribute('href');
+                document.querySelector(sectionId).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else if((checkBillingInputs() == true && document.querySelector('.checkbox').checked != false) && checkDeliveryInputs() != true){
+                e.target.setAttribute("href", "#del_form");
+                const sectionId = e.target.getAttribute('href');
+                document.querySelector(sectionId).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else if(((checkBillingInputs() == true && document.querySelector('.checkbox').checked == false) && checkCCInputs() != true) ||
+                    ((checkBillingInputs() == true && document.querySelector('.checkbox').checked != false) && checkDeliveryInputs() == true && checkCCInputs() != true)) {
+                e.target.setAttribute("href", "#cc_form");
+                const sectionId = e.target.getAttribute('href');
+                document.querySelector(sectionId).scrollIntoView({
+                    behavior: "smooth"
+                });
+                
+                const accBtn = document.querySelector('#cc_form').children[1];
+                if(accBtn.getAttribute('aria-expanded') == 'false') {
+                    accBtn.nextElementSibling.style.maxHeight = accBtn.nextElementSibling.scrollHeight + "px";
+                    accBtn.nextElementSibling.classList.add('open');
+                    accBtn.setAttribute('aria-expanded','true');
+                    document.querySelector('#cc_form').children[1].firstElementChild.lastElementChild.style.background = 'red';
+                } else {
+                    document.querySelector('#cc_form').children[1].firstElementChild.lastElementChild.style.background = '';
+                };
+            };
 
             const firstNameVal = document.querySelector('#billing_first_name').value,
                 lastNameVal = document.querySelector('#billing_last_name').value,
@@ -307,10 +343,8 @@ const fetchCountry = async(e) => {
                 countryDelVal = document.querySelector('#delivery_country').value;
 
             const shippingCosts = localStorage.getItem('shippingCost');
-            console.log(shippingCosts)
-
+            
             if(checkBillingInputs() == true && document.querySelector('.checkbox').checked == false && checkCCInputs() == true) {
-                console.log('aaa')
                 let billingData = JSON.parse(localStorage.getItem('checkBillingData')) || [];
                 billingData.push({firstNameVal, lastNameVal, emailVal, streetVal, townVal, zipVal, countryVal, phoneVal, user});
                 localStorage.setItem('checkBillingData', JSON.stringify(billingData));
@@ -320,7 +354,6 @@ const fetchCountry = async(e) => {
                 localStorage.setItem('checkDeliveryData', JSON.stringify(deliveryData));
                 setCheckCCInputs()
             } else if(checkBillingInputs() == true && checkDeliveryInputs() == true && document.querySelector('.checkbox').checked == true && checkCCInputs() == true) {
-                console.log('bbb')
                 let billingData = JSON.parse(localStorage.getItem('checkBillingData')) || [];
                 billingData.push({firstNameVal, lastNameVal, emailVal, streetVal, townVal, zipVal, countryVal, phoneVal, user, });
                 localStorage.setItem('checkBillingData', JSON.stringify(billingData));
@@ -350,10 +383,7 @@ const fetchCountry = async(e) => {
                     checkCC.push({ccFullNameValue, ccNumberValue, ccExpDateValue, ccSecCodeValue, ccType});
                     localStorage.setItem('checkCC', JSON.stringify(checkCC));
                 };
-            }
-            
-
-
+            };
         });
     };
     checkoutBtn();
@@ -654,7 +684,7 @@ let ccType = '';
 function choseCC() {
     const ccLink = document.querySelectorAll('.cards a');
     const spanPic = document.querySelector('#cc_number').nextElementSibling;   
-    const verify = 
+    // const verify = 
     ccLink.forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
@@ -873,7 +903,6 @@ function setCCNumber() {
         setErrorFor(ccNumber, 'Please enter a valid credit card number.');      
         retVal = false;
     } else {
-        // console.log('ok', ccType, ccNumberValue)
         setSuccessFor(ccNumber, 'Success!');
     };
 
@@ -1020,8 +1049,8 @@ function accordionBtns() {
 };
 accordionBtns();
 
-function init() {
+// function init() {
     // onPageLoad();
-    fetchCountry();
-};
-init();
+    // fetchCountry();
+// };
+// init();
